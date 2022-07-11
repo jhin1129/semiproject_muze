@@ -93,6 +93,12 @@ local.properties
 hs_err_pid*
 replay_pid*
 
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db
