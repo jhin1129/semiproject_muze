@@ -1,0 +1,32 @@
+    /* font-family 눈누폰트 - pretendard */
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+    * { font-family: Pretendard, 
+        -apple-system, BlinkMacSystemFont, 
+        system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    }
+
+      /* 메뉴 호버 기능 */
+    .dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+    border: none;
+    /* box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.1); */
+    /* border-top: none;
+    border-bottom: none; */ 
+    border-radius: 0; 
+    background-color: rgba(255,255,255,0.8);
+    /* opacity : 0.5; */
+    }
+
+    /* 호버 메뉴 삼각형 안보이게 */
+    ::after {
+    color: white;
+    }
+
+    /* 링크 파랑색 밑줄 효과 삭제 */
+    A:link { text-decoration:none; color: black;}	
+
+    /* 캐러셀 이미지 크기 조정 */
+    .carousel-inner > .carousel-item > img{
+    height: 900px; 
+    }
