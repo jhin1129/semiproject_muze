@@ -24,8 +24,8 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    <script src="../../summernote-0.8.18-dist/summernote-lite.js"></script>
+    <link rel="stylesheet" href="../../summernote-0.8.18-dist/summernote-lite.css">
 
     <title>Review_board_crud</title>
 
@@ -186,13 +186,32 @@
             <div class="my-3 px-3">
 
                 <div id="summernote"></div>
+                
                 <script>
                     $('#summernote').summernote({
                         placeholder: '내용을 입력해주세요',
-                        tabsize: 2,
-                        height: 400
+                        focus: true,
+                        height: 400,
+                        toolbar: [
+                            // [groupName, [list of button]]
+                            ['fontname', ['fontname']],
+                            ['fontsize', ['fontsize']],
+                            ['color', ['color']],
+                            ['style', ['bold', 'italic', 'underline', 'clear']],
+                            ['para', ['ul', 'ol', 'paragraph']],
+                            ['insert', ['picture', 'video']],
+                            ['height', ['height']]
+                        ],
+                        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋음체', '바탕체'],
+                        // 추가한 폰트사이즈
+                        fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
+                        // 줄간격
+                        lineHeights: ['0.2', '0.3', '0.4', '0.5', '0.6', '0.8', '1.0', '1.2', '1.4', '1.5', '2.0', '3.0']
+
                     });
                 </script>
+
+                
 
                 <div class="text-right mt-1">
                     <button class="btn btn-light py-0">작성</button>
