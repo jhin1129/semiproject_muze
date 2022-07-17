@@ -1,0 +1,19 @@
+.fc-next-button.fc-button.fc-button-primary {
+    background-color: black;
+    border: 0px;
+}
+
+.fc-prev-button.fc-button.fc-button-primary {
+    background-color: black;
+    border: 5px;
+}
+
+.fc-custom1-button.fc-button.fc-button-primary{
+    background-color: black;
+}
+
+html, body {  
+    color: black; 
+    font-size: 15px;  
+} 
+
