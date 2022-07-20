@@ -17,9 +17,9 @@
     <link rel="stylesheet" href="../../CSS/Login/Login.css" />
 
     <!-- 예린 CSS -->
-    <link rel="stylesheet" href="../CSS/Muze_Main.css" />
+    <link rel="stylesheet" href="../../CSS/Common/mainstyle.css" />
 
-    <title>muze</title>
+    <title>Join_02</title>
   </head>
   <body>
     <!-- 시작 -->
@@ -53,61 +53,128 @@
         </div>
       </header>
 
+      <!-- 메인 메뉴 -->
       <div class="container">
-        <!-- 메인 메뉴 -->
         <ul class="nav justify-content-between">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false" style="font-size: 1.1em">
-                muzé
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              ABOUT US
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">BRAND </a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              ART
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">회화</a></li>
+              <li><a class="dropdown-item" href="#">공예</a></li>
+              <li><a class="dropdown-item" href="#">조소</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              COMMUNITY
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">게시판</a></li>
+              <li><a class="dropdown-item" href="#">공지사항</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              EVENT
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">출석하기</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              CUSTOMER
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Q&A</a></li>
+              <li><a class="dropdown-item" href="#">FAQ</a></li>
+              <li><a class="dropdown-item" href="#">신고하기</a></li>
+            </ul>
+          </li>
+          <ul class="nav justify-content-end" id="search">
+            <form class="d-flex">
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown p-0"
+                  href="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <button type="submit" class="btn btn-white">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="21"
+                      height="21"
+                      fill="currentColor"
+                      class="bi bi-search"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+                      />
+                    </svg>
+                  </button>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">BRAND </a></li>
+                  <li>
+                    <a class="dropdown-item"
+                      ><input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                    /></a>
+                  </li>
                 </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    작품
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">회화</a></li>
-                    <li><a class="dropdown-item" href="#">공예</a></li>
-                    <li><a class="dropdown-item" href="#">조소</a></li>
-                </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    커뮤니티
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">게시판</a></li>
-                    <li><a class="dropdown-item" href="#">공지사항</a></li>
-                </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    이벤트
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">출석하기</a></li>
-                </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    고객 지원
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Q&A</a></li>
-                    <li><a class="dropdown-item" href="#">FAQ</a></li>
-                    <li><a class="dropdown-item" href="#">신고하기</a></li>
-                </ul>
-            </li>
+              </li>
+            </form>
+          </ul>
         </ul>
-        <hr class="mt-1 mb-0">
+        <hr class="mt-1" />
+      </div>
     </div>
     <!-- header 끝 -->
 
@@ -179,7 +246,7 @@
                   <div class="form_element_join">
                     <input type="checkbox" id="termsAgree1" name="agreementInfoFl" class="require" >
                       <label class="check_s" for="termsAgree1"><strong>(필수)</strong><em> 이용약관</em></label>
-                        <span><a href="약관링크넣기" target="_blank">전체보기</a></span>
+                        <span><a href="약관링크넣기" target="_blank"><em>전체보기</em></a></span>
                     </div>
                     <div class="agreement_box">
                         제1조(목적)<br />
