@@ -6,7 +6,7 @@
 }
 
 #myListMain{
-    font-weight: 600;
+    font-weight: 700;
 }
 
 #mylist{
@@ -46,15 +46,15 @@
 }
 
 .card-title {
-    font-size: 0.8em;
+    font-size: 0.9em;
 }
 
 .card-text{
-    font-size: 1.4em;
+    font-size: 0.9em;
 }
 
-/* 최근 주문 정보 */
-table{
+/* 주문 테이블 */
+.ordertable{
     width: 100%;
     height: 90px;
     border: 1px solid lightgray;
@@ -64,7 +64,7 @@ table{
     word-break: break-all;
 }
 
-th{
+.my_th{
     background-color: rgba(238, 233, 233, 0.6);
     border-bottom: 1px solid lightgrey;
     font-size: 0.8em;
@@ -113,27 +113,142 @@ th{
 }
 
 #my_td01{
+    padding-top: 5px;
     height: 40px;
     text-align: center;
     font-size: 0.8em;
 }
 
 #my_td02{
-    /* font-size: 0.75em; */
+    /* font-size: 0.9em; */
+    color: rgb(219, 156, 156);
     text-decoration: underline;
+}
+
+#mycbtn{
+    background-color: rgb(255, 255, 255); 
+    color: black; 
+    font-size: 0.9em; 
+    height: 23px; 
+    padding: 3px;
+}
+
+/* 진행 중인 주문 */
+#mying1{
+    padding: 10px;
+}
+
+#mying2{
+    /* margin-inline: 40px; */
+    /* border: 1px solid lightpink; */
+    background-color: rgba(238, 233, 233, 0.6);
+    border-radius: 40px;
+    height: 50px;
+    padding: 15px;
+}
+
+#mying3{
+    /* margin-inline: 40px; */
+    border: 1px dotted rgb(238, 233, 233);;
+    height: 1px;
+    margin-block: 23px;
 }
 
 /* 기간 검색 */
 .mySearchDate{
     border: 1px solid lightgray;
-    height: 100%;
+    height: 100px;
     text-align: center;
     font-size: 0.85em;
     padding-top: 30px;
 }
 
+.mySearchDate2{
+    border: 1px solid lightgray;
+    height: 140px;
+    text-align: center;
+    font-size: 0.85em;
+    padding-top: 20px;
+}
+
+/* 기간 검색 구간 */
+.btnsearch{
+    text-align: center;
+    background-color: white;
+    font-size: 1em;
+    margin-bottom: 40px;
+}
+
 /* 기간 검색 버튼 */
 .btn-outline-secondary{
-    font-size: 0.9em;
-    color: black;
+    border: 1px solid lightgray;
+    margin-bottom: 3px;
+    border-radius: 1px;
+    height: 34px;
+}
+
+/* 문의 테이블 */
+.qnatable{
+    width: 100%;
+    height: 90px;
+    border: 1px solid lightgray;
+    border-left: none;
+    border-right: none;
+    text-align: center;
+    word-break: break-all;
+}
+
+/* 문의 테이블 */
+.myinputtable{
+    width: 100%;
+    height: 90px;
+    border: 1px solid lightgray;
+    border-left: none;
+    border-right: none;
+    text-align: center;
+}
+
+#my_td03{
+    height: 70px;
+    font-size: 0.8em;
+    border-bottom: 1px solid lightgray;
+}
+
+.mytextarea{
+    width: 98%; 
+    height: 90%; 
+    border: 1px solid lightgrey; 
+    margin-top: 5px;
+}
+
+/* 주문 상세 테이블 */
+.mydetailtable{
+    width: 100%;
+    height: 70px;
+    border: 1px solid lightgray;
+    border-left: none;
+    border-right: none;
+    text-align: left;
+}
+
+#my_th06{
+    width : 13%;
+    padding-left: 10px;
+}
+
+#my_td04{
+    height: 50px;
+    line-height: 25px;
+    font-size: 0.8em;
+    border-bottom: 1px solid lightgray;
+    padding-left: 10px;
+}
+
+/* 기타 */
+
+#my_td00{
+    height: 50px;
+    line-height: 25px;
+    font-size: 0.8em;
+    border-bottom: 1px solid lightgray;
 }

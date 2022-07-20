@@ -1,0 +1,317 @@
+.location_wrap {
+  position: relative;
+  width: 100%;
+  border-bottom: 1px solid #ededed;
+}
+
+.location_cont em {
+  display: block;
+  float: left;
+  padding: 12px 0 10px 0;
+  color: #777777;
+  font-size: 11px;
+}
+
+.location_cont .local_home {
+  color: #777777;
+}
+
+.location_wrap .location_cont:after {
+  display: block;
+  clear: both;
+  content: "";
+}
+
+.content_box {
+  float: left;
+}
+
+.join_agreement_wrap .member_tit {
+  overflow: hidden;
+  border-bottom: 1px solid #999999;
+}
+
+.join_agreement_wrap .member_tit h2 {
+  float: left;
+  margin-top: 20px;
+  font-size: 26px;
+  color: #222222;
+}
+
+.join_agreement_wrap .member_tit ol {
+  float: right;
+  line-height: 62px;
+}
+
+.join_agreement_wrap .member_tit li span {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.join_agreement_wrap .member_tit li span > img {
+  padding-left: 20px;
+  padding-right: 25px;
+  vertical-align: -1px;
+}
+
+.join_agreement_wrap .member_tit ol li {
+  float: left;
+  font-size: 14px;
+  color: #d1d1d1;
+}
+
+.join_agreement_wrap .member_tit {
+  overflow: hidden;
+  border-bottom: 1px solid #999999;
+}
+
+.join_agreement_wrap .member_cont h3 {
+  padding: 0 0 17px 0;
+  margin-top: 20px;
+  font-weight: normal;
+  font-size: 18px;
+  color: #222222;
+}
+
+.join_agreement_wrap .join_agreement_cont {
+  padding: 30px 0 0 0;
+  border-top: 1px solid #999999;
+}
+
+.join_agreement_wrap .member_tit .page_on {
+  color: #252525;
+}
+
+.member_tit {
+  width: 1100px;
+  height: 63px;
+  margin: auto;
+}
+
+.member_tit h2 {
+  font-weight: bold;
+  color: #1a1a1a;
+  margin: 0 0 20px 0;
+}
+
+.member_cont .btn_center_box,
+.member_warning + .btn_center_box {
+  margin: 35px 0 0 0;
+}
+
+.hidden {
+  overflow: hidden;
+  top: -9999px;
+  left: -9999px;
+  visibility: hidden;
+  height: 0;
+  margin: 0;
+  font-size: 0;
+  text-indent: -9999px;
+  line-height: 0;
+  z-index: -9999;
+}
+
+.join_agreement_cont .join_agreement_box {
+  margin: 0 0 30px 0;
+}
+
+.join_agreement_cont > h3 {
+  font-size: 18px;
+  border-bottom: 1px solid #999999;
+  padding: 0 0 17px 0;
+  margin-top: 15px;
+  font-weight: normal;
+}
+
+.join_agreement_cont .form_element em {
+  font-weight: bold;
+  font-size: 13px;
+  font-style: normal;
+}
+
+.join_agreement_cont .form_element span {
+  color: #717171;
+  font-size: 11px;
+}
+
+.join_agreement_cont .form_element span > a {
+  padding: 0 10px 0 5px;
+  font-size: 12px;
+  background: url(../../IMG/Login/icon_arrow_03.png) no-repeat right center;
+  text-decoration: underline;
+}
+
+.join_agreement_cont .agreement_box {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 150px;
+  margin: 10px 0 0;
+  padding: 20px;
+  border: 1px solid #e6e6e6;
+  border-top: 1px solid #999999;
+  line-height: 18px;
+}
+
+.join_agreement_cont .form_element strong.choice {
+  color: #ab3e55;
+}
+
+.join_agreement_cont .agreement_choice_box {
+  padding: 10px 0 0 0;
+}
+
+.join_agreement_cont .agreement_choice_box table {
+  width: 100%;
+}
+
+.join_agreement_cont .agreement_choice_box table th {
+  padding: 20px 0;
+  border-top: 1px solid #999999;
+  border-left: 1px solid #dcdcdc;
+  background: #fbfbfb;
+}
+
+.join_agreement_cont .agreement_choice_box table td {
+  padding: 20px 0 20px 10px;
+  border-top: 1px solid #dcdcdc;
+  border-left: 1px solid #dcdcdc;
+  border-bottom: 1px solid #dcdcdc;
+}
+
+.important_check_box {
+  font-size: 13px;
+}
+
+.join_agreement_cont .important_check_box {
+  text-align: center;
+}
+
+.join_agreement_cont .important_check_box .important_check {
+  margin: 0 auto;
+  padding: 0 0 0 18px;
+  background: url(../../IMG/Login/icon_caution02.png) no-repeat 0px 3px;
+}
+
+input[type="checkbox"] {
+  height: 13px;
+  display: none;
+  vertical-align: top;
+}
+
+input[type="checkbox"]:checked + label {
+  background-image: url(../../IMG/Login/check_on.png);
+}
+
+input[type="checkbox"] + label {
+  position: relative;
+  top: 0;
+  left: 0;
+  padding: 0 0 0 27px;
+  display: inline-block;
+  min-width: 20px;
+  min-height: 20px;
+  background-repeat: no-repeat;
+  background-image: url(../../IMG/Login/check_off.png);
+}
+
+.form_element label:hover {
+  background: url(../../IMG/Login/check_over.png) no-repeat 1px;
+}
+
+.form_element input {
+  position: absolute;
+  top: 3px;
+  left: 1px;
+  width: 0;
+  z-index: -1;
+}
+
+.form_element {
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+}
+
+.agreement_box {
+  font-size: 12px;
+}
+
+.form_element input {
+  position: absolute;
+  top: 3px;
+  left: 1px;
+  width: 0;
+  z-index: -1;
+}
+
+.agreement_choice_box .form_element input {
+  left: 26px;
+}
+
+.btn_center_box {
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.btn_member_prev {
+  width: 150px;
+  height: 45px;
+  margin: 35px 0 0 0;
+  color: #3e3d3c;
+  font-size: 14px;
+  border: 1px solid #cccccc;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.btn_member_next {
+  border: 1px solid #252525;
+  background: #252525;
+  width: 150px;
+  height: 45px;
+  margin: 35px 0 0 0;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.sub_content {
+  width: 100%;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+  box-sizing: border-box;
+}
+
+table {
+  display: table;
+  border-collapse: separate;
+  box-sizing: border-box;
+  text-indent: initial;
+  border-color: grey;
+  border-spacing: 2px;
+}
+
+th,
+td {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #333;
+}
+
+th {
+  display: table-cell;
+  vertical-align: inherit;
+  font-weight: bold;
+  text-align: center;
+}
+
+tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+}

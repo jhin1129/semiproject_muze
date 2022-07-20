@@ -1,0 +1,183 @@
+/* 사이드 메뉴바 */
+.mySideMenu {
+    margin-top: 40px;
+    margin-left: 10px;
+    margin-bottom: 500px;
+}
+
+#myListMain{
+    font-weight: 700;
+}
+
+#mylist{
+    font-size: .9em;
+    list-style-type: none;
+    margin: 8px;
+}
+
+#sublist{
+    font-size: .85em;
+    color: black;
+    text-decoration-line: none;
+}
+
+/* 카드 */
+.card-group{
+    margin-top: 40px;
+    color: black;
+}
+
+.card-img-top{
+    height: 40px;
+    width: 40px;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.card-img-mid{
+    height: 35px;
+    width: 35px;
+    margin: auto;
+    margin-top: 15px;
+}
+
+.card{
+    text-align: center;
+}
+
+.card-title {
+    font-size: 0.8em;
+}
+
+.card-text{
+    font-size: 1.4em;
+}
+
+/* 주문 테이블 */
+.ordertable{
+    width: 100%;
+    height: 90px;
+    border: 1px solid lightgray;
+    border-left: none;
+    border-right: none;
+    text-align: center;
+    word-break: break-all;
+}
+
+.my_th{
+    background-color: rgba(238, 233, 233, 0.6);
+    border-bottom: 1px solid lightgrey;
+    font-size: 0.8em;
+    font-weight: 600;
+}
+
+/* 컨네이너 폰트 */
+#mySpan01{
+    font-weight: 500;
+    font-size: 1em;
+}
+
+#mySpan02{
+    color: grey;
+    font-size: 0.75em;
+}
+
+#myForm01{
+    margin-bottom: 3px;
+}
+
+
+/* 조회 표 */
+#my_thead01{
+    height: 40px;
+}
+
+#my_th01{
+    width: 15%
+}
+
+#my_th02{
+    width: 50%
+}
+
+#my_th03{
+    width: 13%
+}
+
+#my_th04{
+    width: 13%
+}
+
+#my_th05{
+    width: 10%
+}
+
+#my_td01{
+    height: 40px;
+    text-align: center;
+    font-size: 0.8em;
+}
+
+#my_td02{
+    /* font-size: 0.75em; */
+    text-decoration: underline;
+}
+
+/* 기간 검색 */
+.mySearchDate{
+    border: 1px solid lightgray;
+    height: 100px;
+    text-align: center;
+    font-size: 0.85em;
+    padding-top: 30px;
+}
+
+/* 기간 검색 구간 */
+.btnsearch{
+    text-align: center;
+    background-color: white;
+    font-size: 1em;
+    margin-bottom: 40px;
+}
+
+/* 기간 검색 버튼 */
+.btn-outline-secondary{
+    border: 1px solid lightgray;
+    margin-bottom: 3px;
+    border-radius: 1px;
+    height: 34px;
+}
+
+/* 문의 테이블 */
+.qnatable{
+    width: 100%;
+    height: 90px;
+    border: 1px solid lightgray;
+    border-left: none;
+    border-right: none;
+    text-align: center;
+    word-break: break-all;
+}
+
+/* 문의 테이블 */
+.myinputtable{
+    width: 100%;
+    height: 90px;
+    border: 1px solid lightgray;
+    border-left: none;
+    border-right: none;
+    text-align: center;
+}
+
+#my_td03{
+    height: 70px;
+    font-size: 0.8em;
+    border-bottom: 1px solid lightgray;
+}
+
+.mytextarea{
+    width: 98%; 
+    height: 90%; 
+    border: 1px solid lightgrey; 
+    margin-top: 5px;
+}

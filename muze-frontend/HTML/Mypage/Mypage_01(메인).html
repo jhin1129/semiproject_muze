@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    
     <!-- my CSS -->
-    <link rel="stylesheet" href="../CSS/Mypage_Main.css">
+    <link rel="stylesheet" href="../../CSS/Mypage/Mypage_Main.css">
 
     <!-- 예린 CSS -->
-    <link rel="stylesheet" href="../CSS/Muze_Main.css">
-
+    <link rel="stylesheet" href="../../CSS/Common/mainstyle.css">
+    
     <title>muze</title>
 
 </head>
@@ -22,99 +22,106 @@
   <!-- 시작 -->
   <div id="wrap">
 
-    <!-- 상단부분 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- 메인 로고와 상단 우측 메뉴 포함한 header> -->
-    <header class="blog-header pt-5 py-4">
-      <div class="row flex-nowrap justify-content-between align-items-center">
-        <div class="col-4 pt-1"></div>
-          <div class="col-4 text-center">
-            <img src="../IMG/logo.png" width="200px">
-          </div>
-
-          <!-- 상단 우측 메뉴 -->
-          <div class="col-4 d-flex justify-content-end align-items-center mt-3 me-5">
-            <a class="me-4"href="#">로그인</a>
-            <a class="me-4"href="#">회원가입</a>
-            <a href="#" class="me-5 align-items-center" style="margin-bottom: 7px;"> 
-              <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
-                <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
+  <!-- 메인 로고와 상단 우측 메뉴 포함한 header> -->
+  <header class="blog-header pt-5 py-5">
+    <div class="row flex-nowrap justify-content-between align-items-center">
+      <div class="col-4 pt-1"></div>
+      <div class="col-4 text-center">
+        <img src="../../IMG/Common/logo.png" width="200px">
       </div>
-    </header>
-
-    <!-- 메인 메뉴 -->
-      <div class="container">
-        <ul class="nav justify-content-around cul mt-4 mb-2">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <b>About muzé</b>
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">BRAND </a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <b>작품</b>
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">회화</a></li>
-              <li><a class="dropdown-item" href="#">공예</a></li>
-              <li><a class="dropdown-item" href="#">조소</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <b>커뮤니티</b>
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">게시판</a></li>
-              <li><a class="dropdown-item" href="#">공지사항</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <b>이벤트</b>
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">출석하기</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <b>고객센터</b>
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Q&A</a></li>
-              <li><a class="dropdown-item" href="#">FAQ</a></li>
-              <li><a class="dropdown-item" href="#">신고하기</a></li>
-            </ul>
-          </li>
-          <ul class="nav justify-content-end" id="search">
-            <form class="d-flex">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle p-0" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <button type="submit" class="btn btn-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                    </svg>
-                  </button>
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item"><input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"></a></li>
-                </ul>
-              </li>
-            </form>
-          </ul>
-        </ul>
+      <!-- 상단 우측 메뉴 -->
+      <div class="col-4 d-flex justify-content-center align-items-center mt-3">
+        <a class="mr-4 text-nowrap" href="#">로그인</a>
+        <a class="mr-4 text-nowrap" href="#">회원가입</a>
+        <a href="#" class="me-5 align-items-center mb-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-cart2"
+            viewBox="0 0 16 16">
+            <path
+              d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+          </svg>
+        </a>
       </div>
-
     </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- 메인 메뉴 -->
+    <ul class="nav justify-content-between">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false" style="font-size: 1.1em">
+          muzé
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="#">BRAND </a></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          작품
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="#">회화</a></li>
+          <li><a class="dropdown-item" href="#">공예</a></li>
+          <li><a class="dropdown-item" href="#">조소</a></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          커뮤니티
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="#">게시판</a></li>
+          <li><a class="dropdown-item" href="#">공지사항</a></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          이벤트
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="#">출석하기</a></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          고객 지원
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="#">Q&A</a></li>
+          <li><a class="dropdown-item" href="#">FAQ</a></li>
+          <li><a class="dropdown-item" href="#">신고하기</a></li>
+        </ul>
+      </li>
+      <!-- <ul class="nav justify-content-end" id="search">
+        <form class="d-flex">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown p-0" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <button type="submit" class="btn btn-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-search"
+                  viewBox="0 0 16 16">
+                  <path
+                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                </svg>
+              </button>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item"><input class="form-control me-2" type="search" placeholder="Search"
+                    aria-label="Search"></a></li>
+            </ul>
+          </li>
+        </form>
+      </ul> -->
+    </ul>
+    <hr class="mt-1">
+  </div>
+  <!-- header 끝 --> 
 
     <!-- 내용 전체 컨테이너 -->
     <div class="container">
@@ -124,27 +131,27 @@
         <div class="col-sm-2" >
           <!-- 사이드 메뉴바 -->
           <div class="mySideMenu">
-            <h5 style="font-weight: 600;" >마이페이지</h5>
+            <h5 style="font-weight: 600;" >마이 페이지</h5>
             <hr>
-              <p id="myListMain"> 주문내역 조회 </p> 
-                <li id="mylist"><a id="sublist" href="../mypage/order_list.php">- 주문목록 / 배송조회</a></li>
+              <p id="myListMain"> 구매 정보 </p> 
+                <li id="mylist"><a id="sublist" href="../mypage/order_list.php">- 주문 / 배송 조회</a></li>
                 <li id="mylist"><a id="sublist" href="../mypage/cancel_list.php">- 취소 / 반품 내역</a></li>
                 <li id="mylist"><a id="sublist" href="../mypage/cancel_list.php">- 환불 / 입금 내역</a></li><br>
               <p id="myListMain"> 회원 정보 </p> 
-                <li id="mylist"><a id="sublist" href="../mypage/mileage.php">- 이벤트 </a></li>
-                <li id="mylist"><a id="sublist" href="../mypage/mileage.php">- 마일리지</a></li>
+                <li id="mylist"><a id="sublist" href="../mypage/mileage.php">- 회원 혜택</a></li>
                 <li id="mylist"><a id="sublist" href="../mypage/my_page_password.php">- 회원 정보 수정 </a></li>
                 <li id="mylist"><a id="sublist" href="../mypage/my_page_password.php">- 회원 탈퇴 </a></li><br>
-              <p id="myListMain"> 나의 문의 내역 </p> 
+              <p id="myListMain"> 문의 내역 </p> 
                 <li id="mylist"><a id="sublist" href="../mypage/mypage_qa.php">- 1 : 1 문의</a></li>
                 <li id="mylist"><a id="sublist" href="../mypage/mypage_goods_qa.php">- 상품 문의</a></li><br>
-              <p id="myListMain"> 게시물 관리 </p> 
-                <li id="mylist"><a id="sublist" href="../mypage/mypage_goods_review.php">- 나의 게시글</a></li><br>
+              <p id="myListMain"> 내가 쓴 글</p> 
+                <li id="mylist"><a id="sublist" href="../mypage/mypage_community.php">- 구매 후기</a></li>
+                <li id="mylist"><a id="sublist" href="../mypage/mypage_community.php">- 나의 게시글</a></li><br>
           </div>
         </div>
 
         <!-- 오른쪽 그리드 -->
-        <div class="col-sm-10" ">
+        <div class="col-sm-10">
           <!-- 컨테이너 -->
           <div class="container">
 
@@ -155,17 +162,17 @@
                 <div class="card-group">
                   <!-- 첫번째 카드 -->
                   <div class="card">
-                    <img src="../IMG/coupon.png" class="card-img-top" href="../mypage/mypage_goods_review.php">
+                    <img src="../../IMG/Mypage/welcome.png" class="card-img-top" >
                     <div class="card-body">
-                      <h5 class="card-title">쿠폰</h5>
+                      <h5 class="card-title">ooo 님</h5>
                       <p class="card-text">
-                        <a href="../mypage/coupon.php">0 장</a>
+                        환영합니다.
                       </p>
                     </div>
                   </div>
                   <!-- 두번째 카드 -->
                   <div class="card">
-                    <img src="../IMG/m2.png" class="card-img-mid" >
+                    <img src="../../IMG/Mypage/mileage.png" class="card-img-mid" >
                     <div class="card-body">
                       <h5 class="card-title">마일리지</h5>
                       <p class="card-text"> 
@@ -175,11 +182,11 @@
                   </div>
                   <!-- 세번째 카드 -->
                   <div class="card">
-                    <img src="../IMG/wallet.png" class="card-img-top" >
+                    <img src="../../IMG/Mypage/write.png" class="card-img-top" >
                     <div class="card-body">
-                      <h5 class="card-title">예치금</h5>
+                      <h5 class="card-title">나의 후기</h5>
                       <p class="card-text">
-                        <a href="../mypage/money.php">0 원</a>
+                        <a href="../mypage/money.php">0 개</a>
                       </p>
                     </div>
                   </div>
@@ -197,9 +204,40 @@
                   <span id="mySpan02">최근 30일 내 진행중인 주문정보입니다.</span>
 
                 </form>
-                <!-- 기간별 검색 -->
-                <fieldset class="mySearchDate">
-
+                <!-- 주문상태 -->
+                <fieldset class="mySearchDate2">
+                  <div class="container">
+                    <div class="row row-cols-6">
+                      <div class="col" id="mying1">입금대기</div>
+                      <div class="col" id="mying1">결제완료</div>
+                      <div class="col" id="mying1">상품준비중</div>
+                      <div class="col" id="mying1">배송중</div>
+                      <div class="col" id="mying1">배송완료</div>
+                      <div class="col" id="mying1">구매확정</div>
+                    </div>
+                  </div>
+                  <div class="container">
+                    <div class="row row-cols-12">
+                      <div class="col" id="mying3"></div>
+                      <div class="col" id="mying2">1</div>
+                      <div class="col" id="mying3"></div>
+                      <div class="col" id="mying3"></div>
+                      <div class="col" id="mying2">0</div>
+                      <div class="col" id="mying3"></div>
+                      <div class="col" id="mying3"></div>
+                      <div class="col" id="mying2">0</div>
+                      <div class="col" id="mying3"></div>
+                      <div class="col" id="mying3"></div>
+                      <div class="col" id="mying2">0</div>
+                      <div class="col" id="mying3"></div>
+                      <div class="col" id="mying3"></div>
+                      <div class="col" id="mying2">0</div>
+                      <div class="col" id="mying3"></div>
+                      <div class="col" id="mying3"></div>
+                      <div class="col" id="mying2">0</div>
+                      <div class="col" id="mying3"></div>
+                    </div>
+                  </div>
                 </fieldset>
               </div>
             </div>
@@ -215,17 +253,20 @@
                 <table class="ordertable">
                   <thead id="my_thead01">
                     <tr>
-                      <th id="my_th01">날짜/주문번호</th>
-                      <th id="my_th02">상품명/옵션</th>
-                      <th id="my_th03">상품금액/수량</th>
-                      <th id="my_th04">주문상태</th>
-                      <th id="my_th05">확인</th>
+                      <th class="my_th" id="my_th01">날짜/주문번호</th>
+                      <th class="my_th" id="my_th02">상품명/옵션</th>
+                      <th class="my_th" id="my_th03">상품금액/수량</th>
+                      <th class="my_th" id="my_th04">주문상태</th>
+                      <th class="my_th" id="my_th05">확인</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td id="my_td01">2022/07/06 <br> <a href="../mypage/order_list.php" id="my_td02">2207069324820</a> </td>
-                      <td id="my_td01">상품명 01</td>
+                      <td id="my_td01">2022/07/06 <br>
+                        <a href="../mypage/order_list.php" id="my_td02">2207069324820</a> <br>
+                        <button type="button" class="btn btn-outline-secondary" id="mycbtn">주문 취소</button>
+                      </td> 
+                      <td id="my_td01">상품 01</td>
                       <td id="my_td01">42,000원 / 1개</td>
                       <td id="my_td01">고객요청취소</td>
                       <td id="my_td01"></td>
@@ -243,7 +284,6 @@
     </div>
     <!-- 내용 전체 컨테이너 끝 -->
 
-
     <!-- footer -->
     <footer class="bg-light text-center text-lg-start">
       <div style="background-color: rgb(238, 233, 233);">
@@ -254,7 +294,7 @@
           <!--Grid column-->
           <div class="col-lg-6 col-md-12 mb-4 mb-md-0" style="text-align:center; background-color: rgb(238, 233, 233);">
           <h5 class="text-uppercase">Project</h5>
-          <div style="text-align:center;"><img src="../IMG/logo.png" class="w-25 cul my-3"> <br><br>
+          <div style="text-align:center;"><img src="../../IMG/Common/logo.png" class="w-25 cul my-3"> <br><br>
                     <a class="text-dark" href="https://muze.com/">© 2022 Copyright: muze.com</a></div>               
           </div>
           <!--Grid column-->
@@ -282,12 +322,15 @@
         <!-- Grid container -->
       </footer>
 
+
     <!-- Java Script -->
     <!-- My JS -->
-    <script src="../semi_js/01_practice.js"></script>
+    <!-- <script src="../JS/Mypage_02.js"></script> -->
 
-    <!-- Bootstrap JS -->
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-</body>
+    <!-- Bootstrap Js 4.6 -->
+    <!-- 부트스트랩 제이쿼리 활성화 시 제이쿼리 데이트피커 동작 안함 -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+  </body>
 </html>

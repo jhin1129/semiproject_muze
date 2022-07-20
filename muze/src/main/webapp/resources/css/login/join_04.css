@@ -1,0 +1,84 @@
+/* * {
+  border: 1px solid red;
+} */
+
+.member_cont {
+  border: 0;
+  width: 92%;
+  margin: auto;
+}
+
+.member_tit {
+  padding-bottom: 70px;
+  width: 92%;
+  margin: auto;
+  margin-top: 50px;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.member_tit h2 {
+  font-size: 26px;
+  font-weight: bold;
+  color: #1a1a1a;
+  float: left;
+  margin-top: 20px;
+}
+
+.join_ok_box .join_ok_tit {
+  text-align: center;
+  background: url(../../IMG/Login/img_join_ok.png) no-repeat center 0;
+  padding: 50px 0 0 0;
+  margin-top: 10px;
+}
+
+.join_ok_box .join_ok_tit .complete {
+  font-size: 15px;
+  color: #222222;
+}
+
+.join_ok_box .join_ok_tit p {
+  font-size: 12px;
+  color: #989898;
+  letter-spacing: -0.5px;
+}
+
+p {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+.join_ok_box .join_ok_tit p span {
+  font-weight: bold;
+  color: #222222;
+}
+
+.join_ok_box .btn_member_sec {
+  border-top: 1px solid #dbdbdb;
+  margin-bottom: 100px;
+}
+
+.btn_login_home {
+  width: 30%;
+  height: 45px;
+  margin: 35px 0 0 0;
+  color: #3e3d3c;
+  font-size: 14px;
+  border: 1px solid #cccccc;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.btn_login {
+  border: 1px solid #252525;
+  background: #252525;
+  width: 30%;
+  height: 45px;
+  margin: 35px 0 0 0;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: bold;
+}
