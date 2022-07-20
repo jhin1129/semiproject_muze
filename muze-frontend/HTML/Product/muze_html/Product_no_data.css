@@ -1,0 +1,56 @@
+* { 
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+}
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
+::after {
+    color: white;
+}
+A:link { text-decoration:none; color: black;}
+.me-3 {
+    color: black;
+}
+.painting {
+    text-align: center;
+}
+.breadcrumb-item {
+    font-weight: 500;
+    color: black;
+}
+.search {
+    width: 300px;
+}
+.search input {
+    width: 50%;
+    font-size: 18px;
+    border: none;
+    border-bottom: 1px black solid;
+}
+
+.search button {
+    font-size: 18px;
+    border: none;
+    background-color: rgb(255, 255, 255);
+    width: 50px;
+    border-radius: 15px;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+}
+ul li {list-style-type: none; display: inline;}
+
+.\- {
+    width: 288px;
+    height: 32px;
+    margin: 137px 41.5px 55px 83px;
+    font-family: MeiryoUI;
+    font-size: 24px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #c5c5c5; 
+}
