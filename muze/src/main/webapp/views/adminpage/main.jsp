@@ -1,3 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+
 <jsp:include page="/views/common/header.jsp"/>
 
   <!-- 내용 전체 컨테이너 -->
@@ -146,5 +153,9 @@
 
   </div>
   <!-- 내용 전체 컨테이너 끝 -->
+  
+<!-- chart js -->
+<script src="${path}/resources/js/Adminpage/status_visitors.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <jsp:include page="/views/common/footer.jsp"/>

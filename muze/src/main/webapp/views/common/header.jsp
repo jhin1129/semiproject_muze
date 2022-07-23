@@ -17,13 +17,16 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
     integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
-  <!-- mainstyle CSS -->
+  <!-- Mainstyle CSS -->
   <link rel="stylesheet" type="text/css" href="${path}/resources/css/common/mainstyle.css">
 
-  <!-- Andminpage CSS -->
+  <!-- Mypage CSS -->
+  <link rel="stylesheet" href="${path}/resources/css/mypage/Mypage_Main.css">
+
+  <!-- Adminpage CSS -->
   <link rel="stylesheet" href="${path}/resources/css/adminpage/admin.css">
   
-  <!-- support CSS -->
+  <!-- Support CSS -->
   <link rel="stylesheet" href="${path}/resources/css/support/support.css">
 
   <title>Header</title>
