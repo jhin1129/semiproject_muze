@@ -20,6 +20,12 @@
   <!-- mainstyle CSS -->
   <link rel="stylesheet" type="text/css" href="${path}/resources/css/common/mainstyle.css">
 
+  <!-- Andminpage CSS -->
+  <link rel="stylesheet" href="${path}/resources/css/adminpage/admin.css">
+  
+  <!-- support CSS -->
+  <link rel="stylesheet" href="${path}/resources/css/support/support.css">
+
   <title>Header</title>
 </head>
 
@@ -95,9 +101,9 @@
           고객 지원
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#">Q&A</a></li>
-          <li><a class="dropdown-item" href="#">FAQ</a></li>
-          <li><a class="dropdown-item" href="#">신고하기</a></li>
+          <li><a class="dropdown-item" href="#">공지사항</a></li>
+          <li><a class="dropdown-item" href="#">자주하는 질문</a></li>
+          <li><a class="dropdown-item" href="#">1:1 문의</a></li>
         </ul>
       </li>
       <!-- <ul class="nav justify-content-end" id="search">
