@@ -13,9 +13,17 @@
 
     <!-- 예린 CSS -->
     <link rel="stylesheet" href="../../CSS/Common/mainstyle.css">
-    
-    <title>muze</title>
 
+    
+    <!-- 데이트피커 CSS 및 제이쿼리 -->
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+    <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
+    <link rel="stylesheet" href="../../CSS/Mypage/Mypage_Cal.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="../../JS/Mypage/Mypage_02.js" ></script>
+
+    <title>muze</title>
 </head>
 <body>
 
@@ -121,34 +129,34 @@
     </ul>
     <hr class="mt-1">
   </div>
-  <!-- header 끝 --> 
-
-    <!-- 내용 전체 컨테이너 -->
-    <div class="container">
-      <div class="row">
-
-        <!-- 왼쪽 그리드 -->
-        <div class="col-sm-2" >
-          <!-- 사이드 메뉴바 -->
-          <div class="mySideMenu">
-            <h5 style="font-weight: 600;" >마이 페이지</h5>
-            <hr>
-              <p id="myListMain"> 구매 정보 </p> 
-                <li id="mylist"><a id="sublist" href="../mypage/order_list.php">- 주문 / 배송 조회</a></li>
-                <li id="mylist"><a id="sublist" href="../mypage/cancel_list.php">- 취소 / 반품 내역</a></li>
-                <li id="mylist"><a id="sublist" href="../mypage/cancel_list.php">- 환불 / 입금 내역</a></li><br>
-              <p id="myListMain"> 회원 정보 </p> 
-                <li id="mylist"><a id="sublist" href="../mypage/mileage.php">- 회원 혜택</a></li>
-                <li id="mylist"><a id="sublist" href="../mypage/my_page_password.php">- 회원 정보 수정 </a></li>
-                <li id="mylist"><a id="sublist" href="../mypage/my_page_password.php">- 회원 탈퇴 </a></li><br>
-              <p id="myListMain"> 문의 내역 </p> 
-                <li id="mylist"><a id="sublist" href="../mypage/mypage_qa.php">- 1 : 1 문의</a></li>
-                <li id="mylist"><a id="sublist" href="../mypage/mypage_goods_qa.php">- 상품 문의</a></li><br>
-              <p id="myListMain"> 내가 쓴 글</p> 
-                <li id="mylist"><a id="sublist" href="../mypage/mypage_community.php">- 구매 후기</a></li>
-                <li id="mylist"><a id="sublist" href="../mypage/mypage_community.php">- 나의 게시글</a></li><br>
+    <!-- header 끝 --> 
+  
+      <!-- 내용 전체 컨테이너 -->
+      <div class="container">
+        <div class="row">
+  
+          <!-- 왼쪽 그리드 -->
+          <div class="col-sm-2" >
+            <!-- 사이드 메뉴바 -->
+            <div class="mySideMenu">
+              <h5 style="font-weight: 600;" >마이 페이지</h5>
+              <hr>
+                <p id="myListMain"> 구매 정보 </p> 
+                  <li id="mylist"><a id="sublist" href="../mypage/order_list.php">- 주문 / 배송 조회</a></li>
+                  <li id="mylist"><a id="sublist" href="../mypage/cancel_list.php">- 취소 / 반품 내역</a></li>
+                  <li id="mylist"><a id="sublist" href="../mypage/cancel_list.php">- 환불 / 입금 내역</a></li><br>
+                <p id="myListMain"> 회원 정보 </p> 
+                  <li id="mylist"><a id="sublist" href="../mypage/mileage.php">- 회원 혜택</a></li>
+                  <li id="mylist"><a id="sublist" href="../mypage/my_page_password.php">- 회원 정보 변경 </a></li>
+                  <li id="mylist"><a id="sublist" href="../mypage/my_page_password.php">- 회원 탈퇴 </a></li><br>
+                <p id="myListMain"> 문의 내역 </p> 
+                  <li id="mylist"><a id="sublist" href="../mypage/mypage_qa.php">- 1 : 1 문의</a></li>
+                  <li id="mylist"><a id="sublist" href="../mypage/mypage_goods_qa.php">- 상품 문의</a></li><br>
+                <p id="myListMain"> 내가 쓴 글</p> 
+                  <li id="mylist"><a id="sublist" href="../mypage/mypage_community.php">- 구매 후기</a></li>
+                  <li id="mylist"><a id="sublist" href="../mypage/mypage_community.php">- 나의 게시글</a></li><br>
+            </div>
           </div>
-        </div>
 
         <!-- 오른쪽 그리드 -->
         <div class="col-sm-10" ">
@@ -158,30 +166,30 @@
             <div class="row">
               <div class="col-sm-12" style="margin-top: 40px;">
                 <form style="margin-bottom: 3px;">
-                  <span id="mySpan01">회원정보 수정</span> 
-                  <hr style="margin-bottom: 100px;">
-                </form>
-              </div>
-            </div>
-
-            <!-- 두번째 행 -->
-            <div class="row">
-              <div class="col-sm-12" style="margin-top: 30px;">
-                <form style="margin-bottom: 50px;">
-                  <span id="span01" style="font-size: 0.85em;"><center>회원님의 정보를 안전하게 보호하기 위해 비밀번호를 입력 해주세요.</center></span> 
+                  <span id="mySpan01">나의 게시글</span> 
+                  <hr style="margin-bottom: 10px;">
                 </form>
               </div>
             </div>
             
+            <!-- 두번째 행 -->
+            <div class="row">
+              <div class="col-sm-12" style="margin-top: 30px;">
+                <form id="myForm01">
+                  <span id="mySpan01"></span> 
+                </form>
+
+
+
+                </div>
+              </div>
+            
             <!-- 세번째 행 -->
             <div class="row">
               <div class="col-sm-12" style="margin-top: 50px;">
-                <center>
-                  <input type="text">
-                  <button class="btn btn-light text-nowrap">확인</button>
 
-                  <!-- <button type="button" class="btn btn-outline-secondary" style="background-color: rgb(255, 255, 255); color: black;">확인</button> -->
-                </center>
+
+              
               </div>
             </div>
             <!-- 세번째 행 끝 -->
@@ -231,12 +239,8 @@
         <!-- Grid container -->
       </footer>
 
-    <!-- Java Script -->
-    <!-- My JS -->
-    <script src="../../JS/Mypage/Mypage_01.js"></script>
-
-    <!-- Bootstrap Js 4.6 -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>

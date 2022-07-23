@@ -147,7 +147,7 @@
                   <li id="mylist"><a id="sublist" href="../mypage/cancel_list.php">- 환불 / 입금 내역</a></li><br>
                 <p id="myListMain"> 회원 정보 </p> 
                   <li id="mylist"><a id="sublist" href="../mypage/mileage.php">- 회원 혜택</a></li>
-                  <li id="mylist"><a id="sublist" href="../mypage/my_page_password.php">- 회원 정보 수정 </a></li>
+                  <li id="mylist"><a id="sublist" href="../mypage/my_page_password.php">- 회원 정보 변경 </a></li>
                   <li id="mylist"><a id="sublist" href="../mypage/my_page_password.php">- 회원 탈퇴 </a></li><br>
                 <p id="myListMain"> 문의 내역 </p> 
                   <li id="mylist"><a id="sublist" href="../mypage/mypage_qa.php">- 1 : 1 문의</a></li>
@@ -170,11 +170,11 @@
                   <div class="card-group">
                     <!-- 첫번째 카드 -->
                     <div class="card">
-                      <img src="../../IMG/Mypage/coupon.png" class="card-img-top" href="../mypage/mypage_goods_review.php">
+                      <img src="../../IMG/Mypage/welcome.png" class="card-img-top" >
                       <div class="card-body">
-                        <h5 class="card-title">쿠폰</h5>
+                        <h5 class="card-title">ooo 님</h5>
                         <p class="card-text">
-                          <a href="../mypage/coupon.php">0 장</a>
+                          환영합니다.
                         </p>
                       </div>
                     </div>
@@ -235,7 +235,7 @@
 
             <!-- 세번째 행 -->
             <div class="row">
-              <div class="col-sm-12" style="margin-top: 50px;">
+              <div class="col-sm-12" style="margin-top: 50px;" >
                 <form id="myForm01">
                   <span id="mySpan01">주문목록 / 배송조회 내역 총 1 건</span> 
                 </form>
@@ -252,10 +252,13 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td id="my_td01">2022/07/06 <br> <a href="../mypage/order_list.php" id="my_td02">2207069324820</a> </td>
-                      <td id="my_td01">상품명 01</td>
+                      <td id="my_td01">2022/07/06 <br>
+                        <a href="../mypage/order_list.php" id="my_td02">2207069324820</a> <br>
+                        <button type="button" class="btn btn-outline-secondary" id="mycbtn">주문 취소</button>
+                      </td> 
+                      <td id="my_td01">상품 01</td>
                       <td id="my_td01">42,000원 / 1개</td>
-                      <td id="my_td01">고객요청취소</td>
+                      <td id="my_td01">입금대기</td>
                       <td id="my_td01"></td>
                     </tr>
                   </tbody>
