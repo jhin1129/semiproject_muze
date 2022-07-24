@@ -8,7 +8,7 @@
 <html lang="ko">
 
 <head>
-  <!-- Required meta tags -->
+<!-- Required meta tags -->
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,7 +38,7 @@
     <div class="row flex-nowrap justify-content-between align-items-center">
       <div class="col-4 pt-1"></div>
       <div class="col-4 text-center">
-        <img src="${path}/resources/images/common/logo.png" width="200px">
+        <img src="${path}/resources/images/common/logo.png" width="200px" onclick="location.href='${path }/' ">
       </div>
       <!-- 상단 우측 메뉴 -->
       <div class="col-4 d-flex justify-content-center align-items-center mt-3">
@@ -85,8 +85,9 @@
           커뮤니티
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#">게시판</a></li>
-          <li><a class="dropdown-item" href="#">공지사항</a></li>
+          <li><a class="dropdown-item" href="${path}/exhibition/list">공모전/전시회</a></li>
+          <li><a class="dropdown-item" href="${path}/board/list?type=REVIEW">리뷰 게시판</a></li>
+          <li><a class="dropdown-item" href="${path}/board/list?type=FREE">자유 게시판</a></li>
         </ul>
       </li>
       <li class="nav-item dropdown">
