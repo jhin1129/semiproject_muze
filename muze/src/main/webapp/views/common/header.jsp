@@ -85,9 +85,9 @@
           커뮤니티
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="${path}/community/exhibition/list">공모전/전시회</a></li>
-          <li><a class="dropdown-item" href="${path}/community/board/list?type=리뷰">리뷰 게시판</a></li>
-          <li><a class="dropdown-item" href="${path}/community/board/list?type=자유">자유 게시판</a></li>
+          <li><a class="dropdown-item" href="${path}/exhibition/list">공모전/전시회</a></li>
+          <li><a class="dropdown-item" href="${path}/board/list?type=REVIEW">리뷰 게시판</a></li>
+          <li><a class="dropdown-item" href="${path}/board/list?type=FREE">자유 게시판</a></li>
         </ul>
       </li>
       <li class="nav-item dropdown">

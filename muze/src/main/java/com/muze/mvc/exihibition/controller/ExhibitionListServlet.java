@@ -1,4 +1,4 @@
-package muze.mvc.controller.commmunity.exihibition;
+package com.muze.mvc.exihibition.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/community/exhibition/list")
+@WebServlet("/exhibition/list")
 public class ExhibitionListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

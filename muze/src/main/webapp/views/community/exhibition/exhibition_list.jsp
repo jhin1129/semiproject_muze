@@ -14,7 +14,7 @@
         <h2 style="text-align: center;">전시회 소식</h2>
     </div>
 
-    <div class="card my-5" style="width: 100%;" onclick="location.href='${ path }/community/exhibition/view?no=1'">
+    <div class="card my-5" style="width: 100%;" onclick="location.href='${ path }/exhibition/view?no=1'">
         <img style="background-color: black; height: 500px;" class="card-img-top">
         <div class="card-body">
             <h5 class="card-title">Card title</h5>
@@ -25,7 +25,7 @@
         </div>
     </div>
 
-    <div class="card my-5" style="width: 100%;" onclick="location.href='${ path }/community/exhibition/view?no=2'">
+    <div class="card my-5" style="width: 100%;" onclick="location.href='${ path }/exhibition/view?no=2'">
         <img style="background-color: black; height: 500px;" class="card-img-top">
         <div class="card-body">
             <h5 class="card-title">Card title</h5>
@@ -34,22 +34,6 @@
                 content.</p>
             <a href="#" class="btn btn-primary">Go somewhere</a>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-4"></div>
-        <div class="col-4">
-            <ul class="pagination justify-content-center">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-        </div>
-
     </div>
 
 </div>

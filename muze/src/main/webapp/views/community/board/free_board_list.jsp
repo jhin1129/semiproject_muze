@@ -25,89 +25,28 @@
                         <th id="th" style="width: 10%;">조회수</th>
                     </tr>
                 </thead>
-
+				
                 <tbody>
-                    <tr>
-                        <td id="td">1</td>
-                        <td id="td">제목1</td>
-                        <td id="td">작성자1</td>
-                        <td id="td">날짜1</td>
-                        <td id="td">조회수1</td>
-                    </tr>
-
-                    <tr>
-                        <td id="td">2</td>
-                        <td id="td">제목2</td>
-                        <td id="td">작성자2</td>
-                        <td id="td">날짜2</td>
-                        <td id="td">조회수2</td>
-                    </tr>
-
-                    <tr>
-                        <td id="td">3</td>
-                        <td id="td">제목3</td>
-                        <td id="td">작성자3</td>
-                        <td id="td">날짜3</td>
-                        <td id="td">조회수3</td>
-                    </tr>
-
-                    <tr>
-                        <td id="td">4</td>
-                        <td id="td">제목4</td>
-                        <td id="td">작성자4</td>
-                        <td id="td">날짜4</td>
-                        <td id="td">조회수4</td>
-                    </tr>
-
-                    <tr>
-                        <td id="td">5</td>
-                        <td id="td">제목5</td>
-                        <td id="td">작성자5</td>
-                        <td id="td">날짜5</td>
-                        <td id="td">조회수5</td>
-                    </tr>
-
-                    <tr>
-                        <td id="td">6</td>
-                        <td id="td">제목6</td>
-                        <td id="td">작성자6</td>
-                        <td id="td">날짜6</td>
-                        <td id="td">조회수6</td>
-                    </tr>
-
-                    <tr>
-                        <td id="td">7</td>
-                        <td id="td">제목7</td>
-                        <td id="td">작성자7</td>
-                        <td id="td">날짜7</td>
-                        <td id="td">조회수7</td>
-                    </tr>
-
-                    <tr>
-                        <td id="td">8</td>
-                        <td id="td">제목8</td>
-                        <td id="td">작성자8</td>
-                        <td id="td">날짜8</td>
-                        <td id="td">조회수8</td>
-                    </tr>
-
-                    <tr>
-                        <td id="td">9</td>
-                        <td id="td">제목9</td>
-                        <td id="td">작성자9</td>
-                        <td id="td">날짜9</td>
-                        <td id="td">조회수9</td>
-                    </tr>
-
-                    <tr>
-                        <td id="td">10</td>
-                        <td id="td">제목10</td>
-                        <td id="td">작성자10</td>
-                        <td id="td">날짜10</td>
-                        <td id="td">조회수10</td>
-                    </tr>
+                	<c:if test="${ empty list }">
+                		<tr>
+                			<td colspan="6">
+                				조회된 게시글이 없습니다.
+                			</td>
+               			</tr>
+                	</c:if>
+                	<c:if test="${ not empty list }">
+                		<c:forEach var="board" items="${ list }">
+	                		<tr>
+		                        <td id="td">${ board.rowNum }</td>
+		                        <td id="td"><a href="${ path }/board/view?no=${ board.brdNo }&&type=${ type }">${ board.brdTitle }</a></td>
+		                        <td id="td">${ board.brdWriterId }</td>
+		                        <td id="td">${ board.brdDate }</td>
+		                        <td id="td">${ board.brdReadCount }</td>
+	                    	</tr>
+                		
+                		</c:forEach>
+                	</c:if>
                 </tbody>
-
             </table>
         </div>
 
@@ -115,13 +54,22 @@
             <div class="col-4"></div>
             <div class="col-4">
                 <ul class="pagination justify-content-center">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    <li class="page-item"><a class="page-link" href="${path }/board/list?page=1&&type=${type}">&lt;&lt;</a></li>
+                    <li class="page-item"><a class="page-link" href="${path }/board/list?page=${pageInfo.prevPage}&&type=${type}">&lt;</a></li>
+                    
+                    <!--  10개 페이지 목록 -->
+					<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
+						<c:if test="${ status.current == pageInfo.currentPage }">
+		                    <li class="page-item disabled"><a class="page-link" href="#">${ status.current }</a></li>
+						</c:if>
+						<c:if test="${ status.current != pageInfo.currentPage }">
+		                    <li class="page-item"><a class="page-link" href="${path }/board/list?page=${status.current}&&type=${type}">${ status.current }</a></li>
+					
+						</c:if>
+					</c:forEach>
+                    
+                    <li class="page-item"><a class="page-link" href="${path }/board/list?page=${pageInfo.nextPage}&&type=${type}">&gt;</a></li>
+                    <li class="page-item"><a class="page-link" href="${path }/board/list?page=${pageInfo.maxPage}&&type=${type}">&gt;&gt;</a></li>
                 </ul>
             </div>
 
@@ -129,7 +77,6 @@
                 <button class="btn btn-light text-nowrap">글 쓰기</button>
             </div>
         </div>
-
 
         <div class="search row mb-5">
             <div class="col-xs-2 col-sm-2">
@@ -153,6 +100,5 @@
 
         </div>
     </div>
-
 </div>
 <jsp:include page="/views/common/footer.jsp"/>
