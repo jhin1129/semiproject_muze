@@ -91,12 +91,12 @@
         </ul>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+        <a class="nav-link dropdown" href="${path}/event" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
           aria-expanded="false">
           이벤트
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#">출석하기</a></li>
+          <li><a class="dropdown-item" href="${path}/event">출석하기</a></li>
         </ul>
       </li>
       <li class="nav-item dropdown">
