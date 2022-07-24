@@ -17,8 +17,17 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
     integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
-  <!-- mainstyle CSS -->
+  <!-- Mainstyle CSS -->
   <link rel="stylesheet" type="text/css" href="${path}/resources/css/common/mainstyle.css">
+
+  <!-- Mypage CSS -->
+  <link rel="stylesheet" href="${path}/resources/css/mypage/Mypage_Main.css">
+
+  <!-- Adminpage CSS -->
+  <link rel="stylesheet" href="${path}/resources/css/adminpage/admin.css">
+  
+  <!-- Support CSS -->
+  <link rel="stylesheet" href="${path}/resources/css/support/support.css">
 
   <title>Header</title>
 </head>
@@ -96,9 +105,9 @@
           고객 지원
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#">Q&A</a></li>
-          <li><a class="dropdown-item" href="#">FAQ</a></li>
-          <li><a class="dropdown-item" href="#">신고하기</a></li>
+          <li><a class="dropdown-item" href="#">공지사항</a></li>
+          <li><a class="dropdown-item" href="#">자주하는 질문</a></li>
+          <li><a class="dropdown-item" href="#">1:1 문의</a></li>
         </ul>
       </li>
       <!-- <ul class="nav justify-content-end" id="search">

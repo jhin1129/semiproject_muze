@@ -322,19 +322,7 @@
   margin: 20px 0 100px 0;
   border-top: 1px solid #dbdbdb;
 }
-/* .find_id_box .btn_member_sec ul {
-  overflow: hidden;
-  margin: 20px 0 0 0;
-  text-align: center;
-  font-size: 0;
-}
-.find_id_box .btn_member_sec li {
-  display: inline-block;
-  margin: 0 0 0 10px;
-}
-.find_id_box .btn_member_sec li:first-child {
-  margin: 0;
-} */
+
 .find_id_box .radio_find_type {
   margin-top: 10px;
 }
@@ -561,299 +549,6 @@
   margin: 0;
 }
 
-/* 휴면회원 해제 선택 */
-.wake_base_box .wake_base_tit {
-  border-bottom: 1px solid #dbdbdb;
-}
-.wake_base_box .wake_base_tit .complete {
-  padding: 20px 0 20px 0;
-  font-size: 18px;
-  color: #222222;
-}
-.wake_base_box .wake_base_tit .complete strong {
-  font-weight: bold;
-}
-.wake_base_box .wake_date {
-  overflow: hidden;
-  padding: 15px 25px 25px 25px;
-  background: #f4f4f4;
-}
-.wake_base_box .wake_date dl {
-  float: left;
-  width: 50%;
-  padding: 10px 0 0 0;
-}
-.wake_base_box .wake_date dt {
-  float: left;
-  color: #aaaaaa;
-}
-.wake_base_box .wake_date dd {
-  font-weight: bold;
-}
-.wake_base_box .wake_date dd strong {
-  color: #ab3e55;
-}
-.wake_base_box .wake_notice {
-  padding: 20px 0 30px 0;
-  line-height: 23px;
-  font-size: 12px;
-  color: #797979;
-}
-.wake_base_box .wake_notice em {
-  display: block;
-  padding: 10px 0 0 0;
-  font-weight: bold;
-}
-.wake_base_box .none_wake {
-  border-bottom: 1px solid #dbdbdb;
-}
-.wake_base_box .none_wake p {
-  padding: 30px 0;
-  text-align: center;
-  font-size: 18px;
-  color: #868686;
-}
-.wake_base_box .wake_ok {
-  border-bottom: 1px solid #dbdbdb;
-}
-.wake_base_box .wake_ok p {
-  padding: 30px 0;
-  text-align: center;
-  font-size: 18px;
-  color: #868686;
-}
-.wake_base_box .wake_certify_input {
-  padding: 30px 0;
-  border-bottom: 1px solid #dbdbdb;
-}
-.wake_base_box .wake_certify_input .wc_info_tip {
-  padding: 0 0 25px 0;
-  font-size: 13px;
-  text-align: center;
-  letter-spacing: -1px;
-}
-#wrap .wake_base_box .wake_certify_input .member_warning {
-  display: block;
-  width: 369px;
-  margin: 0 auto;
-}
-.wake_base_box .wake_certify_input .member_warning strong {
-  padding: 0 0 0 10px;
-  line-height: 31px;
-}
-.wake_base_box .wake_certify_input .member_warning input {
-  width: 90%;
-}
-.wake_base_box .wake_certify_input .member_warning .phone_num {
-  width: 230px;
-  margin: 10px 0 0 0;
-}
-.wake_base_box .wake_certify_input .member_warning .email_num {
-  width: 230px;
-  margin: 10px 0 0 0;
-}
-.wake_base_box .wake_certify_input .member_warning .email_direct {
-  width: 130px;
-  margin: 10px 0 0 0;
-}
-.wake_base_box .wake_certify_input .member_warning .chosen-container {
-  margin: 10px 0 0 0;
-}
-.wake_base_box .user_certify_list {
-  padding: 30px 0;
-  border-bottom: 1px solid #dbdbdb;
-}
-.wake_base_box .user_certify_list p {
-  text-align: center;
-}
-.wake_base_box .user_certify_list ul {
-  padding: 20px 0 0 0;
-  line-height: 39px;
-}
-.wake_base_box .uc_info_tip {
-  padding: 20px 0 0 0;
-  font-size: 14px;
-}
-.wake_base_box .complete_box {
-  text-align: center;
-  min-height: 130px;
-}
-.wake_base_box .complete_box p {
-  padding: 40px 0 45px 0;
-  font-size: 18px;
-  color: #232323;
-}
-.wake_base_box .login_input .form_element {
-  display: block;
-}
-.wake_base_box .login_input + .btn_center_box,
-.wake_base_box .complete_box + .btn_center_box {
-  margin: 35px 0 0 0;
-}
-.wake_base_box .wake_base_tit + .login_input {
-  border-top: none 0;
-}
-.wake_base_box .wake_base_tit + .btn_center_box,
-.wake_base_box .wake_certify_input + .btn_center_box {
-  margin: 35px 0 0 0;
-}
-#wrap .wake_base_box .wake_certify_input .member_warning.prior_wrong .chosen-single {
-  border: 1px solid #d6d6d6;
-}
-
-/* 휴면회원 해제 완료 */
-.wake_complete_box .wake_complete_tit p {
-  padding: 20px 0 20px 0;
-  font-size: 18px;
-  color: #222222;
-}
-.wake_complete_box .wake_complete_tit p strong {
-  font-weight: bold;
-}
-.wake_complete_box .btn_member_sec {
-  border-top: 1px solid #dbdbdb;
-}
-.wake_complete_box .btn_member_sec ul {
-  overflow: hidden;
-  margin: 20px 0 0 0;
-  text-align: center;
-  font-size: 0;
-}
-.wake_complete_box .btn_member_sec li {
-  display: inline-block;
-}
-.wake_complete_box .btn_member_sec li button {
-  width: 150px;
-  height: 42px;
-  border: 1px solid #6b6b6b;
-  background: #6b6b6b;
-  color: #fff;
-  font-weight: bold;
-  font-size: 13px;
-  cursor: pointer;
-}
-.wake_complete_box .btn_member_sec li button:hover {
-  border: 1px solid #626262;
-  color: #fff;
-  background: #626262;
-}
-
-/*** 휴면해제 완료 | member/wake_complete.html ***/
-.wake_complete {
-  box-sizing: border-box;
-  padding: 10px 30px 20px 30px;
-  text-align: center;
-}
-.wake_complete h3 {
-  font-size: 12px;
-  color: #000;
-  letter-spacing: -0.5px;
-  background-color: #f9f9f9;
-  border: 1px solid #ccc;
-  padding: 10px 0 10px 0;
-}
-.wake_complete h3 strong {
-  color: #ab3e55;
-}
-.wake_complete .wake_wrap {
-  border: 1px solid #ccc;
-  margin: 20px 0 20px 0;
-  padding: 25px 20px 30px 20px;
-}
-.wake_complete .wake_wrap img {
-  width: 61px;
-}
-.wake_complete .wake_inner {
-  display: block;
-  margin: 5px 0 0 0;
-}
-.wake_complete .wake_inner strong {
-  font-size: 15px;
-  color: #000;
-  letter-spacing: -1px;
-}
-.wake_complete .wake_inner p {
-  font-size: 12px;
-  color: #292929;
-  margin: 5px 0 0 0;
-  line-height: 1.8em;
-}
-.wake_complete .wake_inner ul {
-  font-size: 12px;
-  color: #292929;
-  margin: 5px 0 0 0;
-  line-height: 1.8em;
-}
-.wake_complete .wake_inner ul li span:before {
-  content: "-";
-  padding: 0 3px 0 0;
-}
-
-/* 휴면회원 해제 인증 */
-.wake_certify_box .wake_certify_tit .complete {
-  padding: 20px 0 20px 0;
-  font-size: 18px;
-  color: #222222;
-}
-.wake_certify_box .wake_certify_tit .complete strong {
-  font-weight: bold;
-}
-.wake_certify_box .wake_date {
-  overflow: hidden;
-  padding: 15px 25px 25px 25px;
-  background: #f4f4f4;
-}
-.wake_certify_box .wake_date dl {
-  float: left;
-  width: 50%;
-  padding: 10px 0 0 0;
-}
-.wake_certify_box .wake_date dt {
-  float: left;
-  color: #aaaaaa;
-}
-.wake_certify_box .wake_date dd {
-  font-weight: bold;
-}
-.wake_certify_box .wake_notice {
-  padding: 20px 0 30px 0;
-  line-height: 23px;
-  font-size: 12px;
-  color: #797979;
-}
-.wake_certify_box .wake_notice em {
-  display: block;
-  padding: 10px 0 0 0;
-  font-weight: bold;
-}
-.wake_certify_box .wake_certify_input {
-  border-top: 1px solid #dbdbdb;
-  border-bottom: 1px solid #dbdbdb;
-  padding: 30px 0;
-  text-align: center;
-}
-.wake_certify_box .wake_certify_input input {
-  width: 330px;
-  height: 36px;
-  margin: 15px 0 20px 0;
-}
-.wake_certify_box .wake_certify_input a {
-  color: #fa2828;
-}
-.wake_certify_box .btn_member_sec ul {
-  overflow: hidden;
-  margin: 25px 0 0 0;
-  text-align: center;
-  font-size: 0;
-}
-.wake_certify_box .btn_member_sec li {
-  display: inline-block;
-  margin: 0 0 0 10px;
-}
-.wake_certify_box .btn_member_sec li:first-child {
-  margin: 0;
-}
-
 /* 비밀번호 변경안내 */
 .password_change {
   padding: 70px 60px;
@@ -916,7 +611,7 @@
 /* 회원가입 정보입력 */
 .join_base_wrap .member_tit {
   overflow: hidden;
-  border-bottom: 1px solid #dbdbdb;
+  border-bottom: 1px solid #999999;
 }
 .join_base_wrap .member_tit h2 {
   float: left;
@@ -932,8 +627,13 @@
   font-size: 14px;
   color: #d1d1d1;
 }
+
+.join_base_wrap .member_tit li {
+  list-style: none;
+}
+
 .join_base_wrap .member_tit .page_on {
-  color: #ab3e55;
+  color: #252525;
   font-weight: bold;
 }
 .join_base_wrap .member_tit li span {
@@ -950,23 +650,23 @@
   border: none;
 }
 .join_base_wrap .member_cont h3 {
-  padding: 0 0 17px 0;
+  padding: 40px 0 20px;
   font-size: 18px;
   color: #222222;
 }
-.join_base_wrap table th {
+.base_info_box table th {
   padding: 10px 25px;
 }
-.join_base_wrap table th span {
+.base_info_box table th span {
   padding: 0 0 0 10px;
   margin: 0 0 0 -10px;
 }
-.join_base_wrap .important {
+.base_info_box .important {
   background: url("../../IMG/Login/icon_dot_03.png") no-repeat 0 center;
 }
 
 .join_type_box .type_select_sec {
-  padding: 40px 0 60px 0;
+  padding: 40px 0 0px 0;
   border-top: 1px solid #1c1c1c;
 }
 .join_type_box .type_select_sec .form_element {
@@ -982,13 +682,20 @@
 
 .base_info_box h3 {
   display: inline-block;
+  font-size: 18px;
 }
+
 .base_info_box > span {
-  float: right;
   padding: 0 0 0 10px;
   line-height: 40px;
-  color: #ab3e55;
 }
+
+#base_info_p {
+  float: right;
+  padding: 0 0 0 10px;
+  font-size: 14px;
+}
+
 .base_info_box > span img {
   vertical-align: middle;
 }
@@ -1002,6 +709,7 @@
   text-align: left;
   border-bottom: 1px solid #dcdcdc;
   background: #fbfbfb;
+  font-size: 14px;
 }
 .base_info_sec table th:first-child,
 .base_info_sec table td:first-child {
@@ -1011,6 +719,7 @@
   padding: 15px 0 15px 15px;
   border-bottom: 1px solid #dcdcdc;
 }
+
 .base_info_sec table input[type="text"] {
   width: 380px;
 }
@@ -1018,6 +727,18 @@
   display: block;
   margin-top: 5px;
 }
+
+/* 이메일 input */
+.chosen_select {
+  height: 31px;
+  line-height: 36px;
+  width: 115px;
+  margin: 9px 0 10px 3px;
+  padding: 0 0 0 5px;
+  border: 1px solid #d0d0d0;
+  font-size: 13px;
+}
+
 /*.base_info_sec table select{margin:0 0 0 5px; padding:5.5px 4px; vertical-align:top; border:1px solid #cccccc;}*/
 .base_info_sec table strong {
   font-weight: normal;
@@ -1049,7 +770,7 @@
 
 /* 아티스트 정보 */
 .artist_info_box {
-  margin: 40px 0 0 0;
+  margin: 40px 0 30px 0;
 }
 .artist_info_box .artist_info_sec {
   border-top: 1px solid #1c1c1c;
@@ -1061,6 +782,7 @@
   text-align: left;
   border-bottom: 1px solid #dcdcdc;
   background: #fbfbfb;
+  font-size: 14px;
 }
 .artist_info_sec table th:first-child,
 .artist_info_sec table td:first-child {
@@ -1072,64 +794,6 @@
 }
 .artist_info_sec table input[type="text"] {
   width: 380px;
-}
-
-/* 부가정보 */
-.addition_info_box {
-  margin: 40px 0 0 0;
-}
-.addition_info_box .addition_info_sec {
-  border-top: 1px solid #1c1c1c;
-}
-.addition_info_sec table {
-  width: 100%;
-}
-.addition_info_sec table th {
-  text-align: left;
-  border-bottom: 1px solid #dcdcdc;
-  background: #fbfbfb;
-}
-.addition_info_sec table th:first-child,
-.addition_info_sec table td:first-child {
-  border-left: none;
-}
-.addition_info_sec table td {
-  padding: 15px 0 15px 15px;
-  border-bottom: 1px solid #dcdcdc;
-}
-.addition_info_sec table input[type="text"] {
-  width: 380px;
-}
-/*.addition_info_sec table select{padding:5.5px 4px; vertical-align:top; border:1px solid #cccccc;}*/
-.addition_info_sec table li {
-  float: left;
-  padding: 0 30px 0 0;
-}
-.addition_info_sec .hobby_list li {
-  float: left;
-  width: 33%;
-  padding: 0 0 7px 0;
-}
-.addition_info_sec textarea {
-  width: 98%;
-  height: 100px;
-  margin: 0 0 10px 0;
-}
-.addition_info_sec .anniversary {
-  background: url("../../IMG/Login/icon_calendar.png") no-repeat right center;
-}
-.join_base_wrap .btn_member_sec ul {
-  overflow: hidden;
-  margin: 25px 0 0 0;
-  text-align: center;
-  font-size: 0;
-}
-.join_base_wrap .btn_member_sec li {
-  display: inline-block;
-  margin: 0 0 0 10px;
-}
-.join_base_wrap .btn_member_sec li:first-child {
-  margin: 0;
 }
 
 /* 회원가입 약관동의 */
@@ -1153,7 +817,7 @@
 .join_agreement_wrap .member_tit h2 {
   float: left;
   margin-top: 20px;
-  font-size: 26px;
+  font-size: 28px;
   color: #222222;
 }
 .join_agreement_wrap .member_tit ol {
@@ -1201,11 +865,11 @@
 }
 
 .join_agreement_cont > h3 {
+  padding: 40px 0 20px;
   font-size: 18px;
-  border-bottom: 1px solid #999999;
-  padding: 0 0 17px 0;
-  margin-top: 15px;
-  font-weight: normal;
+  color: #222222;
+  font-weight: bold;
+  border-bottom: 1px solid;
 }
 
 .join_agreement_cont .form_element_join em {
@@ -1384,6 +1048,10 @@ td {
   margin: 0 5px 0 0;
 }
 
+.member_warning_pwd {
+  font-size: 12px;
+}
+
 /* 회원가입 이메일 */
 .base_info_sec .member_email input[type="text"] {
   width: 251px;
@@ -1391,42 +1059,39 @@ td {
 .base_info_sec .member_email select {
   width: 120px;
 }
-/* 생일 */
-.addition_info_sec .member_birthday input[type="text"] {
-  width: 306px;
-}
+
 .addition_info_sec .member_birthday select {
   width: 70px;
 }
 /* 주소 */
-#contents .member_address .address_postcode {
+.member_address .address_postcode {
   overflow: hidden;
 }
-#contents .member_address .address_postcode input {
+.member_address .address_postcode input {
   float: left;
   width: 190px;
 }
-#contents .member_address .address_postcode .btn_post_search {
+.member_address .address_postcode .btn_post_search {
   float: left;
   margin: 0 0 0 5px;
   padding: 5px 10px 5px 10px;
   border: 1px solid #989898;
 }
-#contents .member_address .address_input {
+.member_address .address_input {
   float: left;
   width: 72%;
 }
-#contents .member_address .address_input input {
+.member_address .address_input input {
   margin: 10px 0 0 0;
 }
 /* 직업 셀렉트 박스 */
-#contents .select_jop {
+.select_jop {
   width: 380px;
 }
-#contents .select_phone {
+.select_phone {
   width: 80px;
 }
-#contents .select_email {
+.select_email {
   width: 120px;
 }
 
@@ -1547,6 +1212,7 @@ td {
 .btn_member_cancel {
   width: 150px;
   height: 45px;
+  margin: 35px 0 0 0;
   color: #3e3d3c;
   font-weight: bold;
   font-size: 13px;
@@ -1578,7 +1244,7 @@ td {
 .btn_comfirm {
   width: 150px;
   height: 45px;
-  margin: 0;
+  margin: 35px 0 0 0;
   color: #ffffff;
   font-size: 14px;
   border: 1px solid #252525;
@@ -1818,3 +1484,18 @@ input[type="password"] {
   line-height: 31px;
   box-sizing: border-box;
 }
+
+textarea {
+  width: 380px;
+  padding: 0 5px;
+  color: #333333;
+  border: 1px solid #d6d6d6;
+  box-sizing: border-box;
+  padding: 0 10px;
+  outline: none;
+  font-size: 12px;
+  resize: none;
+}
+
+/* input[type="file"] {
+} */
