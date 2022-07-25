@@ -125,7 +125,7 @@ public class BoardDao {
 				board.setBrdType(rs.getString("BRD_STATUS"));
 				board.setBrdStatus(rs.getString("BRD_STATUS"));
 				board.setBrdOriginalFileName(rs.getString("BRD_ORIGINALFILENAME"));
-				board.setBrdRenameFileName(rs.getString("BRD_RENAMEDFILENAME"));
+				board.setBrdRenamedFileName(rs.getString("BRD_RENAMEDFILENAME"));
 				
 				list.add(board);
 			}
@@ -186,7 +186,7 @@ public class BoardDao {
 				board.setBrdType(rs.getString("BRD_TYPE"));
 				board.setBrdType(rs.getString("BRD_STATUS"));
 				board.setBrdOriginalFileName(rs.getString("BRD_ORIGINALFILENAME"));
-				board.setBrdRenameFileName(rs.getString("BRD_RENAMEDFILENAME"));
+				board.setBrdRenamedFileName(rs.getString("BRD_RENAMEDFILENAME"));
 				
 			}
 		} catch (SQLException e) {
@@ -197,6 +197,45 @@ public class BoardDao {
 		}
 		
 		return board;
+	}
+
+	public int insertBoard(Connection connection, Board board) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "INSERT INTO BOARD VALUES("
+							+ "SEQ_BOARD_NO.NEXTVAL,"	//BRD_NO
+							+ "?,"						//BRD_TITLE
+							+ "?,"						//BRD_CONTENT
+							+ "SYSDATE,"				//BRD_DATE
+							+ "0,"						//BRD_READCOUNT
+							+ "?,"						//BRD_WRITER_NO
+							+ "NULL,"					//BRD_PRO_NO
+							+ "NULL,"					//BRD_CATEGORY
+							+ "NULL,"					//BRD_REP_CONTENT
+							+ "?,"						//BRD_TYPE
+							+ "'Y',"						//BRD_STATUS
+							+ "?,"						//BRD_ORIGINALFILENAME
+							+ "?"						//BRD_RENAMEDFILENAME
+							+ ")";
+				
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setString(1, board.getBrdTitle());
+			pstmt.setString(2, board.getBrdContent());
+			pstmt.setInt(3, board.getBrdWriterNo());
+			pstmt.setString(4, board.getBrdType());
+			pstmt.setString(5, board.getBrdOriginalFileName());
+			pstmt.setString(6, board.getBrdRenamedFileName());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
 	}
 
 }

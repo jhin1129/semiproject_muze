@@ -43,4 +43,25 @@ public class BoardService {
 		return board;
 	}
 
+	public int save(Board board) {
+		int result = 0;
+		Connection connection = getConnection();
+		
+		if(board.getBrdNo() != 0) {
+//			result = new BoardDao().updateBoard(connection, board);
+		} else {			
+			result = new BoardDao().insertBoard(connection, board);
+		}
+		
+		if(result > 0) {
+			commit(connection);
+		} else {
+			rollback(connection);
+		}
+		
+		close(connection);
+		
+		return result;
+	}
+
 }
