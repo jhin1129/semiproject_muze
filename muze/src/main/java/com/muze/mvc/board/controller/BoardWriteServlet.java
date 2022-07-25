@@ -30,7 +30,7 @@ public class BoardWriteServlet extends HttpServlet {
     	Board board = null;
     	String type = request.getParameter("type");
     	// 파일이 저장될 경로
-    	String path = getServletContext().getRealPath("/resources/upload/board");
+    	String path = getServletContext().getRealPath("/resources/upload/board/permanant");
     	
     	// 파일의 최대 사이즈 지정 (10MB)
     	int maxSize = 10485760;
@@ -69,7 +69,7 @@ public class BoardWriteServlet extends HttpServlet {
 //    		request.setAttribute("msg", "게시글 등록 실패");
 //    		request.setAttribute("location", "/board/list");
 //		}
-    	
+    	new BoardService().deleteAllTempFiles(getServletContext().getRealPath("/resources/upload/board/temporary"));
     	response.sendRedirect(request.getContextPath() + "/board/list?type=" + type);
 	}
 

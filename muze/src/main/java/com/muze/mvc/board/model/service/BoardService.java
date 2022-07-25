@@ -1,5 +1,6 @@
 package com.muze.mvc.board.model.service;
 
+import java.io.File;
 import java.sql.Connection;
 import java.util.List;
 
@@ -62,6 +63,21 @@ public class BoardService {
 		close(connection);
 		
 		return result;
+	}
+
+	public void deleteAllTempFiles(String targetFolder) {
+		File folder = new File(targetFolder);
+		if(!folder.exists()) {
+            return ;
+        }
+        
+        File[] files = folder.listFiles();
+        for(File file : files) {           
+            file.delete();
+        }
+        
+        return ;
+		
 	}
 
 }

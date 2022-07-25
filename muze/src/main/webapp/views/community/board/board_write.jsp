@@ -7,7 +7,6 @@
 
 <jsp:include page="/views/common/header.jsp"/>
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
     integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
     crossorigin="anonymous"></script>
@@ -17,7 +16,7 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
 
-<script src="${ path}/resources/summernote-0.8.18-dist/summernote-lite.js"></script>
+<script src="${ path }/resources/summernote-0.8.18-dist/summernote-lite.js"></script>
 <link rel="stylesheet" href="${ path }/resources/summernote-0.8.18-dist/summernote-lite.css">
     
     <!-- 내용 전체 컨테이너 -->
@@ -87,16 +86,46 @@
 	                            ['color', ['color']],
 	                            ['style', ['bold', 'italic', 'underline', 'clear']],
 	                            ['para', ['ul', 'ol', 'paragraph']],
-	                            ['insert', ['picture', 'video']],
+	                            ['insert', ['picture']],
 	                            ['height', ['height']]
 	                        ],
 	                        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋음체', '바탕체'],
 	                        // 추가한 폰트사이즈
 	                        fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
 	                        // 줄간격
-	                        lineHeights: ['0.2', '0.3', '0.4', '0.5', '0.6', '0.8', '1.0', '1.2', '1.4', '1.5', '2.0', '3.0']
-	
+	                        lineHeights: ['0.2', '0.3', '0.4', '0.5', '0.6', '0.8', '1.0', '1.2', '1.4', '1.5', '2.0', '3.0'],
+							
+	                    	callbacks: {
+	                    		onImageUpload : function(files, editor, welEditable){
+	                    			for(var i = files.length -1; i>=0; i--){
+	                    				uploadSummerNoteImageFile(files[i], this);
+	                    			}
+	                    		}
+	                    	}
 	                    });
+	                    
+	                    function uploadSummerNoteImageFile(file, editor) {
+	                    	var data = new FormData();
+	                    	data.append("file", file);
+	                    	$.ajax({
+	                    		url: "${path}/board/imageupload",
+	                    		type: "POST",
+	                            enctype: 'multipart/form-data',
+	                            data: data,
+	                            dataType: "json",
+	                            cache: false,
+	                            contentType : false,
+	                            processData : false,
+	                            success : function(data){
+	                            	alert(data.url);
+	                            	$(editor).summernote('editor.insertImage', data.url);
+	                            },
+	                            error : function(e){
+	                            	console.log(e);
+	                            }
+	                    	});
+	                    }
+	                    
 	                </script>
 	
 	
