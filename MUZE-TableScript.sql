@@ -233,6 +233,28 @@ BEGIN
 EXCEPTION
     WHEN OTHERS THEN ROLLBACK;
 END;
+--리뷰게시글 테스트값
+BEGIN
+    FOR N IN 1..51
+    LOOP
+        INSERT INTO BOARD(BRD_NO, BRD_TITLE, BRD_CONTENT, BRD_DATE, BRD_READCOUNT, BRD_WRITER_NO, BRD_PRO_NO, BRD_TYPE, BRD_STATUS)
+        VALUES( 
+            SEQ_BOARD_NO.NEXTVAL, 
+            '테스트를 위한 리뷰게시글 ' || SEQ_BOARD_NO.CURRVAL, 
+            '테스트를 위한 리뷰게시글 내용' || SEQ_BOARD_NO.CURRVAL, 
+            SYSDATE, 
+            0, 
+            TRUNC(DBMS_RANDOM.VALUE(6, 13)),
+            TRUNC(DBMS_RANDOM.VALUE(1, 11)),           
+            'REVIEW',
+            'Y'
+            );
+    END LOOP;
+
+    COMMIT;
+EXCEPTION
+    WHEN OTHERS THEN ROLLBACK;
+END;
 --QNA게시글 테스트값
 BEGIN
     FOR N IN 1..51
