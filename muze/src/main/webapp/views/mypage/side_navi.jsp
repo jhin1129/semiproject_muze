@@ -19,7 +19,6 @@
 	       <li id="mylist"><a id="sublist" href="../mypage/my_page_password.php">- 회원 탈퇴 </a></li><br>
 	     <p id="myListMain"> 문의 내역 </p> 
 	       <li id="mylist"><a id="sublist" href="../mypage/mypage_qa.php">- 1 : 1 문의</a></li>
-	       <li id="mylist"><a id="sublist" href="../mypage/mypage_goods_qa.php">- 상품 문의</a></li><br>
 	     <p id="myListMain"> 내가 쓴 글</p> 
 	       <li id="mylist"><a id="sublist" href="../mypage/mypage_community.php">- 구매 후기</a></li>
 	       <li id="mylist"><a id="sublist" href="../mypage/mypage_community.php">- 나의 게시글</a></li><br>
