@@ -1,0 +1,73 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+
+<jsp:include page="/views/common/header.jsp"/>
+
+<!-- 내용 전체 컨테이너 -->
+<div class="container">
+	<div class="row" style="text-align: center">
+		<div class="col"></div>
+            <div class="col-6 ">
+                <div class="content_box">
+                    <div class="member_wrap">
+                        <div class="member_tit">
+                            <h2>아이디찾기</h2>
+                        </div>
+                        <!-- //member_tit -->
+                        <div class="member_cont">
+                            <form id="formFindId" method="post" action="../member/member_ps.php" novalidate="novalidate">
+                                <div class="find_id_box">
+                                    <div class="find_id_sec">
+                                        <h3 class="hidden">회원 아이디찾기</h3>
+                                        <div class="form_element radio_find_type">            
+                                          <input type="radio" id="findIdEmail" name="findIdFl" value="email" checked="checked">            
+                                          <label for="findIdEmail" class="choice_s on">이메일</label>            
+                                          <input type="radio" id="findIdPhone" name="findIdFl" value="cellPhone">            
+                                          <label for="findIdPhone" class="choice_s">휴대폰번호</label>            
+                                        </div>
+                                        <div class="login_input">
+                                            <div>
+                                                <input type="text" id="userName" name="userName" placeholder="이름">
+                                                <input type="text" id="userCellPhoneNum" name="userCellPhoneNum" placeholder="가입휴대폰번호" disabled="disabled" style="display:none;" maxlength="12">                     
+                                                <input type="text" id="userEmail" name="userEmail" class="input_email" placeholder="가입메일주소">            
+                                                <select id="emailDomain" name="emailDomain" class="email_select">            
+                                                    <option value="self">직접입력</option>            
+                                                    <option value="naver.com">naver.com</option>            
+                                                    <option value="hanmail.net">hanmail.net</option>            
+                                                    <option value="daum.net">daum.net</option>            
+                                                    <option value="nate.com">nate.com</option>            
+                                                    <option value="hotmail.com">hotmail.com</option>            
+                                                    <option value="gmail.com">gmail.com</option>            
+                                                    <option value="icloud.com">icloud.com</option>            
+                                                </select>
+                                            </div>
+                                            <button type="submit" class="btn_member_id">아이디 찾기</button>
+                                        </div>
+                                        <!-- <p class="dn js_caution_msg1">일치하는 회원정보가 없습니다. 다시 입력해 주세요.</p> -->
+                                    </div>
+                                    <!-- //find_id_sec -->
+                                    <div class="btn_member_sec">
+                                            <button class="btn_member_white js_btn_find_password">비밀번호 찾기</button>
+                                            <button class="btn_comfirm js_btn_login">로그인하기</button>
+                                    </div>
+                                    <!-- //btn_member_sec -->
+                                </div>
+                                <!-- //find_id_box -->
+                            </form>
+                        </div>
+                        <!-- //member_cont -->
+                    </div>
+                    <!-- //member_wrap -->
+				</div>
+			</div>
+		<div class="col"></div>
+	</div>
+	<!-- //content_box -->
+</div>
+<!-- //본문 끝 contents -->
+
+<jsp:include page="/views/common/footer.jsp"/>

@@ -1,188 +1,17 @@
-<!DOCTYPE html>
-<html lang="ko">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-      integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
-      crossorigin="anonymous"
-    />
+<jsp:include page="/views/common/header.jsp"/>
 
-    <!-- my CSS -->
-    <link rel="stylesheet" href="../../CSS/Login/join_02.css" />
-
-    <!-- 예린 CSS -->
-    <link rel="stylesheet" href="../../CSS/Common/mainstyle.css" />
-
-    <title>Join_02</title>
-  </head>
-  <body>
-    <!-- 시작 -->
-    <div id="wrap">
-      <!-- 메인 로고와 상단 우측 메뉴 포함한 header> -->
-      <header class="blog-header pt-5 py-5">
-        <div class="row flex-nowrap justify-content-between align-items-center">
-          <div class="col-4 pt-1"></div>
-          <div class="col-4 text-center">
-            <img src="../../IMG/Common/logo.png" width="200px" />
-          </div>
-          <!-- 상단 우측 메뉴 -->
-          <div class="col-4 d-flex justify-content-center align-items-center mt-3">
-            <a class="mr-4 text-nowrap" href="#">로그인</a>
-            <a class="mr-4 text-nowrap" href="#">회원가입</a>
-            <a href="#" class="me-5 align-items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="21"
-                height="21"
-                fill="currentColor"
-                class="bi bi-cart2"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
-                />
-              </svg>
-            </a>
-          </div>
-        </div>
-      </header>
-
-      <!-- 메인 메뉴 -->
-      <div class="container">
-        <ul class="nav justify-content-between">
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              ABOUT US
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">BRAND </a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              ART
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">회화</a></li>
-              <li><a class="dropdown-item" href="#">공예</a></li>
-              <li><a class="dropdown-item" href="#">조소</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              COMMUNITY
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">게시판</a></li>
-              <li><a class="dropdown-item" href="#">공지사항</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              EVENT
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">출석하기</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              CUSTOMER
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Q&A</a></li>
-              <li><a class="dropdown-item" href="#">FAQ</a></li>
-              <li><a class="dropdown-item" href="#">신고하기</a></li>
-            </ul>
-          </li>
-          <ul class="nav justify-content-end" id="search">
-            <form class="d-flex">
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown p-0"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <button type="submit" class="btn btn-white">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="21"
-                      height="21"
-                      fill="currentColor"
-                      class="bi bi-search"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
-                      />
-                    </svg>
-                  </button>
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li>
-                    <a class="dropdown-item"
-                      ><input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                    /></a>
-                  </li>
-                </ul>
-              </li>
-            </form>
-          </ul>
-        </ul>
-        <hr class="mt-1" />
-      </div>
-    </div>
-    <!-- header 끝 -->
-
-    <!-- 내용 전체 컨테이너 -->
-    <div class="container">
-        <div class="row m-auto">
-          <div class="col-12">
-            <div class="location_wrap hidden">
+<!-- 내용 전체 컨테이너 -->
+<div class="container">
+	<div class="row m-auto">
+		<div class="col-12">
+ 			<div class="location_wrap hidden">
                 <div class="location_cont">
                     <em><a href="#" class="local_home">HOME</a> > 회원가입 > 약관동의</em>
                 </div>
@@ -195,8 +24,8 @@
                         <div class="member_tit">
                         <h2>회원가입</h2>
                     <ol>
-                        <li class="page_on" ><span>01</span> 약관동의<span><img src="../../IMG/Login/icon_join_step_on.png" alt=""></span></li>
-                        <li><span>02</span> 정보입력<span><img src="../../IMG/Login/icon_join_step_off.png" alt=""></span></li>
+                        <li class="page_on" ><span>01</span> 약관동의<span><img src="${path}/resources/images/login/icon_join_step_on.png" alt=""></span></li>
+                        <li><span>02</span> 정보입력<span><img src="${path}/resources/images/login/icon_join_step_off.png" alt=""></span></li>
                         <li><span>03</span> 가입완료</li>
                     </ol>
                   </div>
@@ -229,12 +58,12 @@
             <div class="join_agreement_cont">
                 <h3>약관동의</h3>
               <div class="join_agreement_box">            
-                <div class="form_element" id="termsAgreeDiv">            
+                <div class="form_element_join" id="termsAgreeDiv">            
                   <input type="checkbox" id="termsAgree" name="under14ConsentFl">            
                     <label class="check" for="termsAgree"> <strong>(필수)</strong><em> 만 14세 이상입니다</em></label>            
                 </div>
                 <div class="join_agreement_box">
-                  <div class="form_element">
+                  <div class="form_element_join">
                       <input type="checkbox" id="allAgree">
                         <label class="check" for="allAgree"> <em>muzé의 모든 약관을 확인하고 전체 동의합니다.</em></label>
                           <span>(전체동의, 선택항목도 포함됩니다.)</span>
@@ -243,7 +72,7 @@
 
                 <!-- //join_agreement_box -->
                 <div class="join_agreement_box js_terms_view">
-                  <div class="form_element">
+                  <div class="form_element_join">
                     <input type="checkbox" id="termsAgree1" name="agreementInfoFl" class="require" >
                       <label class="check_s" for="termsAgree1"><strong>(필수)</strong><em> 이용약관</em></label>
                         <span><a href="약관링크넣기" target="_blank"><em>전체보기</em></a></span>
@@ -472,7 +301,7 @@
 				  </div>
 				<!-- //join_agreement_box -->
                 <div class="join_agreement_box js_terms_view">
-				  <div class="form_element">
+				  <div class="form_element_join">
 					  <input type="checkbox" id="termsAgree2" name="privateApprovalFl" class="require" >
 						<label class="check_s" for="termsAgree2"><strong>(필수)</strong><em> 개인정보 수집 및 이용</em> </label>
 						<span><a href="../service/agreement.php?code=001003" target="_blank">전체보기</a></span>
@@ -496,13 +325,12 @@
 
 			
 			<div class="join_agreement_box js_terms_view">
-				<div class="form_element">
+				<div class="form_element_join">
 					<input type="checkbox" id="termsAgree3" name="">
 					<label class="check_s" for="termsAgree3"><strong class="choice">(선택)</strong><em> 개인정보 수집 및 이용</em></label>
 					<span><a href="#" target="_blank">전체보기</a></span>
 				</div>
 				  <div class="agreement_choice_box">
-							<!--  -->
 					<table summary="(선택)개인정보 수집 및 이용 내용입니다." border="0" cellpadding="0" cellspacing="0">
 					  <colgroup>
 						<col width="10px">
@@ -517,7 +345,7 @@
 						  <tbody>
 							<tr>
 							  <td>
-								<div class="form_element">
+								<div class="form_element_join">
 								  <input type="checkbox" id="privateApprovalOption_7" name="privateApprovalOptionFl[7]">
 								  <label class="check_s" for="privateApprovalOption_7">선택</label>
 								</div>
@@ -555,53 +383,4 @@
   </div>
 </div>
 
-    <!-- footer -->
-    <footer class="bg-light text-center text-lg-start">
-      <div style="background-color: rgb(238, 233, 233);">
-        <!-- Grid container -->
-        <div class="container p-4" style="background-color: rgb(238, 233, 233);">
-        <!--Grid row-->
-        <div class="row">
-          <!--Grid column-->
-          <div class="col-lg-6 col-md-12 mb-4 mb-md-0" style="text-align:center; background-color: rgb(238, 233, 233);">
-          <h5 class="text-uppercase">Project</h5>
-          <div style="text-align:center;"><img src="../../IMG/Common/logo.png" class="w-25 cul my-3"> <br><br>
-                    <a class="text-dark" href="https://muze.com/">© 2022 Copyright: muze.com</a></div>               
-          </div>
-          <!--Grid column-->
-          <div class="col-lg-6 col-md-12 mb-4 mb-md-0" style="text-align:center; background-color: rgb(238, 233, 233);">
-          <h5 class="text-uppercase">contact us</h5>
-          <div class="cul my-4">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
-            </svg> &nbsp; 02-123-4567 &nbsp;
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
-            <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
-            </svg> &nbsp; muzeofficial@gmail.com <br><br>
-          <p>
-            <a href="#!">이용안내</a> &nbsp;
-            <a href="#!">이용약관</a> &nbsp;
-            <a href="#!">개인정보처리방침</a>
-          </p>
-            <div>Business license : 706-20-01181 <br> Mall-order license : 2022-서울시-0334</div>
-          </div>
-          <!--Grid column-->
-        </div>
-        <!--Grid row-->
-        </div>
-      </div>
-        <!-- Grid container -->
-      </footer>
-
-
-    <!-- Java Script -->
-    <!-- My JS -->
-    <!-- <script src="../JS/Mypage_02.js"></script> -->
-
-    <!-- Bootstrap Js 4.6 -->
-    <!-- 부트스트랩 제이쿼리 활성화 시 제이쿼리 데이트피커 동작 안함 -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
-
-  </body>
-</html>
+<jsp:include page="/views/common/footer.jsp"/>
