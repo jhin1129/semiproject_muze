@@ -47,7 +47,11 @@ public class BoardDao {
 						+ " BRD_CONTENT,"
 						+ " BRD_DATE,"
 						+ " BRD_READCOUNT,"
+						+ " BRD_WRITER_NO,"
 						+ " MEMBER_ID,"
+						+ " BRD_PRO_NO,"
+						+ " BRD_CATEGORY,"
+						+ " BRD_REP_CONTENT,"
 						+ " BRD_TYPE,"
 						+ " BRD_STATUS,"
 						+ " BRD_ORIGINALFILENAME,"
@@ -59,7 +63,11 @@ public class BoardDao {
 						+ 		" BRD_CONTENT,"
 						+ 		" BRD_DATE,"
 						+ 		" BRD_READCOUNT,"
+						+ 		" BRD_WRITER_NO,"
 						+ 		" MEMBER_ID,"
+						+ 		" BRD_PRO_NO,"
+						+ 		" BRD_CATEGORY,"
+						+ 		" BRD_REP_CONTENT,"
 						+ 		" BRD_TYPE,"
 						+ 		" BRD_STATUS,"
 						+ 		" BRD_ORIGINALFILENAME,"
@@ -71,7 +79,11 @@ public class BoardDao {
 						+ 					   " BRD_CONTENT,"
 						+ 					   " BRD_DATE,"
 						+ 					   " BRD_READCOUNT,"
+						+ 					   " BRD_WRITER_NO,"
 						+ 					   " MEMBER_ID,"
+						+ 					   " BRD_PRO_NO,"
+						+ 					   " BRD_CATEGORY,"
+						+ 					   " BRD_REP_CONTENT,"
 						+ 					   " BRD_TYPE,"
 						+ 					   " BRD_STATUS,"
 						+ 					   " BRD_ORIGINALFILENAME,"
@@ -105,8 +117,13 @@ public class BoardDao {
 				board.setBrdContent(rs.getString("BRD_CONTENT"));
 				board.setBrdDate(rs.getDate("BRD_DATE"));
 				board.setBrdReadCount(rs.getInt("BRD_READCOUNT"));
+				board.setBrdWriterNo(rs.getInt("BRD_WRITER_NO"));
 				board.setBrdWriterId(rs.getString("MEMBER_ID"));
+				board.setBrdProNo(rs.getInt("BRD_PRO_NO"));
+				board.setBrdCategory(rs.getString("BRD_CATEGORY"));
+				board.setBrdRepContent(rs.getString("BRD_REP_CONTENT"));
 				board.setBrdType(rs.getString("BRD_STATUS"));
+				board.setBrdStatus(rs.getString("BRD_STATUS"));
 				board.setBrdOriginalFileName(rs.getString("BRD_ORIGINALFILENAME"));
 				board.setBrdRenameFileName(rs.getString("BRD_RENAMEDFILENAME"));
 				
@@ -128,12 +145,15 @@ public class BoardDao {
 		ResultSet rs = null;
 		String query = 
 					" SELECT BRD_NO,"
-				+ 	" BRD_NO,"
 				+ 	" BRD_TITLE,"
 				+ 	" BRD_CONTENT,"
 				+ 	" BRD_DATE,"
 				+ 	" BRD_READCOUNT,"
+				+ 	" BRD_WRITER_NO,"
 				+ 	" MEMBER_ID,"
+				+ 	" BRD_PRO_NO,"
+				+ 	" BRD_CATEGORY,"
+				+ 	" BRD_REP_CONTENT,"
 				+ 	" BRD_TYPE,"
 				+ 	" BRD_STATUS,"
 				+ 	" BRD_ORIGINALFILENAME,"
@@ -158,7 +178,12 @@ public class BoardDao {
 				board.setBrdContent(rs.getString("BRD_CONTENT"));
 				board.setBrdDate(rs.getDate("BRD_DATE"));
 				board.setBrdReadCount(rs.getInt("BRD_READCOUNT"));
+				board.setBrdWriterNo(rs.getInt("BRD_WRITER_NO"));
 				board.setBrdWriterId(rs.getString("MEMBER_ID"));
+				board.setBrdProNo(rs.getInt("BRD_PRO_NO"));
+				board.setBrdCategory(rs.getString("BRD_CATEGORY"));
+				board.setBrdRepContent(rs.getString("BRD_REP_CONTENT"));
+				board.setBrdType(rs.getString("BRD_TYPE"));
 				board.setBrdType(rs.getString("BRD_STATUS"));
 				board.setBrdOriginalFileName(rs.getString("BRD_ORIGINALFILENAME"));
 				board.setBrdRenameFileName(rs.getString("BRD_RENAMEDFILENAME"));
