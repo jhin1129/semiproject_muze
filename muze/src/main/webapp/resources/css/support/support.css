@@ -9,33 +9,25 @@
 	min-height:500px;
 }
 
-.table-faq td:first-child {
+.table-support td:first-child {
 	width: 15%; height: 8%; background-color: whitesmoke; vertical-align: middle; padding-left: 1em;
 }
 
-.table-faq td:nth-child(2) {
+.table-support td:nth-child(2) {
 	padding-left: 1em;
 }
 
-.table-faq td {
+.table-support td {
 	border: 1px solid lightgray;
 	border-left: none;
     border-right: none;
 }
 
 .button-black {
-	width: 80px;
-	height: 40px;
-	margin: 10px;
-	background-color: black; 
+	width: 50px;
+	height: 30px;
+	margin: 0;
+	background-color: black;
 	color: white;
-}
-
-.button-white {
-	width: 80px;
-	height: 40px;
-	margin: 10px;
-	background-color: white; 
-	color: black;
 	border: 1px solid lightgray;
 }

@@ -8,7 +8,7 @@
 <html lang="ko">
 
 <head>
-  <!-- Required meta tags -->
+<!-- Required meta tags -->
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,8 +17,17 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
     integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
-  <!-- mainstyle CSS -->
+  <!-- Mainstyle CSS -->
   <link rel="stylesheet" type="text/css" href="${path}/resources/css/common/mainstyle.css">
+
+  <!-- Mypage CSS -->
+  <link rel="stylesheet" href="${path}/resources/css/mypage/Mypage_Main.css">
+
+  <!-- Adminpage CSS -->
+  <link rel="stylesheet" href="${path}/resources/css/adminpage/admin.css">
+  
+  <!-- Support CSS -->
+  <link rel="stylesheet" href="${path}/resources/css/support/support.css">
 
   <title>Header</title>
 </head>
@@ -29,7 +38,7 @@
     <div class="row flex-nowrap justify-content-between align-items-center">
       <div class="col-4 pt-1"></div>
       <div class="col-4 text-center">
-        <img src="${path}/resources/images/common/logo.png" width="200px">
+        <img src="${path}/resources/images/common/logo.png" width="200px" onclick="location.href='${path }/' ">
       </div>
       <!-- 상단 우측 메뉴 -->
       <div class="col-4 d-flex justify-content-center align-items-center mt-3">
@@ -76,17 +85,18 @@
           커뮤니티
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#">게시판</a></li>
-          <li><a class="dropdown-item" href="#">공지사항</a></li>
+          <li><a class="dropdown-item" href="${path}/exhibition/list">공모전/전시회</a></li>
+          <li><a class="dropdown-item" href="${path}/board/list?type=REVIEW">리뷰 게시판</a></li>
+          <li><a class="dropdown-item" href="${path}/board/list?type=FREE">자유 게시판</a></li>
         </ul>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+        <a class="nav-link dropdown" href="${path}/event" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
           aria-expanded="false">
           이벤트
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#">출석하기</a></li>
+          <li><a class="dropdown-item" href="${path}/event">출석하기</a></li>
         </ul>
       </li>
       <li class="nav-item dropdown">
@@ -95,9 +105,9 @@
           고객 지원
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#">Q&A</a></li>
-          <li><a class="dropdown-item" href="#">FAQ</a></li>
-          <li><a class="dropdown-item" href="#">신고하기</a></li>
+          <li><a class="dropdown-item" href="#">공지사항</a></li>
+          <li><a class="dropdown-item" href="#">자주하는 질문</a></li>
+          <li><a class="dropdown-item" href="#">1:1 문의</a></li>
         </ul>
       </li>
       <!-- <ul class="nav justify-content-end" id="search">

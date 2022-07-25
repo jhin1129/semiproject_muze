@@ -1,0 +1,17 @@
+* { 
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+}
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
+::after {
+    color: white;
+}
+A:link { text-decoration:none; color: black;}
+#page {
+    float: right;
+}
+.btn_right_box {
+    float: right;
+}
