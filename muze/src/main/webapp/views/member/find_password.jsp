@@ -7,13 +7,16 @@
 
 <jsp:include page="/views/common/header.jsp"/>
 
+<!-- Login CSS -->
+<link rel="stylesheet" href="${path}/resources/css/login/Login.css">
+
 <!-- 내용 전체 컨테이너 -->
 <div class="container">
 	<div class="row">
         <div class="col"></div>
             <div class="col-6 ">
                 <div class="content_box">
-                    <form name="formFind" id="formFind" action="../member/user_certification.php" method="post">
+                    <form name="formFind" id="formFind" action="${ path}/member/find_id" method="post">
                         <div class="member_wrap">
                             <div class="member_tit">
                                 <h2>비밀번호 찾기</h2>
@@ -25,7 +28,7 @@
                                     <div class="login_input">
                                         <div class="member_warning">
                                             <input type="text" id="memberId" name="memberId" placeholder="아이디">
-                                            <p class="info_again">아이디를 모르시나요? <a href="#" class="js_btn_find_id">아이디 찾기</a></p>
+                                            <p class="info_again">아이디를 모르시나요? <a href="${ path }/member/find_id"  class="js_btn_find_id">아이디 찾기</a></p>
                                             <p class="dn" id="errorMessage"></p>
                                         </div>
                                         <div class="btn_center_box">
