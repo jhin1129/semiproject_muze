@@ -24,11 +24,10 @@
         <!-- 오른쪽 그리드 -->
         <div class="col-sm-10">
         	<!-- 컨테이너 -->
+<%-- 	        <form action="${ path }/mypage/welcome" method="get"> --%>
         	<div class="container">
-          
             <!-- 첫번째 행 -->
 			<jsp:include page="/views/mypage/welcome_row.jsp" flush="false"/>
-
             <!-- 두번째 행 -->
             <div class="row">
               <div class="col-sm-12" style="margin-top: 30px;">
@@ -52,22 +51,22 @@
                   <div class="container">
                     <div class="row row-cols-12">
                       <div class="col" id="mying3"></div>
-                      <div class="col" id="mying2">1</div>
+                      <div class="col" id="mying2">${ orderStatus.orderIn }</div>
                       <div class="col" id="mying3"></div>
                       <div class="col" id="mying3"></div>
-                      <div class="col" id="mying2">0</div>
+                      <div class="col" id="mying2">${ orderStatus.orderPaid }</div>
                       <div class="col" id="mying3"></div>
                       <div class="col" id="mying3"></div>
-                      <div class="col" id="mying2">0</div>
+                      <div class="col" id="mying2">${ orderStatus.orderReady }</div>
                       <div class="col" id="mying3"></div>
                       <div class="col" id="mying3"></div>
-                      <div class="col" id="mying2">0</div>
+                      <div class="col" id="mying2">${ orderStatus.orderShip }</div>
                       <div class="col" id="mying3"></div>
                       <div class="col" id="mying3"></div>
-                      <div class="col" id="mying2">0</div>
+                      <div class="col" id="mying2">${ orderStatus.orderDelivered }</div>
                       <div class="col" id="mying3"></div>
                       <div class="col" id="mying3"></div>
-                      <div class="col" id="mying2">0</div>
+                      <div class="col" id="mying2">${ orderStatus.orderComplete }</div>
                       <div class="col" id="mying3"></div>
                     </div>
                   </div>
@@ -96,7 +95,7 @@
                   <tbody>
                     <tr>
                       <td id="my_td01">2022/07/06 <br>
-                        <a href="../mypage/order_list.php" id="my_td02">2207069324820</a> <br>
+                        <a href="${ path }/mypage/orderdetail" id="my_td02">2207069324820</a> <br>
                         <button type="button" class="btn btn-outline-secondary" id="mycbtn">주문 취소</button>
                       </td> 
                       <td id="my_td01">상품 01</td>
@@ -110,6 +109,7 @@
             </div>
             <!-- 세번째 행 끝 -->
           </div>
+<!--           </form> -->
           <!-- 컨테이너 끝 -->
       </div>
       <!-- 오른쪽 그리드 끝 -->

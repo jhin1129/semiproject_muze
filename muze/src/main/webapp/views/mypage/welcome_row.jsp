@@ -9,6 +9,7 @@
 	<div class="row">
 	  <div class="col-sm-12">
 	    <!-- 카드 그룹 -->
+	    <form action="${ path }/mypage/welcome" method="get">
 	    <div class="card-group">
 	      <!-- 첫번째 카드 -->
 	      <div class="card">
@@ -26,7 +27,7 @@
 	        <div class="card-body">
 	          <h5 class="card-title">마일리지</h5>
 	          <p class="card-text"> 
-	            <a href="../mypage/mileage.php">1,000 원</a>
+	            <a href="${path}/mypage/mileage">${ welcome.mileageNow } 원</a>
 	          </p>
 	        </div>
 	      </div>
@@ -36,11 +37,12 @@
 	        <div class="card-body">
 	          <h5 class="card-title">나의 후기</h5>
 	          <p class="card-text">
-	            <a href="../mypage/money.php">0 개</a>
+	            <a href="${path}/mypage/review">${ welcome.boardCount } 개</a>
 	          </p>
 	        </div>
 	      </div>
 	    </div>
+	    </form>
 	    <!-- 카드그룹 끝 -->
 	  </div>
 	</div>
