@@ -6,13 +6,13 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <footer class="bg-light text-center text-lg-start">
-	<div style="background-color: rgb(238, 233, 233);">
+	<div style="background-color: #F7F7F7;">
 		<!-- Grid container -->
-		<div class="container p-4" style="background-color: rgb(238, 233, 233);">
+		<div class="container p-4" style="background-color: #F7F7F7;">
 			<!--Grid row-->
 			<div class="row">
 				<!--Left Grid column-->
-				<div class="col-lg-6 col-md-12 mb-4 mb-md-0" style="text-align:center; background-color: rgb(238, 233, 233);">
+				<div class="col-lg-6 col-md-12 mb-4 mb-md-0" style="text-align:center; background-color: #F7F7F7;">
 					<h5 class="text-uppercase">Project</h5>
 				<div style="text-align:center;"><img src="${path}/resources/images/common/logo.png" class="w-25 cul my-3"> <br><br>
 					<a class="text-dark" href="https://muze.com/">© 2022 Copyright: muze.com</a></div>               
@@ -20,7 +20,7 @@
 				<!--Left Grid column-->
 
 				<!--Right Grid column-->
-				<div class="col-lg-6 col-md-12 mb-4 mb-md-0" style="text-align:center; background-color: rgb(238, 233, 233);">
+				<div class="col-lg-6 col-md-12 mb-4 mb-md-0" style="text-align:center; background-color: #F7F7F7;">
 				<h5 class="text-uppercase">contact us</h5>
 					<div class="cul my-4">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">

@@ -20,28 +20,29 @@
             
                 <tr>
                     <td style="width: 15%; height: 8%;"><b>제목</b></td>
-                    <td colspan="3">상품 배송 관련 문의</td>
+                    <td colspan="3">${ board.brdTitle }</td>
                 </tr>
                 <tr>
                     <td style="height: 8%;"><b>작성자</b></td>
-                    <td colspan="3">최동식</td>
+                    <td colspan="3">${ board.brdWriterId }</td>
                 </tr>                
                 <tr>
                     <td style="height: 8%;"><b>작성일</b></td>
-                    <td style="width: 35%;">2022-07-23</td>
+                    <td style="width: 35%;">${ board.brdDate }</td>
                     <td style="width: 15%;"><b>조회수</b></td>
-                    <td>99</td>
+                    <td>${ board.brdReadCount }</td>
                 </tr>                
                 <tr>
                     <td colspan="4" style="height: 76%;">
-                        <p style="padding-top: 30px;">
-                            주문한 상품을 언제 받을 수 있을까요?
+                       <p style="padding-top: 30px;">
+                            ${ board.brdContent }
                         </p>
                     </td>
                 </tr>
             </table>
             <p style="text-align: center; margin-top: 10px;">
-                <button type="button" class="button-white" style="margin: 0;"><b>목록</b></button>
+                <button type="button" class="button-white" style="margin: 0;"
+                onclick="location.href='${ path }/board2/list'"><b>목록</b></button>
             </p>
         </div>
     </div>
