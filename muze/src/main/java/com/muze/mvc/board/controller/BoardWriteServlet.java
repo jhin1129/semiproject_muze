@@ -69,7 +69,7 @@ public class BoardWriteServlet extends HttpServlet {
 //    		request.setAttribute("msg", "게시글 등록 실패");
 //    		request.setAttribute("location", "/board/list");
 //		}
-    	new BoardService().deleteAllTempFiles(getServletContext().getRealPath("/resources/upload/board/temporary"));
+//    	new BoardService().deleteAllTempFiles(getServletContext().getRealPath("/resources/upload/board/temporary"));
     	response.sendRedirect(request.getContextPath() + "/board/list?type=" + type);
 	}
 

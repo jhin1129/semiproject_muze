@@ -25,7 +25,6 @@ public class BoardImgUploadServlet extends HttpServlet {
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("안녕하세요");
 		Map<String, String> map = new HashMap<>();
 		String path = getServletContext().getRealPath("/resources/upload/board/temporary");
 		int maxSize = 10485760;

@@ -57,7 +57,7 @@ public class BoardDao {
 						+ " BRD_ORIGINALFILENAME,"
 						+ " BRD_RENAMEDFILENAME"
 						+ " FROM ("
-						+ 	" SELECT RNUM,"
+						+ 	" SELECT ROWNUM AS RNUM,"
 						+ 		" BRD_NO,"
 						+ 		" BRD_TITLE,"
 						+ 		" BRD_CONTENT,"
@@ -73,7 +73,7 @@ public class BoardDao {
 						+ 		" BRD_ORIGINALFILENAME,"
 						+ 		" BRD_RENAMEDFILENAME"
 						+ 			" FROM ("
-						+ 				" SELECT ROWNUM AS RNUM,"
+						+ 				" SELECT"
 						+ 					   " BRD_NO,"
 						+ 					   " BRD_TITLE,"
 						+ 					   " BRD_CONTENT,"
@@ -184,7 +184,7 @@ public class BoardDao {
 				board.setBrdCategory(rs.getString("BRD_CATEGORY"));
 				board.setBrdRepContent(rs.getString("BRD_REP_CONTENT"));
 				board.setBrdType(rs.getString("BRD_TYPE"));
-				board.setBrdType(rs.getString("BRD_STATUS"));
+				board.setBrdStatus(rs.getString("BRD_STATUS"));
 				board.setBrdOriginalFileName(rs.getString("BRD_ORIGINALFILENAME"));
 				board.setBrdRenamedFileName(rs.getString("BRD_RENAMEDFILENAME"));
 				
@@ -235,6 +235,56 @@ public class BoardDao {
 			close(pstmt);
 		}
 
+		return result;
+	}
+
+	public int updateStatus(Connection connection, int brdNo, String status) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "UPDATE BOARD SET BRD_STATUS=? WHERE BRD_NO=?";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setString(1, status);
+			pstmt.setInt(2, brdNo);		
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateBoard(Connection connection, Board board) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "UPDATE BOARD"
+							 + " SET BRD_TITLE=?,"
+							 + " BRD_CONTENT=?,"
+							 + " BRD_ORIGINALFILENAME=?,"
+							 + " BRD_RENAMEDFILENAME=?"
+							 + " WHERE BRD_NO=?";
+	
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setString(1, board.getBrdTitle());
+			pstmt.setString(2, board.getBrdContent());
+			pstmt.setString(3, board.getBrdOriginalFileName());
+			pstmt.setString(4, board.getBrdRenamedFileName());
+			pstmt.setInt(5, board.getBrdNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
 		return result;
 	}
 

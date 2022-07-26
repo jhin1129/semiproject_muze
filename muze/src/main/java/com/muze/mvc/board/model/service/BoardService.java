@@ -33,11 +33,11 @@ public class BoardService {
 		return list;
 	}
 
-	public Board getBoardByNo(int no) {
+	public Board getBoardByNo(int brdNo, boolean hasRead) {
 		Board board = null;
 		Connection connection = getConnection();
 		
-		board = new BoardDao().findBoardByNo(connection, no);
+		board = new BoardDao().findBoardByNo(connection, brdNo);
 		
 		close(connection);
 		
@@ -49,7 +49,7 @@ public class BoardService {
 		Connection connection = getConnection();
 		
 		if(board.getBrdNo() != 0) {
-//			result = new BoardDao().updateBoard(connection, board);
+			result = new BoardDao().updateBoard(connection, board);
 		} else {			
 			result = new BoardDao().insertBoard(connection, board);
 		}
@@ -79,5 +79,22 @@ public class BoardService {
         return ;
 		
 	}
+
+	public int delete(int brdNo) {
+		int result = 0;
+		Connection connection = getConnection();
+		
+		result = new BoardDao().updateStatus(connection, brdNo, "N");
+		
+		if(result > 0) {
+			commit(connection);
+		} else {
+			rollback(connection);
+		}
+		
+		close(connection);
+		return result;
+	}
+
 
 }

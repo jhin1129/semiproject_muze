@@ -25,7 +25,7 @@ public class BoardViewServlet extends HttpServlet {
     	int no = Integer.parseInt(request.getParameter("no"));
     	String path = null;
     	
-    	board = new BoardService().getBoardByNo(no);
+    	board = new BoardService().getBoardByNo(no, true);
     	
     	request.setAttribute("board", board);
     	request.setAttribute("type", type);

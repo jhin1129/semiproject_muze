@@ -33,6 +33,8 @@ public class BoardListServlet extends HttpServlet {
 			path = "/views/community/board/review_board_list.jsp";
 		} else if(type.equals("FREE")) {
 			path = "/views/community/board/free_board_list.jsp";
+		} else {
+			path = "/views/community/board/free_board_list.jsp";
 		}
 		
 		try {
@@ -41,6 +43,7 @@ public class BoardListServlet extends HttpServlet {
 			page = 1;
 		}
 		
+		System.out.println("PAGE" + page);
 		listCount = new BoardService().getBoardCount(type);
 		pageInfo = new PageInfo(page, 5, listCount, 10);
 		list = new BoardService().getBoardList(pageInfo, type);
