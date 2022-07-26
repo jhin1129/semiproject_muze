@@ -11,22 +11,22 @@ import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
 
 public class BoardService {
 
-	public int getBoardCount(String type) {
+	public int getBoardCount(String type, String searchType, String searchVal) {
 		int count = 0;
 		Connection connection = getConnection();
 		
-		count = new BoardDao().getBoardCount(connection, type);
+		count = new BoardDao().getBoardCount(connection, type, searchType, searchVal);
 		
 		close(connection);
 		
 		return count;
 	}
 
-	public List<Board> getBoardList(PageInfo pageInfo, String type) {
+	public List<Board> getBoardList(PageInfo pageInfo, String type, String searchType, String searchVal) {
 		List<Board> list = null;
 		Connection connection = getConnection();
 		
-		list = new BoardDao().findAll(connection, pageInfo, type);
+		list = new BoardDao().findAll(connection, pageInfo, type, searchType, searchVal);
 		
 		close(connection);
 		

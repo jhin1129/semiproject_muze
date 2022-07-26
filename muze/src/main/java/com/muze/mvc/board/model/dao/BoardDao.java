@@ -13,11 +13,23 @@ import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
 
 public class BoardDao {
 
-	public int getBoardCount(Connection connection, String type) {
+	public int getBoardCount(Connection connection, String type, String searchType, String searchVal) {
 		int count = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT COUNT(*) FROM BOARD WHERE BRD_STATUS='Y' AND BRD_TYPE=?";
+		String query = null;
+		switch(searchType) {
+		
+		case "title":
+			query = "SELECT COUNT(*) FROM BOARD WHERE BRD_STATUS='Y' AND BRD_TYPE=? AND BRD_TITLE LIKE '%"+searchVal+"%'";
+			break;
+		case "writer":
+			query = "SELECT COUNT(*) FROM BOARD JOIN MEMBER ON(BOARD.BRD_WRITER_NO = MEMBER.MEMBER_NO) WHERE BRD_STATUS='Y' AND BRD_TYPE=? AND MEMBER_ID LIKE '%"+searchVal+"%'";
+			break;
+		default:
+			query = "SELECT COUNT(*) FROM BOARD WHERE BRD_STATUS='Y' AND BRD_TYPE=?";			
+		}
+			
 		
 		try {
 			pstmt = connection.prepareStatement(query);
@@ -37,10 +49,23 @@ public class BoardDao {
 		return count;
 	}
 
-	public List<Board> findAll(Connection connection, PageInfo pageInfo, String type) {
+	public List<Board> findAll(Connection connection, PageInfo pageInfo, String type, String searchType, String searchVal) {
 		List<Board> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		String subquery = "";
+		
+		switch(searchType) {
+		case "title":
+			subquery = " AND BRD_TITLE LIKE '%" + searchVal + "%'";
+			break;
+		case "writer":
+			subquery = " AND MEMBER_ID LIKE '%" + searchVal + "%'";
+			break;
+		default:
+			subquery = "";
+		}
+		
 		String query = "SELECT RNUM,"
 						+ " BRD_NO,"
 						+ " BRD_TITLE,"
@@ -92,6 +117,7 @@ public class BoardDao {
 						+ 				" JOIN MEMBER ON(BOARD.BRD_WRITER_NO = MEMBER.MEMBER_NO)"
 						+ 				" WHERE BRD_STATUS = 'Y'"
 						+               " AND BRD_TYPE= ?"    
+						+				subquery
 						+               " ORDER BY BOARD.BRD_NO DESC"
 						+ 				")"
 						+ 		")"
