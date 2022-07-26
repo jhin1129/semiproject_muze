@@ -7,6 +7,11 @@
 
 <jsp:include page="/views/common/header.jsp"/>
 
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<!-- Login CSS -->
+<link rel="stylesheet" href="${path}/resources/css/login/Login.css">
+
 <!-- 내용 전체 컨테이너 -->
 <div class="container">
 	<div class="row m-auto">
@@ -382,5 +387,125 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		var body = $('body'), $formTerms = $('#formTerms');
+
+		$('#btnNextStep').click(function () {
+			var pass = true;
+			/*
+			 * 필수 동의 항목 검증
+			 */
+			$(':checkbox.require').each(function (idx, item) {
+				var $item = $(item);
+				if (!$item.prop('checked')) {
+					pass = false;
+					$('strong.important_check', $formTerms).removeClass('dn').text($item.next().text() + "을 체크해주세요.");
+					_.delay(function () {
+						$item.focus();
+					}, 1000);
+					return false;
+				}
+			});
+			/*            
+             * 만 14세 이상 동의 항목 검증            
+             */            
+            if ($("#termsAgreeDiv").length > 0) {            
+                if (!$('#termsAgree').prop('checked')) {            
+                   pass = false;            
+                   alert("만 14세 이상임에 동의해 주세요.");            
+                   $("#termsAgreeDiv").attr("tabindex", -1).focus();            
+                   return false;            
+                }            
+            }
+
+			if (pass) {
+				$('strong.important_check').addClass('dn');
+				/*
+				 * 실명인증 검증
+				 */
+				if ($('input[name="RnCheckType"]').length > 0) {
+					switch ($('input[name="RnCheckType"]:checked').val()) {
+						case 'ipin' :
+							var popupWindow = window.open("", "popupCertKey", "top=100, left=200, status=0, width=417, height=490");
+							ifrmRnCheck.location.href = "#";
+							break;
+						case  'authCellPhone' :
+							var protocol = location.protocol;
+							var callbackUrl = "#";
+							ifrmHpauth.location.href = protocol + "#" + callbackUrl + "&cpid=";
+							break;
+						default :
+							alert("본인인증이 필요합니다.");
+							$('input[name="RnCheckType"]:first').focus();
+							break;
+					}
+					return false;
+				} else {
+					$formTerms.submit();
+				}
+			}
+		});
+
+		/*
+		 * 전체 동의 체크박스 이벤트
+		 */
+		$('#allAgree', $formTerms).change(function (e) {
+			var $target = $(e.target), $checkbox = $(':checkbox').not('#termsAgree'), $label = $checkbox.siblings('label');
+			if ($target.prop('checked') === true) {
+				$checkbox.prop('checked', true).val('y');
+				$label.addClass('on');
+			} else {
+				$checkbox.prop('checked', false).val('n');
+				$label.removeClass('on');
+			}
+		});
+
+		/*
+		 * 약관 체크박스 이벤트
+		 */
+		$('.js_terms_view :checkbox', $formTerms).change(function (e) {
+			$('strong.important_check').addClass('dn');
+			var $target = $(e.target), $label = $target.siblings('label'), $termsView = $target.closest('.js_terms_view');
+			var isTermsAgreeSelect = (e.target.id === 'termsAgree3') || (e.target.id === 'termsAgree4') || (e.target.id === 'termsAgree5');
+			var isTargetChecked = $target.prop('checked') === true;
+			if (isTargetChecked) {
+				if (isTermsAgreeSelect) {
+					$termsView.find('.agreement_choice_box label').addClass('on');
+					$termsView.find('.agreement_choice_box :checkbox').val('y');
+				} else {
+					$target.val('y');
+					$label.addClass('on');
+				}
+			} else {
+				if (isTermsAgreeSelect) {
+					$termsView.find('.agreement_choice_box label').removeClass('on');
+					$termsView.find('.agreement_choice_box :checkbox').val('n');
+				} else {
+					$target.val('n');
+					$label.removeClass('on');
+				}
+			}
+		});
+		
+		/*            
+        * 14세 동의 항목 체크박스 이벤트            
+        */            
+        if ($("#termsAgreeDiv").length > 0) {            
+            $('#termsAgreeDiv :checkbox', $formTerms).change(function (e) {            
+            var $termsTarget = $(e.target), $termsLabel = $termsTarget.siblings('label');            
+            var isTermsTargetChecked = $termsTarget.prop('checked') === true;            
+            if (isTermsTargetChecked) {            
+               $termsTarget.val('y');            
+               $termsLabel.addClass('on');            
+            } else {            
+              $termsTarget.val('n');            
+              $termsLabel.removeClass('on');            
+            }            
+          });            
+        }
+	});
+</script>
 
 <jsp:include page="/views/common/footer.jsp"/>
