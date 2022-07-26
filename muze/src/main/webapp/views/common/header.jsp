@@ -18,7 +18,7 @@
     integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
   <!-- Mainstyle CSS -->
-  <link rel="stylesheet" type="text/css" href="${path}/resources/css/common/mainstyle.css">
+  <link rel="stylesheet" type="text/css" href="${path}/resources/css/common/mainstyle.css?after">
 
   <!-- Mypage CSS -->
   <link rel="stylesheet" href="${path}/resources/css/mypage/Mypage_Main.css">
@@ -81,7 +81,7 @@
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-          aria-expanded="false">
+          aria-expanded="false" style="padding-right:0px;">
           커뮤니티
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
