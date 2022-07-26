@@ -47,7 +47,11 @@ public class BoardDao {
 						+ " BRD_CONTENT,"
 						+ " BRD_DATE,"
 						+ " BRD_READCOUNT,"
+						+ " BRD_WRITER_NO,"
 						+ " MEMBER_ID,"
+						+ " BRD_PRO_NO,"
+						+ " BRD_CATEGORY,"
+						+ " BRD_REP_CONTENT,"
 						+ " BRD_TYPE,"
 						+ " BRD_STATUS,"
 						+ " BRD_ORIGINALFILENAME,"
@@ -59,7 +63,11 @@ public class BoardDao {
 						+ 		" BRD_CONTENT,"
 						+ 		" BRD_DATE,"
 						+ 		" BRD_READCOUNT,"
+						+ 		" BRD_WRITER_NO,"
 						+ 		" MEMBER_ID,"
+						+ 		" BRD_PRO_NO,"
+						+ 		" BRD_CATEGORY,"
+						+ 		" BRD_REP_CONTENT,"
 						+ 		" BRD_TYPE,"
 						+ 		" BRD_STATUS,"
 						+ 		" BRD_ORIGINALFILENAME,"
@@ -71,7 +79,11 @@ public class BoardDao {
 						+ 					   " BRD_CONTENT,"
 						+ 					   " BRD_DATE,"
 						+ 					   " BRD_READCOUNT,"
+						+ 					   " BRD_WRITER_NO,"
 						+ 					   " MEMBER_ID,"
+						+ 					   " BRD_PRO_NO,"
+						+ 					   " BRD_CATEGORY,"
+						+ 					   " BRD_REP_CONTENT,"
 						+ 					   " BRD_TYPE,"
 						+ 					   " BRD_STATUS,"
 						+ 					   " BRD_ORIGINALFILENAME,"
@@ -105,10 +117,15 @@ public class BoardDao {
 				board.setBrdContent(rs.getString("BRD_CONTENT"));
 				board.setBrdDate(rs.getDate("BRD_DATE"));
 				board.setBrdReadCount(rs.getInt("BRD_READCOUNT"));
+				board.setBrdWriterNo(rs.getInt("BRD_WRITER_NO"));
 				board.setBrdWriterId(rs.getString("MEMBER_ID"));
+				board.setBrdProNo(rs.getInt("BRD_PRO_NO"));
+				board.setBrdCategory(rs.getString("BRD_CATEGORY"));
+				board.setBrdRepContent(rs.getString("BRD_REP_CONTENT"));
 				board.setBrdType(rs.getString("BRD_STATUS"));
+				board.setBrdStatus(rs.getString("BRD_STATUS"));
 				board.setBrdOriginalFileName(rs.getString("BRD_ORIGINALFILENAME"));
-				board.setBrdRenameFileName(rs.getString("BRD_RENAMEDFILENAME"));
+				board.setBrdRenamedFileName(rs.getString("BRD_RENAMEDFILENAME"));
 				
 				list.add(board);
 			}
@@ -128,12 +145,15 @@ public class BoardDao {
 		ResultSet rs = null;
 		String query = 
 					" SELECT BRD_NO,"
-				+ 	" BRD_NO,"
 				+ 	" BRD_TITLE,"
 				+ 	" BRD_CONTENT,"
 				+ 	" BRD_DATE,"
 				+ 	" BRD_READCOUNT,"
+				+ 	" BRD_WRITER_NO,"
 				+ 	" MEMBER_ID,"
+				+ 	" BRD_PRO_NO,"
+				+ 	" BRD_CATEGORY,"
+				+ 	" BRD_REP_CONTENT,"
 				+ 	" BRD_TYPE,"
 				+ 	" BRD_STATUS,"
 				+ 	" BRD_ORIGINALFILENAME,"
@@ -158,10 +178,15 @@ public class BoardDao {
 				board.setBrdContent(rs.getString("BRD_CONTENT"));
 				board.setBrdDate(rs.getDate("BRD_DATE"));
 				board.setBrdReadCount(rs.getInt("BRD_READCOUNT"));
+				board.setBrdWriterNo(rs.getInt("BRD_WRITER_NO"));
 				board.setBrdWriterId(rs.getString("MEMBER_ID"));
+				board.setBrdProNo(rs.getInt("BRD_PRO_NO"));
+				board.setBrdCategory(rs.getString("BRD_CATEGORY"));
+				board.setBrdRepContent(rs.getString("BRD_REP_CONTENT"));
+				board.setBrdType(rs.getString("BRD_TYPE"));
 				board.setBrdType(rs.getString("BRD_STATUS"));
 				board.setBrdOriginalFileName(rs.getString("BRD_ORIGINALFILENAME"));
-				board.setBrdRenameFileName(rs.getString("BRD_RENAMEDFILENAME"));
+				board.setBrdRenamedFileName(rs.getString("BRD_RENAMEDFILENAME"));
 				
 			}
 		} catch (SQLException e) {
@@ -172,6 +197,45 @@ public class BoardDao {
 		}
 		
 		return board;
+	}
+
+	public int insertBoard(Connection connection, Board board) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "INSERT INTO BOARD VALUES("
+							+ "SEQ_BOARD_NO.NEXTVAL,"	//BRD_NO
+							+ "?,"						//BRD_TITLE
+							+ "?,"						//BRD_CONTENT
+							+ "SYSDATE,"				//BRD_DATE
+							+ "0,"						//BRD_READCOUNT
+							+ "?,"						//BRD_WRITER_NO
+							+ "NULL,"					//BRD_PRO_NO
+							+ "NULL,"					//BRD_CATEGORY
+							+ "NULL,"					//BRD_REP_CONTENT
+							+ "?,"						//BRD_TYPE
+							+ "'Y',"						//BRD_STATUS
+							+ "?,"						//BRD_ORIGINALFILENAME
+							+ "?"						//BRD_RENAMEDFILENAME
+							+ ")";
+				
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setString(1, board.getBrdTitle());
+			pstmt.setString(2, board.getBrdContent());
+			pstmt.setInt(3, board.getBrdWriterNo());
+			pstmt.setString(4, board.getBrdType());
+			pstmt.setString(5, board.getBrdOriginalFileName());
+			pstmt.setString(6, board.getBrdRenamedFileName());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
 	}
 
 }

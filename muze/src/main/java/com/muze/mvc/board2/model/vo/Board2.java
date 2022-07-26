@@ -1,4 +1,4 @@
-package com.muze.mvc.board.model.vo;
+package com.muze.mvc.board2.model.vo;
 
 import java.util.Date;
 
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Board {
+public class Board2 {
 	int rowNum;
 	
 	int brdNo;
@@ -38,6 +38,6 @@ public class Board {
 	
 	String brdOriginalFileName;
 	
-	String brdRenamedFileName;
+	String brdRenameFileName;
 	
 }

@@ -1,5 +1,6 @@
 package com.muze.mvc.board.model.service;
 
+import java.io.File;
 import java.sql.Connection;
 import java.util.List;
 
@@ -41,6 +42,42 @@ public class BoardService {
 		close(connection);
 		
 		return board;
+	}
+
+	public int save(Board board) {
+		int result = 0;
+		Connection connection = getConnection();
+		
+		if(board.getBrdNo() != 0) {
+//			result = new BoardDao().updateBoard(connection, board);
+		} else {			
+			result = new BoardDao().insertBoard(connection, board);
+		}
+		
+		if(result > 0) {
+			commit(connection);
+		} else {
+			rollback(connection);
+		}
+		
+		close(connection);
+		
+		return result;
+	}
+
+	public void deleteAllTempFiles(String targetFolder) {
+		File folder = new File(targetFolder);
+		if(!folder.exists()) {
+            return ;
+        }
+        
+        File[] files = folder.listFiles();
+        for(File file : files) {           
+            file.delete();
+        }
+        
+        return ;
+		
 	}
 
 }
