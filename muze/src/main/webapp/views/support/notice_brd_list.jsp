@@ -74,7 +74,7 @@
             </div>
 
             <div class="col-4 text-right">
-                <button class="btn btn-light text-nowrap">글 쓰기</button>
+                <button class="btn btn-light text-nowrap" onclick="location.href='${ path }/board2/write'">글 쓰기</button>
             </div>
         </div>
 

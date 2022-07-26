@@ -42,4 +42,9 @@ public class Board2Service {
 		
 		return board;
 	}
+
+	public int save(Board2 board) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
