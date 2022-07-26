@@ -1,4 +1,4 @@
-package com.muze.mvc.board.controller;
+package com.muze.mvc.board2.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,16 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.muze.mvc.board.model.service.BoardService;
-import com.muze.mvc.board.model.vo.Board;
+import com.muze.mvc.board2.model.service.Board2Service;
+import com.muze.mvc.board2.model.vo.Board2;
 import com.muze.mvc.common.util.PageInfo;
 
-
-@WebServlet("/board/list")
-public class BoardListServlet extends HttpServlet {
+@WebServlet("/board2/list")
+public class Board2ListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public BoardListServlet() {
+    public Board2ListServlet() {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,29 +26,33 @@ public class BoardListServlet extends HttpServlet {
 		int page = 0;
 		int listCount = 0;
 		PageInfo pageInfo = null;
-		List<Board> list = null;
-		
-		if(type.equals("REVIEW")) {
-			path = "/views/community/board/review_board_list.jsp";
-		} else if(type.equals("FREE")) {
-			path = "/views/community/board/free_board_list.jsp";
+		List<Board2> list = null;
+
+		if(type.equals("NOTICE")) {
+			path = "/views/support/notice_brd_list.jsp";
+		} else if(type.equals("FAQ")) {
+			path = "/views/support/faq_brd.jsp";
+		} else if(type.equals("QNA")) {
+			path = "/views/support/qna_brd_list.jsp";
 		}
-		
+
 		try {
-			page = Integer.parseInt(request.getParameter("page"));
+		page = Integer.parseInt(request.getParameter("page"));
 		} catch(NumberFormatException e) {
 			page = 1;
 		}
 		
-		listCount = new BoardService().getBoardCount(type);
+		listCount = new Board2Service().getBoardCount(type);
 		pageInfo = new PageInfo(page, 5, listCount, 10);
-		list = new BoardService().getBoardList(pageInfo, type);
+		list = new Board2Service().getBoardList(pageInfo, type);
+		
+		System.out.println(listCount);
 		
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("list", list);
 		request.setAttribute("type", type);
 		
-		request.getRequestDispatcher(path).forward(request, response);			
+		request.getRequestDispatcher(path).forward(request, response);
 		
 	}
 

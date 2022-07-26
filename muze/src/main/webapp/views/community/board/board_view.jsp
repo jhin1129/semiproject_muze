@@ -63,11 +63,6 @@
                 </table>
             </div>
 
-
-            <!-- 이미지 -->
-            <div>
-                <img style="background: black; width: 100%; height: 500px;">
-            </div>
             <!-- 내용 -->
             <div class="my-3 px-3">
                 <p>
@@ -149,7 +144,7 @@
         </div>
         <!-- 목록버튼 -->
         <div class="text-center mt-3 mb-5">
-            <button class="btn btn-light text-nowrap">목록</button>
+            <button class="btn btn-light text-nowrap" onclick="location.href='${path}/board/list?type=${ type }'">목록</button>
         </div>
     </div>
 <jsp:include page="/views/common/footer.jsp"/>

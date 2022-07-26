@@ -12,6 +12,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- jQuery js -->  
+  <script src="${ path }/resources/js/common/jquery-3.6.0.js"></script>
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
@@ -105,9 +108,9 @@
           고객 지원
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#">공지사항</a></li>
-          <li><a class="dropdown-item" href="#">자주하는 질문</a></li>
-          <li><a class="dropdown-item" href="#">1:1 문의</a></li>
+          <li><a class="dropdown-item" href="${path}/board2/list?type=NOTICE">공지사항</a></li>
+          <li><a class="dropdown-item" href="${path}/board2/list?type=FAQ">자주하는 질문</a></li>
+          <li><a class="dropdown-item" href="${path}/board2/list?type=QNA">1:1 문의</a></li>
         </ul>
       </li>
       <!-- <ul class="nav justify-content-end" id="search">
