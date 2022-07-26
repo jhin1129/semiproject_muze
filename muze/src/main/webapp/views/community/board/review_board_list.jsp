@@ -11,231 +11,31 @@
 <div class="container my-5">
 
     <div>
-        <h2 style="text-align: center;">리뷰 게시판</h2>
+        <h2 style="text-align: center;"><a href="${path }/board/list?type=REVIEW">리뷰 게시판</a></h2>
     </div>
 
-    <div class="row my-5">
-
-        <div class="col-lg-3 col-md-6">
+	<c:forEach var="board" items="${ list }" varStatus="status">
+		<c:if test="${status.count % 4 == 1}">
+			<div class="row my-5">
+		</c:if>
+		
+		<div class="col-lg-3 col-md-6">
             <div class="card" style="width: 16rem;">
                 <img style="background-color: black;" width="100%" height="254px">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <h5 class="card-title">${ board.brdTitle }</h5>
+                    <p class="card-text">${board.brdWriterId }</p>
+                    <p class="card-text">${board.brdContent }</p>
                 </div>
             </div>
         </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="card" style="width: 16rem;">
-                <img style="background-color: black;" width="100%" height="254px">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="card" style="width: 16rem;">
-                <img style="background-color: black;" width="100%" height="254px">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="card" style="width: 16rem;">
-                <img style="background-color: black;" width="100%" height="254px">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="row my-5">
-
-        <div class="col-lg-3 col-md-6">
-            <div class="card" style="width: 16rem;">
-                <img style="background-color: black;" width="100%" height="254px">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="card" style="width: 16rem;">
-                <img style="background-color: black;" width="100%" height="254px">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="card" style="width: 16rem;">
-                <img style="background-color: black;" width="100%" height="254px">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="card" style="width: 16rem;">
-                <img style="background-color: black;" width="100%" height="254px">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row my-5">
-
-        <div class="col-lg-3 col-md-6">
-            <div class="card" style="width: 16rem;">
-                <img style="background-color: black;" width="100%" height="254px">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="card" style="width: 16rem;">
-                <img style="background-color: black;" width="100%" height="254px">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="card" style="width: 16rem;">
-                <img style="background-color: black;" width="100%" height="254px">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="card" style="width: 16rem;">
-                <img style="background-color: black;" width="100%" height="254px">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="row my-5">
-
-        <div class="col-lg-3 col-md-6">
-            <div class="card" style="width: 16rem;">
-                <img style="background-color: black;" width="100%" height="254px">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="card" style="width: 16rem;">
-                <img style="background-color: black;" width="100%" height="254px">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="card" style="width: 16rem;">
-                <img style="background-color: black;" width="100%" height="254px">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="card" style="width: 16rem;">
-                <img style="background-color: black;" width="100%" height="254px">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-
-    </div>
+		<c:if test="${status.count %4 == 0 && !status.last}">
+		    </div>
+		</c:if>
+		<c:if test="${status.last}">
+		    </div>
+		</c:if>
+	</c:forEach>
 
     <div>
         <ul class="pagination justify-content-center">

@@ -27,7 +27,7 @@
             	<h2 style="text-align: center;">리뷰 게시판</h2>
            	</c:if>
         	<c:if test="${ type == 'FREE'}">
-            	<h2 style="text-align: center;">자유 게시판</h2>
+            	<h2 style="text-align: center;"><a href="${path }/board/list?type=FREE">자유 게시판</a></h2>
            	</c:if>
         </div>
         <!-- 후기글 전체 -->

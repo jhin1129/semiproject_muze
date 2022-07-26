@@ -42,12 +42,6 @@ public class BoardListServlet extends HttpServlet {
 		PageInfo pageInfo = null;
 		List<Board> list = null;
 		
-		if(type.equals("REVIEW")) {
-			path = "/views/community/board/review_board_list.jsp";
-		} else if(type.equals("FREE")) {
-			path = "/views/community/board/free_board_list.jsp";
-		}
-		
 		try {
 			page = Integer.parseInt(request.getParameter("page"));
 		} catch(NumberFormatException e) {
@@ -55,9 +49,20 @@ public class BoardListServlet extends HttpServlet {
 		}
 		
 		listCount = new BoardService().getBoardCount(type, searchType, searchVal);
-		pageInfo = new PageInfo(page, 5, listCount, 10);
-		list = new BoardService().getBoardList(pageInfo, type, searchType, searchVal);
 		
+		if(type.equals("REVIEW")) {
+			pageInfo = new PageInfo(page, 5, listCount, 8);
+			path = "/views/community/board/review_board_list.jsp";
+		} else if(type.equals("FREE")) {
+			pageInfo = new PageInfo(page, 5, listCount, 10);
+			path = "/views/community/board/free_board_list.jsp";
+		}
+		
+		list = new BoardService().getBoardList(pageInfo, type, searchType, searchVal);
+		System.out.println(listCount);
+		System.out.println(pageInfo.getEndList());
+		System.out.println(pageInfo.getMaxPage());
+		System.out.println(list);
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("list", list);
 		request.setAttribute("type", type);
