@@ -122,7 +122,7 @@ public class Board2Dao {
 				board.setBrdType(rs.getString("BRD_TYPE"));
 				board.setBrdStatus(rs.getString("BRD_STATUS"));
 				board.setBrdOriginalFileName(rs.getString("BRD_ORIGINALFILENAME"));
-				board.setBrdRenameFileName(rs.getString("BRD_RENAMEDFILENAME"));
+				board.setBrdRenamedFileName(rs.getString("BRD_RENAMEDFILENAME"));
 				
 				list.add(board);
 			}
@@ -184,7 +184,7 @@ public class Board2Dao {
 				board.setBrdType(rs.getString("BRD_TYPE"));
 				board.setBrdStatus(rs.getString("BRD_STATUS"));
 				board.setBrdOriginalFileName(rs.getString("BRD_ORIGINALFILENAME"));
-				board.setBrdRenameFileName(rs.getString("BRD_RENAMEDFILENAME"));
+				board.setBrdRenamedFileName(rs.getString("BRD_RENAMEDFILENAME"));
 				
 			}
 			

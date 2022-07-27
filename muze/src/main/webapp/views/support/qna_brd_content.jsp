@@ -28,10 +28,14 @@
                 </tr>                
                 <tr>
                     <td style="height: 8%;"><b>작성일</b></td>
-                    <td style="width: 35%;">${ board.brdDate }</td>
-                    <td style="width: 15%;"><b>조회수</b></td>
-                    <td>${ board.brdReadCount }</td>
-                </tr>                
+                    <td style="width: 30%;">${ board.brdDate }</td>
+                    <td style="width: 10%;"><b>조회수</b></td>
+                    <td style="width: 40%;">${ board.brdReadCount }</td>
+                </tr>
+                <tr>                
+                    <td style="width: 10%;"><b>첨부파일</b></td>
+                    <td colspan="3" style="width: 35%;">${ board.brdRenamedFileName }</td>
+                </tr>
                 <tr>
                     <td colspan="4" style="height: 76%;">
                        <p style="padding-top: 30px;">
@@ -42,9 +46,15 @@
             </table>
             <p style="text-align: center; margin-top: 10px;">
                 <button type="button" class="button-white" style="margin: 0;"
+<<<<<<< Updated upstream
                 onclick="location.href='${ path }/support/update?type=QNA'"><b>수정</b></button>
                 <button type="button" class="button-white" style="margin: 0;"
                 onclick="location.href='${ path }/support/list?type=QNA'"><b>목록</b></button>
+=======
+                onclick="location.href='${ path }/board2/update?type=QNA'"><b>수정</b></button>
+                <button type="button" class="button-white" style="margin: 0;"
+                onclick="location.href='${ path }/board2/list?type=QNA'"><b>목록</b></button>
+>>>>>>> Stashed changes
             </p>
         </div>
     </div>
