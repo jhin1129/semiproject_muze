@@ -1,12 +1,13 @@
 package com.muze.mvc.board2.model.service;
 
+import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
+
 import java.sql.Connection;
 import java.util.List;
 
 import com.muze.mvc.board2.model.dao.Board2Dao;
 import com.muze.mvc.board2.model.vo.Board2;
 import com.muze.mvc.common.util.PageInfo;
-import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
 
 public class Board2Service {
 
@@ -41,5 +42,37 @@ public class Board2Service {
 		close(connection);
 		
 		return board;
+	}
+
+	public int save(Board2 board) {
+		int result = 0;
+		
+		Connection connection = getConnection();
+		
+		if(board.getBrdNo() != 0) {
+			result = new Board2Dao().updateBoard(connection, board);
+		} else {
+			result = new Board2Dao().insertBoard(connection, board);
+		}
+			
+		return result;
+	}
+
+	public int delete(int no, String type) {
+		int result = 0;
+	
+		Connection connection = getConnection();
+		
+		result = new Board2Dao().updateStatus(connection, no, type, "N");
+		
+		if(result > 0) {
+			commit(connection);
+		} else {
+			rollback(connection);
+		}
+		
+		close(connection);
+		
+		return result;
 	}
 }

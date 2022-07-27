@@ -13,7 +13,7 @@ import com.muze.mvc.board2.model.service.Board2Service;
 import com.muze.mvc.board2.model.vo.Board2;
 import com.muze.mvc.common.util.PageInfo;
 
-@WebServlet("/board2/list")
+@WebServlet("/support/list")
 public class Board2ListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

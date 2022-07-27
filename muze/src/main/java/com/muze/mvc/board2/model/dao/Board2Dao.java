@@ -57,7 +57,7 @@ public class Board2Dao {
 						+ "BRD_ORIGINALFILENAME, "
 						+ "BRD_RENAMEDFILENAME "
 						+ "FROM ("
-						+ 	" SELECT RNUM, "
+						+ 	" SELECT ROWNUM AS RNUM, "
 						+ 		"BRD_NO, "
 						+ 		"BRD_TITLE, "
 						+ 		"BRD_CONTENT, "
@@ -73,8 +73,7 @@ public class Board2Dao {
 						+ 		"BRD_ORIGINALFILENAME, "
 						+ 		"BRD_RENAMEDFILENAME "
 						+ 			"FROM ("
-						+ 				"SELECT ROWNUM AS RNUM, "
-						+ 					   "BRD_NO, "
+						+ 				"SELECT BRD_NO, "
 						+ 					   "BRD_TITLE, "
 						+ 					   "BRD_CONTENT, "
 						+ 					   "BRD_DATE, "
@@ -123,7 +122,7 @@ public class Board2Dao {
 				board.setBrdType(rs.getString("BRD_TYPE"));
 				board.setBrdStatus(rs.getString("BRD_STATUS"));
 				board.setBrdOriginalFileName(rs.getString("BRD_ORIGINALFILENAME"));
-				board.setBrdRenameFileName(rs.getString("BRD_RENAMEDFILENAME"));
+				board.setBrdRenamedFileName(rs.getString("BRD_RENAMEDFILENAME"));
 				
 				list.add(board);
 			}
@@ -185,7 +184,7 @@ public class Board2Dao {
 				board.setBrdType(rs.getString("BRD_TYPE"));
 				board.setBrdStatus(rs.getString("BRD_STATUS"));
 				board.setBrdOriginalFileName(rs.getString("BRD_ORIGINALFILENAME"));
-				board.setBrdRenameFileName(rs.getString("BRD_RENAMEDFILENAME"));
+				board.setBrdRenamedFileName(rs.getString("BRD_RENAMEDFILENAME"));
 				
 			}
 			
@@ -196,6 +195,37 @@ public class Board2Dao {
 			close(pstmt);
 		}
 		return board;
+	}
+
+	public int updateBoard(Connection connection, Board2 board) {
+		
+		return 0;
+	}
+
+	public int insertBoard(Connection connection, Board2 board) {
+		return 0;
+	}
+
+	public int updateStatus(Connection connection, int no, String type, String status) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "UPDATE BOARD SET BRD_STATUS=? WHERE BRD_NO=?";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+
+			pstmt.setString(1, status);
+			pstmt.setInt(2, no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 	
 }
