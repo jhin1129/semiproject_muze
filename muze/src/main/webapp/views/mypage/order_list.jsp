@@ -36,8 +36,24 @@
             <!-- 첫번째 행 -->
 			<jsp:include page="/views/mypage/welcome_row.jsp" flush="false"/>
 
-            <!-- 두번째 행 -->
-			<jsp:include page="/views/mypage/datepick.jsp" flush="false"/>
+           <!-- 두번째 행 -->
+			<div class="row">
+			 <div class="col-sm-12" style="margin-top: 30px;">
+			   <form id="myForm01">
+			     <span id="mySpan01">주문목록 / 배송조회</span> 
+			   </form>
+			   	  <!-- 기간별 검색 -->
+			      <fieldset class="mySearchDate">
+     				<form action="${ path }/mypage/order_list" method="get">
+					  <div class= "btnsearch" role="group" aria-label="First group">
+						<jsp:include page="/views/mypage/datepick.jsp" flush="false"/>
+						<!-- 조회버튼 -->
+			       		<button type="submit" class="btn btn-outline-secondary" id="srhbtn7">조회</button>
+			          </div>
+			       </form>
+  				 </fieldset>
+			  </div>
+            </div>
 
             <!-- 세번째 행 -->
             <div class="row">
@@ -49,7 +65,7 @@
                 </c:if>
                 <c:if test="${ not empty list }">
 	                <form id="myForm01">
- 	                  <span id="mySpan01">주문목록 / 배송조회 내역 총 ${ list.get(list.size()-1).getCount() } 건</span> 
+ 	                  <span id="mySpan01">주문목록 / 배송내역 총 ${ list.get(list.size()-1).getCount() } 건</span> 
 	                </form>
                 </c:if>
                 <!-- 조회 테이블 -->
@@ -76,12 +92,14 @@
 		                    <tr>
 		                      <td id="my_td01">${ orderByDate.orderDate } <br>
 		                        <a href="${ path }/mypage/orderdetail" id="my_td02">${ orderByDate.orderNo }</a> <br>
-		                        <button type="button" class="btn btn-outline-secondary" id="mycbtn">주문취소 </button>
+		                          <c:if test="${ orderByDate.orderStatus != '환불' && orderByDate.orderStatus != '구매확정'}">
+		                        	<button type="button" class="btn btn-outline-secondary" id="mycbtn">주문취소 </button>
+		                       	  </c:if>
 		                      </td> 
 		                      <td id="my_td01">${ orderByDate.proName }</td>
 		                      <td id="my_td01">${ orderByDate.strPrice }원 / ${ orderByDate.orderAmount }개</td>
 		                      <td id="my_td01">${ orderByDate.orderStatus }</td>
-		                      <td id="my_td01">${ orderByDate.count }</td>
+		                      <td id="my_td01"></td>
 		                    </tr>
 	                    </c:forEach>
                     </c:if>
@@ -97,6 +115,16 @@
     </div>
     </div>
     <!-- 내용 전체 컨테이너 끝 -->
+    
+    <script>
+    $(document).ready(()=>{
+		$('#mycbtn').click(function() { 
+			if(confirm('주문을 취소하시겠습니까..?')) {
+				location.replace('${path}/mypage/cancel');
+			}
+		});
+	});
+    </script>
 
 	<!-- footer -->
 	<jsp:include page="/views/mypage/myfooter.jsp"/>

@@ -61,7 +61,9 @@
 		                    <tr>
 		                      <td id="my_td01">${ getOrderRec.orderDate } <br>
 		                        <a href="${ path }/mypage/orderdetail" id="my_td02">${ getOrderRec.orderNo }</a> <br>
-		                        <button type="button" class="btn btn-outline-secondary" id="mycbtn">주문취소 </button>
+		                      	  <c:if test="${ getOrderRec.orderStatus != '환불' && getOrderRec.orderStatus != '구매확정'}">
+		                        	<button type="button" class="btn btn-outline-secondary" id="mycbtn">주문취소 </button>
+		                       	  </c:if>
 		                      </td> 
 		                      <td id="my_td01">${ getOrderRec.proName }</td>
 		                      <td id="my_td01">${ getOrderRec.strPrice }원 / ${ getOrderRec.orderAmount }개</td>
@@ -86,6 +88,16 @@
     <!-- 부트스트랩 제이쿼리 활성화 시 제이쿼리 데이트피커 동작 안함 -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+	<script>
+    $(document).ready(()=>{
+		$('#mycbtn').click(function() { 
+			if(confirm('주문을 취소하시겠습니까..?')) {
+				location.replace('${path}/mypage/cancel');
+			}
+		});
+	});
+    </script>
 
 	<!-- footer -->
 	<jsp:include page="/views/mypage/myfooter.jsp"/>

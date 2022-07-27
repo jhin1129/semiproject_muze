@@ -12,14 +12,33 @@ import com.muze.mvc.mypage.model.service.WelcomeService;
 import com.muze.mvc.mypage.model.vo.MyOrder;
 import com.muze.mvc.mypage.model.vo.Welcome;
 
-@WebServlet("/mypage/cancel")
-public class CancelServlet extends HttpServlet {
+@WebServlet("/mypage/cancel111")
+public class CancelServlet_orig extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public CancelServlet() {
+    public CancelServlet_orig() {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	// 1st row
+    	int mileageNow = 0;
+    	int reviewCount = 0;
+    	Welcome welcome = null;   	
+    	MyOrder myOrder = null;
+    	
+		myOrder = new MyOrderService().getOrderInfo();
+    	mileageNow = new WelcomeService().getMileageN();
+    	reviewCount = new WelcomeService().getReviewC();
+
+    	welcome = new Welcome(mileageNow, reviewCount);
+    	
+    	request.setAttribute("welcome", welcome);    	
+    	request.setAttribute("myOrder", myOrder);
+    	request.getRequestDispatcher("/views/mypage/welcome.jsp").forward(request, response);
+
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int result = 0;
 		
     	result = new MyOrderService().orderCancel();
@@ -29,14 +48,14 @@ public class CancelServlet extends HttpServlet {
 		    // 주문 취소 성공 
     		request.setAttribute("msg", "주문이 정상적으로 취소되었습니다.");
 			request.setAttribute("location", "/mypage/orderdetail");	
-    	} else {
+    	}else {
     		// 주문 취소 실패 
 			request.setAttribute("msg", "회원 정보 수정 실패");
 			request.setAttribute("location", "/mypage/welcome");	
 		}
-
+		
     	request.getRequestDispatcher("/views/mypage/msg.jsp").forward(request, response);
-
+		
 	}
 
 }

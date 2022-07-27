@@ -48,10 +48,12 @@
                     <tr>
                       <td id="my_td01">${ myOrder.orderDate } <br>
                         <a href="${ path }/mypage/orderdetail" id="my_td02">${ myOrder.orderNo }</a> <br>
-                        <button type="button" class="btn btn-outline-secondary" id="mycbtn">주문 취소</button>
+                          <c:if test="${ myOrder.orderStatus != '환불' && myOrder.orderStatus != '구매확정'}">
+		                     <button type="button" class="btn btn-outline-secondary" id="mycbtn">주문취소 </button>
+		                  </c:if>
                       </td> 
                       <td id="my_td01">${ myOrder.proName }</td>
-                      <td id="my_td01">${ myOrder.proPrice } 원 / ${ myOrder.orderAmount } 개 </td>
+                      <td id="my_td01">${ myOrder.proPrice }원 / ${ myOrder.orderAmount }개 </td>
                     </tr>
                   </tbody>
                 </table>
@@ -90,6 +92,12 @@
                           ${ orderDetail.email }
                         </td>
                       </tr>
+                      <tr>
+                        <th class="my_th" id="my_th06">주문상태</th>
+                        <td id="my_td04">
+                          ${ myOrder.orderStatus }
+                        </td>
+                      </tr>
                   </table>
                 </div>
                 <!-- 테이블1 끝 -->
@@ -114,7 +122,7 @@
                       <tr>
                         <th class="my_th" id="my_th06">할인혜택</th>
                         <td id="my_td04">
-                          마일리지 (-) ${ orderDetail.mileage }원
+                          마일리지 (-) ${ orderDetail.mileage } 원
                         </td>
                       </tr>
                       <tr>

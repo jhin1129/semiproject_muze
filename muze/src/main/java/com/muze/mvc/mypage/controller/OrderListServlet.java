@@ -1,6 +1,7 @@
 package com.muze.mvc.mypage.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,37 +15,45 @@ import com.muze.mvc.mypage.model.vo.MyOrder;
 import com.muze.mvc.mypage.model.vo.Welcome;
 
 @WebServlet("/mypage/order_list")
-public class MyOrderServlet extends HttpServlet {
+public class OrderListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public MyOrderServlet() {
+    public OrderListServlet() {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	// 1st row
-    	int mileageNow = 0;
-    	int reviewCount = 0;
-    	Welcome welcome = null;
-    	
-    	// DB에 저장된 마일리지 값 
-    	mileageNow = new WelcomeService().getMileageN();
-    	
-    	// DB에 저장된 리뷰의 갯수
-    	reviewCount = new WelcomeService().getReviewC();
-    	
-//		System.out.println(mileageNow); // 100 제대로 가져옴.
-//		System.out.println(reviewCount); // 6 제대로 가져옴.
+    	int mileageNow = new WelcomeService().getMileageN();
+    	int reviewCount = new WelcomeService().getReviewC();
+    	Welcome welcome = new Welcome(mileageNow, reviewCount);
 		
-		welcome = new Welcome(mileageNow, reviewCount);
-		
+		// 1st row name
     	MyOrder myOrder = null;
 		myOrder = new MyOrderService().getOrderInfo();
+		
+		// 검색
+		List<MyOrder> list = null;
+		
+		// 매개 값 (검색 날짜) 가져오기 
+		String dateFrom = request.getParameter("dateFrom");
+		String dateTo = request.getParameter("dateTo");
+		
+		// 잘 가져오는지 확인
+//		System.out.println(dateFrom + " "+ dateTo);
+		
+		// 넘기기
+		list = new MyOrderService().orderByDate(dateFrom, dateTo);
+		
+		// 성공적으로 받아옴.
+//		System.out.println(list.isEmpty());
+//		list.forEach(System.out::println);
 
     	request.setAttribute("myOrder", myOrder);
-    	request.setAttribute("welcome", welcome);    	
+		request.setAttribute("welcome", welcome);    
+		request.setAttribute("list", list);
     	request.getRequestDispatcher("/views/mypage/order_list.jsp").forward(request, response);
-
+    	
 	}
-	
+
 
 }

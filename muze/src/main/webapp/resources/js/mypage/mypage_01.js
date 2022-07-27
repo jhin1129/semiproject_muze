@@ -1,11 +1,5 @@
 $(document).ready(()=>{
 	
-	 $('#mycbtn').on('click', () => {
-		if(confirm('확인을 누르면 주문이 취소됩니다.')) {
-			location.replace('${ path }/mypage/cancel');
-		}
-	});
-	
 	let today = $.datepicker.formatDate('yy-mm-dd', new Date()); 
 	 
 	 $('#srhbtn1').on('click', () => {
@@ -64,9 +58,5 @@ $(document).ready(()=>{
         
     });
     
-
-	
-
-
 
 });
