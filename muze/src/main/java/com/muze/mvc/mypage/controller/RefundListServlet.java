@@ -14,11 +14,11 @@ import com.muze.mvc.mypage.model.service.WelcomeService;
 import com.muze.mvc.mypage.model.vo.MyOrder;
 import com.muze.mvc.mypage.model.vo.Welcome;
 
-@WebServlet("/mypage/search")
-public class SearchServlet extends HttpServlet {
+@WebServlet("/mypage/refund_list")
+public class RefundListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public SearchServlet() {
+    public RefundListServlet() {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,18 +42,18 @@ public class SearchServlet extends HttpServlet {
 //		System.out.println(dateFrom + " "+ dateTo);
 		
 		// 넘기기
-		list = new MyOrderService().orderByDate(dateFrom, dateTo);
+		list = new MyOrderService().refundByDate(dateFrom, dateTo);
 		
 		// 성공적으로 받아옴.
 //		System.out.println(list.isEmpty());
-//		list.forEach(System.out::println);
+		list.forEach(System.out::println);
 
     	request.setAttribute("myOrder", myOrder);
 		request.setAttribute("welcome", welcome);    
 		request.setAttribute("list", list);
-    	request.getRequestDispatcher("/views/mypage/order_list.jsp").forward(request, response);
-    	
-	}
+    	request.getRequestDispatcher("/views/mypage/refund_list.jsp").forward(request, response);
 
+
+	}
 
 }
