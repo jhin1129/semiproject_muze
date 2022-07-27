@@ -1,17 +1,11 @@
 package com.muze.mvc.mypage.model.service;
 
-import static com.muze.mvc.common.jdbc.JDBCTemplate.close;
-import static com.muze.mvc.common.jdbc.JDBCTemplate.getConnection;
+import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
 
 import java.sql.Connection;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 import com.muze.mvc.mypage.model.dao.WelcomeDao;
 import com.muze.mvc.mypage.model.vo.Delivery;
-import com.muze.mvc.mypage.model.vo.Welcome;
 
 public class WelcomeService {
 
@@ -36,25 +30,5 @@ public class WelcomeService {
 
 		return result;
 	}
-
-	public Delivery getOrderStatus() {
-		Delivery orderStatus = null;
-		Connection connection = getConnection();
-
-		orderStatus = new WelcomeDao().getOrderStatus(connection);
-		
-		close(connection);
-		
-		return orderStatus;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

@@ -12,10 +12,12 @@ $.datepicker.setDefaults({
   });
   
   $(function () {
-    $('.datepicker').datepicker();
+    $('.datepicker').datepicker({
+		maxDate: "today"
+	
+	});
   });
 
   $(function () {
     $("#datepicker").datepicker();
   });
-  

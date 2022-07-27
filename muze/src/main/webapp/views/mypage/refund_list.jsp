@@ -14,7 +14,9 @@
     <link rel="stylesheet" href="${path}/resources/css/mypage/mypage_cal.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="${path}/resources/js/Mypage/mypage_02.js" ></script>
+    <!-- 순서와 위치 주의!! -->
+    <script src="${path}/resources/js/mypage/mypage_02.js" ></script>
+    <script src="${path}/resources/js/mypage/mypage_01.js" ></script>
   
       <!-- 내용 전체 컨테이너 -->
       <div class="container">
@@ -35,33 +37,7 @@
 			<jsp:include page="/views/mypage/welcome_row.jsp" flush="false"/>
 
             <!-- 두번째 행 -->
-            <div class="row">
-              <div class="col-sm-12" style="margin-top: 30px;">
-                <form id="myForm01">
-                  <span id="mySpan01">환불 / 입금 내역</span> 
-                </form>
-                <!-- 기간별 검색 -->
-                <fieldset class="mySearchDate">
-                  <!-- 버튼 -->
-                  <div class= "btnsearch" role="group" aria-label="First group">
-                    <button type="button" class="btn btn-outline-secondary">오늘</button>
-                    <button type="button" class="btn btn-outline-secondary">7일</button>
-                    <button type="button" class="btn btn-outline-secondary">15일</button>
-                    <button type="button" class="btn btn-outline-secondary">1개월</button>
-                    <button type="button" class="btn btn-outline-secondary">3개월</button>
-                    <button type="button" class="btn btn-outline-secondary">1년</button>
-
-                    <!-- 날짜 -->
-                    <input type="text" class="datepicker" id="datepicker1" >
-                    ~
-                    <input type="text" class="datepicker" id="datepicker2" >
-                    
-                    <!-- 조회버튼 -->
-                    <button type="button" class="btn btn-outline-secondary">조회</button>
-                  </div>
-                </fieldset>
-                </div>
-              </div>
+			<jsp:include page="/views/mypage/datepick.jsp" flush="false"/>
 
             <!-- 세번째 행 -->
             <div class="row">
@@ -108,10 +84,6 @@
     </div>
     </div>
     <!-- 내용 전체 컨테이너 끝 -->
-
-    <!-- Java Script -->
-    <!-- My JS -->
-    <!-- <script src="${path}/resources/js/Mypage_02.js"></script> -->
 
 	<!-- footer -->
 	<jsp:include page="/views/mypage/myfooter.jsp"/>

@@ -14,7 +14,9 @@
     <link rel="stylesheet" href="${path}/resources/css/mypage/mypage_cal.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="${path}/resources/js/Mypage/mypage_02.js" ></script>
+    <!-- 순서와 위치 주의!! -->
+    <script src="${path}/resources/js/mypage/mypage_02.js" ></script>
+    <script src="${path}/resources/js/mypage/mypage_01.js" ></script>
   
       <!-- 내용 전체 컨테이너 -->
       <div class="container">
@@ -35,40 +37,21 @@
 			<jsp:include page="/views/mypage/welcome_row.jsp" flush="false"/>
 
             <!-- 두번째 행 -->
-            <div class="row">
-              <div class="col-sm-12" style="margin-top: 30px;">
-                <form id="myForm01">
-                  <span id="mySpan01">주문목록 / 배송조회</span> 
-                </form>
-                <!-- 기간별 검색 -->
-                <fieldset class="mySearchDate">
-                  <!-- 버튼 -->
-                  <div class= "btnsearch" role="group" aria-label="First group">
-                    <button type="button" class="btn btn-outline-secondary">오늘</button>
-                    <button type="button" class="btn btn-outline-secondary">7일</button>
-                    <button type="button" class="btn btn-outline-secondary">15일</button>
-                    <button type="button" class="btn btn-outline-secondary">1개월</button>
-                    <button type="button" class="btn btn-outline-secondary">3개월</button>
-                    <button type="button" class="btn btn-outline-secondary">1년</button>
-
-                    <!-- 날짜 -->
-                    <input type="text" class="datepicker" id="datepicker1" >
-                    ~
-                    <input type="text" class="datepicker" id="datepicker2" >
-                    
-                    <!-- 조회버튼 -->
-                    <button type="button" class="btn btn-outline-secondary">조회</button>
-                  </div>
-                </fieldset>
-                </div>
-              </div>
+			<jsp:include page="/views/mypage/datepick.jsp" flush="false"/>
 
             <!-- 세번째 행 -->
             <div class="row">
               <div class="col-sm-12" style="margin-top: 50px;" >
-                <form id="myForm01">
-                  <span id="mySpan01">주문목록 / 배송조회 내역 총 1 건</span> 
-                </form>
+                <c:if test="${empty list }">
+	                <form id="myForm01">
+	                  <span id="mySpan01">주문목록 / 배송조회</span> 
+	                </form>
+                </c:if>
+                <c:if test="${ not empty list }">
+	                <form id="myForm01">
+ 	                  <span id="mySpan01">주문목록 / 배송조회 내역 총 ${ list.get(list.size()-1).getCount() } 건</span> 
+	                </form>
+                </c:if>
                 <!-- 조회 테이블 -->
                 <table class="ordertable">
                   <thead id="my_thead01">
@@ -81,16 +64,27 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td id="my_td01">2022/07/06 <br>
-                        <a href="../mypage/order_list.php" id="my_td02">2207069324820</a> <br>
-                        <button type="button" class="btn btn-outline-secondary" id="mycbtn">주문 취소</button>
-                      </td> 
-                      <td id="my_td01">상품 01</td>
-                      <td id="my_td01">42,000원 / 1개</td>
-                      <td id="my_td01">입금대기</td>
-                      <td id="my_td01"></td>
-                    </tr>
+                  	<c:if test="${ empty list }">
+                  	 	<tr>
+                      		<td id="my_td00" colspan="5">
+                       			조회 내역이 없습니다.
+                      		</td>
+                    	</tr>
+                   	</c:if>
+                   	<c:if test="${ not empty list }">
+                   		<c:forEach var="orderByDate" items="${ list }">
+		                    <tr>
+		                      <td id="my_td01">${ orderByDate.orderDate } <br>
+		                        <a href="${ path }/mypage/orderdetail" id="my_td02">${ orderByDate.orderNo }</a> <br>
+		                        <button type="button" class="btn btn-outline-secondary" id="mycbtn">주문취소 </button>
+		                      </td> 
+		                      <td id="my_td01">${ orderByDate.proName }</td>
+		                      <td id="my_td01">${ orderByDate.strPrice }원 / ${ orderByDate.orderAmount }개</td>
+		                      <td id="my_td01">${ orderByDate.orderStatus }</td>
+		                      <td id="my_td01">${ orderByDate.count }</td>
+		                    </tr>
+	                    </c:forEach>
+                    </c:if>
                   </tbody>
                 </table>
               </div>
@@ -103,9 +97,6 @@
     </div>
     </div>
     <!-- 내용 전체 컨테이너 끝 -->
-    <!-- Java Script -->
-    <!-- My JS -->
-    <!-- <script src="${path}/resources/js/Mypage_02.js"></script> -->
 
 	<!-- footer -->
 	<jsp:include page="/views/mypage/myfooter.jsp"/>

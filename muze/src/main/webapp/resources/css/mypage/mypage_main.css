@@ -113,8 +113,9 @@
 }
 
 #my_td01{
+	border-bottom: 1px solid lightgray;
     padding-top: 5px;
-    height: 40px;
+    height: 10px;
     text-align: center;
     font-size: 0.8em;
 }
@@ -149,7 +150,7 @@
 
 #mying3{
     /* margin-inline: 40px; */
-    border: 1px dotted rgb(238, 233, 233);;
+    border: 1px dotted rgb(238, 233, 233);
     height: 1px;
     margin-block: 23px;
 }

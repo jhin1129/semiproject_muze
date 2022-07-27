@@ -11,8 +11,8 @@
 	   <hr>
 	     <p id="myListMain"> 구매 정보 </p> 
 	       <li id="mylist"><a id="sublist" href="${ path }/mypage/order_list">- 주문 / 배송 조회</a></li>
-	       <li id="mylist"><a id="sublist" href="${ path }/mypage/cancel_list">- 취소 / 반품 내역</a></li>
-	       <li id="mylist"><a id="sublist" href="${ path }/mypage/cancel_list">- 환불 / 입금 내역</a></li><br>
+	       <li id="mylist"><a id="sublist" href="${ path }/mypage/cancel">- 취소 / 반품 내역</a></li>
+	       <li id="mylist"><a id="sublist" href="${ path }/mypage/refund">- 환불 / 입금 내역</a></li><br>
 	     <p id="myListMain"> 회원 정보 </p> 
 	       <li id="mylist"><a id="sublist" href="${ path }/mypage/mileage">- 회원 혜택</a></li>
 	       <li id="mylist"><a id="sublist" href="${ path }/mypage/pwd_info">- 회원 정보 변경 </a></li>

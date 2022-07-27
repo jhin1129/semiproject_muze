@@ -10,11 +10,6 @@
 
     <!-- my CSS -->
 	<link rel="stylesheet" href="${path}/resources/css/mypage/mypage_main.css"> 
-    <!-- 데이트피커 CSS 및 제이쿼리 -->
-    <link rel="stylesheet" href="${path}/resources/css/mypage/mypage_cal.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="${path}/resources/js/Mypage/mypage_02.js" ></script>
   
       <!-- 내용 전체 컨테이너 -->
       <div class="container">
@@ -44,23 +39,19 @@
                 <table class="ordertable">
                   <thead id="my_thead01">
                     <tr>
-                      <th class="my_th" id="my_th01">날짜/주문번호</th>
+                      <th class="my_th" id="my_th05">날짜/주문번호</th>
                       <th class="my_th" id="my_th02">상품명/옵션</th>
-                      <th class="my_th" id="my_th03">상품금액/수량</th>
-                      <th class="my_th" id="my_th04">주문상태</th>
-                      <th class="my_th" id="my_th05">확인</th>
+                      <th class="my_th" id="my_th05">상품금액/수량</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td id="my_td01">2022/07/06 <br>
-                        <a href="../mypage/order_list.php" id="my_td02">2207069324820</a> <br>
+                      <td id="my_td01">${ myOrder.orderDate } <br>
+                        <a href="${ path }/mypage/orderdetail" id="my_td02">${ myOrder.orderNo }</a> <br>
                         <button type="button" class="btn btn-outline-secondary" id="mycbtn">주문 취소</button>
                       </td> 
-                      <td id="my_td01">상품 01</td>
-                      <td id="my_td01">42,000원 / 1개</td>
-                      <td id="my_td01">결제완료</td>
-                      <td id="my_td01"></td>
+                      <td id="my_td01">${ myOrder.proName }</td>
+                      <td id="my_td01">${ myOrder.proPrice } 원 / ${ myOrder.orderAmount } 개 </td>
                     </tr>
                   </tbody>
                 </table>
@@ -78,25 +69,25 @@
                       <tr>
                         <th class="my_th" id="my_th06">이름</th>
                         <td id="my_td04">
-                          홍길동
+                          ${ orderDetail.orderName }
                         </td>
                       </tr>
                       <tr>
                         <th class="my_th" id="my_th06">주소</th>
                         <td id="my_td04">
-                          서울시 용산구 이태원로 334 - 37
+                          ${ orderDetail.orderAddr }
                         </td>
                       </tr>
                       <tr>
                         <th class="my_th" id="my_th06">연락처</th>
                         <td id="my_td04">
-                          010 - 1234 - 5678 
+                          ${ orderDetail.orderPhone } 
                         </td>
                       </tr>
                       <tr>
                         <th class="my_th" id="my_th06">이메일</th>
                         <td id="my_td04">
-                          abc1234@gmail.com
+                          ${ orderDetail.email }
                         </td>
                       </tr>
                   </table>
@@ -111,25 +102,25 @@
                       <tr>
                         <th class="my_th" id="my_th06" >상품 합계 금액</th>
                         <td id="my_td04">
-                          29,000 원
+                          ${ orderDetail.orderPrice } 원
                         </td>
                       </tr>
                       <tr>
                         <th class="my_th" id="my_th06">배송비</th>
                         <td id="my_td04">
-                          2,500 원 
+                          ${ orderDetail.delFee } 원 
                         </td>
                       </tr>
                       <tr>
                         <th class="my_th" id="my_th06">할인혜택</th>
                         <td id="my_td04">
-                          마일리지 (-) 1000원
+                          마일리지 (-) ${ orderDetail.mileage }원
                         </td>
                       </tr>
                       <tr>
                         <th class="my_th" id="my_th06">총 결제 금액</th>
                         <td id="my_td04">
-                          30,500 원
+                          ${ orderDetail.totalPrice } 원
                         </td>
                       </tr>
                       <tr>
@@ -139,8 +130,8 @@
                           입금은행 : 우리은행 <br>
                           입금계좌 : 1002-844-568858 <br>
                           예금주명 : (주)무제 <br>
-                          입금금액 : 31,500원 <br>
-                          입금자명 : 홍길동 <br>
+                          입금금액 : ${ orderDetail.totalPrice } 원 <br>
+                          입금자명 : ${ orderDetail.orderName } <br>
                         </td>
                       </tr>
                   </table>
@@ -156,10 +147,15 @@
     </div>
     </div>
     <!-- 내용 전체 컨테이너 끝 -->
-
-    <!-- Java Script -->
-    <!-- My JS -->
-    <!-- <script src="${path}/resources/js/Mypage_02.js"></script> -->
+	<script>
+		$(document).ready(() => {
+			$("#mycbtn").on("click", () => {
+				if(confirm("확인을 누르면 주문이 취소됩니다.")) {
+					location.replace("${ path }/mypage/cancel");
+				}
+			});
+		});
+	</script>
 
 	<!-- footer -->
 	<jsp:include page="/views/mypage/myfooter.jsp"/>

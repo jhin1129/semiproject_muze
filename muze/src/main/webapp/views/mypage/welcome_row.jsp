@@ -9,13 +9,12 @@
 	<div class="row">
 	  <div class="col-sm-12">
 	    <!-- 카드 그룹 -->
-	    <form action="${ path }/mypage/welcome" method="get">
 	    <div class="card-group">
 	      <!-- 첫번째 카드 -->
 	      <div class="card">
 	        <img src="${path}/resources/images/mypage/welcome.png" class="card-img-top" >
 	        <div class="card-body">
-	          <h5 class="card-title">ooo 님</h5>
+	          <h5 class="card-title">${ myOrder.orderName } 님</h5>
 	          <p class="card-text">
 	            환영합니다.
 	          </p>
@@ -42,7 +41,6 @@
 	        </div>
 	      </div>
 	    </div>
-	    </form>
 	    <!-- 카드그룹 끝 -->
 	  </div>
 	</div>

@@ -18,7 +18,7 @@ public class WelcomeDao {
 		int count = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT COUNT(*) FROM BOARD WHERE BRD_WRITER_NO = 9 AND BRD_TYPE = 'FREE'";
+		String query = "SELECT COUNT(*) FROM BOARD WHERE BRD_WRITER_NO = 9 AND BRD_TYPE = 'REVIEW'";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
@@ -62,40 +62,40 @@ public class WelcomeDao {
 		return result;
 	}
 
-	public Delivery getOrderStatus(Connection connection) {
-		Delivery orderStatus = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String query = "SELECT * FROM ORDERSTATUS";
-		
-		try {
-			pstmt = connection.prepareStatement(query);
-			rs = pstmt.executeQuery();
-			
-			if (rs.next()) {
-			orderStatus = new Delivery();
-			
-			orderStatus.setOrderNo(rs.getInt("ORDER_NO"));
-			orderStatus.setOrderdate(rs.getDate("ORDER_DATE"));
-			orderStatus.setOrderIn(rs.getInt("ORDER_IN"));
-			orderStatus.setOrderPaid(rs.getInt("ORDER_PAID"));;
-			orderStatus.setOrderReady(rs.getInt("ORDER_READY"));
-			orderStatus.setOrderShip(rs.getInt("ORDER_SHIP"));
-			orderStatus.setOrderDelivered(rs.getInt("ORDER_DELIVERED"));
-			orderStatus.setOrderComplete(rs.getInt("ORDER_COMPLETE"));
-			orderStatus.setMemberNo(rs.getInt("MEMBER_NO"));
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		
-		return orderStatus;
-		
-	}
+//	public Delivery getOrderStatus(Connection connection) {
+//		Delivery orderStatus = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		String query = "SELECT * FROM ORDERSTATUS";
+//		
+//		try {
+//			pstmt = connection.prepareStatement(query);
+//			rs = pstmt.executeQuery();
+//			
+//			if (rs.next()) {
+//			orderStatus = new Delivery();
+//			
+//			orderStatus.setOrderNo(rs.getInt("ORDER_NO"));
+//			orderStatus.setOrderdate(rs.getDate("ORDER_DATE"));
+//			orderStatus.setOrderIn(rs.getInt("ORDER_IN"));
+//			orderStatus.setOrderPaid(rs.getInt("ORDER_PAID"));;
+//			orderStatus.setOrderReady(rs.getInt("ORDER_READY"));
+//			orderStatus.setOrderShip(rs.getInt("ORDER_SHIP"));
+//			orderStatus.setOrderDelivered(rs.getInt("ORDER_DELIVERED"));
+//			orderStatus.setOrderComplete(rs.getInt("ORDER_COMPLETE"));
+//			orderStatus.setMemberNo(rs.getInt("MEMBER_NO"));
+//			}
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close(rs);
+//			close(pstmt);
+//		}
+//		
+//		return orderStatus;
+//		
+//	}
 
 	
 	

@@ -10,6 +10,7 @@
 
     <!-- my CSS -->
 	<link rel="stylesheet" href="${path}/resources/css/mypage/mypage_main.css"> 
+	<script src="${path}/resources/js/mypage/mypage_01.js" ></script>
 
     <!-- 내용 전체 컨테이너 -->
     <div class="container">
@@ -24,56 +25,11 @@
         <!-- 오른쪽 그리드 -->
         <div class="col-sm-10">
         	<!-- 컨테이너 -->
-<%-- 	        <form action="${ path }/mypage/welcome" method="get"> --%>
         	<div class="container">
             <!-- 첫번째 행 -->
 			<jsp:include page="/views/mypage/welcome_row.jsp" flush="false"/>
             <!-- 두번째 행 -->
-            <div class="row">
-              <div class="col-sm-12" style="margin-top: 30px;">
-                <form id="myForm01">
-                  <span id="mySpan01">진행 중인 주문</span> 
-                  <span id="mySpan02">최근 30일 내 진행중인 주문정보입니다.</span>
-
-                </form>
-                <!-- 주문상태 -->
-                <fieldset class="mySearchDate2">
-                  <div class="container">
-                    <div class="row row-cols-6">
-                      <div class="col" id="mying1">입금대기</div>
-                      <div class="col" id="mying1">결제완료</div>
-                      <div class="col" id="mying1">상품준비중</div>
-                      <div class="col" id="mying1">배송중</div>
-                      <div class="col" id="mying1">배송완료</div>
-                      <div class="col" id="mying1">구매확정</div>
-                    </div>
-                  </div>
-                  <div class="container">
-                    <div class="row row-cols-12">
-                      <div class="col" id="mying3"></div>
-                      <div class="col" id="mying2">${ orderStatus.orderIn }</div>
-                      <div class="col" id="mying3"></div>
-                      <div class="col" id="mying3"></div>
-                      <div class="col" id="mying2">${ orderStatus.orderPaid }</div>
-                      <div class="col" id="mying3"></div>
-                      <div class="col" id="mying3"></div>
-                      <div class="col" id="mying2">${ orderStatus.orderReady }</div>
-                      <div class="col" id="mying3"></div>
-                      <div class="col" id="mying3"></div>
-                      <div class="col" id="mying2">${ orderStatus.orderShip }</div>
-                      <div class="col" id="mying3"></div>
-                      <div class="col" id="mying3"></div>
-                      <div class="col" id="mying2">${ orderStatus.orderDelivered }</div>
-                      <div class="col" id="mying3"></div>
-                      <div class="col" id="mying3"></div>
-                      <div class="col" id="mying2">${ orderStatus.orderComplete }</div>
-                      <div class="col" id="mying3"></div>
-                    </div>
-                  </div>
-                </fieldset>
-              </div>
-            </div>
-
+			<jsp:include page="/views/mypage/orderStatus.jsp" flush="false"/>
             <!-- 세번째 행 -->
             <div class="row">
               <div class="col-sm-12" style="margin-top: 50px;">
@@ -93,34 +49,39 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td id="my_td01">2022/07/06 <br>
-                        <a href="${ path }/mypage/orderdetail" id="my_td02">2207069324820</a> <br>
-                        <button type="button" class="btn btn-outline-secondary" id="mycbtn">주문 취소</button>
-                      </td> 
-                      <td id="my_td01">상품 01</td>
-                      <td id="my_td01">42,000원 / 1개</td>
-                      <td id="my_td01">고객요청취소</td>
-                      <td id="my_td01"></td>
-                    </tr>
+                  	<c:if test="${ empty list }">
+                  	 	<tr>
+                      		<td id="my_td00" colspan="5">
+                       			조회 내역이 없습니다.
+                      		</td>
+                    	</tr>
+                   	</c:if>
+                   	<c:if test="${ not empty list }">
+                   		<c:forEach var="getOrderRec" items="${ list }">
+		                    <tr>
+		                      <td id="my_td01">${ getOrderRec.orderDate } <br>
+		                        <a href="${ path }/mypage/orderdetail" id="my_td02">${ getOrderRec.orderNo }</a> <br>
+		                        <button type="button" class="btn btn-outline-secondary" id="mycbtn">주문취소 </button>
+		                      </td> 
+		                      <td id="my_td01">${ getOrderRec.proName }</td>
+		                      <td id="my_td01">${ getOrderRec.strPrice }원 / ${ getOrderRec.orderAmount }개</td>
+		                      <td id="my_td01">${ getOrderRec.orderStatus }</td>
+		                      <td id="my_td01"></td>
+		                    </tr>
+	                    </c:forEach>
+                    </c:if>
                   </tbody>
                 </table>
               </div>
             </div>
             <!-- 세번째 행 끝 -->
           </div>
-<!--           </form> -->
           <!-- 컨테이너 끝 -->
       </div>
       <!-- 오른쪽 그리드 끝 -->
     </div>
     </div>
     <!-- 내용 전체 컨테이너 끝 -->
-
-    <!-- Java Script -->
-    <!-- My JS -->
-    <!-- <script src="${path}/resources/js/Mypage_02.js"></script> -->
-
     <!-- Bootstrap Js 4.6 -->
     <!-- 부트스트랩 제이쿼리 활성화 시 제이쿼리 데이트피커 동작 안함 -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
