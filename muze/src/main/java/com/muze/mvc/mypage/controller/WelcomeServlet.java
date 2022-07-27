@@ -44,22 +44,15 @@ public class WelcomeServlet extends HttpServlet {
 		welcome = new Welcome(mileageNow, reviewCount);
 
     	// 2nd row
-//    	Delivery orderStatus = null; 
-//    	orderStatus = new WelcomeService().getOrderStatus();
-    	
-//    	System.out.println(orderStatus); // 제대로 가져옴.
-    	
-		// 이것도 컬럼 하나를 객체 하나씩으로 해야해서 리스트로 만들어야겠
 		List<MyOrder> status = null;
 		status = new MyOrderService().getOrderStatus();
 		status.forEach(System.out::println);
 		
+//		System.out.println(status.get(status.size() - 1).getOrderStatus()); // 상품준비중 가져와짐 
 //		System.out.println(status.get(0).getOrderStatus()); // 상품준비중 가져와짐 
 //		System.out.println(status.get(0).getPro3()); // 테스트 ok 
 //		System.out.println(status.get(status.size() - 1).getPro3()); // 테스트 ok 
 //		System.out.println(status.get(status.size() - 1).getPro2()); // 테스트 ok 
-		
-		
 		
     	// 3rd row 
 		List<MyOrder> list = null;

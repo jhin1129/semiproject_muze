@@ -225,4 +225,115 @@ public class MyOrderDao {
 		return getOrderStatus;
 	}
 
+	public int orderCancel(Connection connection) {
+		int result = 0;
+		PreparedStatement pstm = null;
+		String query = "UPDATE ORDER_STATUS SET ORDER_STATUS = '취소' WHERE ORDER_NO = '2207239'";
+		
+		try {
+			pstm = connection.prepareStatement(query);
+			
+			result = pstm.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+		}
+		
+		return result;
+	}
+
+	public List<MyOrder> getCancelByDate(Connection connection, String dateFrom, String dateTo) {
+		List<MyOrder> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "SELECT O.ORDER_NO, O.ORDER_DATE, O.ORDER_AMOUNT, P.PRO_NAME, P.PRO_PRICE, OS.ORDER_STATUS, COUNT(*) AS CNT, "
+						+ "REGEXP_REPLACE(REVERSE(REGEXP_REPLACE( REVERSE(TO_CHAR(P.PRO_PRICE)), '([0-9]{3})','\\1,')), '^,','') AS PRICE "
+						+ "FROM PRODUCT P "
+						+ "JOIN ORDERS O ON (P.PRO_NO = O.PRO_NO) "
+						+ "JOIN ORDER_STATUS OS ON (OS.ORDER_NO = O.ORDER_NO) "
+						+ "WHERE O.MEMBER_NO = 9 AND O.ORDER_DATE BETWEEN ? AND ? AND (ORDER_STATUS = '반품' OR ORDER_STATUS = '취소') "
+						+ "GROUP BY O.ORDER_NO, O.ORDER_DATE, O.ORDER_AMOUNT, P.PRO_NAME, P.PRO_PRICE, OS.ORDER_STATUS";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setString(1, dateFrom);
+			pstmt.setString(2, dateTo);
+
+			rs = pstmt.executeQuery();
+
+			// 조회되는 데이터가 있으면 myOrder 객체로 만들어 리턴한다.
+			while (rs.next()) {
+				MyOrder cancelByDate = new MyOrder();
+				
+				cancelByDate.setOrderDate(rs.getDate("ORDER_DATE"));
+				cancelByDate.setOrderNo(rs.getInt("ORDER_NO"));
+				cancelByDate.setProName(rs.getString("PRO_NAME"));
+				cancelByDate.setProPrice(rs.getInt("PRO_PRICE"));
+				cancelByDate.setOrderAmount(rs.getInt("ORDER_AMOUNT"));
+				cancelByDate.setStrPrice(rs.getString("PRICE"));
+				cancelByDate.setCount(rs.getInt("CNT"));
+				cancelByDate.setOrderStatus(rs.getString("ORDER_STATUS"));
+
+				
+				list.add(cancelByDate);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public List<MyOrder> getRefundByDate(Connection connection, String dateFrom, String dateTo) {
+		List<MyOrder> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "SELECT O.ORDER_NO, O.ORDER_DATE, O.ORDER_AMOUNT, P.PRO_NAME, P.PRO_PRICE, OS.ORDER_STATUS, COUNT(*) AS CNT, "
+						+ "REGEXP_REPLACE(REVERSE(REGEXP_REPLACE( REVERSE(TO_CHAR(P.PRO_PRICE)), '([0-9]{3})','\\1,')), '^,','') AS PRICE "
+						+ "FROM PRODUCT P "
+						+ "JOIN ORDERS O ON (P.PRO_NO = O.PRO_NO) "
+						+ "JOIN ORDER_STATUS OS ON (OS.ORDER_NO = O.ORDER_NO) "
+						+ "WHERE O.MEMBER_NO = 9 AND O.ORDER_DATE BETWEEN ? AND ? AND (ORDER_STATUS = '환불') "
+						+ "GROUP BY O.ORDER_NO, O.ORDER_DATE, O.ORDER_AMOUNT, P.PRO_NAME, P.PRO_PRICE, OS.ORDER_STATUS";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setString(1, dateFrom);
+			pstmt.setString(2, dateTo);
+
+			rs = pstmt.executeQuery();
+
+			// 조회되는 데이터가 있으면 myOrder 객체로 만들어 리턴한다.
+			while (rs.next()) {
+				MyOrder refundByDate = new MyOrder();
+				
+				refundByDate.setOrderDate(rs.getDate("ORDER_DATE"));
+				refundByDate.setOrderNo(rs.getInt("ORDER_NO"));
+				refundByDate.setProName(rs.getString("PRO_NAME"));
+				refundByDate.setProPrice(rs.getInt("PRO_PRICE"));
+				refundByDate.setOrderAmount(rs.getInt("ORDER_AMOUNT"));
+				refundByDate.setStrPrice(rs.getString("PRICE"));
+				refundByDate.setCount(rs.getInt("CNT"));
+				refundByDate.setOrderStatus(rs.getString("ORDER_STATUS"));
+
+				
+				list.add(refundByDate);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+
 }

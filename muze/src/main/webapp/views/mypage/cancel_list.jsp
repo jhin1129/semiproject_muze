@@ -37,14 +37,37 @@
 			<jsp:include page="/views/mypage/welcome_row.jsp" flush="false"/>
 
             <!-- 두번째 행 -->
-			<jsp:include page="/views/mypage/datepick.jsp" flush="false"/>
+			<div class="row">
+			 <div class="col-sm-12" style="margin-top: 30px;">
+			   <form id="myForm01">
+			     <span id="mySpan01">주문취소 / 반품조회</span> 
+			   </form>
+			   	  <!-- 기간별 검색 -->
+			      <fieldset class="mySearchDate">
+     				<form action="${ path }/mypage/cancel_list" method="get">
+					  <div class= "btnsearch" role="group" aria-label="First group">
+						<jsp:include page="/views/mypage/datepick.jsp" flush="false"/>
+						<!-- 조회버튼 -->
+			       		<button type="submit" class="btn btn-outline-secondary" id="srhbtn7">조회</button>
+			          </div>
+			       </form>
+  				 </fieldset>
+			  </div>
+            </div>
 
             <!-- 세번째 행 -->
             <div class="row">
               <div class="col-sm-12" style="margin-top: 50px;" >
-                <form id="myForm01">
-                  <span id="mySpan01">주문취소 / 반품 신청 내역</span> 
-                </form>
+                <c:if test="${empty list }">
+	                <form id="myForm01">
+	                  <span id="mySpan01">주문취소 / 반품조회</span> 
+	                </form>
+                </c:if>
+                <c:if test="${ not empty list }">
+	                <form id="myForm01">
+ 	                  <span id="mySpan01">주문취소 / 반품내역 총 ${ list.get(list.size()-1).getCount() } 건</span> 
+	                </form>
+                </c:if>
                 <!-- 조회 테이블 -->
                 <table class="ordertable">
                   <thead id="my_thead01">
@@ -57,16 +80,26 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td id="my_td01">2022/07/06 <br>
-                        <a href="${ path }/mypage/orderdetail" id="my_td02">2207069324820</a> <br>
-                        <!-- <button type="button" class="btn btn-outline-secondary" id="mycbtn">주문 취소</button> -->
-                      </td> 
-                      <td id="my_td01">상품 01</td>
-                      <td id="my_td01">42,000원 / 1개</td>
-                      <td id="my_td01">취소완료</td>
-                      <td id="my_td01"></td>
-                    </tr>
+					<c:if test="${ empty list }">
+                  	 	<tr>
+                      		<td id="my_td00" colspan="5">
+                       			조회 내역이 없습니다.
+                      		</td>
+                    	</tr>
+                   	</c:if>
+                   	<c:if test="${ not empty list }">
+                   		<c:forEach var="cancelByDate" items="${ list }">
+		                    <tr>
+		                      <td id="my_td01">${ cancelByDate.orderDate } <br>
+		                        <a href="${ path }/mypage/orderdetail" id="my_td02">${ cancelByDate.orderNo }</a> <br>
+		                      </td> 
+		                      <td id="my_td01">${ cancelByDate.proName }</td>
+		                      <td id="my_td01">${ cancelByDate.strPrice }원 / ${ cancelByDate.orderAmount }개</td>
+		                      <td id="my_td01">${ cancelByDate.orderStatus }</td>
+		                      <td id="my_td01"></td>
+		                    </tr>
+	                    </c:forEach>
+                    </c:if>
                   </tbody>
                 </table>
               </div>

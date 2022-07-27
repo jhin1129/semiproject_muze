@@ -1,7 +1,9 @@
 package com.muze.mvc.mypage.model.service;
 
 import static com.muze.mvc.common.jdbc.JDBCTemplate.close;
+import static com.muze.mvc.common.jdbc.JDBCTemplate.commit;
 import static com.muze.mvc.common.jdbc.JDBCTemplate.getConnection;
+import static com.muze.mvc.common.jdbc.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
@@ -114,6 +116,48 @@ public class MyOrderService {
 		close(connection);
 		
 		return getOrderStatus;
+	}
+
+	public int orderCancel() {
+		int result = 0; 
+		Connection connection = getConnection();
+		
+		result = new MyOrderDao().orderCancel(connection);
+		
+		// Dao에서 값을 받아오는 과정이 제대로 이루어져, 양수값을 반환한다면
+		if(result > 0) {
+			commit(connection);
+		} else {
+			rollback(connection);
+		}
+		
+		close(connection);
+		
+		return result;
+	}
+
+	public List<MyOrder> cancelByDate(String dateFrom, String dateTo) {
+		List<MyOrder> cancelByDate = null;
+		
+		Connection connection = getConnection();
+
+		cancelByDate = new MyOrderDao().getCancelByDate(connection, dateFrom, dateTo);
+		
+		close(connection);
+		
+		return cancelByDate;
+	}
+
+	public List<MyOrder> refundByDate(String dateFrom, String dateTo) {
+		List<MyOrder> refundByDate = null;
+		
+		Connection connection = getConnection();
+
+		refundByDate = new MyOrderDao().getRefundByDate(connection, dateFrom, dateTo);
+		
+		close(connection);
+		
+		return refundByDate;
 	}
 	
 }
