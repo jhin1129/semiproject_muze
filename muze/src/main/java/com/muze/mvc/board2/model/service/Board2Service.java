@@ -58,12 +58,12 @@ public class Board2Service {
 		return result;
 	}
 
-	public int delete(int no) {
+	public int delete(int no, String type) {
 		int result = 0;
 	
 		Connection connection = getConnection();
 		
-		result = new Board2Dao().updateStatus(connection, no, "N");
+		result = new Board2Dao().updateStatus(connection, no, type, "N");
 		
 		if(result > 0) {
 			commit(connection);

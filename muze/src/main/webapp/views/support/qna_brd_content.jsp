@@ -11,7 +11,7 @@
     <div class="container my-5">
 
         <div>
-            <h3 style="text-align: left; margin-left: 60px; margin-bottom: 20px;">1 : 1 문의</h3>
+    	        <h3 style="text-align: left; margin-left: 60px; margin-bottom: 20px;">1 : 1 문의</h3>
         </div>
 
         <div class="notice-content" style="height: 100%;">
@@ -58,7 +58,7 @@
 	$(document).ready(() => {
 		$("#btnDelete").on("click", () => {
 			if(confirm("정말로 게시글을 삭제하시겠습니까?")) {
-				location.replace("${ path }/support/delete?no=${ board.brdNo }");
+				location.replace("${ path }/support/delete?no=${ board.brdNo }&type=QNA");
 			}
 		});
 	})

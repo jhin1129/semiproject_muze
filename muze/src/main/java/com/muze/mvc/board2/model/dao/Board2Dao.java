@@ -206,7 +206,7 @@ public class Board2Dao {
 		return 0;
 	}
 
-	public int updateStatus(Connection connection, int no, String status) {
+	public int updateStatus(Connection connection, int no, String type, String status) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = "UPDATE BOARD SET BRD_STATUS=? WHERE BRD_NO=?";

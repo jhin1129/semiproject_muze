@@ -43,8 +43,7 @@
         <p style="text-align: center; margin-top: 10px;">
             <button type="button" class="button-white" style="margin: 0;" 
             onclick="location.href='${ path }/support/update?type=NOTICE'"><b>수정</b></button>
-            <button type="button" class="button-white" id="btnDelete" style="margin: 0;" 
-            onclick="location.href='${ path }/support/delete?type=NOTICE'"><b>삭제</b></button>
+            <button type="button" class="button-white" id="btnDelete" style="margin: 0;"><b>삭제</b></button>
             <button type="button" class="button-white" style="margin: 0;" 
             onclick="location.href='${ path }/support/list?type=NOTICE'"><b>목록</b></button>
         </p>
@@ -52,13 +51,13 @@
 </div>
 
 <script>
-	$(document).ready(() => {
-		$("btnDelete").on("click", () => {
-			if(confirm("정말로 게시글을 삭제하시겠습니까?")) {
-				location.replace("${ path }/support/delete?no=${board.brdNo}")
-			}
-		});
-	})
+$(document).ready(() => {
+	$("#btnDelete").on("click", () => {
+		if(confirm("정말로 게시글을 삭제하시겠습니까?")) {
+			location.replace("${ path }/support/delete?no=${ board.brdNo }&type=NOTICE");
+		}
+	});
+})
 </script>
 
 

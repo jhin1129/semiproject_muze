@@ -19,14 +19,13 @@ public class Board2DeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int result = 0;
 		int no = Integer.parseInt(request.getParameter("no"));
+		String type = request.getParameter("type");
 		
-		System.out.println("게시글 번호 : " + no);
-		
-		result = new Board2Service().delete(no);
-		
+		result = new Board2Service().delete(no, type);
+		System.out.println(type);
 		if(result > 0) {
 			request.setAttribute("msg", "게시글 삭제 성공");
-			request.setAttribute("location", "/support/list?type=QNA");
+			request.setAttribute("location", "/support/list?type=" + type);
 		} else {
 			request.setAttribute("msg", "게시글 삭제 실패");
 			request.setAttribute("location", "/support/view?no=" + no);

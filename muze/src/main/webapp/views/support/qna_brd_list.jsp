@@ -11,7 +11,7 @@
     <div class="container my-5">
 
         <div>
-            <h3 style="text-align: left;">1 : 1 문의</h3>
+           	<h3 style="text-align: left;">1 : 1 문의</h3>
         </div>
 
         <div class="mt-5">

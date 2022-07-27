@@ -31,7 +31,12 @@ public class Board2ViewServlet extends HttpServlet {
 		
 		request.setAttribute("type", type);
 		
-		request.getRequestDispatcher("/views/support/qna_brd_content.jsp").forward(request, response);
+		if(type.equals("NOTICE")) {
+			request.getRequestDispatcher("/views/support/notice_brd_content.jsp").forward(request, response);
+		} else if(type.equals("QNA")) {
+			request.getRequestDispatcher("/views/support/qna_brd_content.jsp").forward(request, response);
+		}
+		
 	}
 	
 }
