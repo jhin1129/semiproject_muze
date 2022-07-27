@@ -22,12 +22,15 @@ public class Board2tWriteServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		request.getRequestDispatcher("/views/support/notice_brd_crud.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int result = 0;
+
 		Board2 board = null;
+		
+		String type = request.getParameter("type");
 		
 		String path = getServletContext().getRealPath("/resources/upload/board");
 		
@@ -37,40 +40,48 @@ public class Board2tWriteServlet extends HttpServlet {
 		
 		MultipartRequest mr = new MultipartRequest(request, path, maxSize, encoding, new FileRename());
 		
-		String brdCategory = mr.getParameter("category");
-		String brdWriterId = mr.getParameter("brdWriterId");
+//		String brdCategory = mr.getParameter("category");
+//		String brdWriterId = mr.getParameter("brdWriterId");
 		String brdTitle = mr.getParameter("brdTitle");
 		String brdContent = mr.getParameter("brdContent");
+		
     	String filesystemName = mr.getFilesystemName("upfile");
     	String originalFileName = mr.getOriginalFileName("upfile");
     	
-		HttpSession session = request.getSession(false);
+//    	System.out.println(brdCategory);
+//    	System.out.println(brdWriterId);
+    	System.out.println(brdTitle);	
+    	System.out.println(brdContent);
+    	System.out.println(filesystemName);
+    	System.out.println(originalFileName);
+//		HttpSession session = request.getSession(false);
 //		Member loginMemver = (session == null) ? null : (Member) session.getAttribute("loginMember");
 		
 //		if(loginMember != null) {
 		board = new Board2();
-		
-		board.setBrdType(brdCategory);
+		board.setBrdWriterNo(1);
+//		board.setBrdType(brdCategory);
 		board.setBrdTitle(brdTitle);
-		board.setBrdWriterId(brdWriterId);
+//		board.setBrdWriterId(brdWriterId);
 		board.setBrdContent(brdContent);
 		board.setBrdOriginalFileName(originalFileName);
-		board.setBrdRenameFileName(filesystemName);
+		board.setBrdRenamedFileName(filesystemName);
+		board.setBrdType(type);
 		
 		result = new Board2Service().save(board);
 		
 			if(result > 0) {
 				request.setAttribute("msg", "게시글 등록 성공");
-				request.setAttribute("location", "/board/list");
+				request.setAttribute("location", "/");
 			} else {
 				request.setAttribute("msg", "게시글 등록 실패");
-				request.setAttribute("location", "/board/list");
+				request.setAttribute("location", "/");
 			}
 //		} else {
 //			request.setAttribute("msg", "로그인 후 사용할 수 있습니다.");
 //			request.setAttribute("location", "/");
 //		}
-	request.getRequestDispatcher("/views/support/msg.jsp").forward(request, response);
+	request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 }

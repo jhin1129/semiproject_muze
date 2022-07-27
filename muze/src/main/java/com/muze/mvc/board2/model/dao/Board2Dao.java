@@ -198,12 +198,65 @@ public class Board2Dao {
 	}
 
 	public int updateBoard(Connection connection, Board2 board) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "UPDATE BOARD SET BRD_TITLE=?,BRD_CONTENT=?,BRD_ORIGINALFILENAME=?,BRD_RENAMEDFILENAME=? WHERE NO=?";
 		
-		return 0;
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setString(1, board.getBrdTitle());
+			pstmt.setString(2, board.getBrdContent());
+			pstmt.setString(3, board.getBrdOriginalFileName());
+			pstmt.setString(4, board.getBrdRenamedFileName());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 	public int insertBoard(Connection connection, Board2 board) {
-		return 0;
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "INSERT INTO BOARD VALUES("
+				+ "SEQ_BOARD_NO.NEXTVAL, "  //BRD_NO
+				+ "?, "						//BRD_TITLE
+				+ "?, "						//BRD_CONTENT
+				+ "SYSDATE, "				//BRD_DATE
+				+ "0, "						//BRD_READCOUNT
+				+ "?, "						//BRD_WRITER_NO
+				+ "NULL, "					//BRD_PRO_NO
+				+ "NULL, "					//BRD_CATEGORY
+				+ "NULL, "					//BRD_REP_CONTENT
+				+ "?, "						//BRD_TYPE
+				+ "'Y' ,"					//BRD_STATUS
+				+ "?, "						//BRD_ORIGINALFILENAME
+				+ "? "						//BRD_RENAMEDFILENAME
+				+ ")";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setString(1, board.getBrdTitle());
+			pstmt.setString(2, board.getBrdContent());
+			pstmt.setInt(3, board.getBrdWriterNo());
+			pstmt.setString(4, board.getBrdType());
+			pstmt.setString(5, board.getBrdOriginalFileName());
+			pstmt.setString(6, board.getBrdRenamedFileName());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 	public int updateStatus(Connection connection, int no, String type, String status) {

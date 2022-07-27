@@ -31,6 +31,10 @@
                 <td style="width: 35%;">${ board.brdDate }</td>
                 <td style="width: 15%;"><b>조회수</b></td>
                 <td>${ board.brdReadCount }</td>
+            </tr>
+            <tr>
+            	<td><b>첨부파일</b></td>
+            	<td colspan="3">${ board.brdOriginalFileName }</td>
             </tr>                
             <tr>
                 <td colspan="4" style="height: 76%;">

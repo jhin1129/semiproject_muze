@@ -74,7 +74,7 @@
             </div>
 
             <div class="col-4 text-right">
-                <button class="btn btn-light text-nowrap" onclick="location.href='${ path }/support/write'">글 쓰기</button>
+                <button class="btn btn-light text-nowrap" onclick="location.href='${ path }/support/write?type=QNA'">글 쓰기</button>
             </div>
         </div>
 
