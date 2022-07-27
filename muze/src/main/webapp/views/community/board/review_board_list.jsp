@@ -19,13 +19,13 @@
 			<div class="row my-5">
 		</c:if>
 		
-		<div class="col-lg-3 col-md-6">
+		<div class="col-lg-3 col-md-6" onclick="location.href='${ path }/board/view?no=${ board.brdNo }&type=${ type }'">
             <div class="card" style="width: 16rem;">
                 <img style="background-color: black;" width="100%" height="254px">
                 <div class="card-body">
                     <h5 class="card-title">${ board.brdTitle }</h5>
+                    <p class="card-text">${board.brdProName }</p>
                     <p class="card-text">${board.brdWriterId }</p>
-                    <p class="card-text">${board.brdContent }</p>
                 </div>
             </div>
         </div>
@@ -37,17 +37,63 @@
 		</c:if>
 	</c:forEach>
 
-    <div>
-        <ul class="pagination justify-content-center">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">4</a></li>
-            <li class="page-item"><a class="page-link" href="#">5</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-        </ul>
-    </div>
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <ul class="pagination justify-content-center">
+                <li class="page-item"><a class="page-link" href="${path }/board/list?page=1&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&lt;&lt;</a></li>
+                <li class="page-item"><a class="page-link" href="${path }/board/list?page=${pageInfo.prevPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&lt;</a></li>
+                
+                <!--  10개 페이지 목록 -->
+				<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
+					<c:if test="${ status.current == pageInfo.currentPage }">
+                  		<li class="page-item disabled"><a class="page-link" href="#">${ status.current }</a></li>
+					</c:if>
+					<c:if test="${ status.current != pageInfo.currentPage }">
+                  		<li class="page-item"><a class="page-link" href="${path }/board/list?page=${status.current}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">${ status.current }</a></li>
+	
+					</c:if>
+				</c:forEach>
+                
+                <li class="page-item"><a class="page-link" href="${path }/board/list?page=${pageInfo.nextPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&gt;</a></li>
+                <li class="page-item"><a class="page-link" href="${path }/board/list?page=${pageInfo.maxPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&gt;&gt;</a></li>
+            </ul>
+        </div>
 
+        <div class="col-4 text-right">
+            <button class="btn btn-light text-nowrap" onclick="location.href='${path}/board/write?type=REVIEW'">글 쓰기</button>
+        </div>
+    </div>
+	
+	<div class="search row mb-5">
+    	<div class="col-xs-2 col-sm-2">
+        	<select id="searchType" name="searchType" class="form-control">
+            	<option value="title" selected>제목</option>
+                <option value="writer">작성자</option>
+            </select>
+        </div>
+
+        <div class="col-xs-10 col-sm-10">
+            <div class="input-group">
+            	<input type="text" name="searchInput" id="searchInput" class="form-control">
+                <span class="input-group-btn">
+                    <button id="searchBtn" class="btn btn-light text-nowrap">검색</button>
+                </span>
+            </div>
+
+        </div>
+
+	</div>
 </div>
+
+<script>
+	$(document).ready(() => {
+		$("#searchBtn").on("click", () => {
+			var searchType = $("#searchType option:selected").val();
+			var searchVal = $("#searchInput").val();
+			
+			location.href="${path}/board/list?type=REVIEW&searchType="+searchType+"&searchVal="+searchVal+"&isSearch=true";
+		});
+	});
+</script>
 <jsp:include page="/views/common/footer.jsp"/>

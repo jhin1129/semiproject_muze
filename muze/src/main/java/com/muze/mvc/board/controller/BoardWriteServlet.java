@@ -55,6 +55,10 @@ public class BoardWriteServlet extends HttpServlet {
     		
 		board.setBrdWriterNo(1);
 		board.setBrdTitle(title);
+		if(type.equals("REVIEW")) {
+			board.setBrdProNo(Integer.parseInt(mr.getParameter("proNo")));
+		}
+		System.out.println(board.getBrdProNo());
 		board.setBrdContent(content);
 		board.setBrdOriginalFileName(originalFileName);
 		board.setBrdRenamedFileName(filesystemName);

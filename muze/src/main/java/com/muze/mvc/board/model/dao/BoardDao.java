@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.muze.mvc.board.model.vo.Board;
+import com.muze.mvc.board.model.vo.Product;
 import com.muze.mvc.common.util.PageInfo;
 import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
 
@@ -53,8 +54,12 @@ public class BoardDao {
 		List<Board> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		String typequery[] = {"",""};
 		String subquery = "";
-		
+		if(type.equals("REVIEW")) {
+			typequery[0] = " PRO_NAME,";
+			typequery[1] = " JOIN PRODUCT ON (BOARD.BRD_PRO_NO = PRODUCT.PRO_NO)";
+		}
 		switch(searchType) {
 		case "title":
 			subquery = " AND BRD_TITLE LIKE '%" + searchVal + "%'";
@@ -75,6 +80,7 @@ public class BoardDao {
 						+ " BRD_WRITER_NO,"
 						+ " MEMBER_ID,"
 						+ " BRD_PRO_NO,"
+						+ typequery[0]
 						+ " BRD_CATEGORY,"
 						+ " BRD_REP_CONTENT,"
 						+ " BRD_TYPE,"
@@ -91,6 +97,7 @@ public class BoardDao {
 						+ 		" BRD_WRITER_NO,"
 						+ 		" MEMBER_ID,"
 						+ 		" BRD_PRO_NO,"
+						+ 		typequery[0]
 						+ 		" BRD_CATEGORY,"
 						+ 		" BRD_REP_CONTENT,"
 						+ 		" BRD_TYPE,"
@@ -107,6 +114,7 @@ public class BoardDao {
 						+ 					   " BRD_WRITER_NO,"
 						+ 					   " MEMBER_ID,"
 						+ 					   " BRD_PRO_NO,"
+						+ 					   typequery[0]
 						+ 					   " BRD_CATEGORY,"
 						+ 					   " BRD_REP_CONTENT,"
 						+ 					   " BRD_TYPE,"
@@ -115,6 +123,7 @@ public class BoardDao {
 						+ 					   " BRD_RENAMEDFILENAME"
 						+ 				" FROM BOARD"
 						+ 				" JOIN MEMBER ON(BOARD.BRD_WRITER_NO = MEMBER.MEMBER_NO)"
+						+ 				typequery[1]
 						+ 				" WHERE BRD_STATUS = 'Y'"
 						+               " AND BRD_TYPE= ?"    
 						+				subquery
@@ -146,13 +155,15 @@ public class BoardDao {
 				board.setBrdWriterNo(rs.getInt("BRD_WRITER_NO"));
 				board.setBrdWriterId(rs.getString("MEMBER_ID"));
 				board.setBrdProNo(rs.getInt("BRD_PRO_NO"));
+				if(type.equals("REVIEW"))
+					board.setBrdProName(rs.getString("PRO_NAME"));
 				board.setBrdCategory(rs.getString("BRD_CATEGORY"));
 				board.setBrdRepContent(rs.getString("BRD_REP_CONTENT"));
 				board.setBrdType(rs.getString("BRD_STATUS"));
 				board.setBrdStatus(rs.getString("BRD_STATUS"));
 				board.setBrdOriginalFileName(rs.getString("BRD_ORIGINALFILENAME"));
 				board.setBrdRenamedFileName(rs.getString("BRD_RENAMEDFILENAME"));
-				
+				System.out.println(board);
 				list.add(board);
 			}
 		} catch (SQLException e) {
@@ -165,10 +176,15 @@ public class BoardDao {
 		return list;
 	}
 
-	public Board findBoardByNo(Connection connection, int no) {
+	public Board findBoardByNo(Connection connection, int no, String type) {
 		Board board = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		String typequery[] = {"",""};
+		if(type.equals("REVIEW")) {
+			typequery[0] = " PRO_NAME,";
+			typequery[1] = " JOIN PRODUCT ON (BOARD.BRD_PRO_NO = PRODUCT.PRO_NO)";
+		}
 		String query = 
 					" SELECT BRD_NO,"
 				+ 	" BRD_TITLE,"
@@ -178,6 +194,7 @@ public class BoardDao {
 				+ 	" BRD_WRITER_NO,"
 				+ 	" MEMBER_ID,"
 				+ 	" BRD_PRO_NO,"
+				+ 	typequery[0]
 				+ 	" BRD_CATEGORY,"
 				+ 	" BRD_REP_CONTENT,"
 				+ 	" BRD_TYPE,"
@@ -186,6 +203,7 @@ public class BoardDao {
 				+ 	" BRD_RENAMEDFILENAME"
 				+ 	" FROM BOARD"
 				+ 	" JOIN MEMBER ON(BOARD.BRD_WRITER_NO = MEMBER.MEMBER_NO)"
+				+ 	typequery[1]
 				+ 	" WHERE BRD_STATUS = 'Y'"
 				+   " AND BRD_NO= ?";
 		
@@ -207,6 +225,8 @@ public class BoardDao {
 				board.setBrdWriterNo(rs.getInt("BRD_WRITER_NO"));
 				board.setBrdWriterId(rs.getString("MEMBER_ID"));
 				board.setBrdProNo(rs.getInt("BRD_PRO_NO"));
+				if(type.equals("REVIEW"))
+					board.setBrdProName(rs.getString("PRO_NAME"));
 				board.setBrdCategory(rs.getString("BRD_CATEGORY"));
 				board.setBrdRepContent(rs.getString("BRD_REP_CONTENT"));
 				board.setBrdType(rs.getString("BRD_TYPE"));
@@ -235,7 +255,7 @@ public class BoardDao {
 							+ "SYSDATE,"				//BRD_DATE
 							+ "0,"						//BRD_READCOUNT
 							+ "?,"						//BRD_WRITER_NO
-							+ "NULL,"					//BRD_PRO_NO
+							+ "?,"						//BRD_PRO_NO
 							+ "NULL,"					//BRD_CATEGORY
 							+ "NULL,"					//BRD_REP_CONTENT
 							+ "?,"						//BRD_TYPE
@@ -250,9 +270,14 @@ public class BoardDao {
 			pstmt.setString(1, board.getBrdTitle());
 			pstmt.setString(2, board.getBrdContent());
 			pstmt.setInt(3, board.getBrdWriterNo());
-			pstmt.setString(4, board.getBrdType());
-			pstmt.setString(5, board.getBrdOriginalFileName());
-			pstmt.setString(6, board.getBrdRenamedFileName());
+			if(board.getBrdType().equals("REVIEW")) {
+				pstmt.setInt(4, board.getBrdProNo());
+			}else {
+				pstmt.setString(4, "");
+			}
+			pstmt.setString(5, board.getBrdType());
+			pstmt.setString(6, board.getBrdOriginalFileName());
+			pstmt.setString(7, board.getBrdRenamedFileName());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -290,6 +315,7 @@ public class BoardDao {
 		String query = "UPDATE BOARD"
 							 + " SET BRD_TITLE=?,"
 							 + " BRD_CONTENT=?,"
+							 + " BRD_PRO_NO=?,"
 							 + " BRD_ORIGINALFILENAME=?,"
 							 + " BRD_RENAMEDFILENAME=?"
 							 + " WHERE BRD_NO=?";
@@ -299,9 +325,10 @@ public class BoardDao {
 			
 			pstmt.setString(1, board.getBrdTitle());
 			pstmt.setString(2, board.getBrdContent());
-			pstmt.setString(3, board.getBrdOriginalFileName());
-			pstmt.setString(4, board.getBrdRenamedFileName());
-			pstmt.setInt(5, board.getBrdNo());
+			pstmt.setInt(3, board.getBrdProNo());
+			pstmt.setString(4, board.getBrdOriginalFileName());
+			pstmt.setString(5, board.getBrdRenamedFileName());
+			pstmt.setInt(6, board.getBrdNo());
 			
 			result = pstmt.executeUpdate();
 			
@@ -312,6 +339,116 @@ public class BoardDao {
 		}
 		
 		return result;
+	}
+
+	public static List<Product> findProductListByMemberNo(Connection connection, int memberNo) {
+		List<Product> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String query = "SELECT PRODUCT.PRO_NO,"
+				+ " PRO_NAME,"
+				+ " PRO_SIZE,"
+				+ " PRO_PRICE,"
+				+ " PRO_QUANTITY,"
+				+ " PRO_IMG,"
+				+ " PRO_ARTIST_NO,"
+				+ " MEMBER.MEMBER_NAME,"
+				+ " PRO_REG_DATE,"
+				+ " PRO_DESCRIPTION,"
+				+ " PRO_TYPE"
+				+ " FROM PRODUCT"
+				+ " JOIN ORDERS ON (PRODUCT.PRO_NO = ORDERS.PRO_NO)"
+				+ " JOIN MEMBER ON (PRODUCT.PRO_ARTIST_NO = MEMBER.MEMBER_NO)"
+				+ " JOIN MEMBER ON (ORDERS.MEMBER_NO = MEMBER.MEMBER_NO)"
+				+ " WHERE ORDERS.MEMBER_NO = ?";
+
+		
+
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setInt(1, memberNo);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Product product = new Product();
+				
+				product.setProNo(rs.getInt("PRO_NO"));
+				product.setProName(rs.getString("PRO_NAME"));
+				product.setProSize(rs.getString("PRO_SIZE"));
+				product.setProPrice(rs.getInt("PRO_PRICE"));
+				product.setProQuantity(rs.getInt("PRO_QUANTITY"));
+				product.setProImg(rs.getString("PRO_IMG"));
+				product.setProArtistNo(rs.getInt("PRO_ARTIST_NO"));
+				product.setProArtistName(rs.getString("MEMBER_NAME"));
+				product.setProRegDate(rs.getDate("PRO_REG_DATE"));
+				product.setProDescription(rs.getString("PRO_DESCRIPTION"));
+				product.setProType(rs.getString("PRO_TYPE"));
+				
+				list.add(product);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}		
+		
+		return list;
+	}
+
+	public Product findProductByNo(Connection connection, int no) {
+		Product product = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "SELECT PRO_NO,"
+				+ " PRO_NAME,"
+				+ " PRO_SIZE,"
+				+ " PRO_PRICE,"
+				+ " PRO_QUANTITY,"
+				+ " PRO_IMG,"
+				+ " PRO_ARTIST_NO,"
+				+ " MEMBER.MEMBER_NAME,"
+				+ " PRO_REG_DATE,"
+				+ " PRO_DESCRIPTION,"
+				+ " PRO_TYPE"
+				+ " FROM PRODUCT"
+				+ " JOIN MEMBER ON (PRODUCT.PRO_ARTIST_NO = MEMBER.MEMBER_NO)"
+				+ " WHERE PRO_NO = ?";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setInt(1, no);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				product = new Product();
+				
+				product.setProNo(rs.getInt("PRO_NO"));
+				product.setProName(rs.getString("PRO_NAME"));
+				product.setProSize(rs.getString("PRO_SIZE"));
+				product.setProPrice(rs.getInt("PRO_PRICE"));
+				product.setProQuantity(rs.getInt("PRO_QUANTITY"));
+				product.setProImg(rs.getString("PRO_IMG"));
+				product.setProArtistNo(rs.getInt("PRO_ARTIST_NO"));
+				product.setProArtistName(rs.getString("MEMBER_NAME"));
+				product.setProRegDate(rs.getDate("PRO_REG_DATE"));
+				product.setProDescription(rs.getString("PRO_DESCRIPTION"));
+				product.setProType(rs.getString("PRO_TYPE"));;
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return product;
 	}
 
 }

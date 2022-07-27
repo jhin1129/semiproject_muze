@@ -24,7 +24,7 @@
 
         <div>
         	<c:if test="${ board.brdType == 'REVIEW'}">
-            	<h2 style="text-align: center;">리뷰 게시판</h2>
+            	<h2 style="text-align: center;"><a href="${path }/board/list?type=REVIEW">리뷰 게시판</a></h2>
            	</c:if>
         	<c:if test="${ board.brdType == 'FREE'}">
             	<h2 style="text-align: center;"><a href="${path }/board/list?type=FREE">자유 게시판</a></h2>
@@ -35,6 +35,7 @@
 		
 			<form action="${ path }/board/update" method="POST" enctype="multipart/form-data">
 				<input type="hidden" name="no" value="${ board.brdNo }">
+				<input type="hidden" name="proNo" value="${ board.brdProNo }">
 				<input type="hidden" name="originalFileName" value="${ board.brdOriginalFileName }">
 				<input type="hidden" name="renamedFileName" value="${ board.brdRenamedFileName }">
 				<input type="hidden" name="type" value="${ board.brdType }">
@@ -60,7 +61,7 @@
 							<c:if test="${board.brdType == 'REVIEW' }">
 		                        <tr>
 		                            <th class="table-active">리뷰 작품</th>
-		                            <td><button class="btn btn-light py-0">찾아보기</button></td>
+		                            <td><button type="button" class="btn btn-light py-0" id="btnFindProduct">찾아보기</button>${product.proName }</td>
 		                        </tr>
 	                        </c:if>
 	
@@ -161,12 +162,9 @@
 	                        <!-- 이미지 상세내용 -->
 	                        <div class="col-md-8">
 	                            <div class="card-body">
-	                                <h5 class="card-title">Card title</h5>
-	                                <p class="card-text">This is a wider card with supporting text below as a natural
-	                                    lead-in to
-	                                    additional
-	                                    content. This content is a little bit longer.</p>
-	                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+	                                <h5 class="card-title">${product.proName }</h5>
+	                                <p class="card-text">${product.proDescription }</p>
+	                                <p class="card-text"><small class="text-muted">${product.proArtistName }</small></p>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -182,4 +180,14 @@
             <button class="btn btn-light text-nowrap" onclick="location.href='${path}/board/list?type=${board.brdType }'">목록</button>
         </div>
     </div>
+<script>
+	$(document).ready(() => {
+		$("#btnFindProduct").on("click", () => {
+			let url ="${path}/board/findProduct?memberNo=${board.brdWriterNo}&isUpdate=FALSE";
+			let status = "left=500px,top=200px,width=600px,height=600px";
+			
+			open(url,"",status);
+		});
+	});
+</script>
 <jsp:include page="/views/common/footer.jsp"/>

@@ -60,9 +60,6 @@ public class BoardListServlet extends HttpServlet {
 		
 		list = new BoardService().getBoardList(pageInfo, type, searchType, searchVal);
 		System.out.println(listCount);
-		System.out.println(pageInfo.getEndList());
-		System.out.println(pageInfo.getMaxPage());
-		System.out.println(list);
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("list", list);
 		request.setAttribute("type", type);

@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.muze.mvc.board.model.dao.BoardDao;
 import com.muze.mvc.board.model.vo.Board;
+import com.muze.mvc.board.model.vo.Product;
 import com.muze.mvc.common.util.PageInfo;
 import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
 
@@ -33,11 +34,11 @@ public class BoardService {
 		return list;
 	}
 
-	public Board getBoardByNo(int brdNo, boolean hasRead) {
+	public Board getBoardByNo(int brdNo, boolean hasRead, String type) {
 		Board board = null;
 		Connection connection = getConnection();
 		
-		board = new BoardDao().findBoardByNo(connection, brdNo);
+		board = new BoardDao().findBoardByNo(connection, brdNo, type);
 		
 		close(connection);
 		
@@ -95,6 +96,28 @@ public class BoardService {
 		close(connection);
 		return result;
 	}
+
+	public List<Product> getProductListByMemberNo(int memberNo) {
+		List<Product> list = null;
+		Connection connection = getConnection();
+		
+		list = BoardDao.findProductListByMemberNo(connection, memberNo);
+		
+		return list;
+	}
+
+	public Product getProductByNo(int brdProNo) {
+		Product product = null;
+		Connection connection = getConnection();
+		
+		product = new BoardDao().findProductByNo(connection, brdProNo);
+		
+		close(connection);
+		
+		return product;
+	}
+
+
 
 
 }

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.muze.mvc.board.model.service.BoardService;
 import com.muze.mvc.board.model.vo.Board;
+import com.muze.mvc.board.model.vo.Product;
 import com.muze.mvc.common.util.FileRename;
 import com.oreilly.servlet.MultipartRequest;
 
@@ -24,13 +25,18 @@ public class BoardUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Board board = null;
     	int brdNo = Integer.parseInt(request.getParameter("no"));
+    	String type = request.getParameter("type");
     	
-    	
-    	board = new BoardService().getBoardByNo(brdNo, true);
-    	
-    	System.out.println(board);
-    	
+    	board = new BoardService().getBoardByNo(brdNo, true, type);
+    	    	
     	request.setAttribute("board", board);
+    	request.setAttribute("type", type);
+    	if(type.equals("REVIEW")) {
+    		Product product = new Product();
+    		product = new BoardService().getProductByNo(board.getBrdProNo());
+    		request.setAttribute("product", product);
+    	}
+    	
     	request.getRequestDispatcher("/views/community/board/board_update.jsp").forward(request, response);
 	}
 
@@ -54,6 +60,7 @@ public class BoardUpdateServlet extends HttpServlet {
     	
     	board.setBrdNo(Integer.parseInt(mr.getParameter("no")));
     	board.setBrdTitle(mr.getParameter("title"));
+    	board.setBrdProNo(Integer.parseInt(mr.getParameter("proNo")));
     	board.setBrdContent(mr.getParameter("content"));
     	board.setBrdType(mr.getParameter("type"));
     	

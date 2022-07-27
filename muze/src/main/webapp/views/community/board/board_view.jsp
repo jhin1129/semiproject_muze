@@ -31,7 +31,7 @@
 
         <div>
         	<c:if test="${ type == 'REVIEW'}">
-	            <h2 style="text-align: center;">리뷰 게시판</h2>
+	            <h2 style="text-align: center;"><a href="${path }/board/list?type=REVIEW">리뷰 게시판</a></h2>
         	</c:if>
         	<c:if test="${ type == 'FREE'}">
 	            <h2 style="text-align: center;"><a href="${path }/board/list?type=FREE">자유 게시판</a></h2>
@@ -58,6 +58,14 @@
                             <th class="table-active">작성일</th>
                             <td>${board.brdDate }</td>
                         </tr>
+                       	<c:if test="${ type == 'REVIEW'}">
+	                        <tr>
+	                            <th class="table-active">리뷰 작품</th>
+	                            <td>${product.proName }</td>
+	                            <td></td>
+	                            <td></td>
+	                        </tr>
+                        </c:if>
                         <tr>
                             <th class="table-active">첨부파일</th>
                             <td>
@@ -74,7 +82,8 @@
 									--%>
 								</c:if>
 							</td>
-
+							<td></td>
+							<td></td>
                         </tr>
                     </tbody>
 
@@ -87,7 +96,7 @@
                     ${ board.brdContent }
                 </p>
                 <div class="text-right">
-                    <button onclick="location.href='${path}/board/update?no=${ board.brdNo }'" class="btn btn-light py-0">수정</button>
+                    <button onclick="location.href='${path}/board/update?no=${ board.brdNo }&type=${ type }'" class="btn btn-light py-0">수정</button>
                     <button id="btnDelete" class="btn btn-light py-0">삭제</button>
                 </div>
             </div>
@@ -109,12 +118,9 @@
 	                        <!-- 이미지 상세내용 -->
 	                        <div class="col-md-8">
 	                            <div class="card-body">
-	                                <h5 class="card-title">Card title</h5>
-	                                <p class="card-text">This is a wider card with supporting text below as a natural
-	                                    lead-in to
-	                                    additional
-	                                    content. This content is a little bit longer.</p>
-	                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+	                                <h5 class="card-title">${product.proName }</h5>
+	                                <p class="card-text">${product.proDescription }</p>
+	                                <p class="card-text"><small class="text-muted">${product.proArtistName}</small></p>
 	                            </div>
 	                        </div>
 	                    </div>

@@ -24,7 +24,7 @@
 
         <div>
         	<c:if test="${ type == 'REVIEW'}">
-            	<h2 style="text-align: center;">리뷰 게시판</h2>
+            	<h2 style="text-align: center;"><a href="${path }/board/list?type=REVIEW">리뷰 게시판</a></h2>
            	</c:if>
         	<c:if test="${ type == 'FREE'}">
             	<h2 style="text-align: center;"><a href="${path }/board/list?type=FREE">자유 게시판</a></h2>
@@ -33,7 +33,7 @@
         <!-- 후기글 전체 -->
         <div class="mt-5" style="border: 1px solid rgb(238, 233, 233);">
 		
-			<form action="${ path }/board/write?type=${type}" method="POST" enctype="multipart/form-data">
+			<form action="${ path }/board/write?type=${type}" onsubmit="return isProductSelect()" method="POST" enctype="multipart/form-data">
 	            <div>
 	                <table class="table m-0">
 	                    <thead>
@@ -52,12 +52,16 @@
 	                            	<input type="text" name="writer" value="1234" readonly style="border: 0px;">
 	                            </td>
 	                        </tr>
-	
+	                       	<c:if test="${ type == 'REVIEW'}">
 	                        <tr>
 	                            <th class="table-active">리뷰 작품</th>
-	                            <td><button class="btn btn-light py-0">찾아보기</button></td>
+	                            <td>
+	                            	<button type="button" id="btnFindProduct" class="btn btn-light py-0">찾아보기</button>
+	                            	<input type="text" id="product" name="product" readonly style="border: 0px;">
+	                            	<input type="hidden" id="proNo" name="proNo">
+	                            </td>
 	                        </tr>
-	
+							</c:if>
 	                        <tr>
 	                            <th class="table-active">첨부 파일</th>
 	                            <td>
@@ -151,12 +155,9 @@
 	                        <!-- 이미지 상세내용 -->
 	                        <div class="col-md-8">
 	                            <div class="card-body">
-	                                <h5 class="card-title">Card title</h5>
-	                                <p class="card-text">This is a wider card with supporting text below as a natural
-	                                    lead-in to
-	                                    additional
-	                                    content. This content is a little bit longer.</p>
-	                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+	                                <h5 id="proName" class="card-title"></h5>
+	                                <p id="proDescription" class="card-text"></p>
+	                                <p id="proArtistName" class="card-text"><small class="text-muted"></small></p>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -172,4 +173,22 @@
             <button class="btn btn-light text-nowrap" onclick="location.href='${path}/board/list?type=${ type }'">목록</button>
         </div>
     </div>
+    
+<script>
+	function isProductSelect() {
+		if($("#proNo").val()==""){
+			alert("리뷰작품을 선택해주세요");
+			return false;
+		}
+	};
+	$(document).ready(() => {
+		$("#btnFindProduct").on("click", () => {
+			let url ="${path}/board/findProduct?memberNo=6";
+			let status = "left=500px,top=200px,width=600px,height=600px";
+			
+			open(url,"",status);
+		});
+	});
+	
+</script>
 <jsp:include page="/views/common/footer.jsp"/>
