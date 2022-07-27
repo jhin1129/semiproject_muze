@@ -1,12 +1,14 @@
 package com.muze.mvc.board2.model.service;
 
+import static com.muze.mvc.common.jdbc.JDBCTemplate.close;
+import static com.muze.mvc.common.jdbc.JDBCTemplate.getConnection;
+
 import java.sql.Connection;
 import java.util.List;
 
 import com.muze.mvc.board2.model.dao.Board2Dao;
 import com.muze.mvc.board2.model.vo.Board2;
 import com.muze.mvc.common.util.PageInfo;
-import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
 
 public class Board2Service {
 
@@ -44,7 +46,16 @@ public class Board2Service {
 	}
 
 	public int save(Board2 board) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		
+		Connection connection = getConnection();
+		
+		if(board.getBrdNo() != 0) {
+			result = new Board2Dao().updateBoard(connection, board);
+		} else {
+			result = new Board2Dao().insertBoard(connection, board);
+		}
+			
+		return result;
 	}
 }

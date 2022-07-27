@@ -1,7 +1,6 @@
 package com.muze.mvc.board2.controller;
 
 import java.io.IOException;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,15 +14,14 @@ import com.muze.mvc.board2.model.vo.Board2;
 import com.muze.mvc.common.util.FileRename;
 import com.oreilly.servlet.MultipartRequest;
 
-@WebServlet("/Board2WriteServlet")
-public class Board2WriteServlet extends HttpServlet {
+@WebServlet("/support/write")
+public class Board2tWriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public Board2WriteServlet() {
+    public Board2tWriteServlet() {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
 	
 	}
 
@@ -39,24 +37,25 @@ public class Board2WriteServlet extends HttpServlet {
 		
 		MultipartRequest mr = new MultipartRequest(request, path, maxSize, encoding, new FileRename());
 		
+		String brdCategory = mr.getParameter("category");
+		String brdWriterId = mr.getParameter("brdWriterId");
 		String brdTitle = mr.getParameter("brdTitle");
-		String brdWriter = mr.getParameter("brdWriter");
 		String brdContent = mr.getParameter("brdContent");
-		
     	String filesystemName = mr.getFilesystemName("upfile");
     	String originalFileName = mr.getOriginalFileName("upfile");
     	
 		HttpSession session = request.getSession(false);
-		Member loginMemver = (session == null) ? null : (Member) session.getAttribute("loginMember");
+//		Member loginMemver = (session == null) ? null : (Member) session.getAttribute("loginMember");
 		
-		if(loginMember != null) {
+//		if(loginMember != null) {
 		board = new Board2();
 		
+		board.setBrdType(brdCategory);
 		board.setBrdTitle(brdTitle);
-		board.setBrdWriterNo(loginMember.getNo());
+		board.setBrdWriterId(brdWriterId);
 		board.setBrdContent(brdContent);
 		board.setBrdOriginalFileName(originalFileName);
-		board.setBrdRenameFileName(originalFileName);
+		board.setBrdRenameFileName(filesystemName);
 		
 		result = new Board2Service().save(board);
 		
@@ -67,11 +66,11 @@ public class Board2WriteServlet extends HttpServlet {
 				request.setAttribute("msg", "게시글 등록 실패");
 				request.setAttribute("location", "/board/list");
 			}
-		} else {
-			request.setAttribute("msg", "로그인 후 사용할 수 있습니다.");
-			request.setAttribute("location", "/");
-		}	
-	request.getRequestDispatcher("/views/board/msg.jsp").forward(request, response);
+//		} else {
+//			request.setAttribute("msg", "로그인 후 사용할 수 있습니다.");
+//			request.setAttribute("location", "/");
+//		}
+	request.getRequestDispatcher("/views/support/msg.jsp").forward(request, response);
 	}
 
 }

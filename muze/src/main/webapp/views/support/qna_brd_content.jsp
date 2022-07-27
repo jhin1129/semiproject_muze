@@ -42,7 +42,9 @@
             </table>
             <p style="text-align: center; margin-top: 10px;">
                 <button type="button" class="button-white" style="margin: 0;"
-                onclick="location.href='${ path }/board2/list'"><b>목록</b></button>
+                onclick="location.href='${ path }/support/update?type=QNA'"><b>수정</b></button>
+                <button type="button" class="button-white" style="margin: 0;"
+                onclick="location.href='${ path }/support/list?type=QNA'"><b>목록</b></button>
             </p>
         </div>
     </div>

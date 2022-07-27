@@ -196,5 +196,14 @@ public class Board2Dao {
 		}
 		return board;
 	}
+
+	public int updateBoard(Connection connection, Board2 board) {
+		
+		return 0;
+	}
+
+	public int insertBoard(Connection connection, Board2 board) {
+		return 0;
+	}
 	
 }
