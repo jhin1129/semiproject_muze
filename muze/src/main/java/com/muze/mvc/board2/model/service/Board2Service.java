@@ -1,7 +1,6 @@
 package com.muze.mvc.board2.model.service;
 
-import static com.muze.mvc.common.jdbc.JDBCTemplate.close;
-import static com.muze.mvc.common.jdbc.JDBCTemplate.getConnection;
+import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.List;
@@ -56,6 +55,24 @@ public class Board2Service {
 			result = new Board2Dao().insertBoard(connection, board);
 		}
 			
+		return result;
+	}
+
+	public int delete(int no) {
+		int result = 0;
+	
+		Connection connection = getConnection();
+		
+		result = new Board2Dao().updateStatus(connection, no, "N");
+		
+		if(result > 0) {
+			commit(connection);
+		} else {
+			rollback(connection);
+		}
+		
+		close(connection);
+		
 		return result;
 	}
 }

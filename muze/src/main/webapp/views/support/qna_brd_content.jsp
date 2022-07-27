@@ -46,17 +46,22 @@
             </table>
             <p style="text-align: center; margin-top: 10px;">
                 <button type="button" class="button-white" style="margin: 0;"
-<<<<<<< Updated upstream
-                onclick="location.href='${ path }/support/update?type=QNA'"><b>수정</b></button>
+                onclick="location.href='${ path }/support/update?no=${ board.brdNo }'"><b>수정</b></button>
+                <button type="button" class="button-white" id="btnDelete" style="margin: 0;"><b>삭제</b></button>
                 <button type="button" class="button-white" style="margin: 0;"
                 onclick="location.href='${ path }/support/list?type=QNA'"><b>목록</b></button>
-=======
-                onclick="location.href='${ path }/board2/update?type=QNA'"><b>수정</b></button>
-                <button type="button" class="button-white" style="margin: 0;"
-                onclick="location.href='${ path }/board2/list?type=QNA'"><b>목록</b></button>
->>>>>>> Stashed changes
             </p>
         </div>
     </div>
+
+<script>
+	$(document).ready(() => {
+		$("#btnDelete").on("click", () => {
+			if(confirm("정말로 게시글을 삭제하시겠습니까?")) {
+				location.replace("${ path }/support/delete?no=${ board.brdNo }");
+			}
+		});
+	})
+</script>
 
 <jsp:include page="/views/common/footer.jsp"/>

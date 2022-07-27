@@ -205,5 +205,27 @@ public class Board2Dao {
 	public int insertBoard(Connection connection, Board2 board) {
 		return 0;
 	}
+
+	public int updateStatus(Connection connection, int no, String status) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "UPDATE BOARD SET BRD_STATUS=? WHERE BRD_NO=?";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+
+			pstmt.setString(1, status);
+			pstmt.setInt(2, no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 }
