@@ -19,13 +19,15 @@ public class EventServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/views/event/eventpage.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/event/eventpage5.jsp").forward(request, response);
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		// 출석 정보 값을 가져와서 디비에 저장하고 ajax로 다시 화면에 뿌려준다.
 		doGet(request, response);
+		
+		String userId = request.getParameter("userId");
 	}
 
 }
