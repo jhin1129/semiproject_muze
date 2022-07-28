@@ -38,7 +38,7 @@
                 		<c:forEach var="board" items="${ list }">
 	                    <tr>
 	                        <td>${ board.rowNum }</td>
-	                        <td><a href="${ path }/board2/view?no=${ board.brdNo }&&type=${ type }">${ board.brdTitle }</a></td>
+	                        <td><a href="${ path }/support/view?no=${ board.brdNo }&&type=${ type }">${ board.brdTitle }</a></td>
 	                        <td>${ board.brdWriterId }</td>
 	                        <td>${ board.brdDate }</td>
 	                        <td>${ board.brdReadCount }</td>
@@ -54,8 +54,8 @@
             <div class="col-4"></div>
             <div class="col-4">
                 <ul class="pagination justify-content-center">
-                    <li class="page-item"><a class="page-link" href="${ path }/board2/list?page=1&&type=${ type }">&lt;&lt;</a></li>
-                    <li class="page-item"><a class="page-link" href="${ path }/board2/list?page=${ pageInfo.prevPage }&&type=${ type }">&lt;</a></li>
+                    <li class="page-item"><a class="page-link" href="${ path }/support/list?page=1&&type=${ type }">&lt;&lt;</a></li>
+                    <li class="page-item"><a class="page-link" href="${ path }/support/list?page=${ pageInfo.prevPage }&&type=${ type }">&lt;</a></li>
                     
                     <!--  10개 페이지 목록 -->
 					<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
@@ -63,18 +63,18 @@
 		                    <li class="page-item disabled"><a class="page-link" href="#">${ status.current }</a></li>
 						</c:if>
 						<c:if test="${ status.current != pageInfo.currentPage }">
-		                    <li class="page-item"><a class="page-link" href="${ path }/board2/list?page=${ status.current }&&type=${ type }">${ status.current }</a></li>
+		                    <li class="page-item"><a class="page-link" href="${ path }/support/list?page=${ status.current }&&type=${ type }">${ status.current }</a></li>
 					
 						</c:if>
 					</c:forEach>
                     
-                    <li class="page-item"><a class="page-link" href="${ path }/board2/list?page=${ pageInfo.nextPage }&&type=${ type }">&gt;</a></li>
-                    <li class="page-item"><a class="page-link" href="${ path }/board2/list?page=${ pageInfo.maxPage }&&type=${ type }">&gt;&gt;</a></li>
+                    <li class="page-item"><a class="page-link" href="${ path }/support/list?page=${ pageInfo.nextPage }&&type=${ type }">&gt;</a></li>
+                    <li class="page-item"><a class="page-link" href="${ path }/support/list?page=${ pageInfo.maxPage }&&type=${ type }">&gt;&gt;</a></li>
                 </ul>
             </div>
 
             <div class="col-4 text-right">
-                <button class="btn btn-light text-nowrap">글 쓰기</button>
+                <button class="btn btn-light text-nowrap" onclick="location.href='${ path }/support/write?type=NOTICE'">글 쓰기</button>
             </div>
         </div>
 
