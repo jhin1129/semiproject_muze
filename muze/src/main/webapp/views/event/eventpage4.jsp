@@ -30,24 +30,36 @@
           
           <script>
          	var calendar = null;
-            $(document).ready(function() {
+         	$(document).ready(function() {
             var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-            	 headerToolbar: {          
-            		 left: 'title',             
-            		 right: 'custom'},
-            		 
-            		 customButtons: { 
-            		        custom: {
-            		          text: '출석 체크',
-            		          id: 'check',
-            		          click: function() {	
-            	              	allSave();
-            		          }
-            		        }
-            		    },
+            
+            calendar = new FullCalendar.Calendar(calendarEl, {
+            	initialView: 'dayGridMonth',
+            	selectable : true,
+            	headerToolbar: {   
+            		left: 'title',             
+            		right: 'addEventButton'},
+            		  customButtons: {
+            	            addEventButton: {
+            	              text: '출석 체크',
+            	              click: function () {
+            	                var dateStr = prompt("Enter a date in YYYY-MM-DD format");
+            	                var date = new Date(dateStr + "T00:00:00"); // will be in local time
+            	                if (!isNaN(date.valueOf())) {
+            	                  // valid?
+            	                  calendar.addEvent({
+            	                    title: "dynamic event",
+            	                    start: date,
+            	                    allDay: true,
+            	                  });
+            	                  alert("출석 체크 완료");
+            	                } else {
+            	                  alert("출석 체크 실패");
+            	                }
+            	              },
+            	            },
+            	          },
             	
-              initialView: 'dayGridMonth',
               
               events: [
                 {
@@ -58,14 +70,26 @@
                 
               ],
               eventContent: {
-            	  html: `<center><div><img src="${path}/resources/images/event/resizecalendar.png" class="event-icon" />\</div><center>`,
+            	  html: `<center><div><img src="${path}/resources/images/event/check.png" class="event-icon" />\</div><center>`,
               },
-              
+              eventSource: [{
+            	  url: '/event',
+            	  type: 'GET',
+            	  dataType: "JSON",
+            	  success: function (data) { },
+            	  error: function() {
+            	  	alert('출석 정보를 가져오지 못했습니다.');
+            	  }
+              }]
             });
             calendar.render();
          });
-         }
-            
+         
+        function allsave() {
+        var allEvent = calendar.getEvents();
+        console.log(allEvent);
+        }
+        
         </script>
         <div class="mt-3"><h6 style="text-align: center;">매일 출석 하고 100 마일리지 가져가세요!</h6></div>
         <div class="mt-4" id='calendar'></div>

@@ -29,42 +29,28 @@
         <div class="container calendar-container">
           
           <script>
-            $(document).ready(function() {
+         	var calendar = null;
+         	$(document).ready(function() {
+            
+            var containerEl = document.getElementById('external-events');
             var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-            	 headerToolbar: {          
-            		 left: 'title',             
-            		 right: 'custom'},
+            calendar = new FullCalendar.Calendar(calendarEl, {
+            	initialView: 'dayGridMonth',
+            	selectable : true,
+            	headerToolbar: {   
+            		left: 'title',             
+            		right: 'custom'},
             		 
-            		 customButtons: { 
-            		        custom: {
-            		          text: '출석 체크',
-            		          id: 'check',
-            		          click: function() {	
-            		        	  if (id == '') {
-      								alert("로그인 하세요");
-      								href="${ pageContext.request.contextPath }/views/footer/footerlink1.jsp"
-      								return;
-      							}
-            		        	  $.ajax({
-      								type : "post",
-      								url : "attendAdd",
-      								async : false,
-      								dataType : "json",
-      								data : {
-      									"id" : id
-      								},
-      								success : function(data) {
-
-      									if (data.result == 1) {
-      										alert("출석체크 완료하였습니다.")
-
-      										$("#calendar").fullCalendar('destroy');
-            		          }
+            	customButtons: { 
+            		custom: {
+            		    text: '출석 체크',
+            		    id: 'check',
+            		    click: function() {	
+            	          	allSave();
             		        }
-            		    },
+            		    }
+            		},
             	
-              initialView: 'dayGridMonth',
               
               events: [
                 {
@@ -77,9 +63,24 @@
               eventContent: {
             	  html: `<center><div><img src="${path}/resources/images/event/resizecalendar.png" class="event-icon" />\</div><center>`,
               },
+              eventSource: [{
+            	  url: '/event',
+            	  type: 'GET',
+            	  dataType: "JSON",
+            	  success: function (data) { },
+            	  error: function() {
+            	  	alert('출석 정보를 가져오지 못했습니다.');
+            	  }
+              }]
             });
             calendar.render();
          });
+         
+        function allsave() {
+        var allEvent = calendar.getEvents();
+        console.log(allEvent);
+        }
+        
         </script>
         <div class="mt-3"><h6 style="text-align: center;">매일 출석 하고 100 마일리지 가져가세요!</h6></div>
         <div class="mt-4" id='calendar'></div>
