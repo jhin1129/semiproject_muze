@@ -7,15 +7,17 @@
 
 <jsp:include page="/views/common/header.jsp"/>
 <link rel="stylesheet" href="${path}/resources/css/support/support.css">
+<link rel="stylesheet" href="${path}/resources/css/adminpage/admin.css">
+
 <!-- 내용 전체 컨테이너 -->
 <div class="container my-5">
 
     <div>
-			<h3 style="text-align: left; margin-left: 60px; margin-bottom: 20px;">1 :1 문의</h3>
+		<h3 style="text-align: left; margin-left: 60px; margin-bottom: 20px;">공지사항</h3>
 	</div>
 	
     <div class="notice-content" style="height: 100%;">
-
+		<input type="hidden" name="brdNo" value=${ board.brdNo }>
         <table class="table" style="border: 1px; width: 1000px; height: 100%; margin: auto; font-size: 1em;">
         
             <tr>
@@ -34,7 +36,17 @@
             </tr>
             <tr>
             	<td><b>첨부파일</b></td>
-            	<td colspan="3">${ board.brdOriginalFileName }</td>
+            	<td colspan="3">
+            	<c:if test="${ empty board.brdOriginalFileName }">
+            		<span>-</span>
+            	</c:if>
+            	<c:if test="${ not empty board.brdOriginalFileName }">
+					<img src="${ path }/resources/images/board/file.png" width="20px" height="20px">
+					<a href="javascript:" id="fileDown">
+					<span>${ board.brdOriginalFileName }</span>
+					</a>
+				</c:if>
+            	</td>
             </tr>                
             <tr>
                 <td colspan="4" style="height: 76%;">
@@ -46,7 +58,7 @@
         </table>
         <p style="text-align: center; margin-top: 10px;">
             <button type="button" class="button-white" style="margin: 0;" 
-            onclick="location.href='${ path }/support/update?no=${ board.brdNo }&type=NOTICE'"><b>수정</b></button>
+            onclick="location.href='${ path }/support/update?brdNo=${ board.brdNo }&type=NOTICE'"><b>수정</b></button>
             <button type="button" class="button-white" id="btnDelete" style="margin: 0;"><b>삭제</b></button>
             <button type="button" class="button-white" style="margin: 0;" 
             onclick="location.href='${ path }/support/list?type=NOTICE'"><b>목록</b></button>
@@ -58,10 +70,14 @@
 $(document).ready(() => {
 	$("#btnDelete").on("click", () => {
 		if(confirm("정말로 게시글을 삭제하시겠습니까?")) {
-			location.replace("${ path }/support/delete?no=${ board.brdNo }&type=NOTICE");
+			location.replace("${ path }/support/delete?brdNo=${ board.brdNo }&type=${ type }");
 		}
 	});
-})
+	
+	$("#fileDown").on("click", () => {
+		location.assign("${ path }/support/filedown?oname=${ board.brdOriginalFileName }&rname=${ board.brdRenamedFileName }")
+	});
+});
 </script>
 
 

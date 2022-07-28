@@ -21,21 +21,21 @@ public class Board2ViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Board2 board = null;
 
-		int no = Integer.parseInt(request.getParameter("no"));
+		int brdNo = Integer.parseInt(request.getParameter("brdNo"));
 		
 		String type = request.getParameter("type");
 		
-		board = new Board2Service().getBoardByNo(no);
+		board = new Board2Service().getBoardByNo(brdNo, type);
 		
 		request.setAttribute("board", board);
 		
 		request.setAttribute("type", type);
 		
-		if(type.equals("NOTICE")) {
+//		if(type.equals("NOTICE")) {
 			request.getRequestDispatcher("/views/support/notice_brd_content.jsp").forward(request, response);
-		} else if(type.equals("QNA")) {
-			request.getRequestDispatcher("/views/support/qna_brd_content.jsp").forward(request, response);
-		}
+//		} else if(type.equals("QNA")) {
+//			request.getRequestDispatcher("/views/support/qna_brd_content.jsp").forward(request, response);
+//		}
 		
 	}
 	

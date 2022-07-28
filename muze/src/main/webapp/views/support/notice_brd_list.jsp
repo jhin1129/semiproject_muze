@@ -7,6 +7,7 @@
 
 <jsp:include page="/views/common/header.jsp"/>
 <link rel="stylesheet" href="${path}/resources/css/support/support.css">
+<link rel="stylesheet" href="${path}/resources/css/adminpage/admin.css">
 
     <!-- 내용 전체 컨테이너 -->
     <div class="container my-5">
@@ -39,7 +40,7 @@
                 		<c:forEach var="board" items="${ list }">
 	                    <tr>
 	                        <td>${ board.rowNum }</td>
-	                        <td><a href="${ path }/support/view?no=${ board.brdNo }&&type=${ type }">${ board.brdTitle }</a></td>
+	                        <td><a href="${ path }/support/view?brdNo=${ board.brdNo }&&type=${ type }">${ board.brdTitle }</a></td>
 	                        <td>${ board.brdWriterId }</td>
 	                        <td>${ board.brdDate }</td>
 	                        <td>${ board.brdReadCount }</td>

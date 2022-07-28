@@ -33,11 +33,11 @@ public class Board2Service {
 		return list;
 	}
 
-	public Board2 getBoardByNo(int no) {
+	public Board2 getBoardByNo(int brdNo, String type) {
 		Board2 board = null;
 		Connection connection = getConnection();
 		
-		board = new Board2Dao().findBoardByNo(connection, no);
+		board = new Board2Dao().findBoardByNo(connection, brdNo, type);
 		
 		close(connection);
 		
@@ -65,12 +65,12 @@ public class Board2Service {
 		return result;
 	}
 
-	public int delete(int no, String type) {
+	public int delete(int brdNo, String type) {
 		int result = 0;
 	
 		Connection connection = getConnection();
 		
-		result = new Board2Dao().updateStatus(connection, no, type, "N");
+		result = new Board2Dao().updateStatus(connection, brdNo, type, "N");
 		
 		if(result > 0) {
 			commit(connection);

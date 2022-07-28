@@ -136,7 +136,7 @@ public class Board2Dao {
 		return list;
 	}
 
-	public Board2 findBoardByNo(Connection connection, int no) {
+	public Board2 findBoardByNo(Connection connection, int brdNo, String type) {
 		Board2 board = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -164,7 +164,7 @@ public class Board2Dao {
 		try {
 			pstmt = connection.prepareStatement(query);
 			
-			pstmt.setInt(1, no);
+			pstmt.setInt(1, brdNo);
 			
 			rs = pstmt.executeQuery();
 			
@@ -200,7 +200,7 @@ public class Board2Dao {
 	public int updateBoard(Connection connection, Board2 board) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "UPDATE BOARD SET BRD_TITLE=?,BRD_CONTENT=?,BRD_ORIGINALFILENAME=?,BRD_RENAMEDFILENAME=? WHERE NO=?";
+		String query = "UPDATE BOARD SET BRD_TITLE=?,BRD_CONTENT=?,BRD_ORIGINALFILENAME=?,BRD_RENAMEDFILENAME=? WHERE BRD_NO=?";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
@@ -209,6 +209,7 @@ public class Board2Dao {
 			pstmt.setString(2, board.getBrdContent());
 			pstmt.setString(3, board.getBrdOriginalFileName());
 			pstmt.setString(4, board.getBrdRenamedFileName());
+			pstmt.setInt(5, board.getBrdNo());
 			
 			result = pstmt.executeUpdate();
 			
@@ -259,7 +260,7 @@ public class Board2Dao {
 		return result;
 	}
 
-	public int updateStatus(Connection connection, int no, String type, String status) {
+	public int updateStatus(Connection connection, int brdNo, String type, String status) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = "UPDATE BOARD SET BRD_STATUS=? WHERE BRD_NO=?";
@@ -268,7 +269,7 @@ public class Board2Dao {
 			pstmt = connection.prepareStatement(query);
 
 			pstmt.setString(1, status);
-			pstmt.setInt(2, no);
+			pstmt.setInt(2, brdNo);
 			
 			result = pstmt.executeUpdate();
 			
