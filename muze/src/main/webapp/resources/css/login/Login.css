@@ -341,7 +341,7 @@
 /* 회원가입 완료 */
 .join_ok_box .join_ok_tit {
   text-align: center;
-  background: url(../../images/login/img_join_ok.png) no-repeat center 0;
+  background: url("../../images/login/img_join_ok.png") no-repeat center 0;
   padding: 50px 0 0 0;
   margin-top: 10px;
 }
@@ -646,7 +646,7 @@
   border: none;
 }
 .join_base_wrap .member_cont h3 {
-  padding: 40px 0 20px;
+  padding: 0px 0 20px;
   font-size: 18px;
   color: #222222;
 }
@@ -664,6 +664,7 @@
 .join_type_box .type_select_sec {
   padding: 40px 0 0px 0;
   border-top: 1px solid #1c1c1c;
+  font-size: 13px;
 }
 .join_type_box .type_select_sec .form_element {
   display: block;
@@ -674,6 +675,12 @@
 .join_type_box .type_select_sec li {
   display: inline-block;
   padding: 0 13px;
+}
+
+.base_info_sec .checkDuplicate {
+  margin: 0 0 0 5px;
+  padding: 5px 10px 5px 10px;
+  border: 1px solid #989898;
 }
 
 .base_info_box h3 {
@@ -716,9 +723,22 @@
   border-bottom: 1px solid #dcdcdc;
 }
 
-.base_info_sec table input[type="text"] {
+.member_email input[type="text"] {
   width: 380px;
 }
+
+.address_phone input[type="text"] {
+  width: 380px;
+}
+
+.address_input input[type="text"] {
+  width: 380px;
+}
+
+.member_name input[type="text"] {
+  width: 380px;
+}
+
 .base_info_sec table .form_element {
   display: block;
   margin-top: 5px;
@@ -939,7 +959,7 @@ td {
   margin: 0 auto;
   padding: 0 0 0 18px;
   color: #ab3e55;
-  background: url(../../images/login/icon_caution02.png) no-repeat 0px 3px;
+  background: url("../../images/login/icon_caution02.png") no-repeat 0px 3px;
 }
 .join_agreement_cont .agreement_box {
   overflow-x: hidden;
@@ -1063,6 +1083,11 @@ td {
 .member_address .address_postcode {
   overflow: hidden;
 }
+
+.memberaddress .address_phone {
+  overflow: hidden;
+}
+
 .member_address .address_postcode input {
   float: left;
   width: 190px;
@@ -1408,7 +1433,7 @@ td {
   text-align: left;
   font-weight: normal;
   font-size: 13px;
-  background: url(../../images/login/icon_warning.png) no-repeat left 8px;
+  background: url("../../images/login/icon_warning.png") no-repeat left 8px;
 }
 
 /* checkbox */
@@ -1426,7 +1451,7 @@ input[type="checkbox"] {
 }
 
 input[type="checkbox"]:checked + label {
-  background-image: url(../../images/login/check_on.png);
+  background-image: url("../../images/login/check_on.png");
 }
 
 input[type="checkbox"] + label {
@@ -1438,29 +1463,47 @@ input[type="checkbox"] + label {
   min-width: 20px;
   min-height: 20px;
   background-repeat: no-repeat;
-  background-image: url(../../images/login/check_off.png);
+  background-image: url("../../images/login/check_off.png");
 }
 
 .form_element_join label:hover {
-  background: url(../../images/login/check_over.png) no-repeat 1px;
+  background: url("../../images/login/check_over.png") no-repeat 1px;
 }
 
-input[type="radio"] {
+.login_input input[type="radio"] {
   height: 13px;
   display: none;
   vertical-align: top;
 }
 
-input[type="radio"] + label {
+.login_input input[type="radio"] + label {
   min-width: 13px;
   padding: 0 0 0 22px;
-  background: url(../../images/login/radio_off_small.png) no-repeat 1px 50%;
+  background: url("../../images/login/radio_off_small.png") no-repeat 1px 50%;
 }
 
-input[type="radio"]:checked + label {
+.login_input input[type="radio"]:checked + label {
   min-width: 13px;
   padding: 0 0 0 22px;
-  background: url(../../images/login/radio_on_small.png) no-repeat 1px 50%;
+  background: url("../../images/login/radio_on_small.png") no-repeat 1px 50%;
+}
+
+.find_id_box input[type="radio"] {
+  height: 13px;
+  display: none;
+  vertical-align: top;
+}
+
+.find_id_box input[type="radio"] + label {
+  min-width: 13px;
+  padding: 0 0 0 22px;
+  background: url("../../images/login/radio_off_small.png") no-repeat 1px 50%;
+}
+
+.find_id_box input[type="radio"]:checked + label {
+  min-width: 13px;
+  padding: 0 0 0 22px;
+  background: url("../../images/login/radio_on_small.png") no-repeat 1px 50%;
 }
 
 /* text type */
@@ -1493,5 +1536,18 @@ textarea {
   resize: none;
 }
 
-/* input[type="file"] {
-} */
+.type_select_sec input[type="radio"] {
+  display: none;
+}
+
+.type_select_sec input[type="radio"] + label {
+  background-color: #f5f5f5;
+  padding: 6px 12px;
+  border-radius: 100px;
+}
+
+.type_select_sec input[type="radio"]:checked + label {
+  background: none;
+  background-color: #221714;
+  color: white;
+}

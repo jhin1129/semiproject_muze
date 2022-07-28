@@ -18,7 +18,7 @@
 		<div class="col-12">
  			<div class="location_wrap hidden">
                 <div class="location_cont">
-                    <em><a href="#" class="local_home">HOME</a> > 회원가입 > 약관동의</em>
+                    <em><a href="${ path }/muze" class="local_home">HOME</a> > 회원가입 > 약관동의</em>
                 </div>
             </div>
             <!-- //location_wrap -->
@@ -37,54 +37,57 @@
                 </div>
               </div>
             </div>
-                <!-- //member_tit -->
-                <!-- <div class="member_cont">
-                    <form id="formTerms" name="formTerms" method="post" action="../member/join.php">
-                        <input type="hidden" name="token" value="MTY1NzYxMDEyODYwMjk4MzcyMzk2ODk1ODgwMDg1ODkxNzczOTkxNDg4">
-                        <input type="hidden" name=mode value="chkRealName">
-                        <input type="hidden" name=rncheck value="none">
-                        <input type="hidden" name=nice_nm value="">
-                        <input type="hidden" name=pakey value="">
-                        <input type="hidden" name=birthday value="">
-                        <input type="hidden" name=mobile value="">
-                        <input type="hidden" name=mobileService value="">
-                        <input type="hidden" name=dupeinfo value="">
-                        <input type="hidden" name=foreigner value="">
-                        <input type="hidden" name=adultFl value="">
-                        <input type="hidden" name=phone value="">
-                        <input type="hidden" name=type>
-                        </div> -->
-                    </div>
-                </div>
+          </div>
+        </div>
 
     <div class="row">
       <div class="col"></div>
         <div class="col-8">
-            <div class="join_agreement_cont">
-                <h3>약관동의</h3>
-              <div class="join_agreement_box">            
-                <div class="form_element_join" id="termsAgreeDiv">            
-                  <input type="checkbox" id="termsAgree" name="under14ConsentFl">            
-                    <label class="check" for="termsAgree"> <strong>(필수)</strong><em> 만 14세 이상입니다</em></label>            
-                </div>
-                <div class="join_agreement_box">
-                  <div class="form_element_join">
-                      <input type="checkbox" id="allAgree">
-                        <label class="check" for="allAgree"> <em>muzé의 모든 약관을 확인하고 전체 동의합니다.</em></label>
-                          <span>(전체동의, 선택항목도 포함됩니다.)</span>
-                  </div>
-                </div>
+<!-- //member_tit -->
+		<div class="member_cont">
+			<form id="formTerms" name="formTerms" method="post" action="${ path }/member/join_agreement">
+				<input type="hidden" name="token" value="#">
+				<input type="hidden" name=mode value="chkRealName">
+				<input type="hidden" name=rncheck value="none">
+				<input type="hidden" name=nice_nm value="">
+				<input type="hidden" name=pakey value="">
+				<input type="hidden" name=birthday value="">
+				<input type="hidden" name=mobile value="">
+				<input type="hidden" name=mobileService value="">
+				<input type="hidden" name=sex value="">
+				<input type="hidden" name=dupeinfo value="">
+				<input type="hidden" name=foreigner value="">
+				<input type="hidden" name=adultFl value="">
+				<input type="hidden" name=phone value="">
+				<input type="hidden" name=type>
 
-                <!-- //join_agreement_box -->
-                <div class="join_agreement_box js_terms_view">
-                  <div class="form_element_join">
-                    <input type="checkbox" id="termsAgree1" name="agreementInfoFl" class="require" >
-                      <label class="check_s" for="termsAgree1"><strong>(필수)</strong><em> 이용약관</em></label>
-                        <span><a href="약관링크넣기" target="_blank"><em>전체보기</em></a></span>
-                    </div>
-                    <div class="agreement_box">
-                        제1조(목적)<br />
-                        <br />
+				<h3>약관동의</h3>
+				<div class="join_agreement_cont">
+            
+                    <div class="join_agreement_box">            
+                       <div class="form_element_join" id="termsAgreeDiv">            
+                         <input type="checkbox" id="termsAgree" name="under14ConsentFl">            
+                         <label class="check" for="termsAgree"> <strong>(필수)</strong><em>만 14세 이상입니다</em></label>            
+                      </div>            
+                    </div>            
+					<div class="join_agreement_box">
+						<div class="form_element_join">
+							<input type="checkbox" id="allAgree">
+							<label class="check" for="allAgree"> <em>muzé의 모든 약관을 확인하고 전체 동의합니다.</em></label>
+							<span>(전체동의, 선택항목도 포함됩니다.)</span>
+						</div>
+					</div>
+					<!-- //join_agreement_box -->
+
+					<div class="join_agreement_box js_terms_view">
+						<div class="form_element_join">
+							<input type="checkbox" id="termsAgree1" name="agreementInfoFl" class="require" >
+							<label class="check_s" for="termsAgree1"><strong>(필수)</strong> 이용약관</label>
+							<span><a href=#" target="_blank">전체보기</a></span>
+						</div>
+						<div class="agreement_box">
+							제1조(목적)<br />
+<br />
 표준약관 제10023호<br />
 <br />
 이 약관은 (주)한국아트체인 아트샵 회사(전자거래 사업자)가 운영하는 muzé 사이버 몰(이하 "몰"이라 한다)에서 제공하는 인터넷 관련 서비스(이하 "서비스"라 한다)를 이용함에 있어 사이버몰과 이용자의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.<br />
@@ -300,95 +303,94 @@
 부칙<br />
 <br />
 1. 이 약관은 0000년 00월 00일부터 적용됩니다.
-
-					  </div>
-					<!-- //agreement_box -->
-				  </div>
-				<!-- //join_agreement_box -->
-                <div class="join_agreement_box js_terms_view">
-				  <div class="form_element_join">
-					  <input type="checkbox" id="termsAgree2" name="privateApprovalFl" class="require" >
-						<label class="check_s" for="termsAgree2"><strong>(필수)</strong><em> 개인정보 수집 및 이용</em> </label>
-						<span><a href="../service/agreement.php?code=001003" target="_blank">전체보기</a></span>
-				  </div>
-				<div class="agreement_box">
-					1. - 목적 : 이용자 식별 및 본인여부 확인<br />
-                       - 항목 : 이름, 아이디, 비밀번호<br />
-                       - 보유 및 이용기간 : 회원탈퇴 후 5일까지<br />
-                        <br />
-                    2. - 목적 : 민원 등 고객 고충처리<br />
-                       - 항목 : 이메일, 휴대전화번호<br />
-                       - 보유 및 이용기간 : 회원탈퇴 후 5일까지<br />
-                        <br />
-                    3. - 목적 : 만 14세 미만 아동 확인<br />
-                       - 항목 : 법정 생년월일<br />
-                       - 보유 및 이용기간 : 회원탈퇴 후 5일까지
-				</div>
-				  <!-- //agreement_box -->
-				</div>
-				<!-- //join_agreement_box -->
-
-			
-			<div class="join_agreement_box js_terms_view">
-				<div class="form_element_join">
-					<input type="checkbox" id="termsAgree3" name="">
-					<label class="check_s" for="termsAgree3"><strong class="choice">(선택)</strong><em> 개인정보 수집 및 이용</em></label>
-					<span><a href="#" target="_blank">전체보기</a></span>
-				</div>
-				  <div class="agreement_choice_box">
-					<table summary="(선택)개인정보 수집 및 이용 내용입니다." border="0" cellpadding="0" cellspacing="0">
-					  <colgroup>
-						<col width="10px">
-						<col width="300px">
-					  </colgroup>
-						<thead>
-						  <tr>
-							<th>선택</th>
-							<th>주문/결제 및 배송서비스</th>
-						  </tr>
-						</thead>
-						  <tbody>
-							<tr>
-							  <td>
-								<div class="form_element_join">
-								  <input type="checkbox" id="privateApprovalOption_7" name="privateApprovalOptionFl[7]">
-								  <label class="check_s" for="privateApprovalOption_7">선택</label>
-								</div>
-							  </td>
-							<td>- 수집/이용목적 : 주문/결제 시 상품 배송<br />
-                              - 수집항목 : 구매자정보, 상품 구매/취소/반품/교환/환불 정보, 수령인 정보<br />
-                              - 보유/이용기간 : 회원탈퇴 후 5일까지</td>
-							</tr>
-                          </tbody>
-						</table>
-						<!--  -->
 						</div>
+						<!-- //agreement_box -->
 					</div>
-					<!--  -->
 					<!-- //join_agreement_box -->
 
-					<div class="important_check_box">
-					  <strong class="important_check dn">이용약관과 개인정보 수집 및 이용에 대한 안내 모두 동의해주세요.</strong>
+					<div class="join_agreement_box js_terms_view">
+						<div class="form_element_join">
+							<input type="checkbox" id="termsAgree2" name="privateApprovalFl" class="require" >
+							<label class="check_s" for="termsAgree2"><strong>(필수)</strong> 개인정보 수집 및 이용 </label>
+							<span><a href="#" target="_blank">전체보기</a></span>
+						</div>
+						<div class="agreement_box">
+							1. - 목적 : 이용자 식별 및 본인여부 확인<br />
+    - 항목 : 이름, 아이디, 비밀번호<br />
+    - 보유 및 이용기간 : 회원탈퇴 후 5일까지<br />
+<br />
+2. - 목적 : 민원 등 고객 고충처리<br />
+    - 항목 : 이메일, 휴대전화번호<br />
+    - 보유 및 이용기간 : 회원탈퇴 후 5일까지<br />
+<br />
+3. - 목적 : 만 14세 미만 아동 확인<br />
+    - 항목 : 법정 생년월일<br />
+    - 보유 및 이용기간 : 회원탈퇴 후 5일까지
+						</div>
+						<!-- //agreement_box -->
 					</div>
-				  </div>
-				<!-- //join_agreement_cont -->
+					<!-- //join_agreement_box -->
 
-				    <!-- //join_certify_box -->
-			      <div class="btn_center_box">
-				<button type="button" id="btnPrevStep" class="btn_member_prev">이전단계</button>
-				<button type="button" id="btnNextStep" class="btn_member_next">다음단계</button>
-			  </div>
-			<!-- //btn_member_sec -->
-		  </form>
+					<!--  -->
+					<div class="join_agreement_box js_terms_view">
+						<div class="form_element_join">
+							<input type="checkbox" id="termsAgree3" name="">
+							<label class="check_s" for="termsAgree3"><strong class="choice">(선택)</strong> 개인정보 수집 및 이용 </label>
+							<span><a href="#" target="_blank">전체보기</a></span>
+						</div>
+						<div class="agreement_choice_box">
+							<!--  -->
+							<table summary="(선택)개인정보 수집 및 이용 내용입니다." border="0" cellpadding="0" cellspacing="0">
+								<colgroup>
+									<col width="10px">
+									<col width="300px">
+								</colgroup>
+								<thead>
+									<tr>
+										<th>선택</th>
+										<th>주문/결제 및 배송서비스</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<div class="form_element_join">
+												<input type="checkbox" id="privateApprovalOption_7" name="privateApprovalOptionFl[7]">
+												<label class="check_s" for="privateApprovalOption_7">선택</label>
+											</div>
+										</td>
+										<td>- 수집/이용목적 : 주문/결제 시 상품 배송<br />
+- 수집항목 : 구매자정보, 상품 구매/취소/반품/교환/환불 정보, 수령인 정보<br />
+- 보유/이용기간 : 회원탈퇴 후 5일까지</td>
+									</tr>
+								</tbody>
+							</table>
+							<!--  -->
+						</div>
+					</div>
+					<!-- //join_agreement_box -->
+					<div class="important_check_box">
+						<strong class="important_check dn">이용약관과 개인정보 수집 및 이용에 대한 안내 모두 동의해주세요.</strong>
+					</div>
+				</div>
+				<!-- //join_agreement_cont -->
+				<!-- //join_certify_box -->
+
+				<div class="btn_center_box">
+					<button type="button" id="btnPrevStep" class="btn_member_prev">이전단계</button>
+					<button type="button" id="btnNextStep" class="btn_member_next">다음단계</button>
+				</div>
+				<!-- //btn_member_sec -->
+			</form>
 		</div>
-		<!-- //member_cont -->                 
-        </div>
-      <div class="col"></div>
     </div>
+      <div class="col"></div>
   </div>
 </div>
 
 <script type="text/javascript">
+ 	var $btn_center_box;
+
 	$(document).ready(function () {
 		var body = $('body'), $formTerms = $('#formTerms');
 
@@ -449,6 +451,18 @@
 		});
 
 		/*
+		 * 버튼 이벤트
+		 */
+		 $('#btnPrevStep').click(function (e) {
+				e.preventDefault();
+				location.href = '${path}/member/join_method';
+			});
+			$('#btnNextStep').click(function (e) {
+				e.preventDefault();
+				location.href = '${path}/member/join';
+			});
+		
+		/*
 		 * 전체 동의 체크박스 이벤트
 		 */
 		$('#allAgree', $formTerms).change(function (e) {
@@ -507,5 +521,7 @@
         }
 	});
 </script>
+
+
 
 <jsp:include page="/views/common/footer.jsp"/>

@@ -32,14 +32,14 @@
                     <!-- 회원 로그인 -->
                     <div class="login_input_sec">
                     	<div>
-                        	<input type="text" id="loginId" name="loginId" placeholder="아이디" required="true" aria-required="true">
-                        	<input type="password" id="loginPwd" name="loginPwd" placeholder="비밀번호" required="true" aria-required="true">
+                        	<input type="text" id="loginId" name="loginId" placeholder="아이디" value="${ empty cookie.saveId ? '' : cookie.saveId.value }" aria-required="true" required>
+                        	<input type="password" id="loginPwd" name="loginPwd" placeholder="비밀번호"  aria-required="true" required>
                       	</div>
                     	<button type="submit" onclick="return loginCheck()" >로그인</button>
                     </div>
                     <div class="id_chk">
                     	<span class="form_element">
-                        	<input type="checkbox" id="saveId" name="saveId" value="y" checked="">
+                        	<input type="checkbox" id="saveId" name="saveId" ${ empty cookie.saveId ? "" : "checked" } >
                             <label for="saveId" class="">아이디 저장</label>
                       	</span>
                     		<p class="dn js_caution_msg1" style="display :none" >아이디, 비밀번호가 일치하지 않습니다. 다시 입력해 주세요.</p>

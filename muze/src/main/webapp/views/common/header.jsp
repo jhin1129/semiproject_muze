@@ -58,8 +58,8 @@
 	      </c:if>
 	      
 	      <c:if test="${ not empty loginMember }">
-		        <a class="mr-4 text-nowrap" href="${ path }/member/logout">로그아웃</a>
-		        <a class="mr-4 text-nowrap" href="#">마이페이지</a>
+		        <a class="mr-4 text-nowrap" onclick="location.replace('${ path }/member/logout')">로그아웃</a>
+		        <a class="mr-4 text-nowrap" href="#" >마이페이지</a>
 		        <a href="#" class="me-5 align-items-center mb-1">
 		          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-cart2"
 		            viewBox="0 0 16 16">

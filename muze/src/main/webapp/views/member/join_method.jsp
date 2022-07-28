@@ -8,6 +8,7 @@
 <jsp:include page="/views/common/header.jsp"/>
 
 <!-- Login CSS -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <link rel="stylesheet" href="${path}/resources/css/login/Login.css">
 
 <!-- 내용 전체 컨테이너 -->

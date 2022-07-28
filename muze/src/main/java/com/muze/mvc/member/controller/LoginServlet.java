@@ -30,18 +30,34 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = null;
 		String loginId = request.getParameter("loginId");
 		String loginPwd = request.getParameter("loginPwd");
-//		String saveId = request.getParameter("saveId");
+		String saveId = request.getParameter("saveId");
 		
-		System.out.println(loginId + ", " + loginPwd);
+		System.out.println(loginId + ", " + loginPwd + ", " + saveId);
 		
 		Member loginMember = new MemberService().login(loginId, loginPwd);
 		
 		if(loginMember != null) {
 			session = request.getSession();
 			
+			if (saveId != null) {
+				Cookie cookie = new Cookie("saveId", loginId);
+				
+				cookie.setMaxAge(259200); // 3일 동안 유지
+				response.addCookie(cookie);
+			} else {
+				Cookie cookie = new Cookie("saveId", "");
+				
+				cookie.setMaxAge(0);
+				response.addCookie(cookie);
+			}
+			
 			session.setAttribute("loginMember", loginMember);
 			response.sendRedirect(request.getContextPath() + "/");
 		} else {
+			request.setAttribute("msg", "아이디나 비밀번호가 일치하지 않습니다.");
+			request.setAttribute("location", "/member/login");
+			
+			request.getRequestDispatcher("/views/member/msg.jsp").forward(request, response);
 			
 		}
 		

@@ -22,9 +22,14 @@ public class LogoutServlet extends HttpServlet {
     	
     	if (session != null) {
 			session.invalidate();
+			
 		}
+    	request.setAttribute("msg", "로그아웃 되었습니다.");
+    	request.setAttribute("location", "/");
+		
+		request.getRequestDispatcher("/views/member/msg.jsp").forward(request, response);
+		
     	
-    	response.sendRedirect(request.getContextPath() + "/");
 	}
 
 }
