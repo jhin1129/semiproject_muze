@@ -1,19 +1,19 @@
 package com.muze.mvc.member.service;
 
-import static com.muze.mvc.common.jdbc.JDBCTemplate.close;
-import static com.muze.mvc.common.jdbc.JDBCTemplate.commit;
-import static com.muze.mvc.common.jdbc.JDBCTemplate.getConnection;
-import static com.muze.mvc.common.jdbc.JDBCTemplate.rollback;
-
 import java.sql.Connection;
 
-import com.muze.mvc.member.dao.MemberDao;
-import com.muze.mvc.member.vo.Member;
+import com.muze.mvc.common.jdbc.JDBCTemplate;
+import com.muze.mvc.member.model.dao.MemberDao;
+import com.muze.mvc.member.model.vo.Member;
 
 public class MemberService {
 
 	public Member login(String loginId, String loginPwd) {
-		Member member = new MemberDao().findMemberById(loginId);;
+		Connection connection = JDBCTemplate.getConnection();
+		
+		Member member = new MemberDao().findMemberById(connection, loginId);;
+		
+		JDBCTemplate.close(connection);
 		
 		if(member == null || !member.getMemberPassword().equals(loginPwd)) {
 			return null;
@@ -22,5 +22,12 @@ public class MemberService {
 		}
 		
 		
+	}
+
+	public int save(Member member) {
+		int result = 0;
+
+		
+		return result;
 	}
 }
