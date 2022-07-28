@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.muze.mvc.board.model.service.BoardService;
 import com.muze.mvc.board.model.vo.Board;
+import com.muze.mvc.board.model.vo.Product;
 
 
 @WebServlet("/board/view")
@@ -23,12 +24,15 @@ public class BoardViewServlet extends HttpServlet {
     	Board board = null;
     	String type = request.getParameter("type");
     	int no = Integer.parseInt(request.getParameter("no"));
-    	String path = null;
-    	
-    	board = new BoardService().getBoardByNo(no);
+    	board = new BoardService().getBoardByNo(no, true, type);
     	
     	request.setAttribute("board", board);
     	request.setAttribute("type", type);
+    	if(type.equals("REVIEW")) {
+    		Product product = new Product();
+    		product = new BoardService().getProductByNo(board.getBrdProNo());
+    		request.setAttribute("product", product);
+    	}
     	request.getRequestDispatcher("/views/community/board/board_view.jsp").forward(request, response);
 	
 	}

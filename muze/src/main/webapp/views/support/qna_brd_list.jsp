@@ -6,7 +6,7 @@
 <c:set var="path" value="${ pageContext.request.contextPath }" />
 
 <jsp:include page="/views/common/header.jsp"/>
-
+<link rel="stylesheet" href="${path}/resources/css/support/support.css">
     <!-- 내용 전체 컨테이너 -->
     <div class="container my-5">
 
@@ -74,7 +74,7 @@
             </div>
 
             <div class="col-4 text-right">
-                <button class="btn btn-light text-nowrap" onclick="location.href='${ path }/support/write'">글 쓰기</button>
+                <button class="btn btn-light text-nowrap" onclick="location.href='${ path }/support/write?type=QNA'">글 쓰기</button>
             </div>
         </div>
 

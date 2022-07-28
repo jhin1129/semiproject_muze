@@ -43,9 +43,9 @@ html, body {
   --fc-more-link-bg-color: #d0d0d0;
   --fc-more-link-text-color: inherit;
 
-  --fc-event-resizer-thickness: 8px;
-  --fc-event-resizer-dot-total-width: 8px;
-  --fc-event-resizer-dot-border-width: 1px;
+  --fc-event-resizer-thickness: 0px;
+  --fc-event-resizer-dot-total-width: 0px;
+  --fc-event-resizer-dot-border-width: 0px;
 
   --fc-non-business-color: rgba(215, 215, 215, 0.3);
   --fc-bg-event-color: rgb(143, 223, 130);
@@ -104,3 +104,20 @@ html, body {
 .fc-col-header-cell-cushion{
 	color: black;
 }
+
+.fc-daygrid-day-bottom {
+	padding: 0px;
+}
+
+.fc-daygrid-event {
+	margin: 0px;
+}
+
+.fc-daygrid-day-events {
+	margin: 0px;
+}
+
+.fc-h-event {
+	border:none;
+}
+

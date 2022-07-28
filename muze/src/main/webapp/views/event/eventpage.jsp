@@ -29,6 +29,7 @@
         <div class="container calendar-container">
           
           <script>
+         	var calendar = null;
             $(document).ready(function() {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -41,7 +42,7 @@
             		          text: '출석 체크',
             		          id: 'check',
             		          click: function() {	
-            	              
+            	              	allSave();
             		          }
             		        }
             		    },
@@ -59,9 +60,12 @@
               eventContent: {
             	  html: `<center><div><img src="${path}/resources/images/event/resizecalendar.png" class="event-icon" />\</div><center>`,
               },
+              
             });
             calendar.render();
          });
+         }
+            
         </script>
         <div class="mt-3"><h6 style="text-align: center;">매일 출석 하고 100 마일리지 가져가세요!</h6></div>
         <div class="mt-4" id='calendar'></div>

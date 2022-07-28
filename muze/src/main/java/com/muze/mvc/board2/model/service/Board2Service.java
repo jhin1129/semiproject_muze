@@ -55,6 +55,13 @@ public class Board2Service {
 			result = new Board2Dao().insertBoard(connection, board);
 		}
 			
+		if(result > 0) {
+			commit(connection);
+		} else {
+			rollback(connection);
+		}
+		close(connection);
+		
 		return result;
 	}
 
