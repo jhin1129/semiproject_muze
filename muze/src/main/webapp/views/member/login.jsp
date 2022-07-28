@@ -26,6 +26,7 @@
               		<!-- //member_tit -->
 	<div class="member_cont">
 		<form id="formLogin" action="${ path }/member/login" method="post" >
+		<c:if test="${ empty loginMember }">
  			<input type="hidden" id="mode" name="mode" value="login">
             <input type="hidden" id="returnUrl" name="returnUrl" value="#">
             	<div class="member_login_box">
@@ -45,7 +46,7 @@
                     		<p class="dn js_caution_msg1" style="display :none" >아이디, 비밀번호가 일치하지 않습니다. 다시 입력해 주세요.</p>
                     </div>
                 </div>
-  
+  			</c:if>
 			<!-- //login_box -->
 			<div class="member_sns_login" style="text-align: center">
 				<a href="#" class="btn_kakao_login js_btn_kakao_login" data-kakao-type="login" data-return-url="#"> <img src="${path}/resources/images/login/kakaoLogin.png" class="img-fluid" alt="카카오 아이디 로그인"></a>
@@ -63,7 +64,7 @@
 		<div class="nonmember">
 			<form id="formOrderLogin" action="${ path }/member/login" method="post">
  				<input type="hidden" name="mode" value="guestOrder">
-				<input type="hidden" name="returnUrl" value="../mypage/order_view.php">
+				<input type="hidden" name="returnUrl" value="#">
 					<div class="nonmember_order_box">
                     	<h3>비회원 주문조회 하기</h3>
                     <div class="order_input_sec">
@@ -86,7 +87,7 @@
 </div>
 <!-- //본문 끝 contents -->
 
-<script type="text/javascript" src="/resources/js/Member/member.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/Member/member.js"></script>
 <script type="text/javascript">
 	var $formLogin;
 	$(document).ready(function () {

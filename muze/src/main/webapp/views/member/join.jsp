@@ -3,9 +3,10 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <jsp:include page="/views/common/header.jsp"/>
+
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
@@ -18,7 +19,7 @@
         <div class="col-12">
             <div class="location_wrap hidden">
                 <div class="location_cont">
-                    <em><a href="#" class="local_home">HOME</a> &gt; 회원가입 &gt; 정보입력</em>
+                    <em><a href="#" class="local_home">HOME</a>" > 회원가입 > 정보입력"</em>
                 </div>
             </div>
             <!-- //location_wrap -->
@@ -33,32 +34,24 @@
                     </ol>
                 </div>    
                 <div class="member_cont">
-                    <form id="formJoin" name="formJoin" action="${ path }/member/join" method="post" novalidate="novalidate">
-                        <input type="hidden" name="rncheck" value="none">
-                        <input type="hidden" name="dupeinfo" value="">
-                        <input type="hidden" name="pakey" value="">
-                        <input type="hidden" name="foreigner" value="">
-                        <input type="hidden" name="adultFl" value="">
-                        <input type="hidden" name="mode" value="join">
-                        <div class="join_type_box">
-                            <h3>회원종류</h3>
+                    <div class="join_type_box">
+                        <h3>회원종류</h3>
                             <div class="type_select_sec">
                                 <div class="form_element">
                                     <ul>
                                         <li>
-                                            <input type="radio" id="memberFlDefault" name="memberFl" class="ignore" value="personal" checked="checked">
-                                            <label for="memberFlDefault" class="choice_s on">개인회원</label>
+                                            <input type="radio" id="memberFlDefault" name="memberFl" class="ignore" value="personal" checked="">
+                                            <label for="memberFlDefault" class="choice_s">개인회원</label>
                                         </li>
                                         <li>
-                                            <input type="radio" id="memberFlartist" name="memberFl" class="ignore" value="">
+                                            <input type="radio" id="memberFlartist" name="memberFl" class="ignore" value="artist">
                                             <label for="memberFlartist" class="choice_s">아티스트 회원</label>
                                         </li>
                                     </ul>
-                                  </div>
                                 </div>
                             </div>
+                        </div>
                         <!-- //type_select_sec -->
-                        </form>
                     </div>
                 </div> 
             </div>
@@ -69,10 +62,17 @@
         <div class="row">
             <div class="col"></div>
                 <div class="col-8">  
+                <form id="formJoin" name="formJoin" action="${ path }/member/join" method="post" novalidate="novalidate">
+                        <input type="hidden" name="rncheck" value="none">
+                        <input type="hidden" name="dupeinfo" value="">
+                        <input type="hidden" name="pakey" value="">
+                        <input type="hidden" name="foreigner" value="">
+                        <input type="hidden" name="adultFl" value="">
+                        <input type="hidden" name="mode" value="join">
                     <h3>기본정보</h3>
                     <div class="important" id="base_info_p">표시는 반드시 입력하셔야 하는 항목입니다.</div>
                         <div class="base_info_sec">
-                            <table>
+                            <table border="0" cellpadding="0" cellspacing="0">
                                 <colgroup>
                                     <col width="25%">
                                     <col width="75%">
@@ -82,11 +82,11 @@
                                     <th><span class="important">아이디</span></th>
                                     <td>
                                         <div class="member_warning">
-                                            <input type="text" id="memId" name="memId" data-pattern="gdMemberId">
+                                            <input type="text" id="newMemId" name="memId" data-pattern="gdMemberId">
+                                            <input type="button" id="checkDuplicate" name="checkDuplicate" class="checkDuplicate" value="중복검사" >
                                         </div>
-                                     	<div id="memId-error" class="text_warning" style="display: none"></div>
                                     </td>
-                    			
+                    
                                 </tr>
                                 <tr class="">
                                     <th><span class="important">비밀번호</span></th>
@@ -94,7 +94,6 @@
                                         <div class="member_warning">
                                             <input type="password" id="newPassword" name="memPw" autocomplete="off" placeholder=""> (영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)
                                         </div>
-                                    <div id="newPassword-error" class="text_warning" style="display: block">필수항목 입니다.</div>
                                     </td>
                                 </tr>
                                 <tr class="">
@@ -103,16 +102,14 @@
                                         <div class="member_warning">
                                             <input type="password" class="check-id" name="memPwRe" autocomplete="off">
                                         </div>
-                                    <div id="memPwRe-error" class="text_warning" style="display: block">필수항목 입니다.</div>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr class="member_name">
                                     <th><span class="important">이름</span></th>
                                     <td>
                                         <div class="member_warning">
                                             <input type="text" name="memNm" data-pattern="gdEngKor" value="" maxlength="30">
                                         </div>
-                                    <div id="memNm-error" class="text_warning" style="display: block">필수항목 입니다.</div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -121,7 +118,7 @@
                                         <div class="member_warning">
                                             <input type="text" name="email" id="email" value="" tabindex="-1">
                                             <select id="emailDomain" name="emailDomain" class="chosen_select">
-                                                <option value="self">직접입력</option>
+                                                <option value="self" selected="selected">직접입력</option>
                                                 <option value="naver.com">naver.com</option>
                                                 <option value="hanmail.net">hanmail.net</option>
                                                 <option value="daum.net">daum.net</option>
@@ -141,14 +138,13 @@
                                 <tr>
                                     <th><span class="important">휴대폰번호</span></th>
                                     <td class="member_address">
-                                        <div class="address_postcode">
+                                        <div class="address_phone">
                                             <input type="text" id="cellPhone" name="cellPhone" maxlength="12" placeholder="- 없이 입력하세요." data-pattern="gdNum" value="">
                                         </div>
                                         <div class="form_element">
                                             <input type="checkbox" id="smsFl" name="smsFl" value="y">
                                             <label for="smsFl" class="check_s ">정보/이벤트 SMS 수신에 동의하시면 1,000 포인트가 추가 지급됩니다.</label>
                                         </div>
-                                        <div id="cellPhone-error" class="text_warning" style="display: block">필수항목 입니다.</div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -217,77 +213,115 @@
                             </table>
                         </div>    
                     </div>
+<!--                <div class="addition_info_box">
+                      <h3>부가 정보</h3>
+                      <div class="addition_info_sec">
+                          <table border="0" cellpadding="0" cellspacing="0">
+                              <colgroup>
+                                  <col width="25%">
+                                  <col width="75%">
+                              </colgroup>
+                              <tbody>
+                              <tr>
+                                  <th><span>성별</span></th>
+                                  <td>
+                                      <div class="member_warning">
+                                          <div class="form_element">
+                                              <ul>
+                                                  <li>
+                                                      <input type="radio" id="sexFlMan" name="sexFl" class="ignore" value="m">
+                                                      <label for="sexFlMan" class="choice_s ">남자</label>
+                                                  </li>
+                                                  <li>
+                                                      <input type="radio" id="sexFlWoman" name="sexFl" class="ignore" value="w">
+                                                      <label for="sexFlWoman" class="choice_s ">여자</label>
+                                                  </li>
+                                              </ul>
+                                          </div>
+                                      </div>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <th><span>생일</span></th>
+                                  <td class="member_birthday">
+                                      <div class="member_warning">
+                                      </div>
+                                      <div class="member_warning">
+                                          <input type="text" id="birthDt" name="birthDt" class="anniversary js_datepicker" value="" placeholder="예시) 19991224">
+                                      </div>
+                                  </td>
+                              </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+                  -->
                     <div class="btn_center_box">
                         <button type="button" id="btnCancel" class="btn_member_cancel">취소</button>
-                        <button type="button" class="btn_comfirm js_btn_join" value="회원가입">회원가입</button>
+                        <button type="button" id="btnComfirm" class="btn_comfirm js_btn_join" value="회원가입">회원가입</button>
                     </div>
+                    </form>
                 </div>
             <div class="col"></div>  
         </div>          
     </div>
 </div>  
 
-<script>
-	var paycoProfile = [];
-    var naverProfile = [];
-	var thirdPartyProfile = Array;
-	var kakaoProfile = [];
+<script type="text/javascript">
+var $formJoin;
 
-	$(document).ready(function () {
-		var $formJoin = $('#formJoin');
-
-		$(':text:first', $formJoin).focus();
-
-		$('#btnCancel', $formJoin).click(function (e) {
-			e.preventDefault();
-			top.location.href = '/';
-		});
-
-		if ($('.js_datepicker').length) {
-			$('.js_datepicker').datetimepicker({
-				locale: 'ko',
-				format: 'YYYY-MM-DD',
-				dayViewHeaderFormat: 'YYYY MM',
-				viewMode: 'days',
-				ignoreReadonly: true,
-				debug: false,
-				keepOpen: false
-			});
-		}
-
-		$('#btnPostcode').click(function (e) {
-			e.preventDefault();
-			$('#address-error, #addressSub-error').remove();
-			$(':text[name=address], :text[name=addressSub]').removeClass('text_warning');
-			gd_postcode_search('zonecode', 'address', 'zipcode');
-		});
-
-		$('#btnCompanyPostcode').click(function (e) {
-			e.preventDefault();
-			$('#comAddress-error, #comAddressSub-error').remove();
-			$(':text[name=comAddress], :text[name=comAddressSub]').removeClass('text_warning');
-			gd_postcode_search('comZonecode', 'comAddress', 'comZipcode');
-		});
-
-		$(':radio[name="memberFl"]').change(function () {
-			var $artistinfo = $('.artist_info_box');
-			if (this.value == 'artist') {
-				$artistinfo.removeClass('dn');
-				$artistinfo.find('input, select').removeClass('ignore');
-			} else {
-				$artistinfo.addClass('dn');
-				$artistinfo.find('input, select').addClass('ignore');
-			}
-		});
-		$(':radio[name="memberFl"]:checked').trigger('change');
-
-
-		gd_select_email_domain('email');
-
-		gd_member2.init($formJoin);
-
-		$('.js_btn_join').click({form: $formJoin}, gd_member2.save);
+$(document).ready(function () {
+	$('#btnCancel').click(function (e) {
+		e.preventDefault();
+		location.href = '${path}/';
 	});
+	$('#btnComfirm').click(function (e) {
+		e.preventDefault();
+		location.href = '${path}/member/join_ok';
+	});
+
+	// 아티스트 유형 클릭시
+	$(':radio[name="memberFl"]').change(function() {
+		var $artistinfo = $('.artist_info_box');
+		if (this.value == 'artist') {
+			$artistinfo.removeClass('dn');
+			$artistinfo.find('input, select').removeClass('ignore');
+		} else {
+			$artistinfo.addClass('dn');
+			$artistinfo.find('input, select').addClass('ignore');
+		}
+	});
+	
+	$(':radio[name="memberFl"]:checked').trigger('change');
+	
+	// 아이디 중복 검사
+	$('#checkDuplicate').on('click', () => {
+		let memId = $("#newMemId").val().trim();
+		
+		// DB를 통해 중복검사
+		$.ajax({
+			type: "POST",
+			url: "${ path }/member/idCheck",
+			dataType: "json",
+			data: {
+				memId
+			},
+			success: (obj) => {
+				console.log(obj);
+				
+				if(obj.duplicate === true) {
+					alert("이미 사용중인 아이디 입니다.")
+				} else {
+					alert("사용 가능한 아이디 입니다.")
+				}
+			}, 
+			error: (error) => {
+				console.log(error);
+			}
+		});	
+	});
+});
+
 </script>
 
 <jsp:include page="/views/common/footer.jsp"/>
