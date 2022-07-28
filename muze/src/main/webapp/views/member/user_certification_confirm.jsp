@@ -7,6 +7,9 @@
 
 <jsp:include page="/views/common/header.jsp"/>
 
+<!-- Login CSS -->
+<link rel="stylesheet" href="${path}/resources/css/login/Login.css">
+
 <!-- 내용 전체 컨테이너 -->
 <div class="container">
 	<div class="row">

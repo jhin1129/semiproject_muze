@@ -7,6 +7,10 @@
 
 <jsp:include page="/views/common/header.jsp"/>
 
+<!-- Login CSS -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<link rel="stylesheet" href="${path}/resources/css/login/Login.css">
+
 <!-- 내용 전체 컨테이너 -->
 <div class="container">
 	<div class="row" style="text-align: center">
@@ -15,7 +19,7 @@
 				<div class="member_cont" >
 					<div class="member_join_box ">
 						<div class="member_join_shop ">
-                 			<a href="#" id="btnJoin" class="shop_mall_join"><span>쇼핑몰 회원가입</span></a>
+                 			<a href="${path}/member/join_agreement" id="btnJoin" class="shop_mall_join"><span>쇼핑몰 회원가입</span></a>
                 		</div>
                 <!-- 두 번째 행 -->
                 <div class="row">
@@ -47,7 +51,7 @@
               <!-- //member_cont -->
 		</div>
 	        <div class="member_guide_txt">
-	        	<p>이미 쇼핑몰 회원이세요? <a href="#" id="btnLoginMember">로그인</a></p>
+	        	<p>이미 쇼핑몰 회원이세요? <a href="${path}/member/login" id="btnLoginMember">로그인</a></p>
 	        </div>
         </div>
         	<div class="col"></div>
@@ -55,5 +59,16 @@
 	<!-- //content_box -->
 </div>
 <!-- //본문 끝 contents -->
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('#btnJoin').click(function () {
+			location.href = '${ path }/join_agreement';
+		});
+		$('#btnLoginMember').click(function () {
+			window.location.href = '${ path }/member/login';
+		});
+	});
+</script>
 
 <jsp:include page="/views/common/footer.jsp"/>

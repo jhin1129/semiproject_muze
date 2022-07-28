@@ -7,6 +7,11 @@
 
 <jsp:include page="/views/common/header.jsp"/>
 
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<!-- Login CSS -->
+<link rel="stylesheet" href="${path}/resources/css/login/Login.css">
+
 <!-- 내용 전체 컨테이너 -->
 <div class="container">
     <div class="row m-auto">
@@ -45,8 +50,8 @@
                                             <label for="memberFlDefault" class="choice_s on">개인회원</label>
                                         </li>
                                         <li>
-                                            <input type="radio" id="memberFlBusiness" name="memberFl" class="ignore" value="">
-                                            <label for="memberFlBusiness" class="choice_s">아티스트 회원</label>
+                                            <input type="radio" id="memberFlartist" name="memberFl" class="ignore" value="">
+                                            <label for="memberFlartist" class="choice_s">아티스트 회원</label>
                                         </li>
                                     </ul>
                                   </div>
@@ -79,8 +84,9 @@
                                         <div class="member_warning">
                                             <input type="text" id="memId" name="memId" data-pattern="gdMemberId">
                                         </div>
+                                     	<div id="memId-error" class="text_warning" style="display: none"></div>
                                     </td>
-                    
+                    			
                                 </tr>
                                 <tr class="">
                                     <th><span class="important">비밀번호</span></th>
@@ -88,6 +94,7 @@
                                         <div class="member_warning">
                                             <input type="password" id="newPassword" name="memPw" autocomplete="off" placeholder=""> (영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)
                                         </div>
+                                    <div id="newPassword-error" class="text_warning" style="display: block">필수항목 입니다.</div>
                                     </td>
                                 </tr>
                                 <tr class="">
@@ -96,6 +103,7 @@
                                         <div class="member_warning">
                                             <input type="password" class="check-id" name="memPwRe" autocomplete="off">
                                         </div>
+                                    <div id="memPwRe-error" class="text_warning" style="display: block">필수항목 입니다.</div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -104,6 +112,7 @@
                                         <div class="member_warning">
                                             <input type="text" name="memNm" data-pattern="gdEngKor" value="" maxlength="30">
                                         </div>
+                                    <div id="memNm-error" class="text_warning" style="display: block">필수항목 입니다.</div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -139,6 +148,7 @@
                                             <input type="checkbox" id="smsFl" name="smsFl" value="y">
                                             <label for="smsFl" class="check_s ">정보/이벤트 SMS 수신에 동의하시면 1,000 포인트가 추가 지급됩니다.</label>
                                         </div>
+                                        <div id="cellPhone-error" class="text_warning" style="display: block">필수항목 입니다.</div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -216,5 +226,68 @@
         </div>          
     </div>
 </div>  
+
+<script>
+	var paycoProfile = [];
+    var naverProfile = [];
+	var thirdPartyProfile = Array;
+	var kakaoProfile = [];
+
+	$(document).ready(function () {
+		var $formJoin = $('#formJoin');
+
+		$(':text:first', $formJoin).focus();
+
+		$('#btnCancel', $formJoin).click(function (e) {
+			e.preventDefault();
+			top.location.href = '/';
+		});
+
+		if ($('.js_datepicker').length) {
+			$('.js_datepicker').datetimepicker({
+				locale: 'ko',
+				format: 'YYYY-MM-DD',
+				dayViewHeaderFormat: 'YYYY MM',
+				viewMode: 'days',
+				ignoreReadonly: true,
+				debug: false,
+				keepOpen: false
+			});
+		}
+
+		$('#btnPostcode').click(function (e) {
+			e.preventDefault();
+			$('#address-error, #addressSub-error').remove();
+			$(':text[name=address], :text[name=addressSub]').removeClass('text_warning');
+			gd_postcode_search('zonecode', 'address', 'zipcode');
+		});
+
+		$('#btnCompanyPostcode').click(function (e) {
+			e.preventDefault();
+			$('#comAddress-error, #comAddressSub-error').remove();
+			$(':text[name=comAddress], :text[name=comAddressSub]').removeClass('text_warning');
+			gd_postcode_search('comZonecode', 'comAddress', 'comZipcode');
+		});
+
+		$(':radio[name="memberFl"]').change(function () {
+			var $artistinfo = $('.artist_info_box');
+			if (this.value == 'artist') {
+				$artistinfo.removeClass('dn');
+				$artistinfo.find('input, select').removeClass('ignore');
+			} else {
+				$artistinfo.addClass('dn');
+				$artistinfo.find('input, select').addClass('ignore');
+			}
+		});
+		$(':radio[name="memberFl"]:checked').trigger('change');
+
+
+		gd_select_email_domain('email');
+
+		gd_member2.init($formJoin);
+
+		$('.js_btn_join').click({form: $formJoin}, gd_member2.save);
+	});
+</script>
 
 <jsp:include page="/views/common/footer.jsp"/>

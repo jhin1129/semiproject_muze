@@ -7,6 +7,10 @@
 
 <jsp:include page="/views/common/header.jsp"/>
 
+<!-- Login CSS -->
+<link rel="stylesheet" href="${path}/resources/css/login/Login.css">
+
+
 <!-- 내용 전체 컨테이너 -->
 <div class="container">
 	<div class="row">
@@ -19,7 +23,7 @@
                                 <h2>비밀번호 찾기</h2>
                             </div>
                             <div class="member_cont">
-                                <form name="formReset" id="formReset" action="../member/find_password_reset_ps.php" method="post">
+                                <form name="formReset" id="formReset" action="${ pageContext.request.contextPath }/memberfind_password_reset" method="post">
                                     <div class="find_password_reset_box">
                                         <h3>비밀번호 변경</h3>
                                         <p>새로운 비밀번호를 등록해 주세요.</p>

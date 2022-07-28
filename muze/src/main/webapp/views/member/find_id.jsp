@@ -7,6 +7,11 @@
 
 <jsp:include page="/views/common/header.jsp"/>
 
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<!-- Login CSS -->
+<link rel="stylesheet" href="${path}/resources/css/login/Login.css">
+
 <!-- 내용 전체 컨테이너 -->
 <div class="container">
 	<div class="row" style="text-align: center">
@@ -19,7 +24,7 @@
                         </div>
                         <!-- //member_tit -->
                         <div class="member_cont">
-                            <form id="formFindId" method="post" action="../member/member_ps.php" novalidate="novalidate">
+                            <form id="formFindId" method="post" action="${ path }/member/find_id" novalidate="novalidate">
                                 <div class="find_id_box">
                                     <div class="find_id_sec">
                                         <h3 class="hidden">회원 아이디찾기</h3>
@@ -69,5 +74,91 @@
 	<!-- //content_box -->
 </div>
 <!-- //본문 끝 contents -->
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		gd_select_email_domain('userEmail');
+		
+		$('input').keyup(function () {
+			$('.js_caution_msg1', 'form').addClass('dn');
+		});
+		$('.js_btn_find_password', 'form').click(function (e) {
+			location.href = "${ path }/member/find_password";
+			e.preventDefault();
+		});
+		$('.js_btn_login', 'form').click(function (e) {
+			location.href = "${ path }/member/login";
+			e.preventDefault();
+		});
+		 $('input[name="findIdFl"]').on('click', function(){            
+               if ($(this).val() == 'cellPhone') {            
+               $('input[id="userEmail"]').attr('style','display:none !important').prop('disabled', true);
+			   $('select[id="emailDomain"]').hide().prop('disabled', true);
+               $('input[id="userCellPhoneNum"]').prop('disabled', false).show();            
+               $('#cellPhoneCountryCode').show().prop('disabled', false);            
+              } else if ($(this).val() == 'email') {            
+                $('input[id="userCellPhoneNum"]').hide().prop('disabled', true);            
+                $('input[id="userEmail"]').prop('disabled', false).show();
+				$('select[id="emailDomain"]').prop('disabled', false).show();
+                $('#cellPhoneCountryCode').hide().prop('disabled', true);            
+              }            
+             })            
+                                
+           $('input[id="userCellPhoneNum"]').on('keyup', function(){            
+           var value = $(this).val();            
+           $(this).val(value.replace(/[^\d]/g, ''));            
+        })
+
+		$('#formFindId').validate({
+			dialog: false,
+			rules: {
+				userName: {
+					required: true
+				},
+				userEmail: {
+					required: true,
+					email: true
+				  },            
+                userCellPhoneNum: {            
+                    required: true,
+				}
+			},
+			messages: {
+				userName: {
+					required: "이름을 입력해주세요."
+				},
+				userEmail: {
+					required: "이메일을 입력해주세요.",
+					email: "메일 형식이 틀렸습니다."
+				},
+				 userCellPhoneNum: {            
+                    required: "휴대폰 번호를 입력해주세요.",            
+                }
+			}, submitHandler: function (form) {
+				var params = $(form).serializeArray();
+				params.push({name: "mode", value: "findId"});
+				$.post('${ path }/member/find_id', params).done(function (data, textStatus, jqXHR) {
+					if (data.result) {
+						var compiled = _.template($('#templateFindIdResult').html());
+						var templateData = {memberId: data.memberId, userName: $('#userName').val()};
+						$('.find_id_sec').html(compiled(templateData));
+					} else {
+						if (data['code'] == 500) {            
+                              alert(data['message']);            
+                           } else {
+						$(form).find('.js_caution_msg1').removeClass('dn').text(data.message);
+					}
+					}
+				});
+			}, invalidHandler: function (form, validator) {
+				var errors = validator.numberOfInvalids();
+				if (errors) {
+					$(form.target).find('.js_caution_msg1').removeClass('dn').text(validator.errorList[0].message);
+					validator.errorList[0].element.focus();
+				}
+			}
+		});
+	});
+</script>
 
 <jsp:include page="/views/common/footer.jsp"/>
