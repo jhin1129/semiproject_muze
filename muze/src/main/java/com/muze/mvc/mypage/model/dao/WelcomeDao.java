@@ -7,7 +7,6 @@ import java.sql.SQLException;
 
 import org.eclipse.jdt.internal.compiler.lookup.TagBits;
 
-import com.muze.mvc.mypage.model.vo.Delivery;
 import com.muze.mvc.mypage.model.vo.Welcome;
 
 import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
