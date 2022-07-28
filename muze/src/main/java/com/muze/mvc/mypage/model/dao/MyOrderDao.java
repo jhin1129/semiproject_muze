@@ -16,6 +16,7 @@ import com.muze.mvc.mypage.model.vo.MyOrder;
 
 public class MyOrderDao {
 
+	// 기본 주문 정보 
 	public MyOrder getOrderInfo(Connection connection) {
 		MyOrder orderInfo = null;
 		PreparedStatement pstmt = null;
@@ -56,6 +57,7 @@ public class MyOrderDao {
 		return orderInfo;
 	}
 
+	// 주문 상세 
 	public MyOrder getOrderDetail(Connection connection) {
 		MyOrder orderDetail = null;
 		PreparedStatement pstmt = null;
@@ -96,7 +98,7 @@ public class MyOrderDao {
 		return orderDetail;
 	}
 
-	// 날짜로 오더 가져오기 (주문)
+	// 날짜별 주문 검색 
 	public List<MyOrder> getOrderByDate(Connection connection, String dateFrom, String dateTo) {
 		List<MyOrder> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -143,6 +145,7 @@ public class MyOrderDao {
 		return list;
 	}
 
+	// 주문 정보 (30일) 
 	public List<MyOrder> getOrderRec(Connection connection) {
 		List<MyOrder> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -183,6 +186,7 @@ public class MyOrderDao {
 		return list;
 	}
 
+	// 주문 현황 
 	public List<MyOrder> getOrderStatus(Connection connection) {
 		List<MyOrder> getOrderStatus = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -225,6 +229,7 @@ public class MyOrderDao {
 		return getOrderStatus;
 	}
 
+	// 주문 취소 
 	public int orderCancel(Connection connection) {
 		int result = 0;
 		PreparedStatement pstm = null;
@@ -244,6 +249,7 @@ public class MyOrderDao {
 		return result;
 	}
 
+	// 날짜별 취소 검색 
 	public List<MyOrder> getCancelByDate(Connection connection, String dateFrom, String dateTo) {
 		List<MyOrder> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -290,6 +296,7 @@ public class MyOrderDao {
 		return list;
 	}
 
+	// 날짜별 환불 검색 
 	public List<MyOrder> getRefundByDate(Connection connection, String dateFrom, String dateTo) {
 		List<MyOrder> list = new ArrayList<>();
 		PreparedStatement pstmt = null;

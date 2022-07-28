@@ -13,7 +13,7 @@ import com.muze.mvc.mypage.model.vo.MyOrder;
 
 
 public class MyOrderService {
-
+	// 기본 주문 정보 
 	public MyOrder getOrderInfo() {
 		MyOrder orderInfo = null;
 		Connection connection = getConnection();
@@ -25,7 +25,7 @@ public class MyOrderService {
 		return orderInfo;
 	}
 
-	// 주문 상세를 가져옴 
+	// 주문 상세 
 	public MyOrder getOrderDetail() {
 		MyOrder orderDetail = null;
 		
@@ -38,7 +38,7 @@ public class MyOrderService {
 		return orderDetail;
 	}
 
-	// 달력으로 날짜를 검색해서 정보를 가져옴 
+	// 날짜별 주문 검색 
 	public List<MyOrder> orderByDate(String dateFrom, String dateTo) {
 		List<MyOrder> orderByDate = null;
 		
@@ -51,7 +51,7 @@ public class MyOrderService {
 		return orderByDate;
 	}
 
-	// 30일 간의 정보만 가져옴 
+	// 주문 정보 (30일)
 	public List<MyOrder> getOrderRec() {
 		List<MyOrder> getOrderRec = null;
 		
@@ -63,7 +63,8 @@ public class MyOrderService {
 		
 		return getOrderRec;
 	}
-
+	
+	// 주문 현황 
 	public List<MyOrder> getOrderStatus() {
 		List<MyOrder> getOrderStatus = null;
         int result1 = 0;
@@ -118,6 +119,7 @@ public class MyOrderService {
 		return getOrderStatus;
 	}
 
+	// 주문 취소 
 	public int orderCancel() {
 		int result = 0; 
 		Connection connection = getConnection();
@@ -136,6 +138,7 @@ public class MyOrderService {
 		return result;
 	}
 
+	// 날짜별 취소 검색 
 	public List<MyOrder> cancelByDate(String dateFrom, String dateTo) {
 		List<MyOrder> cancelByDate = null;
 		
@@ -148,6 +151,7 @@ public class MyOrderService {
 		return cancelByDate;
 	}
 
+	// 날짜별 환불 검색 
 	public List<MyOrder> refundByDate(String dateFrom, String dateTo) {
 		List<MyOrder> refundByDate = null;
 		
