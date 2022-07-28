@@ -41,38 +41,11 @@
             </div>
             
             <!-- 두번째 행 -->
-            <div class="row">
-              <div class="col-sm-12" style="margin-top: 30px;">
-                <form id="myForm01">
-                  <span id="mySpan01"></span> 
-                </form>
-                <!-- 기간별 검색 -->
-                <fieldset class="mySearchDate">
-                  <!-- 버튼 -->
-                  <div class= "btnsearch" role="group" aria-label="First group">
-                    <button type="button" class="btn btn-outline-secondary">오늘</button>
-                    <button type="button" class="btn btn-outline-secondary">7일</button>
-                    <button type="button" class="btn btn-outline-secondary">15일</button>
-                    <button type="button" class="btn btn-outline-secondary">1개월</button>
-                    <button type="button" class="btn btn-outline-secondary">3개월</button>
-                    <button type="button" class="btn btn-outline-secondary">1년</button>
-
-                    <!-- 날짜 -->
-                    <input type="text" class="datepicker" id="datepicker1" >
-                    ~
-                    <input type="text" class="datepicker" id="datepicker2" >
-                    
-                    <!-- 조회버튼 -->
-                    <button type="button" class="btn btn-outline-secondary">조회</button>
-                  </div>
-                </fieldset>
-                </div>
-              </div>
             
-            <!-- 세번째 행 -->
+<!--             세번째 행
             <div class="row">
               <div class="col-sm-12" style="margin-top: 50px;">
-                  <!-- 게시글 조회 테이블 -->
+                  게시글 조회 테이블
                   <table class="qnatable">
                     <thead id="my_thead01">
                     <tr>
@@ -94,7 +67,52 @@
 
               </div>
             </div>
-            <!-- 세번째 행 끝 -->
+            세번째 행 끝 -->
+            
+            
+            
+<!--             세번째 행 -->
+                <!-- 조회 테이블 -->
+                <br>
+                <table class="ordertable">
+                  <thead id="my_thead01">
+                    <tr>
+                      <th class="my_th" id="my_th05">문의 날짜</th>
+                      <th class="my_th" id="my_th05">카테고리</th>
+                      <th class="my_th" id="my_th02">제목</th>
+                      <th class="my_th" id="my_th05">문의 상태</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+					<c:if test="${ empty list }">
+                  	 	<tr>
+                      		<td id="my_td00" colspan="5">
+                       			조회 내역이 없습니다.
+                      		</td>
+                    	</tr>
+                   	</c:if>
+                   	<c:if test="${ not empty list }">
+                   		<c:forEach var="refundByDate" items="${ list }">
+		                    <tr>
+		                      <td id="my_td01">${ refundByDate.orderDate } <br>
+		                        <a href="${ path }/mypage/orderdetail?no=${ refundByDate.orderNo }" id="my_td02">${ refundByDate.orderNo }</a> <br>
+		                      </td> 
+		                      <td id="my_td01">${ refundByDate.proName }</td>
+		                      <td id="my_td01">${ refundByDate.proPrice }원 / ${ refundByDate.orderAmount }개</td>
+		                      <td id="my_td01">${ refundByDate.orderStatus }</td>
+		                      <td id="my_td01"></td>
+		                    </tr>
+	                    </c:forEach>
+                    </c:if>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+           <!-- 세번째 행 끝 -->
+            
+            
+            
+            
           </div>
           <!-- 컨테이너 끝 -->
       </div>

@@ -1,11 +1,13 @@
 package com.muze.mvc.mypage.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.muze.mvc.mypage.model.service.MyOrderService;
 import com.muze.mvc.mypage.model.service.WelcomeService;
@@ -21,31 +23,25 @@ public class OrderDetailServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	// 1st row
-    	int mileageNow = 0;
-    	int reviewCount = 0;
-    	Welcome welcome = null;   	
-    	MyOrder myOrder1 = null;
-    	MyOrder myOrder2 = null;
-    	
-		myOrder1 = new MyOrderService().getOrderInfo();
+    	Welcome welcomeRow = null;   	
+    	welcomeRow = new WelcomeService().getWelcomeRow();
+		request.setAttribute("welcomeRow", welcomeRow);
 		
-    	mileageNow = new WelcomeService().getMileageN();
-    	
-    	reviewCount = new WelcomeService().getReviewC();
-		
-		welcome = new Welcome(mileageNow, reviewCount);
-		
-		// 상세 
+		// 상세 (오더 넘버(pk)로 가져옴  
 		MyOrder orderDetail = null;
+		int no = Integer.parseInt(request.getParameter("no"));
 		
-		orderDetail = new MyOrderService().getOrderDetail();
-		myOrder2 = new MyOrderService().getOrderInfo();
+		System.out.println("오더넘버 " + no);
+				
+		orderDetail = new MyOrderService().getOrderDetail(no);
 
-    	request.setAttribute("welcome", welcome);  
-    	request.setAttribute("myOrder", myOrder1);
-    	request.setAttribute("myOrder", myOrder2);
-		request.setAttribute("orderDetail", orderDetail);
+		// 오더 디테일의 값들은 myorder객체로 가져오게 된다!!
 		
+//		String value = request.getParameter("value");
+		System.out.println(orderDetail);
+
+
+		request.setAttribute("orderDetail", orderDetail);
     	request.getRequestDispatcher("/views/mypage/order_detail.jsp").forward(request, response);
 		
 	}

@@ -23,33 +23,20 @@ public class CancelListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	// 1st row
-    	int mileageNow = new WelcomeService().getMileageN();
-    	int reviewCount = new WelcomeService().getReviewC();
-    	Welcome welcome = new Welcome(mileageNow, reviewCount);
+    	Welcome welcomeRow = null;   	
+    	welcomeRow = new WelcomeService().getWelcomeRow();
+		request.setAttribute("welcomeRow", welcomeRow);
 		
-		// 1st row name
-    	MyOrder myOrder = null;
-		myOrder = new MyOrderService().getOrderInfo();
-		
-		// 검색
+		// 2. 검색
 		List<MyOrder> list = null;
 		
 		// 매개 값 (검색 날짜) 가져오기 
 		String dateFrom = request.getParameter("dateFrom");
 		String dateTo = request.getParameter("dateTo");
-		
-		// 잘 가져오는지 확인
-//		System.out.println(dateFrom + " "+ dateTo);
-		
-		// 넘기기
+
+		// 처리 결과 
 		list = new MyOrderService().cancelByDate(dateFrom, dateTo);
 		
-		// 성공적으로 받아옴.
-//		System.out.println(list.isEmpty());
-		list.forEach(System.out::println);
-
-    	request.setAttribute("myOrder", myOrder);
-		request.setAttribute("welcome", welcome);    
 		request.setAttribute("list", list);
     	request.getRequestDispatcher("/views/mypage/cancel_list.jsp").forward(request, response);
 

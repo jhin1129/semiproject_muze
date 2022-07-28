@@ -9,29 +9,19 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.muze.mvc.mypage.model.dao.MyOrderDao;
+import com.muze.mvc.mypage.model.vo.MyMileage;
 import com.muze.mvc.mypage.model.vo.MyOrder;
 
 
 public class MyOrderService {
-	// 기본 주문 정보 
-	public MyOrder getOrderInfo() {
-		MyOrder orderInfo = null;
-		Connection connection = getConnection();
-
-		orderInfo = new MyOrderDao().getOrderInfo(connection);
-		
-		close(connection);
-		
-		return orderInfo;
-	}
 
 	// 주문 상세 
-	public MyOrder getOrderDetail() {
+	public MyOrder getOrderDetail(int no) {
 		MyOrder orderDetail = null;
 		
 		Connection connection = getConnection();
 
-		orderDetail = new MyOrderDao().getOrderDetail(connection);
+		orderDetail = new MyOrderDao().getOrderDetail(connection, no);
 		
 		close(connection);
 		
@@ -162,6 +152,19 @@ public class MyOrderService {
 		close(connection);
 		
 		return refundByDate;
+	}
+
+	// 마일리지 검색 
+	public List<MyMileage> orderMileage(String dateFrom, String dateTo) {
+		List<MyMileage> myMileage = null;
+		
+		Connection connection = getConnection();
+
+		myMileage = new MyOrderDao().getMileage(connection, dateFrom, dateTo);
+		
+		close(connection);
+		
+		return myMileage;
 	}
 	
 }

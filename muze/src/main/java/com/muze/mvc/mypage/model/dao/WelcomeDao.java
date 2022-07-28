@@ -1,55 +1,39 @@
 package com.muze.mvc.mypage.model.dao;
 
+import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.eclipse.jdt.internal.compiler.lookup.TagBits;
-
 import com.muze.mvc.mypage.model.vo.Welcome;
-
-import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
 
 public class WelcomeDao {
 
-	public int getReviewC(Connection connection) {
-		int count = 0;
+	public Welcome getWelcomeRow(Connection connection) {
+		Welcome welcomeRow = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT COUNT(*) FROM BOARD WHERE BRD_WRITER_NO = 9 AND BRD_TYPE = 'REVIEW'";
-		
-		try {
-			pstmt = connection.prepareStatement(query);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				count = rs.getInt(1);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		
-		return count;
-	}
-
-	public int getMileageN(Connection connection) {
-		int result = 0;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String query = "SELECT POINT_PROCESS FROM MILEAGE WHERE MEMBER_NO = 9";
+		String query = "SELECT M.MEMBER_NO, M.MEMBER_NAME, MI.POINT_PROCESS, COUNT(*) AS CNT "
+						+ "FROM MEMBER M\n"
+						+ "JOIN MILEAGE MI ON (M.MEMBER_NO = MI.MEMBER_NO) "
+						+ "JOIN BOARD B ON (MI.MEMBER_NO = B.BRD_WRITER_NO) "
+						+ "WHERE M.MEMBER_NO = 9 AND BRD_TYPE = 'REVIEW' "
+						+ "GROUP BY M.MEMBER_NO, M.MEMBER_NAME, MI.POINT_PROCESS";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
 			rs = pstmt.executeQuery();
 
-			if(rs.next()) {
-				result = rs.getInt(1);
-			}
+			if (rs.next()) {
+				welcomeRow = new Welcome();
 			
+				welcomeRow.setMemberNo(rs.getInt("MEMBER_NO"));
+				welcomeRow.setMemberName(rs.getString("MEMBER_NAME"));
+				welcomeRow.setMileageNow(rs.getInt("POINT_PROCESS"));
+				welcomeRow.setBoardCount(rs.getInt("CNT"));
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -58,44 +42,7 @@ public class WelcomeDao {
 			close(pstmt);
 		}
 		
-		return result;
+		return welcomeRow;
 	}
-
-//	public Delivery getOrderStatus(Connection connection) {
-//		Delivery orderStatus = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		String query = "SELECT * FROM ORDERSTATUS";
-//		
-//		try {
-//			pstmt = connection.prepareStatement(query);
-//			rs = pstmt.executeQuery();
-//			
-//			if (rs.next()) {
-//			orderStatus = new Delivery();
-//			
-//			orderStatus.setOrderNo(rs.getInt("ORDER_NO"));
-//			orderStatus.setOrderdate(rs.getDate("ORDER_DATE"));
-//			orderStatus.setOrderIn(rs.getInt("ORDER_IN"));
-//			orderStatus.setOrderPaid(rs.getInt("ORDER_PAID"));;
-//			orderStatus.setOrderReady(rs.getInt("ORDER_READY"));
-//			orderStatus.setOrderShip(rs.getInt("ORDER_SHIP"));
-//			orderStatus.setOrderDelivered(rs.getInt("ORDER_DELIVERED"));
-//			orderStatus.setOrderComplete(rs.getInt("ORDER_COMPLETE"));
-//			orderStatus.setMemberNo(rs.getInt("MEMBER_NO"));
-//			}
-//			
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			close(rs);
-//			close(pstmt);
-//		}
-//		
-//		return orderStatus;
-//		
-//	}
-
-	
 	
 }
