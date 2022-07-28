@@ -81,7 +81,7 @@ public class BoardUpdateServlet extends HttpServlet {
 	    	board.setBrdRenamedFileName(mr.getParameter("renamedFileName"));
 		}
     	
-    	result = new BoardService().save(board);
+    	result = new BoardService().saveBoard(board);
     	
     	if(result > 0) {
     		request.setAttribute("msg", "게시글 수정 성공");
