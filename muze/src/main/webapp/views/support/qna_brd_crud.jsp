@@ -7,6 +7,8 @@
 
 <jsp:include page="/views/common/header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/support/support.css">
+<link rel="stylesheet" href="${path}/resources/css/adminpage/admin.css">
+
 <!-- 내용 전체 컨테이너 -->
 <div class="container my-5">
 
@@ -35,11 +37,11 @@
 			</tr>
 			<tr>
 				<td style="height: 8%;"><b>제목</b></td>
-				<td><input type="text" name="brdTitle" size="40" style="padding-left: 1em;" placeholder="제목을 입력해 주세요."></td>
+				<td><input type="text" name="brdTitle" size="40" style="padding-left: 0.5em;" placeholder="제목을 입력해 주세요."></td>
 			</tr>
 			<tr>
 				<td style="height: 68%;"><b>본문</b></td>
-				<td><textarea name="brdContent" cols="90%" rows="15" style="padding: 1em; resize: none;"
+				<td><textarea name="brdContent" cols="90%" rows="15" style="padding: 0.5em; resize: none;"
 				placeholder="내용을 입력해 주세요."></textarea></td>
 			</tr>
 			<tr>
