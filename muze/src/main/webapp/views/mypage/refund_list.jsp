@@ -40,7 +40,7 @@
 			<div class="row">
 			 <div class="col-sm-12" style="margin-top: 30px;">
 			   <form id="myForm01">
-			     <span id="mySpan01">주문취소 / 반품조회</span> 
+			     <span id="mySpan01">상품환불 / 입금조회</span> 
 			   </form>
 			   	  <!-- 기간별 검색 -->
 			      <fieldset class="mySearchDate">
