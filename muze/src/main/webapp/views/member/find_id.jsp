@@ -52,7 +52,7 @@
                                             </div>
                                             <button type="submit" class="btn_member_id">아이디 찾기</button>
                                         </div>
-                                        <!-- <p class="dn js_caution_msg1">일치하는 회원정보가 없습니다. 다시 입력해 주세요.</p> -->
+                                          <p class="dn js_caution_msg1" style="display :none">일치하는 회원정보가 없습니다. 다시 입력해 주세요.</p> 
                                     </div>
                                     <!-- //find_id_sec -->
                                     <div class="btn_member_sec">
@@ -83,12 +83,12 @@
 			$('.js_caution_msg1', 'form').addClass('dn');
 		});
 		$('.js_btn_find_password', 'form').click(function (e) {
-			location.href = "${ path }/member/find_password";
 			e.preventDefault();
+			location.href = "${ path }/member/find_password";
 		});
 		$('.js_btn_login', 'form').click(function (e) {
-			location.href = "${ path }/member/login";
 			e.preventDefault();
+			location.href = "${ path }/member/login";
 		});
 		 $('input[name="findIdFl"]').on('click', function(){            
                if ($(this).val() == 'cellPhone') {            

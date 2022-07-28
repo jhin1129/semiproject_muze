@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.muze.mvc.member.model.service.MemberService;
 import com.muze.mvc.member.model.vo.Member;
-import com.muze.mvc.member.service.MemberService;
 
 @WebServlet(name = "login", urlPatterns = "/member/login")
 public class LoginServlet extends HttpServlet {

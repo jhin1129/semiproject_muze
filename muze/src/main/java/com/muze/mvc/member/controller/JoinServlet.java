@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.muze.mvc.member.model.service.MemberService;
 import com.muze.mvc.member.model.vo.Member;
-import com.muze.mvc.member.service.MemberService;
 
 
 @WebServlet(name = "join", urlPatterns = "/member/join")
