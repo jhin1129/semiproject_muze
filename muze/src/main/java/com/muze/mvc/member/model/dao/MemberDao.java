@@ -1,6 +1,4 @@
-package com.muze.mvc.member.dao;
-
-import static com.muze.mvc.common.jdbc.JDBCTemplate.close;
+package com.muze.mvc.member.model.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,10 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.muze.mvc.member.vo.Member;
+import com.muze.mvc.member.model.vo.Member;
 
 public class MemberDao {	
-	public Member findMemberById(String loginId) {
+	public Member findMemberById(Connection connection, String loginId) {
 		Member member = null;
 		Connection conn = null;
 		PreparedStatement pstm = null;
