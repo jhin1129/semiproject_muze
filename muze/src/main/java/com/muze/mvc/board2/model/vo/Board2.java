@@ -38,6 +38,6 @@ public class Board2 {
 	
 	String brdOriginalFileName;
 	
-	String brdRenameFileName;
+	String brdRenamedFileName;
 	
 }
