@@ -11,7 +11,7 @@
     <div class="container my-5">
 
         <div>
-            <h2 style="text-align: center;">자유 게시판</h2>
+            <h2 style="text-align: center;"><a href="${path }/board/list?type=FREE">자유 게시판</a></h2>
         </div>
 
         <div class="mt-5">
@@ -38,7 +38,7 @@
                 		<c:forEach var="board" items="${ list }">
 	                		<tr>
 		                        <td id="td">${ board.rowNum }</td>
-		                        <td id="td"><a href="${ path }/board/view?no=${ board.brdNo }&&type=${ type }">${ board.brdTitle }</a></td>
+		                        <td id="td"><a href="${ path }/board/view?no=${ board.brdNo }&type=${ type }">${ board.brdTitle }</a></td>
 		                        <td id="td">${ board.brdWriterId }</td>
 		                        <td id="td">${ board.brdDate }</td>
 		                        <td id="td">${ board.brdReadCount }</td>
@@ -54,8 +54,8 @@
             <div class="col-4"></div>
             <div class="col-4">
                 <ul class="pagination justify-content-center">
-                    <li class="page-item"><a class="page-link" href="${path }/board/list?page=1&&type=${type}">&lt;&lt;</a></li>
-                    <li class="page-item"><a class="page-link" href="${path }/board/list?page=${pageInfo.prevPage}&&type=${type}">&lt;</a></li>
+                    <li class="page-item"><a class="page-link" href="${path }/board/list?page=1&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&lt;&lt;</a></li>
+                    <li class="page-item"><a class="page-link" href="${path }/board/list?page=${pageInfo.prevPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&lt;</a></li>
                     
                     <!--  10개 페이지 목록 -->
 					<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
@@ -63,13 +63,13 @@
 		                    <li class="page-item disabled"><a class="page-link" href="#">${ status.current }</a></li>
 						</c:if>
 						<c:if test="${ status.current != pageInfo.currentPage }">
-		                    <li class="page-item"><a class="page-link" href="${path }/board/list?page=${status.current}&&type=${type}">${ status.current }</a></li>
+		                    <li class="page-item"><a class="page-link" href="${path }/board/list?page=${status.current}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">${ status.current }</a></li>
 					
 						</c:if>
 					</c:forEach>
                     
-                    <li class="page-item"><a class="page-link" href="${path }/board/list?page=${pageInfo.nextPage}&&type=${type}">&gt;</a></li>
-                    <li class="page-item"><a class="page-link" href="${path }/board/list?page=${pageInfo.maxPage}&&type=${type}">&gt;&gt;</a></li>
+                    <li class="page-item"><a class="page-link" href="${path }/board/list?page=${pageInfo.nextPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&gt;</a></li>
+                    <li class="page-item"><a class="page-link" href="${path }/board/list?page=${pageInfo.maxPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&gt;&gt;</a></li>
                 </ul>
             </div>
 
@@ -80,11 +80,9 @@
 
         <div class="search row mb-5">
             <div class="col-xs-2 col-sm-2">
-                <select name="searchType" class="form-control">
+                <select id="searchType" name="searchType" class="form-control">
                     <option value="title" selected>제목</option>
-                    <option value="title">작성자</option>
-                    <option value="title">내용</option>
-                    <option value="title">제목+내용</option>
+                    <option value="writer">작성자</option>
                 </select>
             </div>
 
@@ -101,4 +99,15 @@
         </div>
     </div>
 </div>
+
+<script>
+	$(document).ready(() => {
+		$("#searchBtn").on("click", () => {
+			var searchType = $("#searchType option:selected").val();
+			var searchVal = $("#searchInput").val();
+			
+			location.href="${path}/board/list?type=FREE&searchType="+searchType+"&searchVal="+searchVal+"&isSearch=true";
+		});
+	});
+</script>
 <jsp:include page="/views/common/footer.jsp"/>

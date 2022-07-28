@@ -27,11 +27,10 @@
   <link rel="stylesheet" href="${path}/resources/css/mypage/Mypage_Main.css">
 
   <!-- Adminpage CSS -->
-  <link rel="stylesheet" href="${path}/resources/css/adminpage/admin.css">
+  
   
   <!-- Support CSS -->
-  <link rel="stylesheet" href="${path}/resources/css/support/support.css">
-
+ 
   <title>Header</title>
 </head>
 
@@ -122,9 +121,9 @@
           고객 지원
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="${path}/board2/list?type=NOTICE">공지사항</a></li>
-          <li><a class="dropdown-item" href="${path}/board2/list?type=FAQ">자주하는 질문</a></li>
-          <li><a class="dropdown-item" href="${path}/board2/list?type=QNA">1:1 문의</a></li>
+          <li><a class="dropdown-item" href="${path}/support/list?type=NOTICE">공지사항</a></li>
+          <li><a class="dropdown-item" href="${path}/support/list?type=FAQ">자주하는 질문</a></li>
+          <li><a class="dropdown-item" href="${path}/support/list?type=QNA">1:1 문의</a></li>
         </ul>
       </li>
       <!-- <ul class="nav justify-content-end" id="search">
