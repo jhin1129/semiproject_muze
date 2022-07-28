@@ -6,14 +6,14 @@
 <c:set var="path" value="${ pageContext.request.contextPath }" />
 
 <jsp:include page="/views/common/header.jsp"/>
-
+<link rel="stylesheet" href="${path}/resources/css/support/support.css">
 <!-- 내용 전체 컨테이너 -->
 <div class="container my-5">
 
     <div>
-        <h3 style="text-align: left; margin-left: 60px; margin-bottom: 20px;">공지사항</h3>
-    </div>
-
+			<h3 style="text-align: left; margin-left: 60px; margin-bottom: 20px;">1 :1 문의</h3>
+	</div>
+	
     <div class="notice-content" style="height: 100%;">
 
         <table class="table" style="border: 1px; width: 1000px; height: 100%; margin: auto; font-size: 1em;">
@@ -46,7 +46,7 @@
         </table>
         <p style="text-align: center; margin-top: 10px;">
             <button type="button" class="button-white" style="margin: 0;" 
-            onclick="location.href='${ path }/support/update?type=NOTICE'"><b>수정</b></button>
+            onclick="location.href='${ path }/support/update?no=${ board.brdNo }&type=NOTICE'"><b>수정</b></button>
             <button type="button" class="button-white" id="btnDelete" style="margin: 0;"><b>삭제</b></button>
             <button type="button" class="button-white" style="margin: 0;" 
             onclick="location.href='${ path }/support/list?type=NOTICE'"><b>목록</b></button>
