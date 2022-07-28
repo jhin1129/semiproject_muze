@@ -21,17 +21,16 @@
     integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
   <!-- Mainstyle CSS -->
-  <link rel="stylesheet" type="text/css" href="${path}/resources/css/common/mainstyle.css">
+  <link rel="stylesheet" type="text/css" href="${path}/resources/css/common/mainstyle.css?after">
 
   <!-- Mypage CSS -->
   <link rel="stylesheet" href="${path}/resources/css/mypage/Mypage_Main.css">
 
   <!-- Adminpage CSS -->
-  <link rel="stylesheet" href="${path}/resources/css/adminpage/admin.css">
+  
   
   <!-- Support CSS -->
-  <link rel="stylesheet" href="${path}/resources/css/support/support.css">
-
+ 
   <title>Header</title>
 </head>
 
@@ -45,19 +44,33 @@
       </div>
       <!-- 상단 우측 메뉴 -->
       <div class="col-4 d-flex justify-content-center align-items-center mt-3">
-        <a class="mr-4 text-nowrap" href="#">로그인</a>
-        <a class="mr-4 text-nowrap" href="#">회원가입</a>
-        <a href="#" class="me-5 align-items-center mb-1">
-          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-cart2"
-            viewBox="0 0 16 16">
-            <path
-              d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
-          </svg>
-        </a>
-      </div>
+	      <c:if test="${ empty loginMember }">
+		        <a class="mr-4 text-nowrap" href="${path}/member/login">로그인</a>
+		        <a class="mr-4 text-nowrap" href="${path}/member/join_method">회원가입</a>
+		        <a href="#" class="me-5 align-items-center mb-1">
+		          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-cart2"
+		            viewBox="0 0 16 16">
+		            <path
+		              d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+		          </svg>
+		        </a>
+	      </c:if>
+	      
+	      <c:if test="${ not empty loginMember }">
+		        <a class="mr-4 text-nowrap" onclick="location.replace('${ path }/member/logout')">로그아웃</a>
+		        <a class="mr-4 text-nowrap" href="#" >마이페이지</a>
+		        <a href="#" class="me-5 align-items-center mb-1">
+		          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-cart2"
+		            viewBox="0 0 16 16">
+		            <path
+		              d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+		          </svg>
+		        </a>	      		      
+	      </c:if>
+	</div>   	
     </div>
-    </div>
-  </header>
+	</div>
+</header>
 
   <div class="container">
     <!-- 메인 메뉴 -->
@@ -84,7 +97,7 @@
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-          aria-expanded="false">
+          aria-expanded="false" style="padding-right:0px;">
           커뮤니티
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -108,9 +121,9 @@
           고객 지원
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="${path}/board2/list?type=NOTICE">공지사항</a></li>
-          <li><a class="dropdown-item" href="${path}/board2/list?type=FAQ">자주하는 질문</a></li>
-          <li><a class="dropdown-item" href="${path}/board2/list?type=QNA">1:1 문의</a></li>
+          <li><a class="dropdown-item" href="${path}/support/list?type=NOTICE">공지사항</a></li>
+          <li><a class="dropdown-item" href="${path}/support/list?type=FAQ">자주하는 질문</a></li>
+          <li><a class="dropdown-item" href="${path}/support/list?type=QNA">1:1 문의</a></li>
         </ul>
       </li>
       <!-- <ul class="nav justify-content-end" id="search">

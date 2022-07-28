@@ -28,6 +28,8 @@ public class Board {
 	
 	int brdProNo;
 	
+	String brdProName;
+	
 	String brdCategory;
 	
 	String brdRepContent;

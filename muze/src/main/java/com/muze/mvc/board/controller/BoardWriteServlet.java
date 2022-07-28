@@ -55,6 +55,10 @@ public class BoardWriteServlet extends HttpServlet {
     		
 		board.setBrdWriterNo(1);
 		board.setBrdTitle(title);
+		if(type.equals("REVIEW")) {
+			board.setBrdProNo(Integer.parseInt(mr.getParameter("proNo")));
+		}
+		System.out.println(board.getBrdProNo());
 		board.setBrdContent(content);
 		board.setBrdOriginalFileName(originalFileName);
 		board.setBrdRenamedFileName(filesystemName);
@@ -69,7 +73,7 @@ public class BoardWriteServlet extends HttpServlet {
 //    		request.setAttribute("msg", "게시글 등록 실패");
 //    		request.setAttribute("location", "/board/list");
 //		}
-    	new BoardService().deleteAllTempFiles(getServletContext().getRealPath("/resources/upload/board/temporary"));
+//    	new BoardService().deleteAllTempFiles(getServletContext().getRealPath("/resources/upload/board/temporary"));
     	response.sendRedirect(request.getContextPath() + "/board/list?type=" + type);
 	}
 

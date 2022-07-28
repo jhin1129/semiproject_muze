@@ -31,10 +31,10 @@
 
         <div>
         	<c:if test="${ type == 'REVIEW'}">
-	            <h2 style="text-align: center;">리뷰 게시판</h2>
+	            <h2 style="text-align: center;"><a href="${path }/board/list?type=REVIEW">리뷰 게시판</a></h2>
         	</c:if>
         	<c:if test="${ type == 'FREE'}">
-	            <h2 style="text-align: center;">자유 게시판</h2>
+	            <h2 style="text-align: center;"><a href="${path }/board/list?type=FREE">자유 게시판</a></h2>
         	</c:if>
         </div>
         <!-- 후기글 전체 -->
@@ -58,6 +58,33 @@
                             <th class="table-active">작성일</th>
                             <td>${board.brdDate }</td>
                         </tr>
+                       	<c:if test="${ type == 'REVIEW'}">
+	                        <tr>
+	                            <th class="table-active">리뷰 작품</th>
+	                            <td>${product.proName }</td>
+	                            <td></td>
+	                            <td></td>
+	                        </tr>
+                        </c:if>
+                        <tr>
+                            <th class="table-active">첨부파일</th>
+                            <td>
+								<c:if test="${ empty board.brdOriginalFileName }">
+									<span>-</span>
+								</c:if>
+								<c:if test="${ not empty board.brdOriginalFileName }">
+									<a href="javascript:" id="fileDown">
+										<span>${ board.brdOriginalFileName }</span>
+									</a>
+									<%-- 
+									<br><a href="${ path }/resources/upload/board/${board.renamedFileName}"
+										download="${ board.originalFileName }">파일 다운</a>
+									--%>
+								</c:if>
+							</td>
+							<td></td>
+							<td></td>
+                        </tr>
                     </tbody>
 
                 </table>
@@ -69,8 +96,8 @@
                     ${ board.brdContent }
                 </p>
                 <div class="text-right">
-                    <button class="btn btn-light py-0">수정</button>
-                    <button class="btn btn-light py-0">삭제</button>
+                    <button onclick="location.href='${path}/board/update?no=${ board.brdNo }&type=${ type }'" class="btn btn-light py-0">수정</button>
+                    <button id="btnDelete" class="btn btn-light py-0">삭제</button>
                 </div>
             </div>
 
@@ -91,12 +118,9 @@
 	                        <!-- 이미지 상세내용 -->
 	                        <div class="col-md-8">
 	                            <div class="card-body">
-	                                <h5 class="card-title">Card title</h5>
-	                                <p class="card-text">This is a wider card with supporting text below as a natural
-	                                    lead-in to
-	                                    additional
-	                                    content. This content is a little bit longer.</p>
-	                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+	                                <h5 class="card-title">${product.proName }</h5>
+	                                <p class="card-text">${product.proDescription }</p>
+	                                <p class="card-text"><small class="text-muted">${product.proArtistName}</small></p>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -144,7 +168,21 @@
         </div>
         <!-- 목록버튼 -->
         <div class="text-center mt-3 mb-5">
-            <button class="btn btn-light text-nowrap" onclick="location.href='${path}/board/list?type=${ type }'">목록</button>
+            <button class="btn btn-light text-nowrap" onclick="location.href='${path}/board/list?type=${type}'">목록</button>
         </div>
     </div>
+<script>
+	$(document).ready(() => {
+		$("#btnDelete").on("click", ()=> {
+			if(confirm("게시글을 삭제하시겠습니까?")){
+				location.replace("${path}/board/delete?no=${board.brdNo}&type=${board.brdType}");
+			}
+		});
+		
+		$("#fileDown").on("click", ()=> {
+			location.assign("${path}/board/fileDown?oname=${board.brdOriginalFileName}&rname=${board.brdRenamedFileName}");
+		});
+	});
+</script>    
+    
 <jsp:include page="/views/common/footer.jsp"/>

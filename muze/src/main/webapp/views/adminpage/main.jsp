@@ -6,7 +6,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <jsp:include page="/views/common/header.jsp"/>
-
+<link rel="stylesheet" href="${path}/resources/css/adminpage/admin.css">
   <!-- 내용 전체 컨테이너 -->
   <div class="container">
     <div class="row">

@@ -7,6 +7,13 @@
 
 <jsp:include page="/views/common/header.jsp"/>
 
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
+
+<!-- Login CSS -->
+<link rel="stylesheet" href="${path}/resources/css/login/Login.css">
+
 <!-- 내용 전체 컨테이너 -->
 <div class="container">
  	<div class="row">
@@ -18,24 +25,24 @@
               		</div>
               		<!-- //member_tit -->
 	<div class="member_cont">
-		<form id="formLogin" method="post" action="${ path }/member/login" novalidate="novalidate">
+		<form id="formLogin" action="${ path }/member/login" method="post" >
  			<input type="hidden" id="mode" name="mode" value="login">
             <input type="hidden" id="returnUrl" name="returnUrl" value="#">
             	<div class="member_login_box">
                     <!-- 회원 로그인 -->
                     <div class="login_input_sec">
                     	<div>
-                        	<input type="text" id="loginId" name="loginId" value="" placeholder="아이디" required="true" aria-required="true">
-                        	<input type="password" id="loginPwd" name="loginPwd" value="" placeholder="비밀번호" required="true" aria-required="true">
+                        	<input type="text" id="loginId" name="loginId" placeholder="아이디" value="${ empty cookie.saveId ? '' : cookie.saveId.value }" aria-required="true" required>
+                        	<input type="password" id="loginPwd" name="loginPwd" placeholder="비밀번호"  aria-required="true" required>
                       	</div>
-                    	<button type="submit">로그인</button>
+                    	<button type="submit" onclick="return loginCheck()" >로그인</button>
                     </div>
                     <div class="id_chk">
                     	<span class="form_element">
-                        	<input type="checkbox" id="saveId" name="saveId" value="y" checked="">
+                        	<input type="checkbox" id="saveId" name="saveId" ${ empty cookie.saveId ? "" : "checked" } >
                             <label for="saveId" class="">아이디 저장</label>
                       	</span>
-                    	<!-- <p class="dn js_caution_msg1">아이디, 비밀번호가 일치하지 않습니다. 다시 입력해 주세요.</p> -->
+                    		<p class="dn js_caution_msg1" style="display :none" >아이디, 비밀번호가 일치하지 않습니다. 다시 입력해 주세요.</p>
                     </div>
                 </div>
   
@@ -54,7 +61,7 @@
         
 		<!-- //nonmember_join_box -->
 		<div class="nonmember">
-			<form id="formOrderLogin" action="../member/member_ps.php" method="post" novalidate="novalidate">
+			<form id="formOrderLogin" action="${ path }/member/login" method="post">
  				<input type="hidden" name="mode" value="guestOrder">
 				<input type="hidden" name="returnUrl" value="../mypage/order_view.php">
 					<div class="nonmember_order_box">
@@ -78,5 +85,95 @@
 	</div>
 </div>
 <!-- //본문 끝 contents -->
+
+<script type="text/javascript" src="/resources/js/Member/member.js"></script>
+<script type="text/javascript">
+	var $formLogin;
+	$(document).ready(function () {
+		$('#btnJoinMember').click(function (e) {
+			e.preventDefault();
+			location.href = '${path}/member/join_method';
+		});
+		$('#btnFindId').click(function (e) {
+			e.preventDefault();
+			location.href = '${path}/member/find_id';
+		});
+		$('#btnFindPwd').click(function (e) {
+			e.preventDefault();
+			location.href = '${path}/member/find_password';
+		});
+
+		$('#loginId, #loginPwd').focusin(function () {
+			$('.js_caution_msg1', '#formLogin').addClass('dn');
+		});
+
+		$formLogin = $('#formLogin');
+		$formLogin.validate({
+			dialog: false,
+			rules: {
+				loginId: {
+					required: true
+				},
+				loginPwd: {
+					required: true
+				}
+			},
+			messages: {
+				loginId: {
+					required: "아이디를 입력해주세요"
+				},
+				loginPwd: {
+					required: "패스워드를 입력해주세요"
+				}
+			}, submitHandler: function (form) {
+			    if (window.location.search) {
+                    var _tempUrl = window.location.search.substring(1);
+                    var _tempVal = _tempUrl.split('=');
+
+                    if (_tempVal[1] == 'lnCouponDown') {
+                        $('#returnUrl').val(document.referrer);
+                    }
+                }
+				form.target = 'ifrmProcess';
+				form.submit();
+			}
+		});
+	});
+
+		// 비회원 주문조회 폼 체크
+		$('#formOrderLogin').validate({
+			rules: {
+				orderNm: 'required',
+				orderNo: {
+					required: true,
+					number: true,
+					maxlength: 16
+				}
+			},
+			messages: {
+				orderNm: {
+					required: "주문자명을 입력해주세요."
+				},
+				orderNo: {
+					required: "주문번호를 입력해주세요.",
+					number: "숫자로만 입력해주세요.",
+					maxlength: "주문번호는 16자리입니다."
+				}
+			},
+			submitHandler: function (form) {
+				$.post(form.action, $(form).serializeObject()).done(function (data, textStatus, jqXhr) {
+					console.log(data);
+					if (data.result == 0) {
+						location.replace('../mypage/order_view.php?orderNo=' + data.orderNo);
+					} else {
+						$('.js_caution_msg2').empty().html("주문자명과 주문번호가 일치하는 주문이 존재하지 않습니다. 다시 입력해 주세요.<br><span>주문번호와 비밀번호를 잊으신 경우, 고객센터로 문의하여 주시기 바랍니다.</span>");
+					}
+				});
+				return false;
+			}
+		});
+	
+</script>
+
 
 <jsp:include page="/views/common/footer.jsp"/>

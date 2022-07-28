@@ -18,13 +18,26 @@
     /* opacity : 0.5; */
     }
 
-    /* 호버 메뉴 삼각형 안보이게 */
-    ::after {
-    color: white;
-    }
-
     /* 링크 파랑색 밑줄 효과 삭제 */
-    A:link { text-decoration:none; color: black;}	
+    a:link {
+  	color : black;
+  	text-decoration: none;
+	}
+	
+	a:visited {
+  	color : black;
+  	text-decoration: none;
+	}
+	
+	a:hover {
+  	color : black;
+  	text-decoration: underline;
+	}
+	
+	a:active {
+  	color : black;
+  	text-decoration: none;
+	}	
 
     /* 캐러셀 이미지 크기 조정 */
     .carousel-inner > .carousel-item > img{
