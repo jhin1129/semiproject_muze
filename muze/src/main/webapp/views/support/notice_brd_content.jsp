@@ -70,12 +70,12 @@
 $(document).ready(() => {
 	$("#btnDelete").on("click", () => {
 		if(confirm("정말로 게시글을 삭제하시겠습니까?")) {
-			location.replace("${ path }/support/delete?brdNo=${board.brdNo}");
+			location.replace("${ path }/support/delete?brdNo=${ board.brdNo }&type=${ type }");
 		}
 	});
 	
 	$("#fileDown").on("click", () => {
-		location.assign("${ path }/support/fileDown?oname=${ board.originalFileName }&rname=${ board.renamedFileName }")
+		location.assign("${ path }/support/filedown?oname=${ board.brdOriginalFileName }&rname=${ board.brdRenamedFileName }")
 	});
 });
 </script>

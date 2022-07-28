@@ -18,7 +18,7 @@ public class Board2DeleteServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int result = 0;
-		int no = Integer.parseInt(request.getParameter("brdNo"));
+		int brdNo = Integer.parseInt(request.getParameter("brdNo"));
 		String type = request.getParameter("type");
 		
 		result = new Board2Service().delete(brdNo, type);
