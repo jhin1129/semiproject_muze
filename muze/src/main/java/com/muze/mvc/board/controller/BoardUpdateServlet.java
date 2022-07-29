@@ -77,6 +77,7 @@ public class BoardUpdateServlet extends HttpServlet {
     	String originalFileName = mr.getOriginalFileName("upfile");
     	String filesystemName = mr.getFilesystemName("upfile");
     	
+				
     	if (originalFileName != null && !originalFileName.equals("")) {
     		File file = new File(path + "/" + mr.getParameter("renamedFileName"));
     		
@@ -90,6 +91,9 @@ public class BoardUpdateServlet extends HttpServlet {
 			board.setBrdOriginalFileName(mr.getParameter("originalFileName"));
 	    	board.setBrdRenamedFileName(mr.getParameter("renamedFileName"));
 		}
+    	
+    	String img = new BoardService().getImg(mr.getParameter("content"));
+    	board.setBrdImg(img);
     	
     	result = new BoardService().saveBoard(board);
     	

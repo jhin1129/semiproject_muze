@@ -2,6 +2,7 @@ package com.muze.mvc.board.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -87,6 +88,8 @@ public class BoardWriteServlet extends HttpServlet {
     		String filesystemName = mr.getFilesystemName("upfile");
     		String originalFileName = mr.getOriginalFileName("upfile");
     		
+    		String img = new BoardService().getImg(content);
+    		
     		board = new Board();
     		
     		board.setBrdTitle(title);
@@ -98,6 +101,7 @@ public class BoardWriteServlet extends HttpServlet {
     		board.setBrdOriginalFileName(originalFileName);
     		board.setBrdRenamedFileName(filesystemName);
     		board.setBrdType(type);
+    		board.setBrdImg(img);
     		
     		result = new BoardService().saveBoard(board);
     		

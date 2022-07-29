@@ -84,20 +84,20 @@ public class BoardService {
 		return result;
 	}
 
-	public void deleteAllTempFiles(String targetFolder) {
-		File folder = new File(targetFolder);
-		if(!folder.exists()) {
-            return ;
-        }
-        
-        File[] files = folder.listFiles();
-        for(File file : files) {           
-            file.delete();
-        }
-        
-        return ;
-		
-	}
+//	public void deleteAllTempFiles(String targetFolder) {
+//		File folder = new File(targetFolder);
+//		if(!folder.exists()) {
+//            return ;
+//        }
+//        
+//        File[] files = folder.listFiles();
+//        for(File file : files) {           
+//            file.delete();
+//        }
+//        
+//        return ;
+//		
+//	}
 
 	public int deleteBoard(int brdNo) {
 		int result = 0;
@@ -207,6 +207,13 @@ public class BoardService {
 				return true;
 		}
 		return false;
+	}
+
+	public String getImg(String content) {
+		if(content.indexOf("<img src=\"") == -1) {
+			return null;
+		}
+		return content.substring(content.indexOf("<img src=\"")).split("temporary/")[1].split("\"")[0];
 	}
 
 
