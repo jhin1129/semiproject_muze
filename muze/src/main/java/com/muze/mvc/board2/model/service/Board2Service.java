@@ -33,11 +33,23 @@ public class Board2Service {
 		return list;
 	}
 
-	public Board2 getBoardByNo(int brdNo, String type) {
+	public Board2 getBoardByNo(int brdNo, boolean hasRead, String type) {
 		Board2 board = null;
 		Connection connection = getConnection();
 		
 		board = new Board2Dao().findBoardByNo(connection, brdNo, type);
+		
+		// 게시글 조회수 증가 로직
+		if(board != null && !hasRead) {
+			int result = new Board2Dao().updateReadCount(connection, board);
+			
+			if(result > 0) {
+				commit(connection);
+			} else {
+				rollback(connection);
+			}
+		}
+	
 		
 		close(connection);
 		

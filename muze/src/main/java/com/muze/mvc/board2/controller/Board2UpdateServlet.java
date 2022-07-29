@@ -30,7 +30,7 @@ public class Board2UpdateServlet extends HttpServlet {
 
 		System.out.println("게시글 번호 " + brdNo);
 	
-		board = new Board2Service().getBoardByNo(brdNo, type);
+		board = new Board2Service().getBoardByNo(brdNo, true, type);
 	
 		request.setAttribute("board", board);
 	
