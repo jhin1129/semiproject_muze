@@ -26,7 +26,7 @@ public class Board2FileDownServlet extends HttpServlet {
 
 		System.out.println(oname + ", " + rname);
 		
-		// 1. 클라이언트로 전송할 파일의 경로와 파일명을 가져옴 슬래시 하나(+"/")면 / 둘(+"//")이면 역슬래시(\)로 출력됨
+		// 1. 클라이언트로 전송할 파일의 경로와 파일명을 가져옴. 슬래시 하나(+"/")면 / 둘(+"//")이면 역슬래시(\)로 출력됨
 		String filePath = getServletContext().getRealPath("/resources/upload/board/permanant") + "//" + rname;
 		
 		System.out.println(filePath);

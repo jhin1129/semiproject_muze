@@ -23,6 +23,8 @@ public class Board2ViewServlet extends HttpServlet {
 
 		int brdNo = Integer.parseInt(request.getParameter("brdNo"));
 		
+		System.out.println(brdNo);
+		
 		String type = request.getParameter("type");
 		
 		board = new Board2Service().getBoardByNo(brdNo, type);
@@ -31,11 +33,11 @@ public class Board2ViewServlet extends HttpServlet {
 		
 		request.setAttribute("type", type);
 		
-//		if(type.equals("NOTICE")) {
+		if(type.equals("NOTICE")) {
 			request.getRequestDispatcher("/views/support/notice_brd_content.jsp").forward(request, response);
-//		} else if(type.equals("QNA")) {
-//			request.getRequestDispatcher("/views/support/qna_brd_content.jsp").forward(request, response);
-//		}
+		} else if(type.equals("QNA")) {
+			request.getRequestDispatcher("/views/support/qna_brd_content.jsp").forward(request, response);
+		}
 		
 	}
 	
