@@ -188,7 +188,7 @@
 	};
 	$(document).ready(() => {
 		$("#btnFindProduct").on("click", () => {
-			let url ="${path}/board/findProduct?memberNo=6";
+			let url ="${path}/board/findProduct?memberNo=${loginMember.memberNo}";
 			let status = "left=500px,top=200px,width=600px,height=600px";
 			
 			open(url,"",status);
