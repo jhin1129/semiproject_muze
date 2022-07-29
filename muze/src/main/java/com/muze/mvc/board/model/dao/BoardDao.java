@@ -456,4 +456,28 @@ public class BoardDao {
 		return product;
 	}
 
+	public int updateReadCount(Connection connection, Board board) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "UPDATE BOARD SET BRD_READCOUNT=? WHERE BRD_NO=?";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			board.setBrdReadCount(board.getBrdReadCount() + 1);
+			
+			
+			pstmt.setInt(1, board.getBrdReadCount());
+			pstmt.setInt(2, board.getBrdNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }

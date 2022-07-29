@@ -47,6 +47,17 @@ public class BoardService {
 		
 		board = new BoardDao().findBoardByNo(connection, brdNo, type);
 		
+		// 게시글 조회수 증가 로직
+		if(board != null && !hasRead) {
+			int result = new BoardDao().updateReadCount(connection, board);
+			
+			if(result > 0) {
+				commit(connection);
+			} else {
+				rollback(connection);
+			}
+		}
+		
 		close(connection);
 		
 		return board;
