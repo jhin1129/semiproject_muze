@@ -102,7 +102,6 @@ public class BoardWriteServlet extends HttpServlet {
     		board.setBrdRenamedFileName(filesystemName);
     		board.setBrdType(type);
     		board.setBrdImg(img);
-    		
     		result = new BoardService().saveBoard(board);
     		
 			if(result > 0) {

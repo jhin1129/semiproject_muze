@@ -36,11 +36,7 @@ public class BoardImgUploadServlet extends HttpServlet {
 		String file = (String)files.nextElement();
 		fileName = mr.getFilesystemName(file);
 		
-		System.out.println("path1 : "+path);
-		
 		path = request.getContextPath() + "/resources/upload/board/temporary/" + fileName;
-		
-		System.out.println("path2 : "+path);
 		
 		map.put("url", path);
 		

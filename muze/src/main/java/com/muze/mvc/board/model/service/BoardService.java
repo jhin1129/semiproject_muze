@@ -210,10 +210,11 @@ public class BoardService {
 	}
 
 	public String getImg(String content) {
-		if(content.indexOf("<img src=\"") == -1) {
+		if(content.indexOf("src=\"") == -1) {
 			return null;
 		}
-		return content.substring(content.indexOf("<img src=\"")).split("temporary/")[1].split("\"")[0];
+		System.out.println("리뷰글 작성. 이미지명 : " + content.substring(content.indexOf("src=\"")).split("temporary/")[1].split("\"")[0]);
+		return content.substring(content.indexOf("src=\"")).split("temporary/")[1].split("\"")[0];
 	}
 
 

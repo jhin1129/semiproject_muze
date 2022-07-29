@@ -48,7 +48,6 @@ public class CommentsWriteServlet extends HttpServlet {
 			
 			getComments = new BoardService().saveComments(comments);
 			response.setContentType("application/json;charset=UTF-8");
-			System.out.println(getComments);
 			Gson gson =  new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			gson.toJson(getComments, response.getWriter());
 		} 

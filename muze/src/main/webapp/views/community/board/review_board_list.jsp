@@ -18,10 +18,12 @@
 		<c:if test="${status.count % 4 == 1}">
 			<div class="row my-5">
 		</c:if>
-		
 		<div class="col-lg-3 col-md-6" onclick="location.href='${ path }/board/view?no=${ board.brdNo }&type=${ type }'">
             <div class="card" style="width: 16rem;">
-                <img style="background-color: black;" width="100%"; height="254px">
+				<div>
+                	<img src="${path}/resources/upload/board/temporary/${board.brdImg }" onerror="this.src='${path}/resources/images/common/No-Image.png'" style="width: 100%; height:254px; object-fit:contain;">
+				</div>
+
                 <div class="card-body" style="width:100%; height: 140px;">
                     <h5 class="card-title" style="overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">${ board.brdTitle }</h5>
                     <p class="card-text">${board.brdProName }</p>
