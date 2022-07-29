@@ -26,25 +26,24 @@ public class CommentsUpdateServlet extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int result = 0;
-    	Comments comments = new Comments();
-    	Comments getComments = new Comments();
-    	comments.setCommentsNo(Integer.parseInt(request.getParameter("commentsNo")));
-    	comments.setCommentsContent( request.getParameter("commentsContent"));
-    	
-    	
-    	getComments = new BoardService().saveComments(comments);
+		int commentsWriterNo = Integer.parseInt(request.getParameter("commentsWriterNo"));
+		
+		boolean selfCheck = new BoardService().selfCheck(request, commentsWriterNo);
+		
+		if(selfCheck) {
+			int result = 0;
+	    	Comments comments = new Comments();
+	    	Comments getComments = new Comments();
+	    	comments.setCommentsNo(Integer.parseInt(request.getParameter("commentsNo")));
+	    	comments.setCommentsContent( request.getParameter("commentsContent"));
+	    	
+	    	getComments = new BoardService().saveComments(comments);
 
-    	//    	
-//    	if(result > 0) {
-//    		request.setAttribute("msg", "게시글 수정 성공");
-//    	} else {
-//    		request.setAttribute("msg", "게시글 수정 실패");
-//    	}
-//    	
-		if(getComments.getCommentsNo() > 0) {
-			new Gson().toJson(getComments.getCommentsNo(), response.getWriter());
-		}
+	    	if(getComments.getCommentsNo() > 0) {
+				new Gson().toJson(getComments.getCommentsNo(), response.getWriter());
+			}
+    	}
+
 	}
 
 }

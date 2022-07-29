@@ -24,6 +24,9 @@ public class BoardDao {
 		case "title":
 			query = "SELECT COUNT(*) FROM BOARD WHERE BRD_STATUS='Y' AND BRD_TYPE=? AND BRD_TITLE LIKE '%"+searchVal+"%'";
 			break;
+		case "proName":
+			query = "SELECT COUNT(*) FROM BOARD JOIN PRODUCT ON(BOARD.BRD_PRO_NO = PRODUCT.PRO_NO) WHERE BRD_STATUS='Y' AND BRD_TYPE=? AND PRO_NAME LIKE '%"+searchVal+"%'";
+			break;
 		case "writer":
 			query = "SELECT COUNT(*) FROM BOARD JOIN MEMBER ON(BOARD.BRD_WRITER_NO = MEMBER.MEMBER_NO) WHERE BRD_STATUS='Y' AND BRD_TYPE=? AND MEMBER_ID LIKE '%"+searchVal+"%'";
 			break;
@@ -63,6 +66,9 @@ public class BoardDao {
 		switch(searchType) {
 		case "title":
 			subquery = " AND BRD_TITLE LIKE '%" + searchVal + "%'";
+			break;
+		case "proName":
+			subquery = " AND PRO_NAME LIKE '%" + searchVal + "%'";
 			break;
 		case "writer":
 			subquery = " AND MEMBER_ID LIKE '%" + searchVal + "%'";

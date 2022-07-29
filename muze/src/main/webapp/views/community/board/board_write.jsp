@@ -33,14 +33,15 @@
         <!-- 후기글 전체 -->
         <div class="mt-5" style="border: 1px solid rgb(238, 233, 233);">
 		
-			<form action="${ path }/board/write?type=${type}" onsubmit="return isProductSelect()" method="POST" enctype="multipart/form-data">
+			<form action="${ path }/board/write?type=${type}" onsubmit="return submitCheck()" method="POST" enctype="multipart/form-data">
+				<input type="hidden" name="writerNo" value=${ loginMember.memberNo }>
 	            <div>
 	                <table class="table m-0">
 	                    <thead>
 	                        <tr>
 	                            <th class="table-active" style="width: 20%;">제목</th>
 	                            <td style="width: 80%;">
-	                            	<input type="text" name="title" placeholder="제목을 입력해주세요." style="width: 80%;">
+	                            	<input type="text" id="title" name="title" placeholder="제목을 입력해주세요." style="width: 80%;">
 	                            </td>
 	                        </tr>
 	                    </thead>
@@ -49,7 +50,7 @@
 	                        <tr>
 	                            <th class="table-active">작성자</th>
 	                            <td>
-	                            	<input type="text" name="writer" value="1234" readonly style="border: 0px;">
+	                            	<input type="text" name="writer" value=${loginMember.memberId } readonly style="border: 0px;">
 	                            </td>
 	                        </tr>
 	                       	<c:if test="${ type == 'REVIEW'}">
@@ -175,7 +176,11 @@
     </div>
     
 <script>
-	function isProductSelect() {
+	function submitCheck() {
+		if($("#title").val().trim()==""){
+			alert("제목을 입력해주세요");
+			return false;
+		}
 		if($("#proNo").val()==""){
 			alert("리뷰작품을 선택해주세요");
 			return false;

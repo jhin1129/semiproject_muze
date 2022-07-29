@@ -4,12 +4,17 @@ import java.io.File;
 import java.sql.Connection;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import com.muze.mvc.board.model.dao.BoardDao;
 import com.muze.mvc.board.model.dao.CommentsDao;
 import com.muze.mvc.board.model.vo.Board;
 import com.muze.mvc.board.model.vo.Comments;
 import com.muze.mvc.board.model.vo.Product;
 import com.muze.mvc.common.util.PageInfo;
+import com.muze.mvc.member.model.vo.Member;
+
 import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
 
 public class BoardService {
@@ -165,6 +170,32 @@ public class BoardService {
 		
 		close(connection);
 		return result;
+	}
+
+	public boolean authorityCheck(HttpServletRequest request, List<String> authority) {
+		HttpSession session = request.getSession(false);
+		Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
+		
+		if(loginMember != null) {
+			for(String aut : authority) {
+				if(loginMember.getMemberRole().equals(aut)) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+
+	public boolean selfCheck(HttpServletRequest request, int no) {
+		HttpSession session = request.getSession(false);
+		Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
+		
+		if(loginMember != null ) {
+			if(loginMember.getMemberNo() == no)
+				return true;
+		}
+		return false;
 	}
 
 

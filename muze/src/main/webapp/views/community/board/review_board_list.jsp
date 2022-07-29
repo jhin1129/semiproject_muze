@@ -21,9 +21,9 @@
 		
 		<div class="col-lg-3 col-md-6" onclick="location.href='${ path }/board/view?no=${ board.brdNo }&type=${ type }'">
             <div class="card" style="width: 16rem;">
-                <img style="background-color: black;" width="100%" height="254px">
-                <div class="card-body">
-                    <h5 class="card-title">${ board.brdTitle }</h5>
+                <img style="background-color: black;" width="100%"; height="254px">
+                <div class="card-body" style="width:100%; height: 140px;">
+                    <h5 class="card-title" style="overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">${ board.brdTitle }</h5>
                     <p class="card-text">${board.brdProName }</p>
                     <p class="card-text">${board.brdWriterId }</p>
                 </div>
@@ -69,6 +69,7 @@
     	<div class="col-xs-2 col-sm-2">
         	<select id="searchType" name="searchType" class="form-control">
             	<option value="title" selected>제목</option>
+                <option value="proName">작품명</option>
                 <option value="writer">작성자</option>
             </select>
         </div>
@@ -87,7 +88,9 @@
 </div>
 
 <script>
+
 	$(document).ready(() => {
+
 		$("#searchBtn").on("click", () => {
 			var searchType = $("#searchType option:selected").val();
 			var searchVal = $("#searchInput").val();

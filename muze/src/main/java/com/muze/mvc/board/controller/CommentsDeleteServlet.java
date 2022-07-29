@@ -25,13 +25,18 @@ public class CommentsDeleteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int result = 0;
 		int commentsNo = Integer.parseInt(request.getParameter("commentsNo"));
+		int commentsWriterNo = Integer.parseInt(request.getParameter("commentsWriterNo"));
 		
-		System.out.println(commentsNo);
-		result = new BoardService().deleteComments(commentsNo);
 		
-		if(result == 1) {
-			new Gson().toJson(result, response.getWriter());
-		}
+		boolean selfCheck = new BoardService().selfCheck(request, commentsWriterNo);
+		
+		if(selfCheck) {
+    		result = new BoardService().deleteComments(commentsNo);
+    		
+    		if(result == 1) {
+    			new Gson().toJson(result, response.getWriter());
+    		}
+    	}
 		
 	}
 
