@@ -683,6 +683,12 @@
   border: 1px solid #989898;
 }
 
+.member_warning .emailCheck {
+  margin: 0 0 0 5px;
+  padding: 5px 10px 5px 10px;
+  border: 1px solid #989898;
+}
+
 .base_info_box h3 {
   display: inline-block;
   font-size: 18px;
@@ -949,7 +955,6 @@
 td {
   font-size: 13px;
   line-height: 1.5;
-  color: #333;
 }
 
 .join_agreement_cont .agreement_choice_box .agreement_scroll {

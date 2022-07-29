@@ -29,8 +29,8 @@ public class JoinServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	Member member = new Member();
     	
-    	member.setMemberId(request.getParameter("memId"));
-    	member.setMemberPassword(request.getParameter("memPw"));
+    	member.setMemberId(request.getParameter("newMemId"));
+    	member.setMemberPassword(request.getParameter("newPassword"));
     	member.setMemberName(request.getParameter("memNm"));
     	member.setMemberEmail(request.getParameter("email"));
     	member.setMemberPhonenumber(request.getParameter("cellPhone"));
@@ -43,7 +43,7 @@ public class JoinServlet extends HttpServlet {
     	if(result > 0) {
     		// 회원 가입 완료
         	request.setAttribute("msg", "회원 가입 성공");
-    		request.setAttribute("location", "/");
+    		request.setAttribute("location", "/member/join_ok");
     	} else {
     		// 회원 가입 실패
         	request.setAttribute("msg", "회원 가입 실패");
