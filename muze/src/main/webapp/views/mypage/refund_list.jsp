@@ -94,7 +94,7 @@
 		                        <a href="${ path }/mypage/orderdetail?no=${ refundByDate.orderNo }" id="my_td02">${ refundByDate.orderNo }</a> <br>
 		                      </td> 
 		                      <td id="my_td01">${ refundByDate.proName }</td>
-		                      <td id="my_td01">${ refundByDate.proPrice }원 / ${ refundByDate.orderAmount }개</td>
+		                      <td id="my_td01"><fmt:formatNumber value="${ refundByDate.proPrice }" pattern="#,###"/>원 / ${ refundByDate.orderAmount }개</td>
 		                      <td id="my_td01">${ refundByDate.orderStatus }</td>
 		                      <td id="my_td01"></td>
 		                    </tr>

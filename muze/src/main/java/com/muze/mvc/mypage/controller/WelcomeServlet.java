@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.muze.mvc.member.service.MemberService;
 import com.muze.mvc.member.vo.Member;
 import com.muze.mvc.mypage.model.service.MyOrderService;
 import com.muze.mvc.mypage.model.service.WelcomeService;
@@ -26,36 +25,47 @@ public class WelcomeServlet extends HttpServlet {
 
     @Override	
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	// 로그인 체크 & 본인 게시글 여부 확인 (직접 적용해 보세요) 
+    	// 로그인 체크 & 본인 게시글 여부 확인 
 		HttpSession session = request.getSession(false);
     	Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
 		
-    	
-//    	if (loginMember != null) {
-    
-    	// 1st row
-    	Welcome welcomeRow = null;   	
-    	welcomeRow = new WelcomeService().getWelcomeRow();
-		request.setAttribute("welcomeRow", welcomeRow);
-
-    	// 2nd row
-		List<MyOrder> status = null;
-		status = new MyOrderService().getOrderStatus();
+    	// 서블릿 이동되었는지 확인 
+    	System.out.println("웰컴서블릿시작");
+		System.out.println(loginMember);
 		
-    	// 3rd row 
-		List<MyOrder> list = null;
-		list = new MyOrderService().getOrderRec();
+    	if (loginMember != null) {
+    		// 로그인 객체의 PK값을 넘기기 위한 객체 생성 
+			Member member = new Member();
+			member.setMemberNo(loginMember.getMemberNo());
+	    	
+	    	// 1st row
+	    	Welcome welcomeRow = null;   	
+	    	welcomeRow = new WelcomeService().getWelcomeRow(member);
+	    	
+	    	// 잘 가져와 졌는지 확인 
+	    	System.out.println(welcomeRow);
+	
+	    	// 2nd row
+			List<MyOrder> status = null;
+			status = new MyOrderService().getOrderStatus(member);
+			
+	    	// 3rd row 
+			List<MyOrder> list = null;
+			list = new MyOrderService().getOrderRec(member);
+	
+			request.setAttribute("status", status);
+			request.setAttribute("list", list);
+			request.setAttribute("welcomeRow", welcomeRow);
+	    	request.getRequestDispatcher("/views/mypage/welcome.jsp").forward(request, response);
+    	
+    	} else {
+    		request.setAttribute("msg", "로그인이 필요한 서비스입니다.");
+			request.setAttribute("location", "/");		
+    		
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+    	}
 
-		request.setAttribute("status", status);
-		request.setAttribute("list", list);
-    	request.getRequestDispatcher("/views/mypage/welcome.jsp").forward(request, response);
-    	
-//    	} else {
-//    		
-//    		request.getRequestDispatcher("/views/member/login.jsp").forward(request, response);
-//    		
-//    	}
-    	
+
 	}
     
 }

@@ -17,5 +17,13 @@ public class MyMileage {
 	private Date pointDate;
 	private String route;
 	private String inOut;
-
+	
+	public void setRoute(String route) {
+		
+		if (route.equals("ATT")) {
+			
+			this.route = "출석 이벤트";
+		}
+	}
+	
 }

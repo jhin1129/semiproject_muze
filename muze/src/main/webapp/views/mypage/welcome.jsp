@@ -60,14 +60,13 @@
                    		<c:forEach var="getOrderRec" items="${ list }">
 		                    <tr>
 		                      <td id="my_td01">${ getOrderRec.orderDate } <br>
-		                        <a href="${ path }/mypage/orderdetail?no=${ getOrderRec.orderNo }" id="my_td02">${ getOrderRec.orderNo }</a> <br>
+		                        <a href="${ path }/mypage/orderdetail" id="my_td02">${ getOrderRec.orderNo }</a> <br>
 		                      	  <c:if test="${ getOrderRec.orderStatus != '환불' && getOrderRec.orderStatus != '구매확정' && getOrderRec.orderStatus != '취소'}">
 		                        	<button type="button" class="btn btn-outline-secondary" id="mycbtn">주문취소 </button>
 		                       	  </c:if>
 		                      </td> 
 		                      <td id="my_td01">${ getOrderRec.proName }</td>
-		                      <td id="my_td01">
-		                     	 <fmt:formatNumber value="${ getOrderRec.proPrice }" pattern="#,###"/>원 / ${ getOrderRec.orderAmount }개</td>
+		                      <td id="my_td01">${ getOrderRec.strPrice }원 / ${ getOrderRec.orderAmount }개</td>
 		                      <td id="my_td01">${ getOrderRec.orderStatus }</td>
 		                      <td id="my_td01"></td>
 		                    </tr>

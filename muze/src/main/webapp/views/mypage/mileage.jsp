@@ -81,13 +81,13 @@
                     	</tr>
                    	</c:if>
                    	<c:if test="${ not empty list }">
-                   		<c:forEach var="orderByDate" items="${ list }">
+                   		<c:forEach var="myMileage" items="${ list }">
 		                    <tr>
-		                      <td id="my_td01">${ myMileage.route } <br>
-		                      </td> 
-		                      <td id="my_td01">${ myMileage.pointNo } </td>
-		                      <td id="my_td01">${ myMileage.point } </td>
-		                      <td id="my_td01"></td>
+		                      <td id="my_td01">${ myMileage.pointDate }</td> 
+		                      <td id="my_td01">${ myMileage.inOut } </td>
+		                      <td id="my_td01">${ myMileage.route } </td>
+		                      <td id="my_td01">${ myMileage.point }</td>
+		                      <td id="my_td01">${ myMileage.point }</td>
 		                    </tr>
 	                    </c:forEach>
                     </c:if>

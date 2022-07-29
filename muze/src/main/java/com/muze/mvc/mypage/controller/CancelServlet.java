@@ -1,6 +1,7 @@
 package com.muze.mvc.mypage.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,9 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.muze.mvc.mypage.model.service.MyOrderService;
-import com.muze.mvc.mypage.model.service.WelcomeService;
-import com.muze.mvc.mypage.model.vo.MyOrder;
-import com.muze.mvc.mypage.model.vo.Welcome;
 
 @WebServlet("/mypage/cancel")
 public class CancelServlet extends HttpServlet {

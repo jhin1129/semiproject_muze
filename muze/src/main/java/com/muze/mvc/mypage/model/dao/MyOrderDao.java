@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.muze.mvc.member.vo.Member;
 import com.muze.mvc.mypage.model.vo.MyMileage;
 import com.muze.mvc.mypage.model.vo.MyOrder;
 
@@ -63,7 +64,7 @@ public class MyOrderDao {
 	}
 
 	// 날짜별 주문 검색 
-	public List<MyOrder> getOrderByDate(Connection connection, String dateFrom, String dateTo) {
+	public List<MyOrder> getOrderByDate(Connection connection, String dateFrom, String dateTo, Member member) {
 		List<MyOrder> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -71,14 +72,15 @@ public class MyOrderDao {
 						+ "FROM PRODUCT P "
 						+ "JOIN ORDERS O ON (P.PRO_NO = O.PRO_NO) "
 						+ "JOIN ORDER_STATUS OS ON (OS.ORDER_NO = O.ORDER_NO) "
-						+ "WHERE O.MEMBER_NO = 9 AND O.ORDER_DATE BETWEEN ? AND ? AND NOT(ORDER_STATUS = '환불' OR ORDER_STATUS = '취소') "
+						+ "WHERE O.MEMBER_NO = ? AND O.ORDER_DATE BETWEEN ? AND ? AND NOT(ORDER_STATUS = '환불' OR ORDER_STATUS = '취소') "
 						+ "GROUP BY O.ORDER_NO, O.ORDER_DATE, O.ORDER_AMOUNT, P.PRO_NAME, P.PRO_PRICE, OS.ORDER_STATUS";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
 			
-			pstmt.setString(1, dateFrom);
-			pstmt.setString(2, dateTo);
+			pstmt.setInt(1, member.getMemberNo());
+			pstmt.setString(2, dateFrom);
+			pstmt.setString(3, dateTo);
 
 			rs = pstmt.executeQuery();
 
@@ -108,7 +110,7 @@ public class MyOrderDao {
 	}
 
 	// 주문 정보 (30일) 
-	public List<MyOrder> getOrderRec(Connection connection) {
+	public List<MyOrder> getOrderRec(Connection connection, Member member) {
 		List<MyOrder> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -116,10 +118,11 @@ public class MyOrderDao {
 						+ "FROM PRODUCT P "
 						+ "JOIN ORDERS O ON (P.PRO_NO = O.PRO_NO) "
 						+ "JOIN ORDER_STATUS OS ON (OS.ORDER_NO = O.ORDER_NO) "
-						+ "WHERE O.MEMBER_NO = 9 AND O.ORDER_DATE > SYSDATE -30";
+						+ "WHERE O.MEMBER_NO = ? AND O.ORDER_DATE > SYSDATE -30";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
+			pstmt.setInt(1, member.getMemberNo());
 			
 			rs = pstmt.executeQuery();
 
@@ -147,7 +150,7 @@ public class MyOrderDao {
 	}
 
 	// 주문 현황 
-	public List<MyOrder> getOrderStatus(Connection connection) {
+	public List<MyOrder> getOrderStatus(Connection connection, Member member) {
 		List<MyOrder> getOrderStatus = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -159,10 +162,12 @@ public class MyOrderDao {
         int result6 = 0;
 		String query = "SELECT ORDER_STATUS "
 						+ "FROM ORDER_STATUS "
-						+ "WHERE MEMBER_NO = 9 AND ORDER_DATE > SYSDATE -30 AND NOT(ORDER_STATUS = '환불' OR ORDER_STATUS = '취소')";
+						+ "WHERE MEMBER_NO = ? AND ORDER_DATE > SYSDATE -30 AND NOT(ORDER_STATUS = '환불' OR ORDER_STATUS = '취소')";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
+			pstmt.setInt(1, member.getMemberNo());
+
 			
 			rs = pstmt.executeQuery();
 
@@ -193,10 +198,11 @@ public class MyOrderDao {
 	public int orderCancel(Connection connection) {
 		int result = 0;
 		PreparedStatement pstm = null;
-		String query = "UPDATE ORDER_STATUS SET ORDER_STATUS = '취소' WHERE ORDER_NO = '2207239'";
+		String query = "UPDATE ORDER_STATUS SET ORDER_STATUS = '취소' WHERE ORDER_NO = ? ";
 		
 		try {
 			pstm = connection.prepareStatement(query);
+			pstm.setInt(1, 334); 
 			
 			result = pstm.executeUpdate();
 			
@@ -210,7 +216,7 @@ public class MyOrderDao {
 	}
 
 	// 날짜별 취소 검색 
-	public List<MyOrder> getCancelByDate(Connection connection, String dateFrom, String dateTo) {
+	public List<MyOrder> getCancelByDate(Connection connection, String dateFrom, String dateTo, Member member) {
 		List<MyOrder> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -218,18 +224,18 @@ public class MyOrderDao {
 						+ "FROM PRODUCT P "
 						+ "JOIN ORDERS O ON (P.PRO_NO = O.PRO_NO) "
 						+ "JOIN ORDER_STATUS OS ON (OS.ORDER_NO = O.ORDER_NO) "
-						+ "WHERE O.MEMBER_NO = 9 AND O.ORDER_DATE BETWEEN ? AND ? AND (ORDER_STATUS = '반품' OR ORDER_STATUS = '취소') "
+						+ "WHERE O.MEMBER_NO = ? AND O.ORDER_DATE BETWEEN ? AND ? AND (ORDER_STATUS = '반품' OR ORDER_STATUS = '취소') "
 						+ "GROUP BY O.ORDER_NO, O.ORDER_DATE, O.ORDER_AMOUNT, P.PRO_NAME, P.PRO_PRICE, OS.ORDER_STATUS";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
 			
-			pstmt.setString(1, dateFrom);
-			pstmt.setString(2, dateTo);
+			pstmt.setInt(1, member.getMemberNo()); 
+			pstmt.setString(2, dateFrom);
+			pstmt.setString(3, dateTo);
 
 			rs = pstmt.executeQuery();
 
-			// 조회되는 데이터가 있으면 myOrder 객체로 만들어 리턴한다.
 			while (rs.next()) {
 				MyOrder cancelByDate = new MyOrder();
 				
@@ -255,7 +261,7 @@ public class MyOrderDao {
 	}
 
 	// 날짜별 환불 검색 
-	public List<MyOrder> getRefundByDate(Connection connection, String dateFrom, String dateTo) {
+	public List<MyOrder> getRefundByDate(Connection connection, String dateFrom, String dateTo, Member member) {
 		List<MyOrder> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -263,14 +269,15 @@ public class MyOrderDao {
 						+ "FROM PRODUCT P "
 						+ "JOIN ORDERS O ON (P.PRO_NO = O.PRO_NO) "
 						+ "JOIN ORDER_STATUS OS ON (OS.ORDER_NO = O.ORDER_NO) "
-						+ "WHERE O.MEMBER_NO = 9 AND O.ORDER_DATE BETWEEN ? AND ? AND (ORDER_STATUS = '환불') "
+						+ "WHERE O.MEMBER_NO = ? AND O.ORDER_DATE BETWEEN ? AND ? AND (ORDER_STATUS = '환불') "
 						+ "GROUP BY O.ORDER_NO, O.ORDER_DATE, O.ORDER_AMOUNT, P.PRO_NAME, P.PRO_PRICE, OS.ORDER_STATUS";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
 			
-			pstmt.setString(1, dateFrom);
-			pstmt.setString(2, dateTo);
+			pstmt.setInt(1, member.getMemberNo()); 
+			pstmt.setString(2, dateFrom);
+			pstmt.setString(3, dateTo);
 
 			rs = pstmt.executeQuery();
 
@@ -288,44 +295,6 @@ public class MyOrderDao {
 
 				
 				list.add(refundByDate);
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		return list;
-	}
-
-	public List<MyMileage> getMileage(Connection connection, String dateFrom, String dateTo) {
-		List<MyMileage> list = new ArrayList<>();
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String query = "SELECT * "
-						+ "FROM MILEAGE "
-						+ "WHERE POINT_DATE BETWEEN ? AND ? AND MEMBER_NO = 9";
-		
-		try {
-			pstmt = connection.prepareStatement(query);
-			
-			pstmt.setString(1, dateFrom);
-			pstmt.setString(2, dateTo);
-
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				MyMileage myMileage = new MyMileage();
-				
-				myMileage.setInOut(rs.getString("POINT_IN_OUT"));
-				myMileage.setPointDate(rs.getDate("POINT_DATE"));
-				myMileage.setMemberNo(rs.getInt("MEMBER_NO"));
-				myMileage.setPoint(rs.getInt("POINT_PROCESS"));
-				myMileage.setPointNo(rs.getInt("POINT_NO"));
-				myMileage.setRoute(rs.getString("POINT_ROUTE"));
-				
-				list.add(myMileage);
 			}
 			
 		} catch (SQLException e) {
