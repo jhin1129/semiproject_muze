@@ -29,8 +29,8 @@ public class JoinServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	Member member = new Member();
     	
-    	member.setMemberId(request.getParameter("newMemId"));
-    	member.setMemberPassword(request.getParameter("newPassword"));
+    	member.setMemberId(request.getParameter("memId"));
+    	member.setMemberPassword(request.getParameter("memPw"));
     	member.setMemberName(request.getParameter("memNm"));
     	member.setMemberEmail(request.getParameter("email"));
     	member.setMemberPhonenumber(request.getParameter("cellPhone"));

@@ -88,7 +88,7 @@
                                     <th><span class="important">아이디</span></th>
                                     <td>
                                         <div class="member_warning">
-                                            <input type="text" id="newMemId" name="memId" data-pattern="gdMemberId" required>
+                                            <input type="text" id="newMemId" name="memId" required>
                                             <!-- text박스의 id입력한거랑 idTest값이 같으면 중복검사 성공 -->
                                             <input type="hidden" name="idTest" value="0" />
                                             <input type="button" id="checkDuplicate" name="checkDuplicate" class="checkDuplicate" value="중복검사" >
@@ -324,7 +324,7 @@ $(document).ready(function () {
 	});
 	
 	$(':radio[name="memberFl"]:checked').trigger('change');
-	
+
 	// 아이디 중복 검사
 	$('#checkDuplicate').on('click', () => {
 		let memId = $("#newMemId").val().trim();
@@ -369,11 +369,11 @@ $(document).ready(function () {
 	$("#newPassword").change(function(){
 		var p1 = $("#newPassword");
 		
-		if(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{10,16}$/.test(p1.val())==false){
+		if(/^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{10,16}$/.test(p1.val())==false){
 			$("#pwd_chk1").html("10자~16자, 최소 하나의 문자 및 하나의 숫자를 입력해주세요.<br>");
 			$("#pwd_chk1").attr('style', 'visibility:visible;');
 			
-		}else if(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{10,16}$/.test(p1.val())==true) {
+		}else if(/^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{10,16}$/.test(p1.val())==true) {
 			$("#pwd_chk1").html("");
 			$("#pwd_chk1").attr('style', 'visibility:hidden;');
 		}

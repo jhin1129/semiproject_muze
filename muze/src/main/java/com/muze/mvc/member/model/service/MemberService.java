@@ -1,6 +1,7 @@
 package com.muze.mvc.member.model.service;
 
 import java.sql.Connection;
+import java.util.Map;
 
 import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
 import com.muze.mvc.member.model.dao.MemberDao;
@@ -26,7 +27,6 @@ public class MemberService {
 		} else {
 			return member;			
 		}
-		
 		
 	}
 
@@ -70,7 +70,51 @@ public class MemberService {
 		}
 		return result;
 	}
+
+	public Member findId(String memberName, String memberEmail) {
+		Connection connection = getConnection();
+		Member member = null;
+		
+		try {
+			member = MemberDao.findId(connection, memberName, memberEmail);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			close(connection);
+		}
+		return member;
+	}
 	
+	public Member findPassword(String memberId, String memberEmail) {
+		Connection connection = getConnection();
+		Member member = null;
+		
+		try {
+			member = MemberDao.findPassword(connection, memberId, memberEmail);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			close(connection);
+		}
+		return member;
+	}
+	
+	public int insertCertification(Map<String, String> map) {
+		Connection connection = getConnection();
+		int result = 0;
+		try {
+			result = memberDao.insertCertification(connection, map);
+			commit(connection);
+		} catch (Exception e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+		return result;
+	}
+
+
 	
 
 }
