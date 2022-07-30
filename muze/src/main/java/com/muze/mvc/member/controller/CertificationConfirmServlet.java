@@ -13,36 +13,36 @@ import com.muze.mvc.member.model.service.MemberService;
 import com.muze.mvc.member.model.vo.Member;
 
 
-@WebServlet("/member/find_password")
-public class FindPasswordServlet extends HttpServlet {
+@WebServlet("/member/user_certification_confirm")
+public class CertificationConfirmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public FindPasswordServlet() {
+
+    public CertificationConfirmServlet() {
     }
-
-
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/views/member/find_password.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/member/user_certification_confirm.jsp").forward(request, response);
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = null;
-		String loginId = request.getParameter("memberId");
+		String passwordCheck = request.getParameter("inputCertify");
 		
-		Member member = new MemberService().findPasswordById(loginId);
+		Member member = new MemberService().checkPassword(passwordCheck);
 		
-		if(member != null) {
+		
+		if(member != null) {			
 			session = request.getSession();
 			
 			session.setAttribute("member", member);
-			response.sendRedirect(request.getContextPath() + "/member/user_certification");
+			response.sendRedirect(request.getContextPath() + "/member/find_password_reset");
 		} else {
-			request.setAttribute("msg", "존재하지 않는 아이디입니다.");
-			request.setAttribute("location", "/member/find_password");
+			request.setAttribute("msg", "비밀번호가 일치하지 않습니다.");
+			request.setAttribute("location", "/member/user_certification_confirm");
 			
 			request.getRequestDispatcher("/views/member/msg.jsp").forward(request, response);
-			
 		}
 	}
 }

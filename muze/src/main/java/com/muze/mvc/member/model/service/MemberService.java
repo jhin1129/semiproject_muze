@@ -1,29 +1,32 @@
 package com.muze.mvc.member.model.service;
 
+import static com.muze.mvc.common.jdbc.JDBCTemplate.close;
+import static com.muze.mvc.common.jdbc.JDBCTemplate.commit;
+import static com.muze.mvc.common.jdbc.JDBCTemplate.getConnection;
+import static com.muze.mvc.common.jdbc.JDBCTemplate.rollback;
+
 import java.sql.Connection;
 import java.util.Map;
 
-import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
 import com.muze.mvc.member.model.dao.MemberDao;
 import com.muze.mvc.member.model.vo.Member;
 
 public class MemberService {
-	private MemberDao memberDao = new MemberDao();
+	private static MemberDao memberDao = new MemberDao();
 	
 	public static final String MEMBER_ROLE_USER = "U";
 	public static final String MEMBER_ROLE_ADMIN = "D";
 	public static final String MEMBER_ROLE_ARTIST = "R";
 
-
 	// 로그인
-	public Member login(String loginId, String loginPwd) {
+	public Member login(String memId, String memPw) {
 		Connection connection = getConnection();
 		
-		Member member = new MemberDao().findMemberById(connection, loginId);
+		Member member = new MemberDao().findMemberById(connection, memId);
 		
 		close(connection);
 		
-		if(member == null || !member.getMemberPassword().equals(loginPwd)) {
+		if(member == null || !member.getMemberPassword().equals(memPw)) {
 			return null;
 		} else {
 			return member;			
@@ -89,7 +92,7 @@ public class MemberService {
 	}
 	
 
-	
+	// 이메일을 통한 본인인증
 	public int insertCertification(Map<String, String> map) {
 		Connection connection = getConnection();
 		int result = 0;
@@ -113,21 +116,52 @@ public class MemberService {
 		
 		close(connection);
 		
-		return member;			
+		return member;
 		}
 	
 	// 비밀번호 찾기
-	public Member findPassword(String memberId, String memberEmail) {
+	public Member findPassword(String memberEmail) {
 		Connection connection = getConnection();
 		Member member = null;
 		
 		try {
-			member = MemberDao.findPassword(connection, memberId, memberEmail);
+			member = MemberDao.findPassword(connection, memberEmail);
 		} catch (Exception e) {
 			throw e;
 		} finally {
 			close(connection);
 		}
 		return member;
+	}
+
+	// 임시비밀번호 체크
+	public Member checkPassword(String passwordCheck) {
+		Connection connection = getConnection();
+		Member member = null;
+		
+		try {
+			member = MemberDao.checkPassword(connection, passwordCheck);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			close(connection);
+		}
+		return member;
+	}
+
+	public static int updatePassword(Member member) {
+		Connection conn = getConnection();
+		int result = 0;
+		
+		try {
+			result = memberDao.updateMemberPassword(conn, member);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
 	}
 }

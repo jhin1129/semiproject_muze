@@ -34,21 +34,28 @@
 										<div class="form_element">
 											<ul class="user_certify_list">
 												<li>
-													<input type="radio" id="authEmail" name="authType" value="${ loginMember.memberEmail }">
+													<input type="radio" id="authEmail" name="authTypeEmail" value="${ member.memberEmail }" checked>
                                                     <label class="choice" for="authEmail">이메일 인증</label>
 	                                                    <strong>
-		                                                    <c:set var="name"       value="${ loginMember.memberEmail }" />
-															<c:set var="totalLength" value="${fn:length( loginMember.memberEmail )}" />
-															<c:set var="first"      value="${fn:substring(loginMember.memberEmail, 0, 2) }" />
-															<c:set var="last"      value="${fn:substring(loginMember.memberEmail, 4, totalLength) }" />
-															<td><c:out value="${first}*${last}"/></td>
+	                                                    <c:set var="name"       value="${member.memberEmail}" />
+	                                                    <c:set var="totalLength" value="${fn:length(name) }" />
+	                                                    <c:set var="first"      value="${fn:substring(name, 0, 4) }" />
+	                                                    <c:set var="last"      value="${fn:substring(name, 8, totalLength) }" />
+	                                                    <td><c:if test="${!empty  name}"><c:out value="(${first}*${last})"/></c:if></td>
 	                                                    </strong>
                                                     <span>가입시 등록한 이메일로 인증번호가 발송됩니다.</span>
                                                 </li>
                                                 <li>
-                                                    <input type="radio" id="authSms" name="authType" value="${ loginMember.memberPhonenumber }" class="radio">
+                                                    <input type="radio" id="authSms" name="authTypeSms" value="${ member.memberPhonenumber }" class="radio">
                                                     <label class="choice" for="authSms">SMS 인증</label>
-                                                    <strong>(${ loginMember.memberPhonenumber })</strong>
+	                                                    <strong>
+	                                                    <c:set var="name"       value="${member.memberPhonenumber}" />
+	                                                    <c:set var="totalLength" value="${fn:length(name) }" />
+	                                                    <c:set var="first"      value="${fn:substring(name, 0, 4) }" />
+	                                                    <c:set var="last"      value="${fn:substring(name, 8, totalLength) }" />
+	                                                    <td><c:if test="${!empty  name}"><c:out value="(${first}****${last})"/></c:if></td>
+
+	                                                    </strong>
                                                 </li>
 											<!-- <p id="errorMessage" class="dn"></p>  -->
 											</ul>

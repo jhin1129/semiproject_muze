@@ -12,7 +12,9 @@ import com.muze.mvc.member.filter.MemberException;
 import com.muze.mvc.member.model.vo.Member;
 
 public class MemberDao {	
-	public Member findMemberById(Connection connection, String loginId) {
+	
+	// 로그인
+	public Member findMemberById(Connection connection, String memId) {
 		Member member = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
@@ -21,7 +23,7 @@ public class MemberDao {
 		try {
 			pstm = connection.prepareStatement(query);
 			
-			pstm.setString(1, loginId);
+			pstm.setString(1, memId);
 			rs = pstm.executeQuery();
 			
 			if(rs.next()) {
@@ -50,6 +52,7 @@ public class MemberDao {
 		return member;
 	}
 
+	// 회원가입
 	public int insertMember(Connection connection, Member member) {
 		int result = 0;
 		PreparedStatement pstm = null;
@@ -76,6 +79,7 @@ public class MemberDao {
 
 	}
 
+	// 이메일 인증
 	public int selectEmail(Connection connection, String email) {
 		int result = 0;
 		PreparedStatement pstm = null;
@@ -141,18 +145,18 @@ public class MemberDao {
 		return member;
 	}
 	
-	public static Member findPassword(Connection connection, String memberId, String memberEmail) {
+	// 비밀번호 찾기 1차 인증
+	public static Member findPassword(Connection connection, String memberEmail) {
 		Member member = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
 		
-		String query = "SELECT * FROM MEMBER WHERE MEMBER_ID=? AND MEMBER_EMAIL='?'";
+		String query = "SELECT * FROM MEMBER WHERE MEMBER_EMAIL=?";
 		
 		try {
 			pstm = connection.prepareStatement(query);
 			
-			pstm.setString(1, memberId);
-			pstm.setString(2, memberEmail);
+			pstm.setString(1, memberEmail);
 			rs = pstm.executeQuery();
 			
 			if(rs.next()) {
@@ -181,25 +185,85 @@ public class MemberDao {
 		return member;
 	}
 
+	// 임시비밀번호 UPDATE 
 	public int insertCertification(Connection connection, Map<String, String> map) {
 		int result = 0;
 		PreparedStatement pstm = null;
-		String query = "SELECT * FROM MEMBER WHERE MEMBER_ID=? AND ISMEMBER='Y'";
-		String id = map.get("MEMBER_ID");
+		String query = "UPDATE MEMBER SET MEMBER_PASSWORD=? WHERE MEMBER_ID=?";
+		String id = map.get("id");
 		String randomString = map.get("randomString");
 		
 		try {
 			pstm = connection.prepareStatement(query);
-			pstm.setString(1, id);
-			pstm.setString(2, randomString);
+			pstm.setString(1, randomString);
+			pstm.setString(2, id);
 			result = pstm.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw new MemberException("인증번호 DB에 접속 실패하였습니다.", e);
 		} finally {
 			close(pstm);
 		}
 		return result;
 	}
 
-
+	// 임시비밀번호 체크
+	public static Member checkPassword(Connection connection, String passwordCheck) {
+		Member member = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		String query = "SELECT * FROM MEMBER WHERE MEMBER_PASSWORD=?";
+			
+		try {
+			pstm = connection.prepareStatement(query);
+			
+			pstm.setString(1, passwordCheck);
+			rs = pstm.executeQuery();
+			
+			if(rs.next()) {
+				member = new Member();
+				
+				member.setMemberNo(rs.getInt("MEMBER_NO"));
+				member.setMemberId(rs.getString("MEMBER_ID"));
+				member.setMemberPassword(rs.getString("MEMBER_PASSWORD"));
+				member.setMemberRole(rs.getString("MEMBER_ROLE"));
+				member.setMemberName(rs.getString("MEMBER_NAME"));
+				member.setMemberPhonenumber(rs.getString("MEMBER_PHONE_NUMBER"));
+				member.setMemberEmail(rs.getString("MEMBER_EMAIL"));
+				member.setMemberAddress(rs.getString("MEMBER_ADDRESS"));
+				member.setPoint(rs.getInt("POINT"));
+				member.setEnrollDate(rs.getDate("ENROLL_DATE"));
+				member.setIsmember(rs.getString("ISMEMBER"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new MemberException("인증에 실패하였습니다.", e);
+		} finally {
+			close(rs);
+			close(pstm);
+		}
+			
+		return member;
+		}
+	
+	
+	// 임시 비밀번호 인증 후 비밀번호 변경
+	public int updateMemberPassword(Connection connection, Member member) {
+		int result = 0;
+		PreparedStatement pstm = null;
+		String query = "UPDATE MEMBER SET MEMBER_PASSWORD=? WHERE MEMBER_ID=?";
+		
+		try {
+			pstm = connection.prepareStatement(query);
+			pstm.setString(1, member.getMemberPassword());
+			pstm.setString(2, member.getMemberId());
+			result = pstm.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new MemberException("비밀번호 변경에 실패하였습니다.", e);
+		} finally {
+			close(pstm);
+		}
+		return result;
+	}
 }	

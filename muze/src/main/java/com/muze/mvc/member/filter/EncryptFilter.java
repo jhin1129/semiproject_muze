@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.muze.mvc.member.wrapper.EncryptPasswordWrapper;
 
-@WebFilter(filterName = "encrypt", servletNames = {"join", "login"})
+@WebFilter(filterName = "encrypt", servletNames = {""})
 public class EncryptFilter extends HttpFilter implements Filter {
        
     public EncryptFilter() {

@@ -38,7 +38,7 @@ public class SendFindEmailServlet {
 		String email = member.getMemberEmail();
 		
 		// 랜덤값 부여
-		String randomString = MvcUtils.randomAlphaWord(10);
+		String randomString = MvcUtils.randomAlphaWord(8);
 		
 		// db에 저장
 			Map<String, String> map = new HashMap<>();
@@ -75,7 +75,7 @@ public class SendFindEmailServlet {
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(fromEmail, fromUsername)); // 보낸 사람
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));//받는사람이메일 입력받는곳
-			message.setSubject("[muze] 비밀번호 변경 링크 메일입니다!","utf-8");//제목
+			message.setSubject("[muze] 임시 비밀번호 전송 메일입니다!","utf-8");//제목
 			message.setContent(new MimeMultipart());
 			Multipart mp = (Multipart) message.getContent();
 			mp.addBodyPart(
@@ -105,13 +105,14 @@ public class SendFindEmailServlet {
 							"          style=\"width: 120px; height: 50px\"\r\n" + 
 							"        />\r\n" + 
 							"        <h2 style='text-align:center;'>\r\n" + 
-							"          안녕하세요! No1.미술품 거래 플랫폼 <u style=\"font-size: 30px; margin-top: 0;\">muze</u>입니다!\r\n" + 
+							"          안녕하세요! "
+									+  id + "님, No1.미술품 거래 플랫폼 <u style=\"font-size: 30px; margin-top: 0;\">muze</u>입니다!\r\n" + 
 							"        </h2>\r\n" + 
 							"        <div style=\"margin-bottom: 10px\">\r\n" + 
 							"          <div></div>\r\n" + 
 							"          <div style=\"margin-bottom: 5px\">muze에 돌아오신걸 환영합니다.</div>\r\n" + 
 							"          <div style=\"margin-bottom: 5px\">\r\n" + 
-							"            회원가입 인증 코드는 아래와 같습니다.\r\n" + 
+							"            임시 비밀번호는 아래와 같습니다.\r\n" + 
 							"          </div>\r\n" + 
 							"          <div style=\"margin-bottom: 5px; font-size: 20px; font-weight: bold\">\r\n" + 
 							"            [" + randomString + "]\r\n" + 
@@ -139,7 +140,6 @@ public class SendFindEmailServlet {
 	public Member sendEmailId(Member member) {
 		String id = member.getMemberId();
 		String email = member.getMemberEmail();
-		System.out.println(id + "보낼 아이디");
 
 		// 메일용 api
 		Properties props = new Properties();
