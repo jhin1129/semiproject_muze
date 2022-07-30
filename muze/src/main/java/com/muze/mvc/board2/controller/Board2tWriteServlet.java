@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import com.muze.mvc.board2.model.service.Board2Service;
 import com.muze.mvc.board2.model.vo.Board2;
 import com.muze.mvc.common.util.FileRename;
-import com.muze.mvc.member.vo.Member;
+import com.muze.mvc.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
 
 @WebServlet("/support/write")
