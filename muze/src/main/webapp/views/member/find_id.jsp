@@ -6,6 +6,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <jsp:include page="/views/common/header.jsp"/>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
@@ -52,7 +53,7 @@
                                             </div>
                                             <button type="submit" class="btn_member_id">아이디 찾기</button>
                                         </div>
-                                          <p class="dn js_caution_msg1" style="display :none">일치하는 회원정보가 없습니다. 다시 입력해 주세요.</p> 
+                                          <p class="dn js_caution_msg1">일치하는 회원정보가 없습니다. 다시 입력해 주세요.</p> 
                                     </div>
                                     <!-- //find_id_sec -->
                                     <div class="btn_member_sec">
@@ -77,8 +78,6 @@
 
 <script type="text/javascript">
 	$(document).ready(function () {
-		gd_select_email_domain('userEmail');
-		
 		$('input').keyup(function () {
 			$('.js_caution_msg1', 'form').addClass('dn');
 		});
