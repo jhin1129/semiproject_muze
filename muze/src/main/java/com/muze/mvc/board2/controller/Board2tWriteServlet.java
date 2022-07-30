@@ -47,8 +47,6 @@ public class Board2tWriteServlet extends HttpServlet {
 		
 		String type = request.getParameter("type");
 		
-		String qnaSubject = request.getParameter("qnaSubject");
-		
 		// 파일 저장 경로
 		String path = getServletContext().getRealPath("/resources/upload/board/permanant");
 		

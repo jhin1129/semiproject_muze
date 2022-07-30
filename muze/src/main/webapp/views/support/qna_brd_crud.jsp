@@ -22,14 +22,12 @@
 
 			<tr>
 				<td><b>말머리</b></td>
-				<td style="width: 85%;"><select name="qna_subject" style="width: 150px; color: gray;">
-						<option>문의 주제</option>
-						<option value="product" >상품</option>
+				<td style="width: 85%;"><select style="width: 150px; color: gray;">
+						<option value="mgmt">회원/정보관리</option>
 						<option value="order">주문/결제</option>
 						<option value="delivery">배송</option>
 						<option value="refund">반품/환불</option>
 						<option value="event">이벤트</option>
-						<option value="mgmt">회원/정보관리</option>
 						<option value="etc">기타</option>
 				</select></td>
 			</tr>
@@ -64,11 +62,5 @@
 	</form>
 </div>
 
-<script>
-const change(this) => {
-	var 
-	
-}
-</script>
 
 <jsp:include page="/views/common/footer.jsp" />
