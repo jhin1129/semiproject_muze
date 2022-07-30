@@ -35,7 +35,7 @@
        // 그리고 입력상태를 떠난 것을 포커스가 벗어났다고 한다.
         
 
-        document.form1.action = "${path}/product/craft"; //페이지로 form1에 저장된 자료를 전송함
+        document.form1.action = "${ path }/product/craft"; //페이지로 form1에 저장된 자료를 전송함
         document.form1.submit();
     }
  </script>
@@ -52,13 +52,13 @@
         <div class="mt-5" style="border: 1px solid rgb(238, 233, 233);">
 
             <div>
-            	<form name="form1" action="${ path }/product/craft" method="POST" enctype="multipart/form-data">
+            	<form name="form1" action="${ path }/product/craft/writer" method="POST" enctype="multipart/form-data">
                 <table class="table m-0">
                     <thead>
                     	<input type="hidden" name="flag" value="i">
                     	<tr>
                             <th class="table-active" style="width: 20%;">작품타입</th>
-                            <td style="width: 80%;"><input type="text" name="pctype" placeholder="유화" style="width: 80%;">
+                            <td style="width: 80%;"><input type="text" name="pctype" placeholder="조소" style="width: 80%;">
                             </td>
 
                         </tr>
@@ -70,7 +70,7 @@
                         </tr>
                         <tr>
                             <th class="table-active" style="width: 20%;">상품 사이즈</th>
-                            <td style="width: 80%;"><input type="text" name="pcsize" placeholder="Cm사이즈 입니다. 예) 20 x 20." style="width: 80%;">
+                            <td style="width: 80%;"><input type="text" name="pcsize" placeholder="Cm사이즈 입니다. 예) 세로 x 가로." style="width: 80%;">
                             </td>
 
                         </tr>

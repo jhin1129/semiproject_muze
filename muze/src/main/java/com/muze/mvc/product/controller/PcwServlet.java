@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.muze.mvc.product.model.service.PowWriterService;
+import com.muze.mvc.product.model.service.PcwWriterService;
 import com.muze.mvc.product.model.vo.PcwWriter;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-@WebServlet("/product/craft")
+@WebServlet("/product/craft/writer")
 public class PcwServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -23,12 +23,13 @@ public class PcwServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("/views/product/Product_craft_writer.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int result = 0;
 		PcwWriter pcwwriter = null;
-		String saveFolder = "\\resources\\upload\\product\\oilpainting";	
+		String saveFolder = "/resources/upload/product/craft";	
 		ServletContext context = getServletContext();
 		String realFolder = context.getRealPath(saveFolder);
 		
@@ -67,14 +68,14 @@ public class PcwServlet extends HttpServlet {
 		pcwwriter.setProDescription(pcDescription);
 		pcwwriter.setProType(pctype);
 		
-		result = new PowWriterService().save(pcwwriter);
+		result = new PcwWriterService().save(pcwwriter);
 		
 		if(result > 0) {
-			request.setAttribute("location", "/product/Product_oilpainting.jsp");
+			request.setAttribute("location", "/product/Product_craft.jsp");
 		}else {
-			request.setAttribute("location", "/product/Product_oilpainting.jsp");
+			request.setAttribute("location", "/product/Product_craft.jsp");
 		}
-		request.getRequestDispatcher("/views/product/Product_oilpainting.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/product/Product_craft.jsp").forward(request, response);
 	}
 
 }

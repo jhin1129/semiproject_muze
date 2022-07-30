@@ -11,7 +11,7 @@
     <div class="container">
         <div class="container">
             <div class="mt-2">
-                <h2 class="painting">유화</h2>
+                <h2 class="oilpainting">유화</h2>
             </div>
             <div class="row">
                 <div class="col-md-6">
@@ -251,7 +251,7 @@
                 </ul>
                 <div class="col-md-6">
 	            <div class="text-right mt-1">
-	                    <button class="btn btn-light py-0"  onclick="location.href='http://localhost:8090/muze/views/product/Product_oilpainting_writer.jsp'">작품 등록</button>
+	                    <button class="btn btn-light py-0"  onclick="location.href='${path}/product/oilpainting/writer'">작품 등록</button>
 	            </div>
             </div>
             </div>

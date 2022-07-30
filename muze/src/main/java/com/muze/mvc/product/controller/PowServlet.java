@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.muze.mvc.common.util.FileRename;
 import com.muze.mvc.product.model.service.PowWriterService;
 import com.muze.mvc.product.model.vo.PowWriter;
 
@@ -17,7 +18,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 
-@WebServlet("/product/oilpainting")
+@WebServlet("/product/oilpainting/writer")
 public class PowServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,6 +27,7 @@ public class PowServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("/views/product/Product_oilpainting_writer.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,7 +41,7 @@ public class PowServlet extends HttpServlet {
 		
 		int maxSize = 20971520; //20mb
 		String encoding = "UTF-8";
-		MultipartRequest mr = new MultipartRequest(request, realFolder, maxSize, encoding, new DefaultFileRenamePolicy());
+		MultipartRequest mr = new MultipartRequest(request, realFolder, maxSize, encoding, new FileRename());
 		
 		String pocode = mr.getParameter("pocode");
 		String potype = mr.getParameter("potype");
