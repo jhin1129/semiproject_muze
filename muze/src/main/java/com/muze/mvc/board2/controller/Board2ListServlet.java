@@ -45,9 +45,8 @@ public class Board2ListServlet extends HttpServlet {
 		listCount = new Board2Service().getBoardCount(type);
 		pageInfo = new PageInfo(page, 5, listCount, 10);
 		list = new Board2Service().getBoardList(pageInfo, type);
-			
+		
 		System.out.println(listCount);
-		System.out.println(list);
 		
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("list", list);

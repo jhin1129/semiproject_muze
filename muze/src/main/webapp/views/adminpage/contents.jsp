@@ -7,9 +7,6 @@
 
 <jsp:include page="/views/common/header.jsp"/>
 <link rel="stylesheet" href="${path}/resources/css/adminpage/admin.css">
-<link rel="stylesheet" href="${path}/resources/css/mypage/mypage_main.css"> 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
-
     <!-- 내용 전체 컨테이너 -->
     <div class="container">
       <div class="row">
@@ -46,8 +43,7 @@
                   <thead class="text-center">
                       <tr style="height: 10px; color:gray">
                           <th style="width: 2%;"><input type="checkbox"></th>
-                          <th style="width: 10%;">번호</th>
-                          <th style="width: 30%;">제목</th>
+                          <th style="width: 40%;">제목</th>
                           <th style="width: 18%;">작성자</th>
                           <th style="width: 15%;">카테고리</th>
                           <th style="width: 15%;">작성일</th>
@@ -55,39 +51,169 @@
                       </tr>
                   </thead>
   
-                  <tbody class="text-center">                    
-                    <c:if test="${ empty list }">
-                    	<tr>
-                    		<td colspan="9">
-                    			조회된 게시글이 없습니다.
-                    		</td>
-                    	</tr>
-                    </c:if>
-                    <c:if test="${ not empty list }">
-                    	<c:forEach var="board" items="${ list }">
-                    	<tr>
-                    		<td><input type="checkbox"></td>
-                    		<td>${ board.brdNo }</td>
-                    		<td>${ board.brdTitle }</td>
-                    		<td>${ board.brdWriterId }</td>
-                    		<td>${ board.brdCategory }</td>
-                    		<td>${ board.brdDate }</td>
-                    		<td>${ board.brdReadCount }</td>
-                    	</tr>
-                    	</c:forEach>
-                    </c:if>
-                    
- <!--                    
+                  <tbody class="text-center">
+                    <!-- (tr>(td>input[type=checkbox])+td{제목$}+td{작성자$}+td{자유게시판}+td{2022-07-22}+td{99})*20 -->
                     <tr>
                       <td><input type="checkbox"></td>
-                      <td>1</td>
                       <td>콘텐츠 관리를 위한 모든 게시글 조회1</td>
                       <td>작성자1</td>
                       <td>자유게시판</td>
                       <td>2022-07-22</td>
                       <td>99</td>
                     </tr>
- -->
+                    <tr>
+                      <td><input type="checkbox"></td>
+                      <td>콘텐츠 관리를 위한 모든 게시글 조회2</td>
+                      <td>작성자2</td>
+                      <td>자유게시판</td>
+                      <td>2022-07-22</td>
+                      <td>99</td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox"></td>
+                      <td>콘텐츠 관리를 위한 모든 게시글 조회3</td>
+                      <td>작성자3</td>
+                      <td>자유게시판</td>
+                      <td>2022-07-22</td>
+                      <td>99</td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox"></td>
+                      <td>콘텐츠 관리를 위한 모든 게시글 조회4</td>
+                      <td>작성자4</td>
+                      <td>자유게시판</td>
+                      <td>2022-07-22</td>
+                      <td>99</td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox"></td>
+                      <td>콘텐츠 관리를 위한 모든 게시글 조회5</td>
+                      <td>작성자5</td>
+                      <td>자유게시판</td>
+                      <td>2022-07-22</td>
+                      <td>99</td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox"></td>
+                      <td>콘텐츠 관리를 위한 모든 게시글 조회6</td>
+                      <td>작성자6</td>
+                      <td>자유게시판</td>
+                      <td>2022-07-22</td>
+                      <td>99</td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox"></td>
+                      <td>콘텐츠 관리를 위한 모든 게시글 조회7</td>
+                      <td>작성자7</td>
+                      <td>자유게시판</td>
+                      <td>2022-07-22</td>
+                      <td>99</td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox"></td>
+                      <td>콘텐츠 관리를 위한 모든 게시글 조회8</td>
+                      <td>작성자8</td>
+                      <td>자유게시판</td>
+                      <td>2022-07-22</td>
+                      <td>99</td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox"></td>
+                      <td>콘텐츠 관리를 위한 모든 게시글 조회9</td>
+                      <td>작성자9</td>
+                      <td>자유게시판</td>
+                      <td>2022-07-22</td>
+                      <td>99</td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox"></td>
+                      <td>콘텐츠 관리를 위한 모든 게시글 조회10</td>
+                      <td>작성자10</td>
+                      <td>자유게시판</td>
+                      <td>2022-07-22</td>
+                      <td>99</td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox"></td>
+                      <td>콘텐츠 관리를 위한 모든 게시글 조회11</td>
+                      <td>작성자11</td>
+                      <td>자유게시판</td>
+                      <td>2022-07-22</td>
+                      <td>99</td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox"></td>
+                      <td>콘텐츠 관리를 위한 모든 게시글 조회12</td>
+                      <td>작성자12</td>
+                      <td>자유게시판</td>
+                      <td>2022-07-22</td>
+                      <td>99</td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox"></td>
+                      <td>콘텐츠 관리를 위한 모든 게시글 조회13</td>
+                      <td>작성자13</td>
+                      <td>자유게시판</td>
+                      <td>2022-07-22</td>
+                      <td>99</td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox"></td>
+                      <td>콘텐츠 관리를 위한 모든 게시글 조회14</td>
+                      <td>작성자14</td>
+                      <td>자유게시판</td>
+                      <td>2022-07-22</td>
+                      <td>99</td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox"></td>
+                      <td>콘텐츠 관리를 위한 모든 게시글 조회15</td>
+                      <td>작성자15</td>
+                      <td>자유게시판</td>
+                      <td>2022-07-22</td>
+                      <td>99</td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox"></td>
+                      <td>콘텐츠 관리를 위한 모든 게시글 조회16</td>
+                      <td>작성자16</td>
+                      <td>자유게시판</td>
+                      <td>2022-07-22</td>
+                      <td>99</td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox"></td>
+                      <td>콘텐츠 관리를 위한 모든 게시글 조회17</td>
+                      <td>작성자17</td>
+                      <td>자유게시판</td>
+                      <td>2022-07-22</td>
+                      <td>99</td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox"></td>
+                      <td>콘텐츠 관리를 위한 모든 게시글 조회18</td>
+                      <td>작성자18</td>
+                      <td>자유게시판</td>
+                      <td>2022-07-22</td>
+                      <td>99</td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox"></td>
+                      <td>콘텐츠 관리를 위한 모든 게시글 조회19</td>
+                      <td>작성자19</td>
+                      <td>자유게시판</td>
+                      <td>2022-07-22</td>
+                      <td>99</td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox"></td>
+                      <td>콘텐츠 관리를 위한 모든 게시글 조회20</td>
+                      <td>작성자20</td>
+                      <td>자유게시판</td>
+                      <td>2022-07-22</td>
+                      <td>99</td>
+                    </tr>
+
                   </tbody>
   
               </table>
@@ -97,23 +223,13 @@
             <div class="col-4"></div>
             <div class="col-4">
                 <ul class="pagination justify-content-center">
-                    <li class="page-item"><a class="page-link" href="${ path }/admin/content?page=1">&lt;&lt;</a></li>
-                    <li class="page-item"><a class="page-link" href="${ path }/admin/content?page=${ pageInfo.prevPage }">&lt;</a></li>
-
-                    <!--  10개 페이지 목록 -->
-					<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
-						<c:if test="${ status.current == pageInfo.currentPage }">
-		                    <li class="page-item disabled"><a class="page-link" href="#">${ status.current }</a></li>
-						</c:if>
-						<c:if test="${ status.current != pageInfo.currentPage }">
-		                    <li class="page-item"><a class="page-link" href="${ path }/admin/content?page=${ status.current }">${ status.current }</a></li>
-					
-						</c:if>
-					</c:forEach>
-                    
-                    <li class="page-item"><a class="page-link" href="${ path }/admin/member?content=${ pageInfo.nextPage }">&gt;</a></li>
-                    <li class="page-item"><a class="page-link" href="${ path }/admin/member?content=${ pageInfo.maxPage }">&gt;&gt;</a></li>
- 
+                    <li class="page-item"><a class="page-link" href="#">&lt;&lt;</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                    <li class="page-item"><a class="page-link" href="#">&gt;&gt;</a></li>
                 </ul>
             </div>
         </div>

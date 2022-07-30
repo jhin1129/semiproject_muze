@@ -7,9 +7,6 @@
 
 <jsp:include page="/views/common/header.jsp"/>
 <link rel="stylesheet" href="${path}/resources/css/adminpage/admin.css">
-<link rel="stylesheet" href="${path}/resources/css/mypage/mypage_main.css"> 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
-
     <!-- 내용 전체 컨테이너 -->
     <div class="container">
       <div class="row">
@@ -21,10 +18,10 @@
           <h5 style="font-weight: 600;">마이 페이지</h5>
           <hr>
           <p id="myListMain"> 대시보드 </p>
-          <li id="mylist"><a id="sublist" href="${ path }/admin/main">- 방문자 현황</a></li>
+          <li id="mylist"><a id="sublist">- 방문자 현황</a></li>
           <li id="mylist"><a id="sublist">- 일자별 요약</a></li>
-          <p id="myListMain"><a href="${ path }/admin/member"> 회원 관리 </a></p>
-          <p id="myListMain"><a href="${ path }/admin/content"> 콘텐츠 관리 </a></p>
+          <p id="myListMain"> 회원 관리 </p>
+          <p id="myListMain"> 콘텐츠 관리 </p>
           <li id="mylist"><a id="sublist">- 게시글 관리</a></li>
           <li id="mylist"><a id="sublist">- 댓글 관리</a></li>
           <p id="myListMain"> 문의/신고 관리</p>
@@ -53,34 +50,233 @@
                           <th style="width: 20%;">이메일</th>
                           <th style="width: 12%;">가입일</th>
                           <th style="width: 10%;">계정타입</th>
-                          <th style="width: 8%;">회원여부</th>
+                          <th style="width: 8%;">탈퇴여부</th>
                       </tr>
                   </thead>
   
                   <tbody class="text-center">
-                    <c:if test="${ empty list }">
-                    	<tr>
-                    		<td colspan="9">
-                    			조회된 회원이 없습니다.
-                    		</td>
-                    	</tr>
-                    </c:if>
-                    <c:if test="${ not empty list }">
-                    	<c:forEach var="board" items="${ list }">
-                    	<tr>
-                    		<td><input type="checkbox"></td>
-                    		<td>${ member.memberNo }</td>
-                    		<td>${ member.memberId }</td>
-                    		<td>${ member.memberName }</td>
-                    		<td>${ member.memberPhoneNumber }</td>
-                    		<td>${ member.memberEmail }</td>
-                    		<td>${ member.enrollDate }</td>
-                    		<td>${ member.memberRole }</td>
-                    		<td>${ member.ismember }</td>
-                    	</tr>
-                    	</c:forEach>
-                    </c:if>
-                 </tbody>
+                    <!-- (tr>(td{2022-07-$$}+td{0건}+td{0원}+td*4{0}))*9 -->
+                    <tr>
+                      <th><input type="checkbox" name="user"></th>
+                      <td>000001</td>
+                      <td>아이디1</td>
+                      <td>이름1</td>
+                      <td>010-0001-0001</td>
+                      <td>000001@naver.com</td>
+                      <td>2022-07-22</td>
+                      <td>일반회원</td>
+                      <td>N</td>
+                    </tr>
+                    <tr>
+                      <th><input type="checkbox" name="user"></th>
+                      <td>000002</td>
+                      <td>아이디2</td>
+                      <td>이름2</td>
+                      <td>010-0002-0002</td>
+                      <td>000002@naver.com</td>
+                      <td>2022-07-22</td>
+                      <td>일반회원</td>
+                      <td>N</td>
+                    </tr>
+                    <tr>
+                      <th><input type="checkbox" name="user"></th>
+                      <td>000003</td>
+                      <td>아이디3</td>
+                      <td>이름3</td>
+                      <td>010-0003-0003</td>
+                      <td>000003@naver.com</td>
+                      <td>2022-07-22</td>
+                      <td>일반회원</td>
+                      <td>N</td>
+                    </tr>
+                    <tr>
+                      <th><input type="checkbox" name="user"></th>
+                      <td>000004</td>
+                      <td>아이디4</td>
+                      <td>이름4</td>
+                      <td>010-0004-0004</td>
+                      <td>000004@naver.com</td>
+                      <td>2022-07-22</td>
+                      <td>일반회원</td>
+                      <td>N</td>
+                    </tr>
+                    <tr>
+                      <th><input type="checkbox" name="user"></th>
+                      <td>000005</td>
+                      <td>아이디5</td>
+                      <td>이름5</td>
+                      <td>010-0005-0005</td>
+                      <td>000005@naver.com</td>
+                      <td>2022-07-22</td>
+                      <td>일반회원</td>
+                      <td>N</td>
+                    </tr>
+                    <tr>
+                      <th><input type="checkbox" name="user"></th>
+                      <td>000006</td>
+                      <td>아이디6</td>
+                      <td>이름6</td>
+                      <td>010-0006-0006</td>
+                      <td>000006@naver.com</td>
+                      <td>2022-07-22</td>
+                      <td>일반회원</td>
+                      <td>N</td>
+                    </tr>
+                    <tr>
+                      <th><input type="checkbox" name="user"></th>
+                      <td>000007</td>
+                      <td>아이디7</td>
+                      <td>이름7</td>
+                      <td>010-0007-0007</td>
+                      <td>000007@naver.com</td>
+                      <td>2022-07-22</td>
+                      <td>일반회원</td>
+                      <td>N</td>
+                    </tr>
+                    <tr>
+                      <th><input type="checkbox" name="user"></th>
+                      <td>000008</td>
+                      <td>아이디8</td>
+                      <td>이름8</td>
+                      <td>010-0008-0008</td>
+                      <td>000008@naver.com</td>
+                      <td>2022-07-22</td>
+                      <td>일반회원</td>
+                      <td>N</td>
+                    </tr>
+                    <tr>
+                      <th><input type="checkbox" name="user"></th>
+                      <td>000009</td>
+                      <td>아이디9</td>
+                      <td>이름9</td>
+                      <td>010-0009-0009</td>
+                      <td>000009@naver.com</td>
+                      <td>2022-07-22</td>
+                      <td>일반회원</td>
+                      <td>N</td>
+                    </tr>
+                    <tr>
+                      <th><input type="checkbox" name="user"></th>
+                      <td>000010</td>
+                      <td>아이디10</td>
+                      <td>이름10</td>
+                      <td>010-0010-0010</td>
+                      <td>000010@naver.com</td>
+                      <td>2022-07-22</td>
+                      <td>일반회원</td>
+                      <td>N</td>
+                    </tr>
+                    <tr>
+                      <th><input type="checkbox" name="user"></th>
+                      <td>000001</td>
+                      <td>아이디1</td>
+                      <td>이름1</td>
+                      <td>010-0001-0001</td>
+                      <td>000001@naver.com</td>
+                      <td>2022-07-22</td>
+                      <td>일반회원</td>
+                      <td>N</td>
+                    </tr>
+                    <tr>
+                      <th><input type="checkbox" name="user"></th>
+                      <td>000002</td>
+                      <td>아이디2</td>
+                      <td>이름2</td>
+                      <td>010-0002-0002</td>
+                      <td>000002@naver.com</td>
+                      <td>2022-07-22</td>
+                      <td>일반회원</td>
+                      <td>N</td>
+                    </tr>
+                    <tr>
+                      <th><input type="checkbox" name="user"></th>
+                      <td>000003</td>
+                      <td>아이디3</td>
+                      <td>이름3</td>
+                      <td>010-0003-0003</td>
+                      <td>000003@naver.com</td>
+                      <td>2022-07-22</td>
+                      <td>일반회원</td>
+                      <td>N</td>
+                    </tr>
+                    <tr>
+                      <th><input type="checkbox" name="user"></th>
+                      <td>000004</td>
+                      <td>아이디4</td>
+                      <td>이름4</td>
+                      <td>010-0004-0004</td>
+                      <td>000004@naver.com</td>
+                      <td>2022-07-22</td>
+                      <td>일반회원</td>
+                      <td>N</td>
+                    </tr>
+                    <tr>
+                      <th><input type="checkbox" name="user"></th>
+                      <td>000005</td>
+                      <td>아이디5</td>
+                      <td>이름5</td>
+                      <td>010-0005-0005</td>
+                      <td>000005@naver.com</td>
+                      <td>2022-07-22</td>
+                      <td>일반회원</td>
+                      <td>N</td>
+                    </tr>
+                    <tr>
+                      <th><input type="checkbox" name="user"></th>
+                      <td>000006</td>
+                      <td>아이디6</td>
+                      <td>이름6</td>
+                      <td>010-0006-0006</td>
+                      <td>000006@naver.com</td>
+                      <td>2022-07-22</td>
+                      <td>일반회원</td>
+                      <td>N</td>
+                    </tr>
+                    <tr>
+                      <th><input type="checkbox" name="user"></th>
+                      <td>000007</td>
+                      <td>아이디7</td>
+                      <td>이름7</td>
+                      <td>010-0007-0007</td>
+                      <td>000007@naver.com</td>
+                      <td>2022-07-22</td>
+                      <td>일반회원</td>
+                      <td>N</td>
+                    </tr>
+                    <tr>
+                      <th><input type="checkbox" name="user"></th>
+                      <td>000008</td>
+                      <td>아이디8</td>
+                      <td>이름8</td>
+                      <td>010-0008-0008</td>
+                      <td>000008@naver.com</td>
+                      <td>2022-07-22</td>
+                      <td>일반회원</td>
+                      <td>N</td>
+                    </tr>
+                    <tr>
+                      <th><input type="checkbox" name="user"></th>
+                      <td>000009</td>
+                      <td>아이디9</td>
+                      <td>이름9</td>
+                      <td>010-0009-0009</td>
+                      <td>000009@naver.com</td>
+                      <td>2022-07-22</td>
+                      <td>일반회원</td>
+                      <td>N</td>
+                    </tr>
+                    <tr>
+                      <th><input type="checkbox" name="user"></th>
+                      <td>000010</td>
+                      <td>아이디10</td>
+                      <td>이름10</td>
+                      <td>010-0010-0010</td>
+                      <td>000010@naver.com</td>
+                      <td>2022-07-22</td>
+                      <td>일반회원</td>
+                      <td>N</td>
+                    </tr>  
+                  </tbody>
   
               </table>
           </div>
@@ -89,23 +285,13 @@
             <div class="col-4"></div>
             <div class="col-4">
                 <ul class="pagination justify-content-center">
-                    <li class="page-item"><a class="page-link" href="${ path }/admin/member?page=1">&lt;&lt;</a></li>
-                    <li class="page-item"><a class="page-link" href="${ path }/admin/member?page=${ pageInfo.prevPage }">&lt;</a></li>
-
-                    <!--  10개 페이지 목록 -->
-					<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
-						<c:if test="${ status.current == pageInfo.currentPage }">
-		                    <li class="page-item disabled"><a class="page-link" href="#">${ status.current }</a></li>
-						</c:if>
-						<c:if test="${ status.current != pageInfo.currentPage }">
-		                    <li class="page-item"><a class="page-link" href="${ path }/admin/member?page=${ status.current }">${ status.current }</a></li>
-					
-						</c:if>
-					</c:forEach>
-                    
-                    <li class="page-item"><a class="page-link" href="${ path }/admin/member?page=${ pageInfo.nextPage }">&gt;</a></li>
-                    <li class="page-item"><a class="page-link" href="${ path }/admin/member?page=${ pageInfo.maxPage }">&gt;&gt;</a></li>
- 
+                    <li class="page-item"><a class="page-link" href="#">&lt;&lt;</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                    <li class="page-item"><a class="page-link" href="#">&gt;&gt;</a></li>
                 </ul>
             </div>
         </div>
