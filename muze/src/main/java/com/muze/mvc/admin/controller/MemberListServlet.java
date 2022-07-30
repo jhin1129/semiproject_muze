@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.muze.mvc.admin.model.service.AdminService;
 import com.muze.mvc.common.util.PageInfo;
-import com.muze.mvc.member.vo.Member;
+import com.muze.mvc.member.model.vo.Member;
 
 @WebServlet("/admin/member")
 public class MemberListServlet extends HttpServlet {

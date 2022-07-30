@@ -1,13 +1,14 @@
 package com.muze.mvc.admin.model.service;
 
+import static com.muze.mvc.common.jdbc.JDBCTemplate.close;
+import static com.muze.mvc.common.jdbc.JDBCTemplate.getConnection;
+
 import java.sql.Connection;
 import java.util.List;
 
-import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
-
 import com.muze.mvc.admin.model.dao.AdminDao;
 import com.muze.mvc.common.util.PageInfo;
-import com.muze.mvc.member.vo.Member;
+import com.muze.mvc.member.model.vo.Member;
 
 public class AdminService {
 

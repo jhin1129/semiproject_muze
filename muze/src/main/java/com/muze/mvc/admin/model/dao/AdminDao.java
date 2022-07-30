@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.muze.mvc.common.util.PageInfo;
-import com.muze.mvc.member.vo.Member;
+import com.muze.mvc.member.model.vo.Member;
 
 public class AdminDao {
 
