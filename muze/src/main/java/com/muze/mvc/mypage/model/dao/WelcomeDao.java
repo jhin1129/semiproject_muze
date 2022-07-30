@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.muze.mvc.member.vo.Member;
+import com.muze.mvc.member.model.vo.Member;
 import com.muze.mvc.mypage.model.vo.Welcome;
 
 public class WelcomeDao {

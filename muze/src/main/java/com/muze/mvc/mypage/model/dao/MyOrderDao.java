@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.muze.mvc.member.vo.Member;
+import com.muze.mvc.member.model.vo.Member;
 import com.muze.mvc.mypage.model.vo.MyMileage;
 import com.muze.mvc.mypage.model.vo.MyOrder;
 

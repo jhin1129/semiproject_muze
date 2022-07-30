@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.muze.mvc.board.model.vo.Board;
 import com.muze.mvc.common.util.PageInfo;
-import com.muze.mvc.member.vo.Member;
+import com.muze.mvc.member.model.vo.Member;
 import com.muze.mvc.mypage.model.service.MyBoardService;
 
 /**
