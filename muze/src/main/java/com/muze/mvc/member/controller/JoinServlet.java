@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.muze.mvc.member.service.MemberService;
-import com.muze.mvc.member.vo.Member;
+import com.muze.mvc.member.model.service.MemberService;
+import com.muze.mvc.member.model.vo.Member;
 
 
 @WebServlet(name = "join", urlPatterns = "/member/join")
@@ -29,12 +29,12 @@ public class JoinServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	Member member = new Member();
     	
-    	member.setMember_id(request.getParameter("userId"));
-    	member.setMember_password(request.getParameter("userPwd"));
-    	member.setMember_name(request.getParameter("userName"));
-    	member.setMember_phone_number(request.getParameter("phone"));
-    	member.setMember_email(request.getParameter("email"));
-    	member.setMember_address(request.getParameter("address"));
+    	member.setMemberId(request.getParameter("memId"));
+    	member.setMemberPassword(request.getParameter("memPw"));
+    	member.setMemberName(request.getParameter("memNm"));
+    	member.setMemberEmail(request.getParameter("email"));
+    	member.setMemberPhonenumber(request.getParameter("cellPhone"));
+    	member.setMemberAddress(request.getParameter("address"));
     	
     	System.out.println(member);
     	
@@ -47,10 +47,10 @@ public class JoinServlet extends HttpServlet {
     	} else {
     		// 회원 가입 실패
         	request.setAttribute("msg", "회원 가입 실패");
-    		request.setAttribute("location", "/member/enroll");
+    		request.setAttribute("location", "/member/join");
     	}
 		
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/member/msg.jsp").forward(request, response);
 	}
 
 }

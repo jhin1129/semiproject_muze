@@ -163,7 +163,6 @@ public class BoardDao {
 				board.setBrdStatus(rs.getString("BRD_STATUS"));
 				board.setBrdOriginalFileName(rs.getString("BRD_ORIGINALFILENAME"));
 				board.setBrdRenamedFileName(rs.getString("BRD_RENAMEDFILENAME"));
-				System.out.println(board);
 				list.add(board);
 			}
 		} catch (SQLException e) {

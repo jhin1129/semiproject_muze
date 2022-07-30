@@ -23,6 +23,14 @@
   <!-- Mainstyle CSS -->
   <link rel="stylesheet" type="text/css" href="${path}/resources/css/common/mainstyle.css?after">
 
+  <!-- Mypage CSS -->
+  <link rel="stylesheet" href="${path}/resources/css/mypage/Mypage_Main.css">
+
+  <!-- Adminpage CSS -->
+  
+  
+  <!-- Support CSS -->
+ 
   <title>Header</title>
 </head>
 

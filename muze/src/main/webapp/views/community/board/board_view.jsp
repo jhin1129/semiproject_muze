@@ -7,7 +7,7 @@
 
 <jsp:include page="/views/common/header.jsp"/>
 <style>
-	 #comment p {
+	 .comment p {
 	     margin: 0px;
 	 }
 	
@@ -97,7 +97,7 @@
                 </p>
                 <div class="text-right">
                     <button onclick="location.href='${path}/board/update?no=${ board.brdNo }&type=${ type }'" class="btn btn-light py-0">수정</button>
-                    <button id="btnDelete" class="btn btn-light py-0">삭제</button>
+                    <button id="btnDeleteBoard" class="btn btn-light py-0">삭제</button>
                 </div>
             </div>
 
@@ -131,37 +131,50 @@
 
             <hr style="border-style: dotted;">
             <!-- 댓글 -->
-            <div class="px-3">
+            <div id="comment-container" class="px-3">
                 <h4>댓글</h4>
-
-                <div id="comment">
-                    <hr>
-                    <p style="font-weight: bold;">USER1</p>
-                    <p>댓글을 작성합니다.</p>
-                    <div class="row m-0">
-                        <p class="mt-2 col p-0" style="font-size: 11px;">2022.07.15 05:30</p>
-                        <div>
-                            <button class="btn btn-light py-0">수정</button>
-                            <button class="btn btn-light py-0">삭제</button>
+                <hr>
+				<div id="comment-list">
+					<c:forEach var="comments" items="${ commentsList }">
+	                <div class="comment">
+	                	<input id="commentsNo" type="hidden" value="${ comments.commentsNo}">
+	                    <p style="font-weight: bold; margin: 0px;">${comments.commentsWriterId }</p>
+	                    <p class="commentsContent">${comments.commentsContent }</p>
+	                    <div class="row m-0">
+	                        <p class="mt-2 col p-0" style="font-size: 11px;">${comments.commentsDate }</p>
+	                        <div>
+	                            <button onclick="updateComments(event)" class="btn btn-light py-0">수정</button>
+	                            <button onclick="deleteComments(event)" class="btn btn-light py-0">삭제</button>
+	                        </div>
+	                    </div>
+	
+	                    <hr>
+	                </div>
+                    <div class="mb-3 comment-editor" style="display:none;">
+                    	<div class="form-control" style="height: 85px;">
+                        	<p class="commentsWriterId" style="font-weight: bold; margin: 0px;"></p>
+                        	<hr style="margin: 0px;">
+                        	<textarea id="updateCommentsContent" style="border: none; resize: none; width: 100%;"
+                            placeholder="댓글을 작성해주세요"></textarea>
                         </div>
+	                    <div class="text-right mt-1">
+	                        <button onclick="updateCommentsCancel(event)" class="btn btn-light py-0">취소</button>
+	                        <button onclick="updateCommentsCommit(event)" class="btn btn-light py-0">작성</button>
+	                    </div>
                     </div>
+					</c:forEach>
+				</div>
 
-                    <hr>
-                </div>
-
-                <div class="mb-3">
-                    <form action="">
-                        <div class="form-control" style="height: 85px;">
-                            <p style="font-weight: bold; margin: 0px;">USER2</p>
-                            <hr style="margin: 0px;">
-                            <textarea style="border: none; resize: none; width: 100%;"
-                                placeholder="댓글을 작성해주세요"></textarea>
-                        </div>
-                        <div class="text-right mt-1">
-                            <button class="btn btn-light py-0">작성</button>
-                        </div>
-                    </form>
-
+                <div id="comment-editor" class="mb-3">
+                    <div class="form-control" style="height: 85px;">
+                        <p style="font-weight: bold; margin: 0px;">USER2</p>
+                        <hr style="margin: 0px;">
+                        <textarea id="commentsContent" style="border: none; resize: none; width: 100%;"
+                            placeholder="댓글을 작성해주세요"></textarea>
+                    </div>
+                    <div class="text-right mt-1">
+                        <button onclick="writeComments();" class="btn btn-light py-0">작성</button>
+                    </div>
                 </div>
             </div>
 
@@ -173,7 +186,7 @@
     </div>
 <script>
 	$(document).ready(() => {
-		$("#btnDelete").on("click", ()=> {
+		$("#btnDeleteBoard").on("click", ()=> {
 			if(confirm("게시글을 삭제하시겠습니까?")){
 				location.replace("${path}/board/delete?no=${board.brdNo}&type=${board.brdType}");
 			}
@@ -182,7 +195,99 @@
 		$("#fileDown").on("click", ()=> {
 			location.assign("${path}/board/fileDown?oname=${board.brdOriginalFileName}&rname=${board.brdRenamedFileName}");
 		});
+			
+
+		$(".btnUpdateCommentsCommit").on("click", (event) => {
+
+			
+			
+
+		});
 	});
+	
+	function writeComments() {
+		$.ajax({
+			url: "${path}/board/commentswrite",
+			type: "POST",
+			dataType: "json",
+			data: {
+				"brdNo" : ${board.brdNo},
+				"commentsContent" : $("#commentsContent").val(),
+				"commentsWriterNo" : 1,
+				"commentsWriterId" : "admin"
+			},
+			success: function(data) {
+
+				
+				let html = "<div class='comment'>";
+				html += "<input id='commentsNo' type='hidden' value="+ data.commentsNo + ">";
+				html += "<p style='font-weight: bold; margin: 0px;'>"+data.commentsWriterId+"</p>";
+				html += "<p class='commentsContent'>"+data.commentsContent+"</p>";
+				html += "<div class='row m-0'>";
+				html += "<p class='mt-2 col p-0' style='font-size: 11px;'>"+ data.commentsDate + "</p>";
+				html += "<div><button onclick='updateComments(event)' class='btn btn-light py-0'>수정</button>";
+				html += "<button onclick='deleteComments(event)' class='btn btn-light py-0'>삭제</button></div></div><hr></div>";
+				html += "<div class='mb-3 comment-editor' style='display:none;'>";
+				html += "<div class='form-control' style='height: 85px;'>";
+				html += "<p class='commentsWriterId' style='font-weight: bold; margin: 0px;'></p>";
+				html += "<hr style='margin: 0px;'>";
+				html += "<textarea id='updateCommentsContent' style='border: none; resize: none; width: 100%;' placeholder='댓글을 작성해주세요'></textarea>";
+				html += "</div>";
+				html += "<div class='text-right mt-1'>";
+				html += "<button onclick='updateCommentsCancel(event)' class='btn btn-light py-0'>취소</button>";
+				html += "<button onclick='updateCommentsCommit(event)' class='btn btn-light py-0'>작성</button>";
+				html += "</div></div>";
+				
+				$("#comment-list").append(html);
+
+				$("#commentsContent").val('');
+			}
+		});
+	}
+	
+	function deleteComments(event) {
+		$.ajax({
+			url: "${path}/board/commentsdelete",
+			type: "POST",
+			dataType: "json",
+			data: {
+				"commentsNo" : $(event.target).parent().parent().siblings("#commentsNo").val()
+			},
+			success: function() {
+				$(event.target).parents(".comment").remove();
+			}
+		});
+	}
+	
+	function updateComments(event) {
+		$(event.target).parents(".comment").hide();
+		$(event.target).parents(".comment").next().show();
+		$(event.target).parents(".comment").next().find("#updateCommentsContent").val($(event.target).parent().parent().prev().text());
+		$(event.target).parents(".comment").next().find(".commentsWriterId").text($(event.target).parent().parent().prev().prev().text());
+	}
+	
+	function updateCommentsCancel(event) {
+		$(event.target).parent().parent().hide();
+		$(event.target).parent().parent().prev().show();
+	}
+	
+	function updateCommentsCommit(event){
+		alert();
+		$.ajax({
+			url: "${path}/board/commentsupdate",
+			type: "POST",
+			dataType: "json",
+			data: {
+				"commentsNo" : $(event.target).parent().parent().prev().find("#commentsNo").val(),
+				"commentsContent" : $(event.target).parent().prev().find("#updateCommentsContent").val()
+			},
+			success: function() {
+				$(event.target).parent().parent().hide();
+				$(event.target).parent().parent().prev().show();
+				$(event.target).parent().parent().prev().find(".commentsContent").text($(event.target).parent().prev().find("#updateCommentsContent").val());
+			}
+		});
+	}
 </script>    
     
 <jsp:include page="/views/common/footer.jsp"/>

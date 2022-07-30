@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.muze.mvc.member.service.MemberService;
+import com.muze.mvc.member.model.service.MemberService;
 
 @WebServlet("/member/idCheck")
 public class IdCheckServlet extends HttpServlet {
@@ -22,11 +22,10 @@ public class IdCheckServlet extends HttpServlet {
 
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// ID 값을 가져와서 DB에 있는 값인지 확인하고 결과(JSON)를 전달한다.
     	Map<String, Boolean> map = new HashMap<>();
-    	String loginId = request.getParameter("loginId");
+    	String memId = request.getParameter("memId");
     	    	
-    	map.put("duplicate", new MemberService().isDuplicateID(loginId));
+    	map.put("duplicate", new MemberService().isDuplicateID(memId));
     	
     	response.setContentType("application/json;charset=UTF-8");
     	

@@ -50,7 +50,6 @@ public class BoardWriteServlet extends HttpServlet {
     	String filesystemName = mr.getFilesystemName("upfile");
     	String originalFileName = mr.getOriginalFileName("upfile");
     	
-   		System.out.println(content);
     	board = new Board();
     		
 		board.setBrdWriterNo(1);
@@ -64,7 +63,7 @@ public class BoardWriteServlet extends HttpServlet {
 		board.setBrdRenamedFileName(filesystemName);
 		board.setBrdType(type);
 		
-		result = new BoardService().save(board);
+		result = new BoardService().saveBoard(board);
     		
 //		if(result > 0) {
 //    		request.setAttribute("msg", "게시글 등록 성공");

@@ -5,7 +5,9 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.muze.mvc.board.model.dao.BoardDao;
+import com.muze.mvc.board.model.dao.CommentsDao;
 import com.muze.mvc.board.model.vo.Board;
+import com.muze.mvc.board.model.vo.Comments;
 import com.muze.mvc.board.model.vo.Product;
 import com.muze.mvc.common.util.PageInfo;
 import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
@@ -45,7 +47,7 @@ public class BoardService {
 		return board;
 	}
 
-	public int save(Board board) {
+	public int saveBoard(Board board) {
 		int result = 0;
 		Connection connection = getConnection();
 		
@@ -81,7 +83,7 @@ public class BoardService {
 		
 	}
 
-	public int delete(int brdNo) {
+	public int deleteBoard(int brdNo) {
 		int result = 0;
 		Connection connection = getConnection();
 		
@@ -115,6 +117,54 @@ public class BoardService {
 		close(connection);
 		
 		return product;
+	}
+
+	public List<Comments> getCommentsList(int brdNo) {
+		List<Comments> commentsList = null;
+		Connection connection = getConnection();
+		
+		commentsList = new CommentsDao().findCommentsList(connection, brdNo);
+		return commentsList;
+	}
+
+	public Comments saveComments(Comments comments) {
+		int result = 0;
+		Comments getComments = new Comments();
+		Connection connection = getConnection();
+		
+		if(comments.getCommentsNo() != 0) {
+			result = new CommentsDao().updateComments(connection, comments);
+			getComments.setCommentsNo(result);
+		} else {			
+			getComments = new CommentsDao().insertComments(connection, comments);
+		}
+		
+		if(getComments.getCommentsNo() > 0) {
+			commit(connection);
+		} else {
+			rollback(connection);
+		}
+		
+		close(connection);
+		
+		return getComments;
+		
+	}
+
+	public int deleteComments(int commentsNo) {
+		int result = 0;
+		Connection connection = getConnection();
+		
+		result = new CommentsDao().updateStatus(connection, commentsNo, "N");
+		
+		if(result > 0) {
+			commit(connection);
+		} else {
+			rollback(connection);
+		}
+		
+		close(connection);
+		return result;
 	}
 
 

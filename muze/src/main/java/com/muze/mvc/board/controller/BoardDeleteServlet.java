@@ -22,7 +22,7 @@ public class BoardDeleteServlet extends HttpServlet {
 		String type = request.getParameter("type");
 		String path = "";
 		
-		result = new BoardService().delete(brdNo);
+		result = new BoardService().deleteBoard(brdNo);
 		
 		if(result > 0) {
 			path = request.getContextPath()+"/board/list?type="+type;

@@ -1,4 +1,4 @@
-package com.muze.mvc.member.vo;
+package com.muze.mvc.member.model.vo;
 
 import lombok.Data;
 
