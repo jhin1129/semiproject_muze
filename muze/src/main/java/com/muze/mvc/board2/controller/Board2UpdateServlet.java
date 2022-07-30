@@ -30,7 +30,7 @@ public class Board2UpdateServlet extends HttpServlet {
 
 		System.out.println("게시글 번호 " + brdNo);
 	
-		board = new Board2Service().getBoardByNo(brdNo, type);
+		board = new Board2Service().getBoardByNo(brdNo, true, type);
 	
 		request.setAttribute("board", board);
 	
@@ -48,6 +48,8 @@ public class Board2UpdateServlet extends HttpServlet {
 		int result = 0;
 		
 		Board2 board = null;
+		
+		String type = request.getParameter("type");
 		
 		// 파일 저장 경로
 		String path = getServletContext().getRealPath("/resources/upload/board/permanant");
@@ -93,13 +95,11 @@ public class Board2UpdateServlet extends HttpServlet {
 		
 		if(result > 0) {
 			request.setAttribute("msg", "게시글 수정 성공");
-			request.setAttribute("location", "/");
 		} else {
 			request.setAttribute("msg", "게시글 수정 실패");
-			request.setAttribute("location", "/");
 		}
-	
-	request.setAttribute("location", "/support/view?no=" + board.getBrdNo());
+		
+	request.setAttribute("location", "/support/list?type=" + type);
 	request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
