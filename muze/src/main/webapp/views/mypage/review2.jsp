@@ -29,28 +29,30 @@
             <div class="row">
               <div class="col-sm-12" style="margin-top: 40px;">
                 <form style="margin-bottom: 3px;">
-                  <span id="mySpan01">회원 인증</span> 
-                  <hr style="margin-bottom: 100px;">
-                </form>
-              </div>
-            </div>
-
-            <!-- 두번째 행 -->
-            <div class="row">
-              <div class="col-sm-12" style="margin-top: 30px;">
-                <form style="margin-bottom: 50px;">
-                  <span id="span01" style="font-size: 0.85em;"><center>회원님의 정보를 안전하게 보호하기 위해 비밀번호를 입력 해주세요.</center></span> 
+                  <span id="mySpan01">나의 후기</span> 
+                  <hr style="margin-bottom: 10px;">
                 </form>
               </div>
             </div>
             
+            <!-- 두번째 행 -->
+            <div class="row">
+              <div class="col-sm-12" style="margin-top: 30px;">
+                <form id="myForm01">
+                  <span id="mySpan01"></span> 
+                </form>
+
+
+
+                </div>
+              </div>
+            
             <!-- 세번째 행 -->
             <div class="row">
               <div class="col-sm-12" style="margin-top: 50px;">
-                <center>
-                  <input type="password">
-                  	<button type="submit" class="btn btn-outline-secondary" id="srhbtn7">확인</button>
-                </center>
+
+
+              
               </div>
             </div>
             <!-- 세번째 행 끝 -->

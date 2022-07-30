@@ -21,19 +21,11 @@ public class CancelServlet_orig extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	// 1st row
-    	int mileageNow = 0;
-    	int reviewCount = 0;
-    	Welcome welcome = null;   	
-    	MyOrder myOrder = null;
+    	Welcome welcomeRow = null;   	
+    	welcomeRow = new WelcomeService().getWelcomeRow();
+		System.out.println(welcomeRow);
+		request.setAttribute("welcomeRow", welcomeRow);
     	
-		myOrder = new MyOrderService().getOrderInfo();
-    	mileageNow = new WelcomeService().getMileageN();
-    	reviewCount = new WelcomeService().getReviewC();
-
-    	welcome = new Welcome(mileageNow, reviewCount);
-    	
-    	request.setAttribute("welcome", welcome);    	
-    	request.setAttribute("myOrder", myOrder);
     	request.getRequestDispatcher("/views/mypage/welcome.jsp").forward(request, response);
 
 	}
@@ -54,7 +46,7 @@ public class CancelServlet_orig extends HttpServlet {
 			request.setAttribute("location", "/mypage/welcome");	
 		}
 		
-    	request.getRequestDispatcher("/views/mypage/msg.jsp").forward(request, response);
+    	request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		
 	}
 

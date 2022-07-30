@@ -29,7 +29,7 @@
             <!-- 첫번째 행 -->
 			<jsp:include page="/views/mypage/welcome_row.jsp" flush="false"/>
             <!-- 두번째 행 -->
-			<jsp:include page="/views/mypage/orderStatus.jsp" flush="false"/>
+			<jsp:include page="/views/mypage/order_status.jsp" flush="false"/>
             <!-- 세번째 행 -->
             <div class="row">
               <div class="col-sm-12" style="margin-top: 50px;">

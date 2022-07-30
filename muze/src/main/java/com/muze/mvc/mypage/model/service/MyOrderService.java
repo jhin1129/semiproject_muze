@@ -8,30 +8,21 @@ import static com.muze.mvc.common.jdbc.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.List;
 
+import com.muze.mvc.member.vo.Member;
 import com.muze.mvc.mypage.model.dao.MyOrderDao;
+import com.muze.mvc.mypage.model.vo.MyMileage;
 import com.muze.mvc.mypage.model.vo.MyOrder;
 
 
 public class MyOrderService {
-	// 기본 주문 정보 
-	public MyOrder getOrderInfo() {
-		MyOrder orderInfo = null;
-		Connection connection = getConnection();
-
-		orderInfo = new MyOrderDao().getOrderInfo(connection);
-		
-		close(connection);
-		
-		return orderInfo;
-	}
 
 	// 주문 상세 
-	public MyOrder getOrderDetail() {
+	public MyOrder getOrderDetail(int no) {
 		MyOrder orderDetail = null;
 		
 		Connection connection = getConnection();
 
-		orderDetail = new MyOrderDao().getOrderDetail(connection);
+		orderDetail = new MyOrderDao().getOrderDetail(connection, no);
 		
 		close(connection);
 		
@@ -39,12 +30,12 @@ public class MyOrderService {
 	}
 
 	// 날짜별 주문 검색 
-	public List<MyOrder> orderByDate(String dateFrom, String dateTo) {
+	public List<MyOrder> orderByDate(String dateFrom, String dateTo, Member member) {
 		List<MyOrder> orderByDate = null;
 		
 		Connection connection = getConnection();
 
-		orderByDate = new MyOrderDao().getOrderByDate(connection, dateFrom, dateTo);
+		orderByDate = new MyOrderDao().getOrderByDate(connection, dateFrom, dateTo, member);
 		
 		close(connection);
 		
@@ -52,12 +43,12 @@ public class MyOrderService {
 	}
 
 	// 주문 정보 (30일)
-	public List<MyOrder> getOrderRec() {
+	public List<MyOrder> getOrderRec(Member member) {
 		List<MyOrder> getOrderRec = null;
 		
 		Connection connection = getConnection();
 
-		getOrderRec = new MyOrderDao().getOrderRec(connection);
+		getOrderRec = new MyOrderDao().getOrderRec(connection, member);
 		
 		close(connection);
 		
@@ -65,7 +56,7 @@ public class MyOrderService {
 	}
 	
 	// 주문 현황 
-	public List<MyOrder> getOrderStatus() {
+	public List<MyOrder> getOrderStatus(Member member) {
 		List<MyOrder> getOrderStatus = null;
         int result1 = 0;
         int result2 = 0;
@@ -76,7 +67,7 @@ public class MyOrderService {
 		
 		Connection connection = getConnection();
 
-		getOrderStatus = new MyOrderDao().getOrderStatus(connection);
+		getOrderStatus = new MyOrderDao().getOrderStatus(connection, member);
 		
 		for (int i = 0; i < getOrderStatus.size(); i++) {
 			
@@ -139,12 +130,12 @@ public class MyOrderService {
 	}
 
 	// 날짜별 취소 검색 
-	public List<MyOrder> cancelByDate(String dateFrom, String dateTo) {
+	public List<MyOrder> cancelByDate(String dateFrom, String dateTo, Member member) {
 		List<MyOrder> cancelByDate = null;
 		
 		Connection connection = getConnection();
 
-		cancelByDate = new MyOrderDao().getCancelByDate(connection, dateFrom, dateTo);
+		cancelByDate = new MyOrderDao().getCancelByDate(connection, dateFrom, dateTo, member);
 		
 		close(connection);
 		
@@ -152,12 +143,12 @@ public class MyOrderService {
 	}
 
 	// 날짜별 환불 검색 
-	public List<MyOrder> refundByDate(String dateFrom, String dateTo) {
+	public List<MyOrder> refundByDate(String dateFrom, String dateTo, Member member) {
 		List<MyOrder> refundByDate = null;
 		
 		Connection connection = getConnection();
 
-		refundByDate = new MyOrderDao().getRefundByDate(connection, dateFrom, dateTo);
+		refundByDate = new MyOrderDao().getRefundByDate(connection, dateFrom, dateTo, member);
 		
 		close(connection);
 		

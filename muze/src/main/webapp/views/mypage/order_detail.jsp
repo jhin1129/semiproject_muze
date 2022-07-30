@@ -46,14 +46,16 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td id="my_td01">${ myOrder.orderDate } <br>
-                        <a href="${ path }/mypage/orderdetail" id="my_td02">${ myOrder.orderNo }</a> <br>
-                          <c:if test="${ myOrder.orderStatus != '환불' && myOrder.orderStatus != '구매확정'}">
+                      <td id="my_td01">${ orderDetail.orderDate } <br>
+                        <a href="${ path }/mypage/orderdetail" id="my_td02">${ orderDetail.orderNo }</a> <br>
+                          <c:if test="${ orderDetail.orderStatus != '환불' && orderDetail.orderStatus != '구매확정'}">
 		                     <button type="button" class="btn btn-outline-secondary" id="mycbtn">주문취소 </button>
 		                  </c:if>
                       </td> 
-                      <td id="my_td01">${ myOrder.proName }</td>
-                      <td id="my_td01">${ myOrder.proPrice }원 / ${ myOrder.orderAmount }개 </td>
+                      <td id="my_td01">${ orderDetail.proName }</td>
+                      <td id="my_td01">
+                      <fmt:formatNumber value="${ orderDetail.proPrice }" pattern="#,###"/>원 / ${ orderDetail.orderAmount }개 
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -95,7 +97,7 @@
                       <tr>
                         <th class="my_th" id="my_th06">주문상태</th>
                         <td id="my_td04">
-                          ${ myOrder.orderStatus }
+                          ${ orderDetail.orderStatus }
                         </td>
                       </tr>
                   </table>
@@ -110,25 +112,25 @@
                       <tr>
                         <th class="my_th" id="my_th06" >상품 합계 금액</th>
                         <td id="my_td04">
-                          ${ orderDetail.orderPrice } 원
+                        	<fmt:formatNumber value="${ orderDetail.proPrice }" pattern="#,###"/>원
                         </td>
                       </tr>
                       <tr>
                         <th class="my_th" id="my_th06">배송비</th>
                         <td id="my_td04">
-                          ${ orderDetail.delFee } 원 
+                        	<fmt:formatNumber value="${ orderDetail.delFee }" pattern="#,###"/>원
                         </td>
                       </tr>
                       <tr>
                         <th class="my_th" id="my_th06">할인혜택</th>
                         <td id="my_td04">
-                          마일리지 (-) ${ orderDetail.mileage } 원
+                          마일리지 (-) <fmt:formatNumber value="${ orderDetail.mileage }" pattern="#,###"/> p
                         </td>
                       </tr>
                       <tr>
                         <th class="my_th" id="my_th06">총 결제 금액</th>
                         <td id="my_td04">
-                          ${ orderDetail.totalPrice } 원
+                          <fmt:formatNumber value="${ orderDetail.totalPrice }" pattern="#,###"/>원
                         </td>
                       </tr>
                       <tr>
@@ -138,7 +140,7 @@
                           입금은행 : 우리은행 <br>
                           입금계좌 : 1002-844-568858 <br>
                           예금주명 : (주)무제 <br>
-                          입금금액 : ${ orderDetail.totalPrice } 원 <br>
+                          입금금액 : <fmt:formatNumber value="${ orderDetail.totalPrice }" pattern="#,###"/>원 <br>
                           입금자명 : ${ orderDetail.orderName } <br>
                         </td>
                       </tr>

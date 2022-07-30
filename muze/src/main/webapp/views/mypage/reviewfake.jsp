@@ -5,37 +5,15 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
-<!-- header -->
 <jsp:include page="/views/common/header.jsp"/>
+   
+<!-- 내용 전체 컨테이너 -->
+<div class="container my-5">
 
-    <!-- my CSS -->
-	<link rel="stylesheet" href="${path}/resources/css/mypage/mypage_main.css"> 
+    <div>
+        <h2 style="text-align: center;"><a href="${path }/board/list?type=REVIEW">리뷰 게시판</a></h2>
+    </div>
 
-    <!-- 내용 전체 컨테이너 -->
-    <div class="container">
-      <div class="row">
-
-        <!-- 왼쪽 그리드 -->
-        <div class="col-sm-2" >
-        	<!--사이드 메뉴 -->
-        	<jsp:include page="/views/mypage/side_navi.jsp" flush="false"/>
-        </div>
-
-        <!-- 오른쪽 그리드 -->
-        <div class="col-sm-10" ">
-          <!-- 컨테이너 -->
-          <div class="container">
-            <!-- 첫번째 행 -->
-            <div class="row">
-              <div class="col-sm-12" style="margin-top: 40px;">
-                <form style="margin-bottom: 3px;">
-                  <span id="mySpan01">나의 후기</span> 
-                  <hr style="margin-bottom: 10px;">
-                </form>
-              </div>
-            </div>
-            
-            <!-- 두번째 행 -->
 	<c:forEach var="board" items="${ list }" varStatus="status">
 		<c:if test="${status.count % 4 == 1}">
 			<div class="row my-5">
@@ -86,18 +64,36 @@
             <button class="btn btn-light text-nowrap" onclick="location.href='${path}/board/write?type=REVIEW'">글 쓰기</button>
         </div>
     </div>
-            <!-- 세번째 행 끝 -->
-          </div>
-          <!-- 컨테이너 끝 -->
-      </div>
-      <!-- 오른쪽 그리드 끝 -->
-    </div>
-    </div>
-    <!-- 내용 전체 컨테이너 끝 -->
+	
+	<div class="search row mb-5">
+    	<div class="col-xs-2 col-sm-2">
+        	<select id="searchType" name="searchType" class="form-control">
+            	<option value="title" selected>제목</option>
+                <option value="writer">작성자</option>
+            </select>
+        </div>
 
-    <!-- Java Script -->
-    <!-- My JS -->
-    <!-- <script src="${path}/resources/js/Mypage_02.js"></script> -->
+        <div class="col-xs-10 col-sm-10">
+            <div class="input-group">
+            	<input type="text" name="searchInput" id="searchInput" class="form-control">
+                <span class="input-group-btn">
+                    <button id="searchBtn" class="btn btn-light text-nowrap">검색</button>
+                </span>
+            </div>
 
-	<!-- footer -->
-	<jsp:include page="/views/mypage/myfooter.jsp"/>
+        </div>
+
+	</div>
+</div>
+
+<script>
+	$(document).ready(() => {
+		$("#searchBtn").on("click", () => {
+			var searchType = $("#searchType option:selected").val();
+			var searchVal = $("#searchInput").val();
+			
+			location.href="${path}/board/list?type=REVIEW&searchType="+searchType+"&searchVal="+searchVal+"&isSearch=true";
+		});
+	});
+</script>
+<jsp:include page="/views/common/footer.jsp"/>

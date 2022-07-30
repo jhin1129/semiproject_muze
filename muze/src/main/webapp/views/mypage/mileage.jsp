@@ -14,7 +14,9 @@
     <link rel="stylesheet" href="${path}/resources/css/mypage/mypage_cal.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="${path}/resources/js/Mypage/mypage_02.js" ></script>
+    <!-- 순서와 위치 주의!! -->
+    <script src="${path}/resources/js/mypage/mypage_02.js" ></script>
+    <script src="${path}/resources/js/mypage/mypage_01.js" ></script>
   
       <!-- 내용 전체 컨테이너 -->
       <div class="container">
@@ -34,63 +36,63 @@
             <!-- 첫번째 행 -->
 			<jsp:include page="/views/mypage/welcome_row.jsp" flush="false"/>
 
-            <!-- 두번째 행 -->
-            <div class="row">
-              <div class="col-sm-12" style="margin-top: 30px;">
-                <form id="myForm01">
-                  <span id="mySpan01">마일리지</span> 
-                </form>
-                <!-- 기간별 검색 -->
-                <fieldset class="mySearchDate">
-                  <!-- 버튼 -->
-                  <div class= "btnsearch" role="group" aria-label="First group">
-                    <button type="button" class="btn btn-outline-secondary">오늘</button>
-                    <button type="button" class="btn btn-outline-secondary">7일</button>
-                    <button type="button" class="btn btn-outline-secondary">15일</button>
-                    <button type="button" class="btn btn-outline-secondary">1개월</button>
-                    <button type="button" class="btn btn-outline-secondary">3개월</button>
-                    <button type="button" class="btn btn-outline-secondary">1년</button>
-
-                    <!-- 날짜 -->
-                    <input type="text" class="datepicker" id="datepicker1" >
-                    ~
-                    <input type="text" class="datepicker" id="datepicker2" >
-                    
-                    <!-- 조회버튼 -->
-                    <button type="button" class="btn btn-outline-secondary">조회</button>
-                  </div>
-                </fieldset>
-                </div>
-              </div>
+           <!-- 두번째 행 -->
+			<div class="row">
+			 <div class="col-sm-12" style="margin-top: 30px;">
+			   <form id="myForm01">
+			     <span id="mySpan01">마일리지 내역</span> 
+			   </form>
+			   	  <!-- 기간별 검색 -->
+			      <fieldset class="mySearchDate">
+     				<form action="${ path }/mypage/mileage" method="get">
+					  <div class= "btnsearch" role="group" aria-label="First group">
+						<jsp:include page="/views/mypage/datepick.jsp" flush="false"/>
+						<!-- 조회버튼 -->
+			       		<button type="submit" class="btn btn-outline-secondary" id="srhbtn7">조회</button>
+			          </div>
+			       </form>
+  				 </fieldset>
+			  </div>
+            </div>
 
             <!-- 세번째 행 -->
-            <div class="row">
-              <div class="col-sm-12" style="margin-top: 30px;">
-                <form id="myForm01">
-                  <span id="mySpan01">적립내역 총 1건</span> 
-                </form>
-                  <!-- 마일리지 테이블 -->
-                  <table class="qnatable">
-                    <thead id="my_thead01">
+ 			<div class="row">
+              <div class="col-sm-12" style="margin-top: 50px;" >
+	             <form id="myForm01">
+	               <span id="mySpan01">마일리지 내역</span> 
+	             </form>
+                <!-- 조회 테이블 -->
+                <table class="ordertable">
+                  <thead id="my_thead01">
                     <tr>
-                      <th class="my_th" id="my_th05">날짜</th>
-                      <th class="my_th" id="my_th05">유형</th>
+                      <th class="my_th" id="my_th01">날짜</th>
+                      <th class="my_th" id="my_th03">유형</th>
                       <th class="my_th" id="my_th02">내용</th>
-                      <th class="my_th" id="my_th01">마일리지 내역</th>
-                      <th class="my_th" id="my_th01">잔여 마일리지</th>
+                      <th class="my_th" id="my_th04">마일리지 내역</th>
+                      <th class="my_th" id="my_th05">잔여 마일리지</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td id="my_td01">2022/07/06 </td>
-                      <td id="my_td01">적립</td>
-                      <td id="my_td01">신규회원 가입</td>
-                      <td id="my_td01">+ 1,000 원</td>
-                      <td id="my_td01">1,000 원</td>
-                    </tr>
+                  	<c:if test="${ empty list }">
+                  	 	<tr>
+                      		<td id="my_td00" colspan="5">
+                       			조회 내역이 없습니다.
+                      		</td>
+                    	</tr>
+                   	</c:if>
+                   	<c:if test="${ not empty list }">
+                   		<c:forEach var="myMileage" items="${ list }">
+		                    <tr>
+		                      <td id="my_td01">${ myMileage.pointDate }</td> 
+		                      <td id="my_td01">${ myMileage.inOut } </td>
+		                      <td id="my_td01">${ myMileage.route } </td>
+		                      <td id="my_td01">${ myMileage.point }</td>
+		                      <td id="my_td01">${ myMileage.point }</td>
+		                    </tr>
+	                    </c:forEach>
+                    </c:if>
                   </tbody>
                 </table>
-
               </div>
             </div>
             <!-- 세번째 행 끝 -->
@@ -101,10 +103,6 @@
     </div>
     </div>
     <!-- 내용 전체 컨테이너 끝 -->
-
-    <!-- Java Script -->
-    <!-- My JS -->
-    <!-- <script src="${path}/resources/js/Mypage_02.js"></script> -->
 
 	<!-- footer -->
 	<jsp:include page="/views/mypage/myfooter.jsp"/>

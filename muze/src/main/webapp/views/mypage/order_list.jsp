@@ -91,13 +91,13 @@
                    		<c:forEach var="orderByDate" items="${ list }">
 		                    <tr>
 		                      <td id="my_td01">${ orderByDate.orderDate } <br>
-		                        <a href="${ path }/mypage/orderdetail" id="my_td02">${ orderByDate.orderNo }</a> <br>
-		                          <c:if test="${ orderByDate.orderStatus != '환불' && orderByDate.orderStatus != '구매확정'}">
+	   								<a href="${path}/mypage/orderdetail?no=${ orderByDate.orderNo }" id="my_td02">${ orderByDate.orderNo }</a><br>
+		                        <c:if test="${ orderByDate.orderStatus != '환불' && orderByDate.orderStatus != '구매확정'}">
 		                        	<button type="button" class="btn btn-outline-secondary" id="mycbtn">주문취소 </button>
-		                       	  </c:if>
+		                       	</c:if>
 		                      </td> 
 		                      <td id="my_td01">${ orderByDate.proName }</td>
-		                      <td id="my_td01">${ orderByDate.strPrice }원 / ${ orderByDate.orderAmount }개</td>
+		                      <td id="my_td01"> <fmt:formatNumber value="${ orderByDate.proPrice }" pattern="#,###"/>원 / ${ orderByDate.orderAmount }개</td>
 		                      <td id="my_td01">${ orderByDate.orderStatus }</td>
 		                      <td id="my_td01"></td>
 		                    </tr>
@@ -123,7 +123,8 @@
 				location.replace('${path}/mypage/cancel');
 			}
 		});
-	});
+    }); 
+
     </script>
 
 	<!-- footer -->

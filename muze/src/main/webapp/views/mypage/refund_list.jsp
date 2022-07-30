@@ -91,10 +91,10 @@
                    		<c:forEach var="refundByDate" items="${ list }">
 		                    <tr>
 		                      <td id="my_td01">${ refundByDate.orderDate } <br>
-		                        <a href="${ path }/mypage/orderdetail" id="my_td02">${ refundByDate.orderNo }</a> <br>
+		                        <a href="${ path }/mypage/orderdetail?no=${ refundByDate.orderNo }" id="my_td02">${ refundByDate.orderNo }</a> <br>
 		                      </td> 
 		                      <td id="my_td01">${ refundByDate.proName }</td>
-		                      <td id="my_td01">${ refundByDate.strPrice }원 / ${ refundByDate.orderAmount }개</td>
+		                      <td id="my_td01"><fmt:formatNumber value="${ refundByDate.proPrice }" pattern="#,###"/>원 / ${ refundByDate.orderAmount }개</td>
 		                      <td id="my_td01">${ refundByDate.orderStatus }</td>
 		                      <td id="my_td01"></td>
 		                    </tr>
