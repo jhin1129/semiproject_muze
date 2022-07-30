@@ -27,7 +27,7 @@ public class AdminService {
 		List<Member> list = null;
 		Connection connection = getConnection();
 		
-		list = new AdminDao().findAll(connection, pageInfo);
+		list = new AdminDao().getMemberList(connection, pageInfo);
 		
 		close(connection);
 		
