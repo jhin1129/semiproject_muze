@@ -16,7 +16,7 @@
         <div class="col"></div>
             <div class="col-6 ">
                 <div class="content_box">
-                    <form name="formFind" id="formFind" action="../member/user_certification.php" method="post">
+                    <form name="formFind" id="formFind" action="${ path}/member/user_certification" method="post">
                         <div class="member_wrap">
                             <div class="member_tit">
                                 <h2>본인인증</h2>

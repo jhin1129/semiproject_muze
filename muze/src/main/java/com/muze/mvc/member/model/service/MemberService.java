@@ -15,10 +15,11 @@ public class MemberService {
 	public static final String MEMBER_ROLE_ARTIST = "R";
 
 
+	// 로그인
 	public Member login(String loginId, String loginPwd) {
 		Connection connection = getConnection();
 		
-		Member member = new MemberDao().findMemberById(connection, loginId);;
+		Member member = new MemberDao().findMemberById(connection, loginId);
 		
 		close(connection);
 		
@@ -30,6 +31,7 @@ public class MemberService {
 		
 	}
 
+	// 회원가입
 	public int save(Member member) {
 		int result = 0;
 		Connection connection = getConnection();
@@ -57,7 +59,7 @@ public class MemberService {
 		return member != null;
 	}
 
-	// 이메일 인증
+	// 이메일 중복 검사
 	public int selectEmail(String email) {
 		int result = 0;
 		Connection connection = getConnection();
@@ -71,6 +73,7 @@ public class MemberService {
 		return result;
 	}
 
+	// 아이디 찾기
 	public Member findId(String memberName, String memberEmail) {
 		Connection connection = getConnection();
 		Member member = null;
@@ -85,19 +88,7 @@ public class MemberService {
 		return member;
 	}
 	
-	public Member findPassword(String memberId, String memberEmail) {
-		Connection connection = getConnection();
-		Member member = null;
-		
-		try {
-			member = MemberDao.findPassword(connection, memberId, memberEmail);
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			close(connection);
-		}
-		return member;
-	}
+
 	
 	public int insertCertification(Map<String, String> map) {
 		Connection connection = getConnection();
@@ -114,7 +105,29 @@ public class MemberService {
 		return result;
 	}
 
-
+	// 비밀번호 찾기 1차
+	public Member findPasswordById(String memberId) {
+		Connection connection = getConnection();
+		
+		Member member = new MemberDao().findMemberById(connection, memberId);
+		
+		close(connection);
+		
+		return member;			
+		}
 	
-
+	// 비밀번호 찾기
+	public Member findPassword(String memberId, String memberEmail) {
+		Connection connection = getConnection();
+		Member member = null;
+		
+		try {
+			member = MemberDao.findPassword(connection, memberId, memberEmail);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			close(connection);
+		}
+		return member;
+	}
 }

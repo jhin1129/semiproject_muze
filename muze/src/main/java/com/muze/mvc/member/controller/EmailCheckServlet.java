@@ -51,6 +51,7 @@ public class EmailCheckServlet extends HttpServlet {
     	int result = 0;
     	
     	result = memberService.selectEmail(email);
+    	
     	if(result > 0) {
     		out.print("overlap");
     		

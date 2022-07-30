@@ -78,10 +78,9 @@ public class MemberDao {
 
 	public int selectEmail(Connection connection, String email) {
 		int result = 0;
-		Member member = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
-		String query = "SELECT * FROM MEMBER WHERE MEMBER_EMAIL=? AND ISMEMBER='Y'";
+		String query = "SELECT * FROM MEMBER WHERE MEMBER_EMAIL=?";
 		
 		try {
 			pstm = connection.prepareStatement(query);
@@ -89,22 +88,9 @@ public class MemberDao {
 			pstm.setString(1, email);
 			rs = pstm.executeQuery();
 			
-			if(rs.next()) {
-				member = new Member();
-				
-				member.setMemberNo(rs.getInt("MEMBER_NO"));
-				member.setMemberId(rs.getString("MEMBER_ID"));
-				member.setMemberPassword(rs.getString("MEMBER_PASSWORD"));
-				member.setMemberRole(rs.getString("MEMBER_ROLE"));
-				member.setMemberName(rs.getString("MEMBER_NAME"));
-				member.setMemberPhonenumber(rs.getString("MEMBER_PHONE_NUMBER"));
-				member.setMemberEmail(rs.getString("MEMBER_EMAIL"));
-				member.setMemberAddress(rs.getString("MEMBER_ADDRESS"));
-				member.setPoint(rs.getInt("POINT"));
-				member.setEnrollDate(rs.getDate("ENROLL_DATE"));
-				member.setIsmember(rs.getString("ISMEMBER"));
+			while(rs.next()) {
+				result = rs.getInt(1);
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -120,7 +106,7 @@ public class MemberDao {
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
 		
-		String query = "SELECT * FROM MEMBER WHERE MEMBER_NAME=? AND MEMBER_EMAIL='?'";
+		String query = "SELECT * FROM MEMBER WHERE MEMBER_NAME=? AND MEMBER_EMAIL=?";
 		
 		try {
 			pstm = connection.prepareStatement(query);
@@ -214,7 +200,6 @@ public class MemberDao {
 		}
 		return result;
 	}
-
 
 
 }	
