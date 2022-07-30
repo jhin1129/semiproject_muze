@@ -43,17 +43,23 @@
             	              text: '출석 체크',
             	              click: function () {
             	                var date = new Date(); 
-            	                if (!isNaN(date.valueOf())) {
-            	                  calendar.addEvent({
+            	                var currentDate = date.getFullYear() + "-" + ( date.getMonth() + 1 ) + "-" + date.getDate(); 
+            	                calendar.addEvent({
             	                    title: "출석 정보",
             	                    start: date,
-            	                    allDay: true,
-            	                  });
-            	                  alert("출석 체크 완료");
-            	                  allsave();
-            	                } else {
-            	                  alert("출석 체크 실패");
-            	                }
+            	                    allDay: true, 
+            	                $.ajax({
+            	           			url: "/event",
+            	           			type: "POST",
+            	           			data:{
+            	           				currentDate
+            	           			},
+            	           			success: function(data){
+            	           				alert(data);
+            	           				location.reload();	
+            	           			}
+            	           		});
+            	                });
             	              },
             	            },
             	          },
@@ -64,52 +70,6 @@
             calendar.render();
          });
          
-        function allsave() 
-        {
-        	var allEvent = calendar.getEvents();
-        	
-        	console.log(allEvent);
-        	
-        	var events = new Array();
-        	for(var i=0; i < allEvent.length; i++ ) {
-        		
-        		var obj = new Object();
-        		
-        		obj.evAttendDate = allEvent[i]._instance.range.start;  
-        		
-        		events.push(obj);
-        	}
-        	
-        	console.log(obj);
-        	var jsondata = JSON.stringify(events);
-        	console.log(jsondata);
-        	
-        	savedata(jsondata);
-        }
-        
-        function savedata(jsondata) 
-        {
-        	$.ajax({
-        		type: 'POST',
-        		url: "${ path }/event",
-        		data: 
-        			{ attenddate : jsondata },
-        		dataType : 'text',
-        		success: (data) => {
-        			console.log(data);
-        		},
-        		error: (error) => {
-        			console.log(error);
-        		},
-        		// AJAX 통신 성공 여부와 상관없이 실행될 콜백 함수
-        		complete: function() {
-					console.log("complete");						
-				}
-        	});
-        }
-       
-      
-        
         </script>
         <div class="mt-3"><h6 style="text-align: center;">매일 출석 하고 100 마일리지 가져가세요!</h6></div>
         <div class="mt-4" id='calendar'></div>

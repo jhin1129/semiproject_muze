@@ -22,22 +22,55 @@ public class Board2Service {
 		return count;
 	}
 
+	public int getBoardCountAll() {
+		int count = 0;
+		Connection connection = getConnection();
+		
+		count = new Board2Dao().getBoardCountAll(connection);
+		
+		close(connection);
+		return count;
+	}
+	
 	public List<Board2> getBoardList(PageInfo pageInfo, String type) {
 		List<Board2> list = null;
 		Connection connection = getConnection();
 		
-		list = new Board2Dao().findAll(connection, pageInfo, type);
+		list = new Board2Dao().getBoardList(connection, pageInfo, type);
 		
 		close(connection);
 		
 		return list;
 	}
 
-	public Board2 getBoardByNo(int brdNo, String type) {
+	public List<Board2> getBoardListAll(PageInfo pageInfo) {
+		List<Board2> list = null;
+		Connection connection = getConnection();
+		
+		list = new Board2Dao().getBoardListAll(connection, pageInfo);
+		
+		close(connection);
+		
+		return list;
+	}
+	
+	public Board2 getBoardByNo(int brdNo, boolean hasRead, String type) {
 		Board2 board = null;
 		Connection connection = getConnection();
 		
 		board = new Board2Dao().findBoardByNo(connection, brdNo, type);
+		
+		// 게시글 조회수 증가 로직
+		if(board != null && !hasRead) {
+			int result = new Board2Dao().updateReadCount(connection, board);
+			
+			if(result > 0) {
+				commit(connection);
+			} else {
+				rollback(connection);
+			}
+		}
+	
 		
 		close(connection);
 		
@@ -82,4 +115,5 @@ public class Board2Service {
 		
 		return result;
 	}
+
 }

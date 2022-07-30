@@ -7,6 +7,8 @@
 
 <jsp:include page="/views/common/header.jsp"/>
 <link rel="stylesheet" href="${path}/resources/css/adminpage/admin.css">
+<link rel="stylesheet" href="${path}/resources/css/mypage/mypage_main.css"> 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
   <!-- 내용 전체 컨테이너 -->
   <div class="container">
     <div class="row">

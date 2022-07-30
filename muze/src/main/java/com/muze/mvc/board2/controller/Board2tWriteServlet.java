@@ -35,7 +35,7 @@ public class Board2tWriteServlet extends HttpServlet {
 			}
 		} else {
 			request.setAttribute("msg", "로그인 후 사용할 수 있습니다.");
-			request.setAttribute("location", "/");
+			request.setAttribute("location", "/member/login");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
 	}
@@ -92,14 +92,14 @@ public class Board2tWriteServlet extends HttpServlet {
 		
 			if(result > 0) {
 				request.setAttribute("msg", "게시글 등록 성공");
-				request.setAttribute("location", "/support/list?type=${ }");
+				request.setAttribute("location", "/support/list?type=" + type);
 			} else {
 				request.setAttribute("msg", "게시글 등록 실패");
-				request.setAttribute("location", "/");
+				request.setAttribute("location", "/support/list?type=" + type);
 			}
 		} else {
 			request.setAttribute("msg", "로그인 후 사용할 수 있습니다.");
-			request.setAttribute("location", "/");
+			request.setAttribute("location", "/member/login");
 		}
 	request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}

@@ -11,33 +11,38 @@ import javax.servlet.http.HttpServletResponse;
 import com.muze.mvc.member.model.service.MemberService;
 import com.muze.mvc.member.model.vo.Member;
 
-@WebServlet("/member/find_id")
-public class FindIdServlet extends HttpServlet {
+
+@WebServlet("/member/user_certification")
+public class UserCertificationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	SendFindEmailServlet sendEmail = new SendFindEmailServlet();
-
-    public FindIdServlet() {
+ 
+    public UserCertificationServlet() {
+       
     }
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/views/member/find_id.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/member/user_certification.jsp").forward(request, response);
 	}
 
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberName = request.getParameter("userName");
+		String memberId = request.getParameter("userName");
 		String memberEmail = request.getParameter("userEmail");
 		
-		Member member = new MemberService().findId(memberName, memberEmail);
+		Member member = new MemberService().findPassword(memberId, memberEmail);
 		
-		
+		String msg = "";
 		if (member != null) {
-			member = sendEmail.sendEmailId(member);
-			
-			request.getSession().setAttribute("msg", "아이디가 이메일로 발송되었습니다.");
+			// 비밀번호 보내주기
+			member = sendEmail.sendEmailPassword(member);
+			request.getSession().setAttribute("msg", "이메일로 임시비밀번호가 발급되었습니다.");
 			response.sendRedirect(request.getContextPath()+"/");
+
+
 		} else {
-			request.getSession().setAttribute("msg", "존재하지 않는 아이디입니다.");
+			request.getSession().setAttribute("msg", "비밀번호 찾기가 실패하였습니다.");
+			
 			// 뒤로가기
 			String url = request.getHeader("Referer");
 			response.sendRedirect(url);
