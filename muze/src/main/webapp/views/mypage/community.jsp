@@ -28,23 +28,22 @@
             <!-- 첫번째 행 -->
             <div class="row">
               <div class="col-sm-12" style="margin-top: 40px;">
-                <form style="margin-bottom: 3px;">
                   <span id="mySpan01">나의 게시글</span> 
-                  <hr style="margin-bottom: 0%;">
-                </form>
+                  <hr style="margin-bottom: 0;">
               </div>
             </div>
             
             <!-- 두번째 행 -->
         <div class="mt-5">
-            <table class="table table-hover" style="margin-top: 0%;">
-                <thead>
+            <!-- <table class="ordertable" style="margin-top: 0%;"> -->
+             <table class="table table-hover" style="margin-top: 0%;">
+                 <thead id="my_thead01">
                     <tr>
-                        <th id="th" style="width: 10%;">번호</th>
-                        <th id="th" style="width: 50%;">제목</th>
-                        <th id="th" style="width: 15%;">작성자</th>
-                        <th id="th" style="width: 15%;">날짜</th>
-                        <th id="th" style="width: 10%;">조회수</th>
+                        <th class="my_th" id="br_th01"><center>번호</center></th>
+                        <th class="my_th" id="br_th02"><center>제목</center></th>
+                        <th class="my_th" id="br_th03"><center>작성자</center></th>
+                        <th class="my_th" id="br_th04"><center>날짜</center></th>
+                        <th class="my_th" id="br_th05"><center>조회수</center></th>
                     </tr>
                 </thead>
 				
@@ -59,52 +58,51 @@
                 	<c:if test="${ not empty list }">
                 		<c:forEach var="board" items="${ list }">
 	                		<tr>
-		                        <td id="td">${ board.rowNum }</td>
-		                        <td id="td"><a href="${ path }/board/view?no=${ board.brdNo }&type=${ type }">${ board.brdTitle }</a></td>
-		                        <td id="td">${ board.brdWriterId }</td>
-		                        <td id="td">${ board.brdDate }</td>
-		                        <td id="td">${ board.brdReadCount }</td>
+		                        <td id="br_td01">${ board.rowNum }</td>
+		                        <td id="br_td01"><a href="${ path }/board/view?no=${ board.brdNo }&type=${ type }">${ board.brdTitle }</a></td>
+		                        <td id="br_td01">${ board.brdWriterId }</td>
+		                        <td id="br_td01">${ board.brdDate }</td>
+		                        <td id="br_td01">${ board.brdReadCount }</td> 
 	                    	</tr>
-                		
                 		</c:forEach>
                 	</c:if>
                 </tbody>
             </table>
         </div>
 
-        <div class="row">
-            <div class="col-4"></div>
-            <div class="col-4">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item"><a class="page-link" href="${path }/board/list?page=1&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&lt;&lt;</a></li>
-                    <li class="page-item"><a class="page-link" href="${path }/board/list?page=${pageInfo.prevPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&lt;</a></li>
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-5">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" style="color: grey;" href="${path }/board/list?page=1&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&lt;&lt;</a></li>
+                    <li class="page-item"><a class="page-link" style="color: grey;" href="${path }/board/list?page=${pageInfo.prevPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&lt;</a></li>
                     
                     <!--  10개 페이지 목록 -->
 					<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
 						<c:if test="${ status.current == pageInfo.currentPage }">
-		                    <li class="page-item disabled"><a class="page-link" href="#">${ status.current }</a></li>
+		                    <li class="page-item disabled"><a class="page-link" style="color: grey;"  href="#">${ status.current }</a></li>
 						</c:if>
 						<c:if test="${ status.current != pageInfo.currentPage }">
-		                    <li class="page-item"><a class="page-link" href="${path }/board/list?page=${status.current}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">${ status.current }</a></li>
+		                    <li class="page-item"><a class="page-link" style="color: grey;" href="${path }/board/list?page=${status.current}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">${ status.current }</a></li>
 					
 						</c:if>
 					</c:forEach>
                     
-                    <li class="page-item"><a class="page-link" href="${path }/board/list?page=${pageInfo.nextPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&gt;</a></li>
-                    <li class="page-item"><a class="page-link" href="${path }/board/list?page=${pageInfo.maxPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&gt;&gt;</a></li>
+                    <li class="page-item"><a class="page-link" style="color: grey;" href="${path }/board/list?page=${pageInfo.nextPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&gt;</a></li>
+                    <li class="page-item"><a class="page-link" style="color: grey;" href="${path }/board/list?page=${pageInfo.maxPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&gt;&gt;</a></li>
                 </ul>
             </div>
+            <div class="col-4">
+            
+            </div>
 
-            <div class="col-4 text-right">
-                <button class="btn btn-light text-nowrap" onclick="location.href='${path}/board/write?type=FREE'">글 쓰기</button>
+            <div class="col-3 text-right">
+                <button type="button" class="btn btn-outline-secondary" onclick="location.href='${path}/board/write?type=FREE'" id="srhbtn8">글 쓰기</button>
             </div>
         </div>
             
             <!-- 세번째 행 -->
             <div class="row">
               <div class="col-sm-12" style="margin-top: 50px;">
-
-
               
               </div>
             </div>

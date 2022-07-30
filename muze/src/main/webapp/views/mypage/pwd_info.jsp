@@ -48,7 +48,7 @@
             <div class="row">
               <div class="col-sm-12" style="margin-top: 50px;">
                 <center>
-                  <input type="password">
+                  <input type="password" style="border: 1px solid lightgrey; border-radius: 0%; height: 34px;"">
                   	<button type="submit" class="btn btn-outline-secondary" id="srhbtn7">확인</button>
                 </center>
               </div>
@@ -61,10 +61,6 @@
     </div>
     </div>
     <!-- 내용 전체 컨테이너 끝 -->
-
-    <!-- Java Script -->
-    <!-- My JS -->
-    <!-- <script src="${path}/resources/js/Mypage_02.js"></script> -->
 
 	<!-- footer -->
 	<jsp:include page="/views/mypage/myfooter.jsp"/>

@@ -19,7 +19,7 @@ public class MyInfoDao {
 		List<MyMileage> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT * "
+		String query = "SELECT POINT_NO, MEMBER_NO, POINT_PROCESS, POINT_ROUTE, POINT_DATE, POINT_IN_OUT "
 						+ "FROM MILEAGE "
 						+ "WHERE POINT_DATE BETWEEN ? AND ? AND MEMBER_NO = ?";
 		

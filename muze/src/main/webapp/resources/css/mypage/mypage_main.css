@@ -69,6 +69,7 @@
     border-bottom: 1px solid lightgrey;
     font-size: 0.8em;
     font-weight: 600;
+    text-align: center;
 }
 
 /* 컨네이너 폰트 */
@@ -114,7 +115,6 @@
 
 #my_td01{
 	border-bottom: 1px solid lightgray;
-    padding-top: 5px;
     height: 10px;
     text-align: center;
     font-size: 0.8em;
@@ -260,4 +260,56 @@
     line-height: 25px;
     font-size: 0.8em;
     border-bottom: 1px solid lightgray;
+}
+
+/* 게시판 */
+
+.page-link{
+    font-size: 0.75em; 
+    font-color: lightgrey;
+}
+
+
+#br_th01{
+    width: 5%
+}
+
+#br_th02{
+    width: 50%
+}
+
+#br_th03{
+    width: 10%
+}
+
+#br_th04{
+    width: 10%
+}
+
+#br_th05{
+    width: 7%
+}
+
+#br_td01{
+	border-bottom: 1px solid lightgray;
+    height: 40px;
+    text-align: center;
+    font-size: 0.8em;
+}
+
+#my_td01{
+	border-bottom: 1px solid lightgray;
+    height: 10px;
+    text-align: center;
+    font-size: 0.8em;
+}
+
+
+#srhbtn8{
+    border: 1px solid lightgray;
+    margin-bottom: 3px;
+    padding-bottom: 5px;
+    border-radius: 8%;
+    height: 34px;
+    font-size: 0.8em;
 }

@@ -162,7 +162,7 @@ public class MyOrderDao {
         int result6 = 0;
 		String query = "SELECT ORDER_STATUS "
 						+ "FROM ORDER_STATUS "
-						+ "WHERE MEMBER_NO = ? AND ORDER_DATE > SYSDATE -30 AND NOT(ORDER_STATUS = '환불' OR ORDER_STATUS = '취소')";
+						+ "WHERE MEMBER_NO = ? AND ORDER_DATE > SYSDATE -30";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
@@ -181,6 +181,8 @@ public class MyOrderDao {
 				orderStatus.setPro4(1);
 				orderStatus.setPro5(1);
 				orderStatus.setPro6(1);
+				orderStatus.setPro7(1);
+				orderStatus.setPro8(1);
 				
 				getOrderStatus.add(orderStatus);
 			}
@@ -195,14 +197,14 @@ public class MyOrderDao {
 	}
 
 	// 주문 취소 
-	public int orderCancel(Connection connection) {
+	public int orderCancel(Connection connection, int no) {
 		int result = 0;
 		PreparedStatement pstm = null;
 		String query = "UPDATE ORDER_STATUS SET ORDER_STATUS = '취소' WHERE ORDER_NO = ? ";
 		
 		try {
 			pstm = connection.prepareStatement(query);
-			pstm.setInt(1, 334); 
+			pstm.setInt(1, no); 
 			
 			result = pstm.executeUpdate();
 			

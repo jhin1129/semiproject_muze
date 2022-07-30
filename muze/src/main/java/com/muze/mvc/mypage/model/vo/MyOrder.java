@@ -37,6 +37,8 @@ public class MyOrder {
 	private int pro4; // 배송중 
 	private int pro5; // 배송완료 
 	private int pro6; // 구매확정 
+	private int pro7; // 취소
+	private int pro8; // 환불 
 	
 	public int getTotalPrice() {
 

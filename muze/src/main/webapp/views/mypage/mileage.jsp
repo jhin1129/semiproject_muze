@@ -65,10 +65,10 @@
                 <table class="ordertable">
                   <thead id="my_thead01">
                     <tr>
-                      <th class="my_th" id="my_th01">날짜</th>
-                      <th class="my_th" id="my_th03">유형</th>
+                      <th class="my_th" id="my_th05">날짜</th>
+                      <th class="my_th" id="my_th05">유형</th>
                       <th class="my_th" id="my_th02">내용</th>
-                      <th class="my_th" id="my_th04">마일리지 내역</th>
+                      <th class="my_th" id="my_th05">마일리지 내역</th>
                       <th class="my_th" id="my_th05">잔여 마일리지</th>
                     </tr>
                   </thead>

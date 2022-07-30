@@ -42,8 +42,8 @@
 		</c:if>
 		
 		<div class="col-lg-3 col-md-6" onclick="location.href='${ path }/board/view?no=${ board.brdNo }&type=${ type }'">
-            <div class="card" style="width: 16rem;">
-                <img style="background-color: black;" width="100%" height="254px">
+            <div class="card" style="width: 13rem; height: 20rem;">
+                <img style="background-color: black;" width="100%" height="70%">
                 <div class="card-body">
                     <h5 class="card-title">${ board.brdTitle }</h5>
                     <p class="card-text">${board.brdProName }</p>
@@ -63,8 +63,8 @@
         <div class="col-4"></div>
         <div class="col-4">
             <ul class="pagination justify-content-center">
-                <li class="page-item"><a class="page-link" href="${path }/board/list?page=1&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&lt;&lt;</a></li>
-                <li class="page-item"><a class="page-link" href="${path }/board/list?page=${pageInfo.prevPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&lt;</a></li>
+                <li class="page-item"><a class="page-link" style="color: grey;" href="${path }/board/list?page=1&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&lt;&lt;</a></li>
+                <li class="page-item"><a class="page-link" style="color: grey;" href="${path }/board/list?page=${pageInfo.prevPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&lt;</a></li>
                 
                 <!--  10개 페이지 목록 -->
 				<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
@@ -72,18 +72,18 @@
                   		<li class="page-item disabled"><a class="page-link" href="#">${ status.current }</a></li>
 					</c:if>
 					<c:if test="${ status.current != pageInfo.currentPage }">
-                  		<li class="page-item"><a class="page-link" href="${path }/board/list?page=${status.current}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">${ status.current }</a></li>
+                  		<li class="page-item"><a class="page-link" style="color: grey;" href="${path }/board/list?page=${status.current}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">${ status.current }</a></li>
 	
 					</c:if>
 				</c:forEach>
                 
-                <li class="page-item"><a class="page-link" href="${path }/board/list?page=${pageInfo.nextPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&gt;</a></li>
-                <li class="page-item"><a class="page-link" href="${path }/board/list?page=${pageInfo.maxPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&gt;&gt;</a></li>
+                <li class="page-item"><a class="page-link" style="color: grey;" href="${path }/board/list?page=${pageInfo.nextPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&gt;</a></li>
+                <li class="page-item"><a class="page-link" style="color: grey;" href="${path }/board/list?page=${pageInfo.maxPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&gt;&gt;</a></li>
             </ul>
         </div>
 
         <div class="col-4 text-right">
-            <button class="btn btn-light text-nowrap" onclick="location.href='${path}/board/write?type=REVIEW'">글 쓰기</button>
+            <button type="button" class="btn btn-outline-secondary" onclick="location.href='${path}/board/write?type=REVIEW'" id="srhbtn8">글 쓰기</button>
         </div>
     </div>
             <!-- 세번째 행 끝 -->
@@ -94,10 +94,6 @@
     </div>
     </div>
     <!-- 내용 전체 컨테이너 끝 -->
-
-    <!-- Java Script -->
-    <!-- My JS -->
-    <!-- <script src="${path}/resources/js/Mypage_02.js"></script> -->
 
 	<!-- footer -->
 	<jsp:include page="/views/mypage/myfooter.jsp"/>

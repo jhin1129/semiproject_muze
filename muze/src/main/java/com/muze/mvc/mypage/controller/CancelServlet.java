@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.muze.mvc.mypage.model.service.MyOrderService;
 
+import oracle.net.aso.d;
+
 @WebServlet("/mypage/cancel")
 public class CancelServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -19,22 +21,24 @@ public class CancelServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int result = 0;
+		int no = Integer.parseInt(request.getParameter("no"));
 		
-    	result = new MyOrderService().orderCancel();
+		System.out.println(" 넘버값 " + no);
+		
+    	result = new MyOrderService().orderCancel(no);
 
 		// 쿼리가 정상적으로 실행되어 정수값을 반환하면,
     	if (result > 0) {
 		    // 주문 취소 성공 
     		request.setAttribute("msg", "주문이 정상적으로 취소되었습니다.");
-			request.setAttribute("location", "/mypage/orderdetail");	
+			request.setAttribute("location", "/mypage/welcome");	
     	} else {
     		// 주문 취소 실패 
-			request.setAttribute("msg", "회원 정보 수정 실패");
+			request.setAttribute("msg", "취소에 실패하였습니다. 관리자에게 문의해주세요.");
 			request.setAttribute("location", "/mypage/welcome");	
 		}
 
-    	request.getRequestDispatcher("/views/mypage/msg.jsp").forward(request, response);
+    	request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 
 	}
-
 }
