@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.muze.mvc.member.vo.Member;
 import com.muze.mvc.mypage.model.service.MyOrderService;
 import com.muze.mvc.mypage.model.service.WelcomeService;
 import com.muze.mvc.mypage.model.vo.MyOrder;
@@ -23,55 +25,43 @@ public class WelcomeServlet extends HttpServlet {
 
     @Override	
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	// 1st row
-    	int mileageNow = 0;
-    	int reviewCount = 0;
-    	Welcome welcome = null;   	
-    	MyOrder myOrder = null;
-    	
-    	// 이름 얻어오기 
-		myOrder = new MyOrderService().getOrderInfo();
+    	// 로그인 체크 & 본인 게시글 여부 확인 
+		HttpSession session = request.getSession(false);
+    	Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
 		
-    	// DB에 저장된 마일리지 값 
-    	mileageNow = new WelcomeService().getMileageN();
+    	if (loginMember != null) {
+    		// 로그인 객체의 PK값을 넘기기 위한 객체 생성 
+			Member member = new Member();
+			member.setMemberNo(loginMember.getMemberNo());			
+			member.setMemberName(loginMember.getMemberName());
+			request.setAttribute("member", member);
+	    	
+	    	// 1st row
+	    	Welcome welcomeRow = null;   	
+	    	welcomeRow = new WelcomeService().getWelcomeRow(member);
+	    	System.out.println(welcomeRow);
+	    	
+	    	
+	    	// 2nd row
+			List<MyOrder> status = null;
+			status = new MyOrderService().getOrderStatus(member);
+			
+	    	// 3rd row 
+			List<MyOrder> list = null;
+			list = new MyOrderService().getOrderRec(member);
+	
+			request.setAttribute("welcomeRow", welcomeRow);
+			request.setAttribute("status", status);
+			request.setAttribute("list", list);
+	    	request.getRequestDispatcher("/views/mypage/welcome.jsp").forward(request, response);
     	
-    	// DB에 저장된 리뷰의 갯수
-    	reviewCount = new WelcomeService().getReviewC();
-    	
-//		System.out.println(mileageNow); // 100 제대로 가져옴.
-//		System.out.println(reviewCount); // 6 제대로 가져옴.
-		
-		welcome = new Welcome(mileageNow, reviewCount);
+    	} else {
+    		request.setAttribute("msg", "로그인이 필요한 서비스입니다.");
+			request.setAttribute("location", "/");		
+    		
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+    	}
 
-    	// 2nd row
-		List<MyOrder> status = null;
-		status = new MyOrderService().getOrderStatus();
-		status.forEach(System.out::println);
-		
-//		System.out.println(status.get(status.size() - 1).getOrderStatus()); // 상품준비중 가져와짐 
-//		System.out.println(status.get(0).getOrderStatus()); // 상품준비중 가져와짐 
-//		System.out.println(status.get(0).getPro3()); // 테스트 ok 
-//		System.out.println(status.get(status.size() - 1).getPro3()); // 테스트 ok 
-//		System.out.println(status.get(status.size() - 1).getPro2()); // 테스트 ok 
-		
-    	// 3rd row 
-		List<MyOrder> list = null;
-		list = new MyOrderService().getOrderRec();
-
-		// 받아왔는지 확인 
-//		list.forEach(System.out::println);
-
-		request.setAttribute("status", status);
-		request.setAttribute("list", list);
-    	request.setAttribute("welcome", welcome);    	
-    	request.setAttribute("myOrder", myOrder);
-    	request.getRequestDispatcher("/views/mypage/welcome.jsp").forward(request, response);
-    	
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
-    
     
 }

@@ -24,6 +24,7 @@
 	          <div class="col" id="mying1">구매확정</div>
 	        </div>
 	      </div>
+	     <c:if test="${ not empty status }">
 	      <div class="container">
 	        <div class="row row-cols-12">
 	          <div class="col" id="mying3"></div>
@@ -44,8 +45,35 @@
 	          <div class="col" id="mying3"></div>
 	          <div class="col" id="mying2">${ status.get(status.size() - 1).getPro6() }</div>
 	          <div class="col" id="mying3"></div>
+	          <div class="col" id="mying3" hidden>${ status.get(status.size() - 1).getPro7() }</div>
+	          <div class="col" id="mying3" hidden>${ status.get(status.size() - 1).getPro8() }</div>
 	        </div>
 	      </div>
+	    </c:if>
+		<c:if test="${ empty status }">
+	      <div class="container">
+	        <div class="row row-cols-12">
+	          <div class="col" id="mying3"></div>
+	          <div class="col" id="mying2">0</div>
+	          <div class="col" id="mying3"></div>
+	          <div class="col" id="mying3"></div>
+	          <div class="col" id="mying2">0</div>
+	          <div class="col" id="mying3"></div>
+	          <div class="col" id="mying3"></div>
+	          <div class="col" id="mying2">0</div>
+	          <div class="col" id="mying3"></div>
+	          <div class="col" id="mying3"></div>
+	          <div class="col" id="mying2">0</div>
+	          <div class="col" id="mying3"></div>
+	          <div class="col" id="mying3"></div>
+	          <div class="col" id="mying2">0</div>
+	          <div class="col" id="mying3"></div>
+	          <div class="col" id="mying3"></div>
+	          <div class="col" id="mying2">0</div>
+	          <div class="col" id="mying3"></div>
+	        </div>
+	      </div>
+	     </c:if>
 	    </fieldset>
 	  </div>
 	</div>

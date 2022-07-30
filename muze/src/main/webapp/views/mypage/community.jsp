@@ -28,30 +28,81 @@
             <!-- 첫번째 행 -->
             <div class="row">
               <div class="col-sm-12" style="margin-top: 40px;">
-                <form style="margin-bottom: 3px;">
                   <span id="mySpan01">나의 게시글</span> 
-                  <hr style="margin-bottom: 10px;">
-                </form>
+                  <hr style="margin-bottom: 0;">
               </div>
             </div>
             
             <!-- 두번째 행 -->
-            <div class="row">
-              <div class="col-sm-12" style="margin-top: 30px;">
-                <form id="myForm01">
-                  <span id="mySpan01"></span> 
-                </form>
+        <div class="mt-5">
+            <!-- <table class="ordertable" style="margin-top: 0%;"> -->
+             <table class="table table-hover" style="margin-top: 0%;">
+                 <thead id="my_thead01">
+                    <tr>
+                        <th class="my_th" id="br_th01"><center>번호</center></th>
+                        <th class="my_th" id="br_th02"><center>제목</center></th>
+                        <th class="my_th" id="br_th03"><center>작성자</center></th>
+                        <th class="my_th" id="br_th04"><center>날짜</center></th>
+                        <th class="my_th" id="br_th05"><center>조회수</center></th>
+                    </tr>
+                </thead>
+				
+                <tbody>
+                	<c:if test="${ empty list }">
+                		<tr>
+                			<td colspan="6">
+                				작성된 게시글이 존재하지 않습니다.
+                			</td>
+               			</tr>
+                	</c:if>
+                	<c:if test="${ not empty list }">
+                		<c:forEach var="board" items="${ list }">
+	                		<tr>
+		                        <td id="br_td01">${ board.rowNum }</td>
+		                        <td id="br_td01"><a href="${ path }/board/view?no=${ board.brdNo }&type=${ type }">${ board.brdTitle }</a></td>
+		                        <td id="br_td01">${ board.brdWriterId }</td>
+		                        <td id="br_td01">${ board.brdDate }</td>
+		                        <td id="br_td01">${ board.brdReadCount }</td> 
+	                    	</tr>
+                		</c:forEach>
+                	</c:if>
+                </tbody>
+            </table>
+        </div>
 
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-5">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" style="color: grey;" href="${path }/board/list?page=1&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&lt;&lt;</a></li>
+                    <li class="page-item"><a class="page-link" style="color: grey;" href="${path }/board/list?page=${pageInfo.prevPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&lt;</a></li>
+                    
+                    <!--  10개 페이지 목록 -->
+					<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
+						<c:if test="${ status.current == pageInfo.currentPage }">
+		                    <li class="page-item disabled"><a class="page-link" style="color: grey;"  href="#">${ status.current }</a></li>
+						</c:if>
+						<c:if test="${ status.current != pageInfo.currentPage }">
+		                    <li class="page-item"><a class="page-link" style="color: grey;" href="${path }/board/list?page=${status.current}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">${ status.current }</a></li>
+					
+						</c:if>
+					</c:forEach>
+                    
+                    <li class="page-item"><a class="page-link" style="color: grey;" href="${path }/board/list?page=${pageInfo.nextPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&gt;</a></li>
+                    <li class="page-item"><a class="page-link" style="color: grey;" href="${path }/board/list?page=${pageInfo.maxPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&gt;&gt;</a></li>
+                </ul>
+            </div>
+            <div class="col-4">
+            
+            </div>
 
-
-                </div>
-              </div>
+            <div class="col-3 text-right">
+                <button type="button" class="btn btn-outline-secondary" onclick="location.href='${path}/board/write?type=FREE'" id="srhbtn8">글 쓰기</button>
+            </div>
+        </div>
             
             <!-- 세번째 행 -->
             <div class="row">
               <div class="col-sm-12" style="margin-top: 50px;">
-
-
               
               </div>
             </div>
@@ -64,9 +115,5 @@
     </div>
     <!-- 내용 전체 컨테이너 끝 -->
     
-    <!-- Java Script -->
-    <!-- My JS -->
-    <!-- <script src="${path}/resources/js/Mypage_02.js"></script> -->
-
 	<!-- footer -->
 	<jsp:include page="/views/mypage/myfooter.jsp"/>

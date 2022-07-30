@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.muze.mvc.member.vo.Member;
 import com.muze.mvc.mypage.model.service.MyOrderService;
 import com.muze.mvc.mypage.model.service.WelcomeService;
 import com.muze.mvc.mypage.model.vo.MyOrder;
@@ -22,38 +24,40 @@ public class RefundListServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	// 1st row
-    	int mileageNow = new WelcomeService().getMileageN();
-    	int reviewCount = new WelcomeService().getReviewC();
-    	Welcome welcome = new Welcome(mileageNow, reviewCount);
+    	// 로그인 체크 & 본인 게시글 여부 확인 
+		HttpSession session = request.getSession(false);
+    	Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
 		
-		// 1st row name
-    	MyOrder myOrder = null;
-		myOrder = new MyOrderService().getOrderInfo();
+    	if (loginMember != null) {
+    		// 로그인 객체의 PK값을 넘기기 위한 객체 생성 
+			Member member = new Member();
+			member.setMemberNo(loginMember.getMemberNo());			
+			member.setMemberName(loginMember.getMemberName());
+			request.setAttribute("member", member);
 		
-		// 검색
-		List<MyOrder> list = null;
-		
-		// 매개 값 (검색 날짜) 가져오기 
-		String dateFrom = request.getParameter("dateFrom");
-		String dateTo = request.getParameter("dateTo");
-		
-		// 잘 가져오는지 확인
-//		System.out.println(dateFrom + " "+ dateTo);
-		
-		// 넘기기
-		list = new MyOrderService().refundByDate(dateFrom, dateTo);
-		
-		// 성공적으로 받아옴.
-//		System.out.println(list.isEmpty());
-		list.forEach(System.out::println);
-
-    	request.setAttribute("myOrder", myOrder);
-		request.setAttribute("welcome", welcome);    
-		request.setAttribute("list", list);
-    	request.getRequestDispatcher("/views/mypage/refund_list.jsp").forward(request, response);
-
-
+			// 1st row
+	    	Welcome welcomeRow = null;   	
+	    	welcomeRow = new WelcomeService().getWelcomeRow(member);
+			request.setAttribute("welcomeRow", welcomeRow);
+			
+			// 검색
+			List<MyOrder> list = null;
+			
+			// 매개 값 (검색 날짜) 가져오기 
+			String dateFrom = request.getParameter("dateFrom");
+			String dateTo = request.getParameter("dateTo");
+			
+			// 처리 결과 
+			list = new MyOrderService().refundByDate(dateFrom, dateTo, member);
+			
+			request.setAttribute("list", list);
+	    	request.getRequestDispatcher("/views/mypage/refund_list.jsp").forward(request, response);
+    	} else {
+    		request.setAttribute("msg", "로그인이 필요한 서비스입니다.");
+			request.setAttribute("location", "/");		
+    		
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+    	}
 	}
 
 }

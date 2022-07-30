@@ -8,82 +8,86 @@
 <!-- header -->
 <jsp:include page="/views/common/header.jsp"/>
 
-    <!-- my CSS -->
+	<!-- my CSS -->
 	<link rel="stylesheet" href="${path}/resources/css/mypage/mypage_main.css"> 
     <!-- 데이트피커 CSS 및 제이쿼리 -->
     <link rel="stylesheet" href="${path}/resources/css/mypage/mypage_cal.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <!-- 순서와 위치 주의!! -->
-    <script src="${path}/resources/js/mypage/mypage_02.js" ></script>
-    <script src="${path}/resources/js/mypage/mypage_01.js" ></script>
-  
-      <!-- 내용 전체 컨테이너 -->
-      <div class="container">
-        <div class="row">
-  
+    <script src="${path}/resources/js/Mypage/mypage_02.js" ></script>
+
+    <!-- 내용 전체 컨테이너 -->
+    <div class="container">
+      <div class="row">
+
         <!-- 왼쪽 그리드 -->
         <div class="col-sm-2" >
         	<!--사이드 메뉴 -->
         	<jsp:include page="/views/mypage/side_navi.jsp" flush="false"/>
         </div>
-  
+
         <!-- 오른쪽 그리드 -->
-        <div class="col-sm-10">
-        	<!-- 컨테이너 -->
-        	<div class="container">
-          
+        <div class="col-sm-10" ">
+          <!-- 컨테이너 -->
+          <div class="container">
             <!-- 첫번째 행 -->
-			<jsp:include page="/views/mypage/welcome_row.jsp" flush="false"/>
-
-            <!-- 두번째 행 -->
-			<div class="row">
-			 <div class="col-sm-12" style="margin-top: 30px;">
-			   <form id="myForm01">
-			     <span id="mySpan01">상품환불 / 입금조회</span> 
-			   </form>
-			   	  <!-- 기간별 검색 -->
-			      <fieldset class="mySearchDate">
-     				<form action="${ path }/mypage/refund_list" method="get">
-					  <div class= "btnsearch" role="group" aria-label="First group">
-						<jsp:include page="/views/mypage/datepick.jsp" flush="false"/>
-						<!-- 조회버튼 -->
-			       		<button type="submit" class="btn btn-outline-secondary" id="srhbtn7">조회</button>
-			          </div>
-			       </form>
-  				 </fieldset>
-			  </div>
+            <div class="row">
+              <div class="col-sm-12" style="margin-top: 40px;">
+                <form style="margin-bottom: 3px;">
+                  <span id="mySpan01">1 : 1 문의</span> 
+                  <hr style="margin-bottom: 10px;">
+                </form>
+              </div>
             </div>
+            
+            <!-- 두번째 행 -->
+            
+<!--             세번째 행
+            <div class="row">
+              <div class="col-sm-12" style="margin-top: 50px;">
+                  게시글 조회 테이블
+                  <table class="qnatable">
+                    <thead id="my_thead01">
+                    <tr>
+                      <th class="my_th" id="my_th05">문의 날짜</th>
+                      <th class="my_th" id="my_th05">카테고리</th>
+                      <th class="my_th" id="my_th02">제목</th>
+                      <th class="my_th" id="my_th05">문의 상태</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td id="my_td01">2022/07/06 </td>
+                      <td id="my_td01">배송</td>
+                      <td id="my_td01">배송이 안와요...</td>
+                      <td id="my_td01">답변 완료</td>
+                    </tr>
+                  </tbody>
+                </table>
 
-            <!-- 세번째 행 -->
-         	<div class="row">
-              <div class="col-sm-12" style="margin-top: 50px;" >
-                <c:if test="${empty list }">
-	                <form id="myForm01">
-	                  <span id="mySpan01">상품환불 / 입금조회</span> 
-	                </form>
-                </c:if>
-                <c:if test="${ not empty list }">
-	                <form id="myForm01">
- 	                  <span id="mySpan01">상품환불 / 입금내역 총 ${ list.get(list.size()-1).getCount() } 건</span> 
-	                </form>
-                </c:if>
+              </div>
+            </div>
+            세번째 행 끝 -->
+            
+            
+            
+<!--             세번째 행 -->
                 <!-- 조회 테이블 -->
+                <br>
                 <table class="ordertable">
                   <thead id="my_thead01">
                     <tr>
-                      <th class="my_th" id="my_th01">날짜/주문번호</th>
-                      <th class="my_th" id="my_th02">상품명/옵션</th>
-                      <th class="my_th" id="my_th03">상품금액/수량</th>
-                      <th class="my_th" id="my_th04">주문상태</th>
-                      <th class="my_th" id="my_th05">확인</th>
+                      <th class="my_th" id="my_th05">문의 날짜</th>
+                      <th class="my_th" id="my_th05">카테고리</th>
+                      <th class="my_th" id="my_th02">제목</th>
+                      <th class="my_th" id="my_th05">문의 상태</th>
                     </tr>
                   </thead>
                   <tbody>
 					<c:if test="${ empty list }">
                   	 	<tr>
                       		<td id="my_td00" colspan="5">
-                       			조회 내역이 존재하지 않습니다.
+                       			조회 내역이 없습니다.
                       		</td>
                     	</tr>
                    	</c:if>
@@ -94,7 +98,7 @@
 		                        <a href="${ path }/mypage/orderdetail?no=${ refundByDate.orderNo }" id="my_td02">${ refundByDate.orderNo }</a> <br>
 		                      </td> 
 		                      <td id="my_td01">${ refundByDate.proName }</td>
-		                      <td id="my_td01"><fmt:formatNumber value="${ refundByDate.proPrice }" pattern="#,###"/>원 / ${ refundByDate.orderAmount }개</td>
+		                      <td id="my_td01">${ refundByDate.proPrice }원 / ${ refundByDate.orderAmount }개</td>
 		                      <td id="my_td01">${ refundByDate.orderStatus }</td>
 		                      <td id="my_td01"></td>
 		                    </tr>
@@ -104,7 +108,11 @@
                 </table>
               </div>
             </div>
-            <!-- 세번째 행 끝 -->
+           <!-- 세번째 행 끝 -->
+            
+            
+            
+            
           </div>
           <!-- 컨테이너 끝 -->
       </div>
@@ -112,6 +120,10 @@
     </div>
     </div>
     <!-- 내용 전체 컨테이너 끝 -->
+
+    <!-- Java Script -->
+    <!-- My JS -->
+    <!-- <script src="${path}/resources/js/Mypage_02.js"></script> -->
 
 	<!-- footer -->
 	<jsp:include page="/views/mypage/myfooter.jsp"/>

@@ -83,7 +83,7 @@
 					<c:if test="${ empty list }">
                   	 	<tr>
                       		<td id="my_td00" colspan="5">
-                       			조회 내역이 없습니다.
+                       			조회 내역이 존재하지 않습니다.
                       		</td>
                     	</tr>
                    	</c:if>
@@ -91,10 +91,10 @@
                    		<c:forEach var="cancelByDate" items="${ list }">
 		                    <tr>
 		                      <td id="my_td01">${ cancelByDate.orderDate } <br>
-		                        <a href="${ path }/mypage/orderdetail" id="my_td02">${ cancelByDate.orderNo }</a> <br>
+		                        <a href="${ path }/mypage/orderdetail?no=${ cancelByDate.orderNo }" id="my_td02">${ cancelByDate.orderNo }</a> <br>
 		                      </td> 
 		                      <td id="my_td01">${ cancelByDate.proName }</td>
-		                      <td id="my_td01">${ cancelByDate.strPrice }원 / ${ cancelByDate.orderAmount }개</td>
+		                      <td id="my_td01"><fmt:formatNumber value="${ cancelByDate.proPrice }" pattern="#,###"/>원 / ${ cancelByDate.orderAmount }개</td>
 		                      <td id="my_td01">${ cancelByDate.orderStatus }</td>
 		                      <td id="my_td01"></td>
 		                    </tr>

@@ -36,25 +36,67 @@
             </div>
             
             <!-- 두번째 행 -->
-            <div class="row">
-              <div class="col-sm-12" style="margin-top: 30px;">
-                <form id="myForm01">
-                  <span id="mySpan01"></span> 
-                </form>
+             <c:if test="${ not empty list }">
+				<c:forEach var="board" items="${ list }" varStatus="status">
+					<c:if test="${status.count % 4 == 1}">
+						<div class="row my-5">
+					</c:if>
+					
+					<div class="col-lg-3 col-md-6" onclick="location.href='${ path }/board/view?no=${ board.brdNo }&type=${ type }'">
+			            <div class="card" style="width: 13rem; height: 20rem;">
+			                <img style="background-color: black;" width="100%" height="70%">
+			                <div class="card-body">
+			                    <h5 class="card-title">${ board.brdTitle }</h5>
+			                    <p class="card-text">${board.brdProName }</p>
+			                    <p class="card-text">${board.brdWriterId }</p>
+			                </div>
+			            </div>
+			        </div>
+					<c:if test="${status.count %4 == 0 && !status.last}">
+					    </div>
+					</c:if>
+					<c:if test="${status.last}">
+					    </div>
+					</c:if>
+				</c:forEach>
+			 </c:if>
+	           <c:if test="${ empty list }">
+				  <tr>
+	                <td colspan="6">
+	                	<br>
+		                	<p style="font-size : 0.8em;"> 작성된 후기가 존재하지 않습니다. </p>
+	                	<br><br><br><br><br>
+	                </td>
+	             </tr>
+			 </c:if>
 
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <ul class="pagination justify-content-center">
+                <li class="page-item"><a class="page-link" style="color: grey;" href="${path }/board/list?page=1&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&lt;&lt;</a></li>
+                <li class="page-item"><a class="page-link" style="color: grey;" href="${path }/board/list?page=${pageInfo.prevPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&lt;</a></li>
+                
+                <!--  10개 페이지 목록 -->
+				<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
+					<c:if test="${ status.current == pageInfo.currentPage }">
+                  		<li class="page-item disabled"><a class="page-link" href="#">${ status.current }</a></li>
+					</c:if>
+					<c:if test="${ status.current != pageInfo.currentPage }">
+                  		<li class="page-item"><a class="page-link" style="color: grey;" href="${path }/board/list?page=${status.current}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">${ status.current }</a></li>
+	
+					</c:if>
+				</c:forEach>
+                
+                <li class="page-item"><a class="page-link" style="color: grey;" href="${path }/board/list?page=${pageInfo.nextPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&gt;</a></li>
+                <li class="page-item"><a class="page-link" style="color: grey;" href="${path }/board/list?page=${pageInfo.maxPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&gt;&gt;</a></li>
+            </ul>
+        </div>
 
-
-                </div>
-              </div>
-            
-            <!-- 세번째 행 -->
-            <div class="row">
-              <div class="col-sm-12" style="margin-top: 50px;">
-
-
-              
-              </div>
-            </div>
+        <div class="col-4 text-right">
+            <button type="button" class="btn btn-outline-secondary" onclick="location.href='${path}/board/write?type=REVIEW'" id="srhbtn8">글 쓰기</button>
+        </div>
+    </div>
             <!-- 세번째 행 끝 -->
           </div>
           <!-- 컨테이너 끝 -->
@@ -63,10 +105,6 @@
     </div>
     </div>
     <!-- 내용 전체 컨테이너 끝 -->
-
-    <!-- Java Script -->
-    <!-- My JS -->
-    <!-- <script src="${path}/resources/js/Mypage_02.js"></script> -->
 
 	<!-- footer -->
 	<jsp:include page="/views/mypage/myfooter.jsp"/>
