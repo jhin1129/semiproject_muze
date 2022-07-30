@@ -83,7 +83,7 @@
 					<c:if test="${ empty list }">
                   	 	<tr>
                       		<td id="my_td00" colspan="5">
-                       			조회 내역이 없습니다.
+                       			조회 내역이 존재하지 않습니다.
                       		</td>
                     	</tr>
                    	</c:if>

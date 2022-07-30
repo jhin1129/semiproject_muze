@@ -29,7 +29,9 @@ public class OrderListServlet extends HttpServlet {
 		
     	if (loginMember != null) {
 			Member member = new Member();
-			member.setMemberNo(loginMember.getMemberNo());
+			member.setMemberNo(loginMember.getMemberNo());			
+			member.setMemberName(loginMember.getMemberName());
+			request.setAttribute("member", member);
 			
 			// 1st row
 	    	Welcome welcomeRow = null;   	

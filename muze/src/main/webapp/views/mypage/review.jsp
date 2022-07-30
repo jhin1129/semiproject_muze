@@ -36,28 +36,39 @@
             </div>
             
             <!-- 두번째 행 -->
-	<c:forEach var="board" items="${ list }" varStatus="status">
-		<c:if test="${status.count % 4 == 1}">
-			<div class="row my-5">
-		</c:if>
-		
-		<div class="col-lg-3 col-md-6" onclick="location.href='${ path }/board/view?no=${ board.brdNo }&type=${ type }'">
-            <div class="card" style="width: 13rem; height: 20rem;">
-                <img style="background-color: black;" width="100%" height="70%">
-                <div class="card-body">
-                    <h5 class="card-title">${ board.brdTitle }</h5>
-                    <p class="card-text">${board.brdProName }</p>
-                    <p class="card-text">${board.brdWriterId }</p>
-                </div>
-            </div>
-        </div>
-		<c:if test="${status.count %4 == 0 && !status.last}">
-		    </div>
-		</c:if>
-		<c:if test="${status.last}">
-		    </div>
-		</c:if>
-	</c:forEach>
+             <c:if test="${ not empty list }">
+				<c:forEach var="board" items="${ list }" varStatus="status">
+					<c:if test="${status.count % 4 == 1}">
+						<div class="row my-5">
+					</c:if>
+					
+					<div class="col-lg-3 col-md-6" onclick="location.href='${ path }/board/view?no=${ board.brdNo }&type=${ type }'">
+			            <div class="card" style="width: 13rem; height: 20rem;">
+			                <img style="background-color: black;" width="100%" height="70%">
+			                <div class="card-body">
+			                    <h5 class="card-title">${ board.brdTitle }</h5>
+			                    <p class="card-text">${board.brdProName }</p>
+			                    <p class="card-text">${board.brdWriterId }</p>
+			                </div>
+			            </div>
+			        </div>
+					<c:if test="${status.count %4 == 0 && !status.last}">
+					    </div>
+					</c:if>
+					<c:if test="${status.last}">
+					    </div>
+					</c:if>
+				</c:forEach>
+			 </c:if>
+	           <c:if test="${ empty list }">
+				  <tr>
+	                <td colspan="6">
+	                	<br>
+		                	<p style="font-size : 0.8em;"> 작성된 후기가 존재하지 않습니다. </p>
+	                	<br><br><br><br><br>
+	                </td>
+	             </tr>
+			 </c:if>
 
     <div class="row">
         <div class="col-4"></div>

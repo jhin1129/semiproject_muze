@@ -27,17 +27,27 @@ public class WelcomeDao {
 			pstmt = connection.prepareStatement(query);
 			pstmt.setInt(1, member.getMemberNo());
 
-			
 			rs = pstmt.executeQuery();
 			
-
-			if (rs.next()) {
+			if(rs.next()) {
+				
+				do {
+						welcomeRow = new Welcome();
+						
+						welcomeRow.setMemberNo(rs.getInt("MEMBER_NO"));
+						welcomeRow.setMemberName(rs.getString("MEMBER_NAME"));
+						welcomeRow.setMileageNow(rs.getInt("POINT_PROCESS"));
+						welcomeRow.setBoardCount(rs.getInt("CNT"));
+				}while(rs.next());
+				
+			}else {
 				welcomeRow = new Welcome();
+								
+				welcomeRow.setMemberNo(0);
+				welcomeRow.setMemberName("0");
+				welcomeRow.setMileageNow(0);
+				welcomeRow.setBoardCount(0);
 			
-				welcomeRow.setMemberNo(rs.getInt("MEMBER_NO"));
-				welcomeRow.setMemberName(rs.getString("MEMBER_NAME"));
-				welcomeRow.setMileageNow(rs.getInt("POINT_PROCESS"));
-				welcomeRow.setBoardCount(rs.getInt("CNT"));
 			}
 			
 		} catch (SQLException e) {

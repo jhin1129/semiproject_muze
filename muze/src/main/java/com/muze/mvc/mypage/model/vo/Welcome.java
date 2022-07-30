@@ -18,4 +18,6 @@ public class Welcome {
 	private int boardCount; // BRD_TITLE
 	private String memberName;
 	
+	
+	
 }

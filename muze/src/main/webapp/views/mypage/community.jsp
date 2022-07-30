@@ -51,7 +51,7 @@
                 	<c:if test="${ empty list }">
                 		<tr>
                 			<td colspan="6">
-                				조회된 게시글이 없습니다.
+                				작성된 게시글이 존재하지 않습니다.
                 			</td>
                			</tr>
                 	</c:if>

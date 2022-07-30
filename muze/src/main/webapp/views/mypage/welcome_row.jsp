@@ -11,15 +11,15 @@
 	    <!-- 카드 그룹 -->
 	    <div class="card-group">
 	      <!-- 첫번째 카드 -->
-	      <div class="card">
-	        <img src="${path}/resources/images/mypage/welcome.png" class="card-img-top" >
-	        <div class="card-body">
-	          <h5 class="card-title">${ welcomeRow.memberName } 님</h5>
-	          <p class="card-text">
-	            환영합니다.
-	          </p>
-	        </div>
-	      </div>
+		      <div class="card">
+		        <img src="${path}/resources/images/mypage/welcome.png" class="card-img-top" >
+		        <div class="card-body">
+		          <h5 class="card-title">${ member.memberName } 님</h5>
+		          <p class="card-text">
+		            환영합니다.
+		          </p>
+		        </div>
+		      </div>
 	      <!-- 두번째 카드 -->
 	      <div class="card">
 	        <img src="${path}/resources/images/mypage/mileage.png" class="card-img-mid" >
