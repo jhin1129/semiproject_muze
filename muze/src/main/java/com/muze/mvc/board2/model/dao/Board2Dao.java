@@ -352,13 +352,14 @@ public class Board2Dao {
 				+ "SYSDATE, "				//BRD_DATE
 				+ "0, "						//BRD_READCOUNT
 				+ "?, "						//BRD_WRITER_NO
-				+ "NULL, "					//BRD_PRO_NO
-				+ "NULL, "					//BRD_CATEGORY
+				+ "?, "						//BRD_PRO_NO
+				+ "?, "						//BRD_CATEGORY
 				+ "NULL, "					//BRD_REP_CONTENT
 				+ "?, "						//BRD_TYPE
 				+ "'Y' ,"					//BRD_STATUS
 				+ "?, "						//BRD_ORIGINALFILENAME
-				+ "? "						//BRD_RENAMEDFILENAME
+				+ "?, "						//BRD_RENAMEDFILENAME
+				+ "?"						//BRD_IMG
 				+ ")";
 		
 		try {
@@ -367,9 +368,20 @@ public class Board2Dao {
 			pstmt.setString(1, board.getBrdTitle());
 			pstmt.setString(2, board.getBrdContent());
 			pstmt.setInt(3, board.getBrdWriterNo());
-			pstmt.setString(4, board.getBrdType());
-			pstmt.setString(5, board.getBrdOriginalFileName());
-			pstmt.setString(6, board.getBrdRenamedFileName());
+			if (board.getBrdType().equals("REVIEW")) {
+				pstmt.setInt(4, board.getBrdProNo());
+			} else {
+				pstmt.setString(4, "");
+			}
+			if (board.getBrdType().equals("QNA")) {
+				pstmt.setString(5, board.getBrdCategory());
+			} else {
+				pstmt.setString(5, "");				
+			}
+			pstmt.setString(6, board.getBrdType());
+			pstmt.setString(7, board.getBrdOriginalFileName());
+			pstmt.setString(8, board.getBrdRenamedFileName());
+			pstmt.setString(9, board.getBrdImg());
 			
 			result = pstmt.executeUpdate();
 			

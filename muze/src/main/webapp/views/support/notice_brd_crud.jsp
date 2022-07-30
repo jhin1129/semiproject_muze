@@ -22,7 +22,7 @@
 
 			<tr>
 				<td style="height: 8%;"><b>작성자</b></td>
-				<td><input type="text" name="brdWriterNo" style="padding-left: 0.5em;" value="${ loginMember.memberId }" readonly></td>
+				<td><input type="text" name="brdWriterId" style="padding-left: 0.5em;" value="${ loginMember.memberId }" readonly></td>
 			</tr>
 			<tr>
 				<td style="height: 8%;"><b>제목</b></td>

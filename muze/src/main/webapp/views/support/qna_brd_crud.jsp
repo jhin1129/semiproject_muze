@@ -22,18 +22,20 @@
 
 			<tr>
 				<td><b>말머리</b></td>
-				<td style="width: 85%;"><select style="width: 150px; color: gray;">
-						<option value="mgmt">회원/정보관리</option>
-						<option value="order">주문/결제</option>
-						<option value="delivery">배송</option>
-						<option value="refund">반품/환불</option>
-						<option value="event">이벤트</option>
-						<option value="etc">기타</option>
+				<td style="width: 85%;"><select name="brdCategory" style="width: 150px; color: gray;">
+						<option>문의 주제 선택</option>
+						<option value="상품" >상품</option>
+						<option value="주문/결제">주문/결제</option>
+						<option value="배송">배송</option>
+						<option value="반품/환불">반품/환불</option>
+						<option value="이벤트">이벤트</option>
+						<option value="회원/정보관리">회원/정보관리</option>
+						<option value="기타">기타</option>
 				</select></td>
 			</tr>
 			<tr>
 				<td style="height: 8%;"><b>작성자</b></td>
-				<td>최동식</td>
+				<td><input type="text" name="brdWriterId" style="padding-left: 0.5em;" value="${ loginMember.memberId }" readonly></td>
 			</tr>
 			<tr>
 				<td style="height: 8%;"><b>제목</b></td>

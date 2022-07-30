@@ -28,6 +28,8 @@ public class Board2 {
 	
 	int brdProNo;
 	
+	String brdProName;
+	
 	String brdCategory;
 	
 	String brdRepContent;
@@ -40,4 +42,5 @@ public class Board2 {
 	
 	String brdRenamedFileName;
 	
+	String brdImg;
 }
