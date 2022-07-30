@@ -17,7 +17,7 @@ import com.muze.mvc.product.model.vo.Writer;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-@WebServlet("/product/painting")
+@WebServlet("/product/painting/writer")
 public class WriterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -25,7 +25,7 @@ public class WriterServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/views/product/Product_painting.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/product/Product_painting_writer.jsp").forward(request, response);
 	}
 
 	@Override

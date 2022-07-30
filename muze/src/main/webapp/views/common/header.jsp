@@ -90,9 +90,9 @@
           작품
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#">회화</a></li>
-          <li><a class="dropdown-item" href="#">공예</a></li>
-          <li><a class="dropdown-item" href="#">조소</a></li>
+          <li><a class="dropdown-item" href="${path}/product/painting">회화</a></li>
+          <li><a class="dropdown-item" href="${path}/product/craft">공예</a></li>
+          <li><a class="dropdown-item" href="${path}/product/oilpainting">유화</a></li>
         </ul>
       </li>
       <li class="nav-item dropdown">
