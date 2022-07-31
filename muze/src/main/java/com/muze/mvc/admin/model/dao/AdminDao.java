@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.muze.mvc.board2.model.vo.Board2;
 import com.muze.mvc.common.util.PageInfo;
 import com.muze.mvc.member.model.vo.Member;
 
@@ -84,6 +85,31 @@ public class AdminDao {
 		}
 		
 		return list;
+	}
+
+	public int deleteContent(Connection connection, int[] contents) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String params = "";
+		for(int i = 0; i < contents.length; i++) {
+			params += contents[i];
+			if(i < contents.length - 1) 
+				params += ", ";
+		}
+		String query = "UPDATE BOARD SET BRD_STATUS='N' WHERE BRD_NO IN ("+params+")";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

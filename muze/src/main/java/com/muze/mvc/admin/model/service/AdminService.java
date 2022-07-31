@@ -1,7 +1,6 @@
 package com.muze.mvc.admin.model.service;
 
-import static com.muze.mvc.common.jdbc.JDBCTemplate.close;
-import static com.muze.mvc.common.jdbc.JDBCTemplate.getConnection;
+import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.List;
@@ -34,6 +33,20 @@ public class AdminService {
 		return list;
 	}
 
-	
+	public int deleteContent(int[] contents) {
+		int result = 0;
+		Connection connection = getConnection();
+		
+		result = new AdminDao().deleteContent(connection, contents);
+		
+		if(result > 0) {
+			commit(connection);
+		} else {
+			rollback(connection);
+		}
+		close(connection);
+		
+		return result;
+	}
 
 }
