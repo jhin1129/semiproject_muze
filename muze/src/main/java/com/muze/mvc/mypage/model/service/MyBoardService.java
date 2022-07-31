@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.muze.mvc.board.model.vo.Board;
+import com.muze.mvc.board2.model.dao.Board2Dao;
+import com.muze.mvc.board2.model.vo.Board2;
 import com.muze.mvc.common.util.PageInfo;
 import com.muze.mvc.mypage.model.dao.MyBoardDao;
 
@@ -27,7 +29,18 @@ public class MyBoardService {
 		List<Board> list = null;
 		Connection connection = getConnection();
 		
-		list = new MyBoardDao().findAll(connection, pageInfo, type,searchVal);
+		list = new MyBoardDao().findAll(connection, pageInfo, type, searchVal);
+		
+		close(connection);
+		
+		return list;
+	}
+
+	public List<Board2> getQnAList(PageInfo pageInfo, String type, String searchVal) {
+		List<Board2> list = null;
+		Connection connection = getConnection();
+		
+		list = new MyBoardDao().getQnAList(connection, pageInfo, type, searchVal);
 		
 		close(connection);
 		
