@@ -18,17 +18,17 @@ public class Board2DeleteServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int result = 0;
-		int no = Integer.parseInt(request.getParameter("no"));
+		int brdNo = Integer.parseInt(request.getParameter("brdNo"));
 		String type = request.getParameter("type");
 		
-		result = new Board2Service().delete(no, type);
+		result = new Board2Service().delete(brdNo, type);
 		System.out.println(type);
 		if(result > 0) {
 			request.setAttribute("msg", "게시글 삭제 성공");
 			request.setAttribute("location", "/support/list?type=" + type);
 		} else {
 			request.setAttribute("msg", "게시글 삭제 실패");
-			request.setAttribute("location", "/support/view?no=" + no);
+			request.setAttribute("location", "/support/view?brdNo=" + brdNo);
 		}
 		
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);

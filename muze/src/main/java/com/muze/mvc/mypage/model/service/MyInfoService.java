@@ -5,7 +5,7 @@ import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.List;
 
-import com.muze.mvc.member.vo.Member;
+import com.muze.mvc.member.model.vo.Member;
 import com.muze.mvc.mypage.model.dao.MyInfoDao;
 import com.muze.mvc.mypage.model.vo.MyMileage;
 

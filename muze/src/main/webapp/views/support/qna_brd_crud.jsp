@@ -6,6 +6,8 @@
 <c:set var="path" value="${ pageContext.request.contextPath }" />
 
 <jsp:include page="/views/common/header.jsp" />
+<link rel="stylesheet" href="${path}/resources/css/support/support.css">
+<link rel="stylesheet" href="${path}/resources/css/adminpage/admin.css">
 
 <!-- 내용 전체 컨테이너 -->
 <div class="container my-5">
@@ -20,26 +22,29 @@
 
 			<tr>
 				<td><b>말머리</b></td>
-				<td style="width: 85%;"><select style="width: 150px; color: gray;">
-						<option value="mgmt">회원/정보관리</option>
-						<option value="order">주문/결제</option>
-						<option value="delivery">배송</option>
-						<option value="refund">반품/환불</option>
-						<option value="event">이벤트</option>
-						<option value="etc">기타</option>
+				<td style="width: 85%;"><select name="brdCategory" style="width: 150px; color: gray;">
+						<option>문의 주제 선택</option>
+						<option value="상품" >상품</option>
+						<option value="주문/결제">주문/결제</option>
+						<option value="배송">배송</option>
+						<option value="반품/환불">반품/환불</option>
+						<option value="이벤트">이벤트</option>
+						<option value="회원/정보관리">회원/정보관리</option>
+						<option value="기타">기타</option>
 				</select></td>
 			</tr>
 			<tr>
 				<td style="height: 8%;"><b>작성자</b></td>
-				<td>최동식</td>
+				<td><input type="text" name="brdWriterId" style="padding-left: 0.5em;" value="${ loginMember.memberId }" readonly></td>
 			</tr>
 			<tr>
 				<td style="height: 8%;"><b>제목</b></td>
-				<td><input type="text" name="brdTitle" size="40" style="padding-left: 1em;" placeholder="제목을 입력해 주세요."></td>
+				<td><input type="text" name="brdTitle" size="40" style="padding-left: 0.5em;" placeholder="제목을 입력해 주세요."></td>
 			</tr>
 			<tr>
 				<td style="height: 68%;"><b>본문</b></td>
-				<td><textarea name="brdContent" cols="90%" rows="15" style="padding: 1em; resize: none;"></textarea></td>
+				<td><textarea name="brdContent" cols="90%" rows="15" style="padding: 0.5em; resize: none;"
+				placeholder="내용을 입력해 주세요."></textarea></td>
 			</tr>
 			<tr>
 				<td style="width: 8%;"><b>첨부파일</b></td>

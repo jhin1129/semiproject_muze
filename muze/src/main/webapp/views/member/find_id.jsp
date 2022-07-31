@@ -6,6 +6,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <jsp:include page="/views/common/header.jsp"/>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
@@ -29,9 +30,9 @@
                                     <div class="find_id_sec">
                                         <h3 class="hidden">회원 아이디찾기</h3>
                                         <div class="form_element radio_find_type">            
-                                          <input type="radio" id="findIdEmail" name="findIdFl" value="email" checked="checked">            
+                                          <input type="radio" id="findIdEmail" name="findIdFl" value="${ member.memberEmail }" checked="checked">            
                                           <label for="findIdEmail" class="choice_s on">이메일</label>            
-                                          <input type="radio" id="findIdPhone" name="findIdFl" value="cellPhone">            
+                                          <input type="radio" id="findIdPhone" name="findIdFl" value="${ member.memberPhonenumber }">            
                                           <label for="findIdPhone" class="choice_s">휴대폰번호</label>            
                                         </div>
                                         <div class="login_input">
@@ -52,8 +53,9 @@
                                             </div>
                                             <button type="submit" class="btn_member_id">아이디 찾기</button>
                                         </div>
-                                        <!-- <p class="dn js_caution_msg1">일치하는 회원정보가 없습니다. 다시 입력해 주세요.</p> -->
+                                          <p class="dn js_caution_msg1">일치하는 회원정보가 없습니다. 다시 입력해 주세요.</p> 
                                     </div>
+                                    <div class="find_complete_box"><p>"${ loginMember.memberName }" 회원님의 아이디는 <br><strong>"${ loginMember.memberId }"</strong> 입니다</p></div>
                                     <!-- //find_id_sec -->
                                     <div class="btn_member_sec">
                                             <button class="btn_member_white js_btn_find_password">비밀번호 찾기</button>
@@ -77,18 +79,16 @@
 
 <script type="text/javascript">
 	$(document).ready(function () {
-		gd_select_email_domain('userEmail');
-		
 		$('input').keyup(function () {
 			$('.js_caution_msg1', 'form').addClass('dn');
 		});
 		$('.js_btn_find_password', 'form').click(function (e) {
-			location.href = "${ path }/member/find_password";
 			e.preventDefault();
+			location.href = "${ path }/member/find_password";
 		});
 		$('.js_btn_login', 'form').click(function (e) {
-			location.href = "${ path }/member/login";
 			e.preventDefault();
+			location.href = "${ path }/member/login";
 		});
 		 $('input[name="findIdFl"]').on('click', function(){            
                if ($(this).val() == 'cellPhone') {            

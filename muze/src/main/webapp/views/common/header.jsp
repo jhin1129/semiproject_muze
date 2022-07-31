@@ -23,15 +23,6 @@
   <!-- Mainstyle CSS -->
   <link rel="stylesheet" type="text/css" href="${path}/resources/css/common/mainstyle.css?after">
 
-  <!-- Mypage CSS -->
-  <link rel="stylesheet" href="${path}/resources/css/mypage/Mypage_Main.css">
-
-  <!-- Adminpage CSS -->
-  <link rel="stylesheet" href="${path}/resources/css/adminpage/admin.css">
-  
-  <!-- Support CSS -->
-  <link rel="stylesheet" href="${path}/resources/css/support/support.css">
-
   <title>Header</title>
 </head>
 
@@ -91,9 +82,9 @@
           작품
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#">회화</a></li>
-          <li><a class="dropdown-item" href="#">공예</a></li>
-          <li><a class="dropdown-item" href="#">조소</a></li>
+          <li><a class="dropdown-item" href="${path}/product/painting">회화</a></li>
+          <li><a class="dropdown-item" href="${path}/product/craft">공예</a></li>
+          <li><a class="dropdown-item" href="${path}/product/oilpainting">유화</a></li>
         </ul>
       </li>
       <li class="nav-item dropdown">

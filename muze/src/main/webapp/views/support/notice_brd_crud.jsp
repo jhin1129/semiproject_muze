@@ -6,6 +6,8 @@
 <c:set var="path" value="${ pageContext.request.contextPath }" />
 
 <jsp:include page="/views/common/header.jsp" />
+<link rel="stylesheet" href="${path}/resources/css/support/support.css">
+<link rel="stylesheet" href="${path}/resources/css/adminpage/admin.css">
 
 <!-- 내용 전체 컨테이너 -->
 <div class="container my-5">
@@ -15,21 +17,21 @@
 	</div>
 
 	<form action="${ path }/support/write?type=NOTICE" method="POST" enctype="multipart/form-data">
-
-
+		<input type="hidden" name="brdNo" value=${ board.brdNo }>
 		<table class="table-support" style="border: 1px; width: 1000px; height: 600px; margin: auto;">
 
 			<tr>
 				<td style="height: 8%;"><b>작성자</b></td>
-				<td>관리자</td>
+				<td><input type="text" name="brdWriterId" style="padding-left: 0.5em;" value="${ loginMember.memberId }" readonly></td>
 			</tr>
 			<tr>
 				<td style="height: 8%;"><b>제목</b></td>
-				<td><input type="text" name="brdTitle" size="40" style="padding-left: 1em;" placeholder="제목을 입력해 주세요."></td>
+				<td><input type="text" name="brdTitle" size="40" style="padding-left: 0.5em;" placeholder="제목을 입력해 주세요."></td>
 			</tr>
 			<tr>
 				<td style="height: 68%;"><b>본문</b></td>
-				<td><textarea name="brdContent" cols="90%" rows="15" style="padding: 1em; resize: none;"></textarea></td>
+				<td><textarea name="brdContent" cols="90%" rows="15" style="padding: 0.5em; resize: none;" 
+				placeholder="내용을 입력해 주세요."></textarea></td>
 			</tr>
 			<tr>
 				<td style="width: 8%;"><b>첨부파일</b></td>

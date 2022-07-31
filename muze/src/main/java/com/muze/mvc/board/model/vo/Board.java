@@ -42,4 +42,5 @@ public class Board {
 	
 	String brdRenamedFileName;
 	
+	String brdImg;
 }

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/board/fileDown")
+@WebServlet("/board/filedown")
 public class BoardFileDownServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

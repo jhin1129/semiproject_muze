@@ -25,19 +25,29 @@ public class BoardUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Board board = null;
     	int brdNo = Integer.parseInt(request.getParameter("no"));
+    	int brdWriterNo = Integer.parseInt(request.getParameter("brdWriterNo"));
     	String type = request.getParameter("type");
     	
-    	board = new BoardService().getBoardByNo(brdNo, true, type);
-    	    	
-    	request.setAttribute("board", board);
-    	request.setAttribute("type", type);
-    	if(type.equals("REVIEW")) {
-    		Product product = new Product();
-    		product = new BoardService().getProductByNo(board.getBrdProNo());
-    		request.setAttribute("product", product);
+    	boolean selfCheck = new BoardService().selfCheck(request, brdWriterNo);
+    	
+    	if(!selfCheck) {
+    		request.setAttribute("msg", "접근 권한이 없습니다.");
+			request.setAttribute("location", "/board/view?type="+type+"&no="+brdNo);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+    	}else {
+    		board = new BoardService().getBoardByNo(brdNo, true, type);
+    		
+    		request.setAttribute("board", board);
+    		request.setAttribute("type", type);
+    		if(type.equals("REVIEW")) {
+    			Product product = new Product();
+    			product = new BoardService().getProductByNo(board.getBrdProNo());
+    			request.setAttribute("product", product);
+    		}
+    		
+    		request.getRequestDispatcher("/views/community/board/board_update.jsp").forward(request, response);
     	}
     	
-    	request.getRequestDispatcher("/views/community/board/board_update.jsp").forward(request, response);
 	}
 
 
@@ -67,6 +77,7 @@ public class BoardUpdateServlet extends HttpServlet {
     	String originalFileName = mr.getOriginalFileName("upfile");
     	String filesystemName = mr.getFilesystemName("upfile");
     	
+				
     	if (originalFileName != null && !originalFileName.equals("")) {
     		File file = new File(path + "/" + mr.getParameter("renamedFileName"));
     		
@@ -81,7 +92,10 @@ public class BoardUpdateServlet extends HttpServlet {
 	    	board.setBrdRenamedFileName(mr.getParameter("renamedFileName"));
 		}
     	
-    	result = new BoardService().save(board);
+    	String img = new BoardService().getImg(mr.getParameter("content"));
+    	board.setBrdImg(img);
+    	
+    	result = new BoardService().saveBoard(board);
     	
     	if(result > 0) {
     		request.setAttribute("msg", "게시글 수정 성공");

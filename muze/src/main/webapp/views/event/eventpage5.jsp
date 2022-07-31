@@ -94,13 +94,18 @@
         		url: "${ path }/event",
         		data: 
         			{ attenddate : jsondata },
-        		dataType : 'text'
-        	})
-        	.done(function(result){
-        	})
-        	.fail(function(request, status, error){
-        		alert("에러 발생:" + error);
-        	})
+        		dataType : 'text',
+        		success: (data) => {
+        			console.log(data);
+        		},
+        		error: (error) => {
+        			console.log(error);
+        		},
+        		// AJAX 통신 성공 여부와 상관없이 실행될 콜백 함수
+        		complete: function() {
+					console.log("complete");						
+				}
+        	});
         }
        
       

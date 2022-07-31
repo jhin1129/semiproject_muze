@@ -16,24 +16,21 @@
         <div class="col"></div>
             <div class="col-6 ">
                 <div class="content_box">
-                    <form name="formFind" id="formFind" action="../member/user_certification.php" method="post">
+                    <form name="formFind" id="formFind" action="${ path}/member/user_certification_confirm" method="post">
                         <div class="member_wrap">
                             <div class="member_tit">
                                 <h2>본인인증</h2>
                             </div>
                             <div class="member_cont">
-                                <form name="formAuthConfirm" id="formAuthConfirm" method="post" novalidate="novalidate">
-                                    <input type="hidden" name="authType" value="authEmail">
-                                    <input type="hidden" name="certificationType" value="find_password">
-                                    <input type="hidden" name="token" value="MTY1ODI2NTE4NTc1NjIxMjA1NTY0Mjg3NTIzMzQ4NjMyMzA0OTU5NjE2">
                                     <div class="find_password_box">
                                         <h3>인증번호 입력</h3>
                                         <p class="guide">수신된 이메일의 인증번호를 입력해 주세요.</p>
                                         <div class="login_input">
                                             <div class="member_warning">
                                                 <input type="text" id="inputCertify" name="inputCertify" class="text" placeholder="인증번호 입력">
+                                                <label for="" id="pwd_chk2"></label>
                                                 <div id="guideMsg">
-                                                    <p class="info_again"> 인증메일이 도착하지 않았나요?  <a href="#" name="btnAgain">인증번호 다시받기</a></p>
+                                                    <p class="info_again"> 인증메일이 도착하지 않았나요?  <a href="${path}/member/user_certification" name="btnAgain">인증번호 다시받기</a></p>
                                                 </div>
                                                 <div id="errorMessage" class="dn">
                                                     <!-- <p class="info_again">잘못된 인증번호 입니다. 다시 입력해 주세요. <a href="#" name="btnAgain">인증번호 다시받기</a></p> -->
@@ -42,22 +39,55 @@
                                             <!-- //member_warning -->
                                             <div class="btn_center_box">
                                                 <button type="button" id="btnCancel" class="btn_member_prev">이전</button>
-                                                <button type="submit" class="btn_member_next">확인</button>
+                                                <button type="submit" id="btnSubmit" class="btn_member_next">확인</button>
                                             </div>
                                         </div>
                                     </div>
+                                 </div>
+                                 </div>   
                                 </form>
                                 <!-- //find_password_box -->
                             </div>
 						</div>
 					<!-- //member_cont -->
-					</div>
-				<!-- //member_wrap -->
-				</form>
-			</div>
-		<div class="col"></div>
-	</div> 
+			<div class="col"></div>
+		</div>
+	<!-- //member_wrap -->
 </div>
+
+
 <!-- //본문 끝 contents -->
+
+<script type="text/javascript">
+
+$(document).ready(function () {
+	$("#inputCertify").change(function(){
+		var $inputCertify = $("#inputCertify");
+			
+			if(/^[a-zA-Z]{8,8}$/.test($inputCertify.val()) == false){
+				$("#pwd_chk2").html("유효한 비밀번호가 아닙니다.");
+				$("#pwd_chk2").attr('style', 'visibility:visible;');
+					return false;
+			} else {
+				$("#pwd_chk2").html("");
+				$("#pwd_chk2").attr('style', 'visibility:hidden;');
+				
+			}
+		});
+	
+	$("#formFind").submit(function(){
+		if($("#pwd_chk2").css("visibility") != "hidden"){
+			alert("비밀번호를 입력해주세요");
+			$("#inputCertify").focus();
+			return false;
+		};
+	});
+
+	$('#btnCancel').click(function (e) {
+		e.preventDefault();
+		location.href = '${path}/member/user_certification';
+	});
+});
+</script>
 
 <jsp:include page="/views/common/footer.jsp"/>

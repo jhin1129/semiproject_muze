@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+    <!-- mainstyle CSS -->
+    <link rel="stylesheet" type="text/css" href="../../CSS/Common/mainstyle.css">
+
+    <title>Header</title>
+</head>
+<link rel="stylesheet" href="/muze-frontend/CSS/Product/Product_painting.css">
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+</style>
+</head>
+<body>
+
+    <body>
+        <!-- 메인 로고와 상단 우측 메뉴 포함한 header> -->
+        <header class="blog-header pt-5 py-5">
+            <div class="row flex-nowrap justify-content-between align-items-center">
+                <div class="col-4 pt-1"></div>
+                    <div class="col-4 text-center">
+                        <img src="../../IMG/Common/logo.png" width="200px"> 
+                    </div>
+                <!-- 상단 우측 메뉴 -->
+                <div class="col-4 d-flex justify-content-center align-items-center mt-3">
+                    <a class="mr-4 text-nowrap" href="#">로그인</a>
+                    <a class="mr-4 text-nowrap" href="#">회원가입</a>
+                    <a href="#" class="me-5 align-items-center mb-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-cart2"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <!-- 메인 메뉴 -->
+            <ul class="nav justify-content-between">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false" style="font-size: 1.1em">
+                    muzé
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#">BRAND </a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    작품
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#">회화</a></li>
+                    <li><a class="dropdown-item" href="#">공예</a></li>
+                    <li><a class="dropdown-item" href="#">조소</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    커뮤니티
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#">게시판</a></li>
+                    <li><a class="dropdown-item" href="#">공지사항</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    이벤트
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#">출석하기</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    고객 지원
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#">Q&A</a></li>
+                    <li><a class="dropdown-item" href="#">FAQ</a></li>
+                    <li><a class="dropdown-item" href="#">신고하기</a></li>
+                    </ul>
+                </li>
+                <!-- <ul class="nav justify-content-end" id="search">
+                    <form class="d-flex">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown p-0" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <button type="submit" class="btn btn-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-search"
+                            viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                            </svg>
+                        </button>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item"><input class="form-control me-2" type="search" placeholder="Search"
+                                aria-label="Search"></a></li>
+                        </ul>
+                    </li>
+                    </form>
+                </ul> -->
+                </ul>
+                <hr class="mt-1">
+            </div>
+
+
+    <div class="container">
+        <div class="mt-2">
+            <h2 class="painting">회화</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                    <div id="product_order_list">
+                        <p>
+                            <a href="javascript:recentlist();">최신순</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+                            <a href="javascript:pricelist();">낮은가격</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+                            <a href="javascript:pricelistdesc();">높은가격</a>
+                        </p>
+                    </div>
+            </div>
+            <div class="col-md-6">
+                <form action="...">
+                    <div class="search">
+                        <input type="text" name="query" value="">
+                        <button type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row my-5">
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card" style="width: 16rem;">
+                    <img style="background-color: black;" width="100%" height="254px">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's
+                            content.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card" style="width: 16rem;">
+                    <img style="background-color: black;" width="100%" height="254px">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's
+                            content.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card" style="width: 16rem;">
+                    <img style="background-color: black;" width="100%" height="254px">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's
+                            content.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card" style="width: 16rem;">
+                    <img style="background-color: black;" width="100%" height="254px">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's
+                            content.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row my-5">
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card" style="width: 16rem;">
+                    <img style="background-color: black;" width="100%" height="254px">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's
+                            content.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card" style="width: 16rem;">
+                    <img style="background-color: black;" width="100%" height="254px">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's
+                            content.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card" style="width: 16rem;">
+                    <img style="background-color: black;" width="100%" height="254px">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's
+                            content.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card" style="width: 16rem;">
+                    <img style="background-color: black;" width="100%" height="254px">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's
+                            content.</p>
+                    </div>
+                </div>
+            </div>
+
+        <div class="row my-5">
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card" style="width: 16rem;">
+                    <img style="background-color: black;" width="100%" height="254px">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's
+                            content.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card" style="width: 16rem;">
+                    <img style="background-color: black;" width="100%" height="254px">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's
+                            content.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card" style="width: 16rem;">
+                    <img style="background-color: black;" width="100%" height="254px">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's
+                            content.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card" style="width: 16rem;">
+                    <img style="background-color: black;" width="100%" height="254px">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's
+                            content.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row my-5">
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card" style="width: 16rem;">
+                    <img style="background-color: black;" width="100%" height="254px">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's
+                            content.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card" style="width: 16rem;">
+                    <img style="background-color: black;" width="100%" height="254px">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's
+                            content.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card" style="width: 16rem;">
+                    <img style="background-color: black;" width="100%" height="254px">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's
+                            content.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card" style="width: 16rem;">
+                    <img style="background-color: black;" width="100%" height="254px">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's
+                            content.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+            <ul class="pagination justify-content-center">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </div>
+        </div>
+
+
+        <footer class="bg-light text-center text-lg-start">
+            <div style="background-color: rgb(238, 233, 233);">
+                <!-- Grid container -->
+                <div class="container p-4" style="background-color: rgb(238, 233, 233);">
+                    <!--Grid row-->
+                    <div class="row">
+                        <!--Left Grid column-->
+                        <div class="col-lg-6 col-md-12 mb-4 mb-md-0" style="text-align:center; background-color: rgb(238, 233, 233);">
+                            <h5 class="text-uppercase">Project</h5>
+                        <div style="text-align:center;"><img src="../../IMG/Common/logo.png" class="w-25 cul my-3"> <br><br>
+                            <a class="text-dark" href="https://muze.com/">© 2022 Copyright: muze.com</a></div>               
+                        </div>
+                        <!--Left Grid column-->
+        
+                        <!--Right Grid column-->
+                        <div class="col-lg-6 col-md-12 mb-4 mb-md-0" style="text-align:center; background-color: rgb(238, 233, 233);">
+                        <h5 class="text-uppercase">contact us</h5>
+                            <div class="cul my-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                                </svg> &nbsp; 02-123-4567 &nbsp;
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                                    <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
+                                </svg> &nbsp; muzeofficial@gmail.com <br><br>
+                                <p>
+                                <a href="#!">이용안내</a> &nbsp;
+                                <a href="#!">이용약관</a> &nbsp;
+                                <a href="#!">개인정보처리방침</a>
+                                </p>
+                                <div>Business license : 706-20-01181 <br> Mall-order license : 2022-서울시-0334</div>
+                            </div>
+                        </div>
+                        <!--Right Grid column-->
+                    </div>
+                    <!--Grid row-->
+                </div>
+                <!-- Grid container -->
+            </footer>
+</body>
+</html>
