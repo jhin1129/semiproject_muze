@@ -28,19 +28,19 @@ public class LoginServlet extends HttpServlet {
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = null;
-		String loginId = request.getParameter("loginId");
-		String loginPwd = request.getParameter("loginPwd");
+		String memId = request.getParameter("memId");
+		String memPw = request.getParameter("memPw");
 		String saveId = request.getParameter("saveId");
 		
-		System.out.println(loginId + ", " + loginPwd + ", " + saveId);
+		System.out.println(memId + memPw);
 		
-		Member loginMember = new MemberService().login(loginId, loginPwd);
+		Member loginMember = new MemberService().login(memId, memPw);
 		
 		if(loginMember != null) {
 			session = request.getSession();
 			
 			if (saveId != null) {
-				Cookie cookie = new Cookie("saveId", loginId);
+				Cookie cookie = new Cookie("saveId", memId);
 				
 				cookie.setMaxAge(259200); // 3일 동안 유지
 				response.addCookie(cookie);

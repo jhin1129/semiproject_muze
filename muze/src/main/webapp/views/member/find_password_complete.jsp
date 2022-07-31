@@ -17,7 +17,7 @@
         <div class="col"></div>
             <div class="col-6 ">
                 <div class="content_box">
-                    <form name="formFind" id="formFind" action="../member/user_certification.php" method="post">
+                    <form name="formFind" id="formFind" action="${ path }/member/find_password_complete" method="post">
                         <div class="member_wrap">
                             <div class="member_tit">
                                 <h2>비밀번호 찾기</h2>
@@ -26,7 +26,7 @@
                                 <div class="find_password_complete_box">
                                     <p>비밀번호가 정상적으로 변경되었습니다.</p>
                                     <div class="btn_center_box">
-                                        <button class="btn_comfirm js_btn_login">로그인</button>
+                                        <button type="button" id="btn_comfirm" class="btn_comfirm" >로그인</button>
                                     </div>
                                 </div>
                                 <!-- //find_password_complete_box -->
@@ -43,4 +43,12 @@
 </div>
 <!-- //본문 끝 contents -->
 
+<script type="text/javascript">
+$(document).ready(function () {
+	$('#btn_comfirm').click(function (e) {
+		e.preventDefault();
+		location.href = '${path}/member/login';
+	});
+});
+</script>
 <jsp:include page="/views/common/footer.jsp"/>

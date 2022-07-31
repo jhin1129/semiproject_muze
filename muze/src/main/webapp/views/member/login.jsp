@@ -33,8 +33,8 @@
                     <!-- 회원 로그인 -->
                     <div class="login_input_sec">
                     	<div>
-                        	<input type="text" id="loginId" name="loginId" placeholder="아이디" value="${ empty cookie.saveId ? '' : cookie.saveId.value }" aria-required="true" required>
-                        	<input type="password" id="loginPwd" name="loginPwd" placeholder="비밀번호"  aria-required="true" required>
+                        	<input type="text" id="memId" name="memId" placeholder="아이디" value="${ empty cookie.saveId ? '' : cookie.saveId.value }" aria-required="true" required>
+                        	<input type="password" id="memPw" name="memPw" placeholder="비밀번호"  aria-required="true" required>
                       	</div>
                     	<button type="submit" onclick="return loginCheck()" >로그인</button>
                     </div>
@@ -104,7 +104,7 @@
 			location.href = '${path}/member/find_password';
 		});
 
-		$('#loginId, #loginPwd').focusin(function () {
+		$('#memId, #memPw').focusin(function () {
 			$('.js_caution_msg1', '#formLogin').addClass('dn');
 		});
 
@@ -112,18 +112,18 @@
 		$formLogin.validate({
 			dialog: false,
 			rules: {
-				loginId: {
+				memId: {
 					required: true
 				},
-				loginPwd: {
+				memPw: {
 					required: true
 				}
 			},
 			messages: {
-				loginId: {
+				memId: {
 					required: "아이디를 입력해주세요"
 				},
-				loginPwd: {
+				memPw: {
 					required: "패스워드를 입력해주세요"
 				}
 			}, submitHandler: function (form) {

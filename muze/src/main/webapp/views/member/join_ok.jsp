@@ -25,7 +25,7 @@
                             <div class="join_ok_box">
                                 <div class="join_ok_tit">
                                     <p class="complete">회원가입이 <strong>완료</strong> 되었습니다.</p>
-                                    <p><span>${ loginMember.memberName }</span>님의 회원가입을 축하합니다. <br> 아름다운 작품으로 찾아뵙겠습니다.</p>
+                                    <p><span>${ member.memberName }</span>님의 회원가입을 축하합니다. <br> 아름다운 작품으로 찾아뵙겠습니다.</p>
                                 </div>
                                 <!-- //join_ok_tit -->
                                 <div class="btn_member_sec" style="text-align: center">
@@ -47,5 +47,18 @@
 </div>
 <!-- //본문 끝 contents -->
 
+<script type="text/javascript">
+$(document).ready(function () {
+	$('#btnNext').click(function (e) {
+		e.preventDefault();
+		location.href = '${path}/member/login';
+	});
+	
+	$('#btnHome').click(function (e) {
+		e.preventDefault();
+		location.href = '${path}/';
+	});
+});
+</script>
 
 <jsp:include page="/views/common/footer.jsp"/>
