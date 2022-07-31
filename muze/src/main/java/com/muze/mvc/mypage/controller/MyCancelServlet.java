@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.muze.mvc.mypage.model.service.MyOrderService;
 
-import oracle.net.aso.d;
-
 @WebServlet("/mypage/cancel")
 public class MyCancelServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -23,7 +21,7 @@ public class MyCancelServlet extends HttpServlet {
 		int result = 0;
 		int no = Integer.parseInt(request.getParameter("no"));
 		
-		System.out.println(" 넘버값 " + no);
+//		System.out.println("넘버값 " + no);
 		
     	result = new MyOrderService().orderCancel(no);
 

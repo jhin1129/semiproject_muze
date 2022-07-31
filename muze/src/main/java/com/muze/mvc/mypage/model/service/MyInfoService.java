@@ -1,6 +1,9 @@
 package com.muze.mvc.mypage.model.service;
 
-import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
+import static com.muze.mvc.common.jdbc.JDBCTemplate.close;
+import static com.muze.mvc.common.jdbc.JDBCTemplate.commit;
+import static com.muze.mvc.common.jdbc.JDBCTemplate.getConnection;
+import static com.muze.mvc.common.jdbc.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;

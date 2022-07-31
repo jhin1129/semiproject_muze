@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.muze.mvc.board.model.vo.Board;
-import com.muze.mvc.board.model.vo.Product;
-import com.muze.mvc.mypage.model.service.MyBoardService;
 
 @WebServlet("/MyBoardViewServlet")
 public class MyBoardViewServlet extends HttpServlet {

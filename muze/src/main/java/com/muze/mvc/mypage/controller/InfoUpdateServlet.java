@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.muze.mvc.member.vo.Member;
+import com.muze.mvc.member.model.vo.Member;
 import com.muze.mvc.mypage.model.service.MyInfoService;
 
 @WebServlet("/mypage/updateinfo")
