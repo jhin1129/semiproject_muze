@@ -46,7 +46,7 @@ public class Board2tWriteServlet extends HttpServlet {
 		Board2 board = null;
 		
 		String type = request.getParameter("type");
-		
+				
 		// 파일 저장 경로
 		String path = getServletContext().getRealPath("/resources/upload/board/permanant");
 		
@@ -57,7 +57,7 @@ public class Board2tWriteServlet extends HttpServlet {
 		
 		MultipartRequest mr = new MultipartRequest(request, path, maxSize, encoding, new FileRename());
 		
-//		String brdCategory = mr.getParameter("category");
+		String brdCategory = mr.getParameter("brdCategory");
 		String brdWriterId = mr.getParameter("brdWriterId");
 		String brdTitle = mr.getParameter("brdTitle");
 		String brdContent = mr.getParameter("brdContent");
@@ -65,7 +65,8 @@ public class Board2tWriteServlet extends HttpServlet {
     	String filesystemName = mr.getFilesystemName("upfile");
     	String originalFileName = mr.getOriginalFileName("upfile");
     	
-//    	System.out.println(brdCategory);
+    	System.out.println(type);
+    	System.out.println(brdCategory);
     	System.out.println(brdWriterId);
     	System.out.println(brdTitle);	
     	System.out.println(brdContent);
@@ -78,7 +79,7 @@ public class Board2tWriteServlet extends HttpServlet {
 		if(loginMember != null) {
 		board = new Board2();
 		board.setBrdWriterNo(loginMember.getMemberNo());
-//		board.setBrdType(brdCategory);
+		board.setBrdCategory(brdCategory);
 		board.setBrdTitle(brdTitle);
 		board.setBrdWriterId(brdWriterId);
 		board.setBrdContent(brdContent);

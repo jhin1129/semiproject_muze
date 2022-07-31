@@ -35,6 +35,8 @@ public class Board2UpdateServlet extends HttpServlet {
 		request.setAttribute("board", board);
 	
 		request.setAttribute("type", type);	
+
+		request.setAttribute("brdNo", brdNo);
 		
 		if(type.equals("NOTICE")) {
 			request.getRequestDispatcher("/views/support/notice_brd_update.jsp").forward(request, response);

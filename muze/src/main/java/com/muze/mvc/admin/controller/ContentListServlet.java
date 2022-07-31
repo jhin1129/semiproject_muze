@@ -33,7 +33,7 @@ public class ContentListServlet extends HttpServlet {
 		}
 		
 		listCount = new Board2Service().getBoardCountAll();
-		pageInfo = new PageInfo(page, 5, listCount, 10);
+		pageInfo = new PageInfo(page, 5, listCount, 20);
 		list = new Board2Service().getBoardListAll(pageInfo);
 		
 		System.out.println(listCount);
@@ -42,7 +42,7 @@ public class ContentListServlet extends HttpServlet {
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("list", list);
 		
-		request.getRequestDispatcher("/views/adminpage/content.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/adminpage/contents.jsp").forward(request, response);
 	}
 
 }

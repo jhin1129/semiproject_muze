@@ -37,7 +37,7 @@ public class AdminDao {
 		return count;
 	}
 
-	public List<Member> findAll(Connection connection, PageInfo pageInfo) {
+	public List<Member> getMemberList(Connection connection, PageInfo pageInfo) {
 		List<Member> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

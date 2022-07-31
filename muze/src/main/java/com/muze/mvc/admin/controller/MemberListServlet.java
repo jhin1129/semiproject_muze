@@ -33,14 +33,15 @@ public class MemberListServlet extends HttpServlet {
 		}
 		
 		listCount = new AdminService().getMemberCount();
-		pageInfo = new PageInfo(page, 2, listCount, 10);
+		pageInfo = new PageInfo(page, 5, listCount, 5);
 		list = new AdminService().getMemberList(pageInfo);
+		
+		System.out.println(page);
+		System.out.println(listCount);
+		System.out.println(list);
 		
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("list", list);
-
-		System.out.println(listCount);
-		System.out.println(list);
 		
 		request.getRequestDispatcher("/views/adminpage/members.jsp").forward(request, response);
 	}

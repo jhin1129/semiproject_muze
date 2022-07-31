@@ -6,28 +6,10 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <jsp:include page="/views/common/header.jsp"/>
+<jsp:include page="/views/common/adminSidebar.jsp"/>
 <link rel="stylesheet" href="${path}/resources/css/adminpage/admin.css">
 <link rel="stylesheet" href="${path}/resources/css/mypage/mypage_main.css"> 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
-  <!-- 내용 전체 컨테이너 -->
-  <div class="container">
-    <div class="row">
-
-      <!-- 왼쪽 그리드 -->
-      <div class="col-sm-2">
-        <!-- 사이드 메뉴바 -->
-        <div class="mySideMenu">
-          <h5 style="font-weight: 600;">마이 페이지</h5>
-          <hr>
-          <p id="myListMain"> 대시보드 </p>
-          <li id="mylist"><a id="sublist">- 방문자 현황</a></li>
-          <li id="mylist"><a id="sublist">- 일자별 요약</a></li>
-          <li id="mylist"><a id="sublist">- 구매 후기</a></li><br>
-          <p id="myListMain"> 회원 관리 </p>
-          <p id="myListMain"> 문의/신고 관리</p>
-          <p id="myListMain"> 공지사항</p>
-        </div>
-      </div>
 
       <!-- 오른쪽 그리드 -->
       <div class="col-sm-10" style="border: 1px solid lightgray;">
