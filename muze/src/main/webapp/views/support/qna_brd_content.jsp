@@ -17,7 +17,7 @@
         </div>
 
         <div class="notice-content" style="height: 100%;">
-
+			<input type="hidden" name="brdNo" value=${ board.brdNo }>
             <table class="table" style="border: 1px; width: 1000px; height: 100%; margin: auto; font-size: 1em;">
             
                 <tr>
@@ -46,10 +46,13 @@
                     </td>
                 </tr>
             </table>
+            <%--글작성자/관리자인 경우 수정삭제 가능 --%>
             <p style="text-align: center; margin-top: 10px;">
+<%--        <c:if test="${ not empty loginMember && loginMemberId == board.writerId }"> --%>
                 <button type="button" class="button-white" style="margin: 0;"
-                onclick="location.href='${ path }/support/update?no=${ board.brdNo }'"><b>수정</b></button>
+                onclick="location.href='${ path }/support/update?brdNo=${ board.brdNo }&type=QNA'"><b>수정</b></button>
                 <button type="button" class="button-white" id="btnDelete" style="margin: 0;"><b>삭제</b></button>
+<%--        </c:if>  --%>
                 <button type="button" class="button-white" style="margin: 0;"
                 onclick="location.href='${ path }/support/list?type=QNA'"><b>목록</b></button>
             </p>
@@ -60,7 +63,7 @@
 	$(document).ready(() => {
 		$("#btnDelete").on("click", () => {
 			if(confirm("정말로 게시글을 삭제하시겠습니까?")) {
-				location.replace("${ path }/support/delete?no=${ board.brdNo }&type=QNA");
+				location.replace("${ path }/support/delete?brdNo=${ board.brdNo }&type=QNA");
 			}
 		});
 	})

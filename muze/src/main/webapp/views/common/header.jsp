@@ -50,7 +50,14 @@
 	      
 	      <c:if test="${ not empty loginMember }">
 		        <a class="mr-4 text-nowrap" onclick="location.replace('${ path }/member/logout')">로그아웃</a>
-		        <a class="mr-4 text-nowrap" href="${path}/mypage/welcome" >마이페이지</a>
+		        <c:choose>
+					<c:when test="${ memId  == 'admin' }">
+						<a class="mr-4 text-nowrap" href="${path}/admin/main">관리자페이지</a>
+					</c:when>
+					<c:otherwise>
+						<a class="mr-4 text-nowrap" href="${path}/mypage/welcome">마이페이지</a>
+					</c:otherwise>
+					</c:choose>
 		        <a href="#" class="me-5 align-items-center mb-1">
 		          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-cart2"
 		            viewBox="0 0 16 16">
