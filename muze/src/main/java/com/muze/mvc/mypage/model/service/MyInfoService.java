@@ -1,7 +1,6 @@
 package com.muze.mvc.mypage.model.service;
 
-import static com.muze.mvc.common.jdbc.JDBCTemplate.close;
-import static com.muze.mvc.common.jdbc.JDBCTemplate.getConnection;
+import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.List;
@@ -24,4 +23,41 @@ public class MyInfoService {
 		
 		return myMileage;
 	}
+
+	// 회원정보 수정
+	public int save(Member member) {
+		int result = 0; 
+		Connection connection = getConnection();
+		
+		result = new MyInfoDao().updateMember(connection, member);
+		
+		if(result > 0) {
+			commit(connection);
+		} else {
+			rollback(connection);
+		}
+		
+		close(connection);
+		
+		return result;
+	}
+
+	// 회원 탈퇴
+	public int delete(int memberNo) {
+		int result = 0;
+		Connection connection = getConnection();
+		
+		result = new MyInfoDao().updateMemberStatus(connection, memberNo, "N");
+		
+		if(result > 0) {
+			commit(connection);
+		}else {
+			rollback(connection);
+		}
+		
+		close(connection);
+		
+		return result;
+	}
+	
 }

@@ -15,7 +15,7 @@ public class MyQnaServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	request.getRequestDispatcher("/views/mypage/qna.jsp").forward(request, response);
+    	request.getRequestDispatcher("/views/mypage/my_qna.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

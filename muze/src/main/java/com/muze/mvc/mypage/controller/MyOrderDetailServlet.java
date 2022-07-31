@@ -16,10 +16,10 @@ import com.muze.mvc.mypage.model.vo.MyOrder;
 import com.muze.mvc.mypage.model.vo.Welcome;
 
 @WebServlet("/mypage/orderdetail")
-public class OrderDetailServlet extends HttpServlet {
+public class MyOrderDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public OrderDetailServlet() {
+    public MyOrderDetailServlet() {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -53,7 +53,7 @@ public class OrderDetailServlet extends HttpServlet {
 			System.out.println(orderDetail);
 	
 			request.setAttribute("orderDetail", orderDetail);
-	    	request.getRequestDispatcher("/views/mypage/order_detail.jsp").forward(request, response);
+	    	request.getRequestDispatcher("/views/mypage/my_order_detail.jsp").forward(request, response);
     	
     	} else {
     		request.setAttribute("msg", "로그인이 필요한 서비스입니다.");
