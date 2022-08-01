@@ -217,6 +217,15 @@ public class BoardService {
 		return content.substring(content.indexOf("src=\"")).split("temporary/")[1].split("\"")[0];
 	}
 
+	public List<Product> getProductListByArtistNo(int proArtistNo) {
+		List<Product> list = null;
+		Connection connection = getConnection();
+		
+		list = new BoardDao().findProductListByArtistNo(connection, proArtistNo);
+		
+		return list;
+	}
+
 
 
 

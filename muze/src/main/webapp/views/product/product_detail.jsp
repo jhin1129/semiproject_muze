@@ -97,65 +97,54 @@
                 </div>
             </div>
 
-            <h3>추천 상품 보기</h3>
-
-            <div class="row my-5">
-
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="card" style="width: 16rem;">
-                        <img style="background-color: black;" width="100%" height="254px">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                                the card's
-                                content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="col-lg-3 col-md-6">
-                    <div class="card" style="width: 16rem;">
-                        <img style="background-color: black;" width="100%" height="254px">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                                the card's
-                                content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="col-lg-3 col-md-6">
-                    <div class="card" style="width: 16rem;">
-                        <img style="background-color: black;" width="100%" height="254px">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                                the card's
-                                content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="col-lg-3 col-md-6">
-                    <div class="card" style="width: 16rem;">
-                        <img style="background-color: black;" width="100%" height="254px">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                                the card's
-                                content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-    
-            </div>
-
+            <h3>작가의 다른 작품</h3>
+				<div id="carousel" class="carousel slide row" data-ride="carousel" data-interval="false">
+					<div style="width:5%;" class="my-5">
+	  					<button style="width:5%; height:60px; margin-top:200px;" class="carousel-control-prev" type="button" data-target="#carousel" data-slide="prev">
+	  						<img src="${path }/resources/images/common/prev.png" style="width:100%;, object-fit:contain;">
+	    					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	    					<span class="sr-only">Previous</span>
+	  					</button>
+					</div>
+					<div style="width:90%" class="carousel-inner">
+						<c:forEach var="product" items="${ productListByArtistNo }" varStatus="status">
+							<c:if test="${status.count % 4 == 1 && !status.first}">
+								<div class="carousel-item">
+						    	<div class="row my-5 w-100 mx-0">
+							</c:if>
+							<c:if test="${status.first}">
+								<div class="carousel-item active">
+								<div class="row my-5 w-100 mx-0">
+							</c:if>
+							<div class="col-lg-3 col-md-6">
+			                    <div class="card" style="width: 14rem;" onclick="location.href='${path}/product/detail?proNo=${ product.proNo }'">
+			                        <img style="background-color: black;" width="100%" height="222px">
+					                <div class="card-body" style="width:100%; height: 140px;">
+					                    <h5 class="card-title" style="overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">${ product.proName }</h5>
+					                    <p class="card-text">${product.proArtistName }</p>
+					                    <p class="card-text" style="overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">${product.proDescription }</p>
+					                </div>
+			                    </div>
+			                </div>
+	               			<c:if test="${status.count %4 == 0 && !status.last}">
+			    				</div>
+			    				</div>
+							</c:if>
+							<c:if test="${status.last}">
+			    				</div>
+			    				</div>
+							</c:if>
+						</c:forEach>
+					</div>
+					<div style="width:5%;" class="my-5">
+	  					<button style="width:5%; height:60px; margin-top:200px;" class="carousel-control-next" type="button" data-target="#carousel" data-slide="next">
+	  						<img src="${path }/resources/images/common/next.png" style="width:100%;, object-fit:contain;">
+	    					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+	    					<span class="sr-only">Next</span>
+	  					</button>
+					</div>
+				</div>
+				
             <ul class="nav nav-tabs nav-justified">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#artistIntroduce" style="height: 55px; line-height: 40px;">작가 소개</a>
@@ -247,6 +236,8 @@
     </div>
 	
 	<script>
+			
+		
 		$("#quantitySelect").on("change", () => {
 			$("#totalPrice").text(${product.proPrice} * $("#quantitySelect").val());
 		});

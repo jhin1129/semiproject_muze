@@ -110,7 +110,7 @@
             
 	            <hr style="border-style: dotted;">
 	            <!-- 리뷰 속 작품 -->
-	            <div onclick="location.href='${path}/product/detail?proNo=${ product.proNo }'" class="px-3 pb-3">
+	            <div class="px-3 pb-3">
 	                <h4>리뷰 속 작품</h4>
 	
 	                <div class="card">
@@ -123,8 +123,11 @@
 	                        <div class="col-md-8">
 	                            <div class="card-body">
 	                                <h5 class="card-title">${product.proName }</h5>
-	                                <p class="card-text">${product.proDescription }</p>
 	                                <p class="card-text"><small class="text-muted">${product.proArtistName}</small></p>
+	                                <p style="height:80px;" class="card-text">${product.proDescription }</p>
+	                                <div class="text-right">
+	                                	<a href="${path}/product/detail?proNo=${ product.proNo }" class="btn btn-light">작품 상세보기</a>
+	                    			</div>
 	                            </div>
 	                        </div>
 	                    </div>

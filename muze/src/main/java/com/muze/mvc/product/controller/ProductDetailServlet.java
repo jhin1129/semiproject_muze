@@ -1,6 +1,9 @@
 package com.muze.mvc.product.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,9 +25,12 @@ public class ProductDetailServlet extends HttpServlet {
 		
 		Product product = new BoardService().getProductByProNo(proNo);
 		
+		List<Product> productList = new ArrayList<Product>();
 		
+		productList = new BoardService().getProductListByArtistNo(product.getProArtistNo());
 		
 		request.setAttribute("product", product);
+		request.setAttribute("productListByArtistNo", productList);
 		
 		request.getRequestDispatcher("/views/product/product_detail.jsp").forward(request, response);
 	}

@@ -164,8 +164,8 @@
 	                        <div class="col-md-8">
 	                            <div class="card-body">
 	                                <h5 class="card-title">${product.proName }</h5>
-	                                <p class="card-text">${product.proDescription }</p>
 	                                <p class="card-text"><small class="text-muted">${product.proArtistName }</small></p>
+	                                <p class="card-text">${product.proDescription }</p>
 	                            </div>
 	                        </div>
 	                    </div>
