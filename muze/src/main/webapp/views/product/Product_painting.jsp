@@ -24,12 +24,12 @@
             </div>
             <div class="col-md-6">
                 <form action="...">
-                    <div class="search">
-                        <input type="text" name="query" value="">
-                        <button type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                        </svg></button>
-                    </div>
+                    <div class="input-group">
+            	<input type="text" name="searchInput" id="searchInput" class="form-control">
+                <span class="input-group-btn">
+                    <button id="searchBtn" class="btn btn-light text-nowrap">검색</button>
+                </span>
+            </div>
                 </form>
             </div>
         </div>
@@ -259,14 +259,10 @@
                     <li class="page-item"><a class="page-link" href="${path }/product/painting?page=${pageInfo.maxPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&gt;&gt;</a></li>
                 </ul>
             </div>
-
-            <div class="col-4 text-right">
-                <button class="btn btn-light text-nowrap" onclick="location.href='${path}/product/painting?type=FREE'">글 쓰기</button>
-            </div>
         </div>
             <div class="col-md-6">
 	            <div class="text-right mt-1">
-	                    <button class="btn btn-light py-0"  onclick="location.href='${ path }/product/painting/writer'">작품 등록</button>
+	                    <button class="btn btn-light py-0"  onclick="location.href='${ path }/product/writer?type=Pwriter'">작품 등록</button>
 	            </div>
             </div>
         </div>

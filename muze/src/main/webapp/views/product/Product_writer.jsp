@@ -35,7 +35,7 @@
        // 그리고 입력상태를 떠난 것을 포커스가 벗어났다고 한다.
         
 
-        document.form1.action = "${ path }/product/craft"; //페이지로 form1에 저장된 자료를 전송함
+        document.form1.action = "${path}/product/painting/writer"; //페이지로 form1에 저장된 자료를 전송함
         document.form1.submit();
     }
  </script>
@@ -44,7 +44,17 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h2 class="basket">상품등록</h2>
+                <div>
+        	<c:if test="${ type == 'Pwriter'}">
+            	<h2 style="text-align: center;"><a href="${path }/product/writer?type=Pwriter">회화 작품등록</a></h2>
+           	</c:if>
+        	<c:if test="${ type == 'Owriter'}">
+            	<h2 style="text-align: center;"><a href="${path }/product/writer?type=Owriter">유화 작품등록</a></h2>
+           	</c:if>
+           	<c:if test="${ type == 'Cwriter'}">
+            	<h2 style="text-align: center;"><a href="${path }/product/writer?type=Cwriter">조소 작품등록</a></h2>
+           	</c:if>
+        </div>
             </div>
         </div>
         <hr class="mt-4">
@@ -52,31 +62,31 @@
         <div class="mt-5" style="border: 1px solid rgb(238, 233, 233);">
 
             <div>
-            	<form name="form1" action="${ path }/product/craft/writer" method="POST" enctype="multipart/form-data">
+            	<form name="form1" action="${ path }/product/writer?type=${type}" method="POST" enctype="multipart/form-data">
                 <table class="table m-0">
                     <thead>
                     	<input type="hidden" name="flag" value="i">
                     	<tr>
                             <th class="table-active" style="width: 20%;">작품타입</th>
-                            <td style="width: 80%;"><input type="text" name="pctype" placeholder="조소" style="width: 80%;">
+                            <td style="width: 80%;"><input type="text" name="ptype" placeholder="회화, 조소, 유화" style="width: 80%;">
                             </td>
 
                         </tr>
                         <tr>
                             <th class="table-active" style="width: 20%;">상품명</th>
-                            <td style="width: 80%;"><input type="text" name="pcname" placeholder="제목을 입력해주세요." style="width: 80%;">
+                            <td style="width: 80%;"><input type="text" name="pname" placeholder="제목을 입력해주세요." style="width: 80%;">
                             </td>
 
                         </tr>
                         <tr>
                             <th class="table-active" style="width: 20%;">상품 사이즈</th>
-                            <td style="width: 80%;"><input type="text" name="pcsize" placeholder="Cm사이즈 입니다. 예) 세로 x 가로." style="width: 80%;">
+                            <td style="width: 80%;"><input type="text" name="psize" placeholder="Cm사이즈 입니다. 예) 세로 x 가로." style="width: 80%;">
                             </td>
 
                         </tr>
                                                 <tr>
                             <th class="table-active" style="width: 20%;">상품 수량</th>
-                            <td style="width: 80%;"><input type="text" name="pccount" placeholder="수량을 입력해주세요." style="width: 80%;">
+                            <td style="width: 80%;"><input type="text" name="pcount" placeholder="수량을 입력해주세요." style="width: 80%;">
                             </td>
 
                         </tr>
@@ -88,19 +98,19 @@
                         <tr>
                             <th class="table-active">작품 이미지</th>
                             <td>
-                                <input type="file" name="pcimg"></input>
+                                <input type="file" name="pimg"></input>
                                 
                             </td>
                         </tr>
 
                         <tr>
                             <th class="table-active">가격</th>
-                            <td style="width: 80%;"><input type="text" name="pcprice" placeholder="가격을 입력해주세요." style="width: 80%;">
+                            <td style="width: 80%;"><input type="text" name="pprice" placeholder="가격을 입력해주세요." style="width: 80%;">
                             </td>
                         </tr>
                         <tr>
                 			<td>상품설명</td>
-               				<td><textarea rows="5" cols="60" name="pcDescription"
+               				<td><textarea rows="5" cols="60" name="description"
                         	id="description" placeholder="작품 설명을 입력해주세요."></textarea></td>
            			    </tr>
            			    <tr>

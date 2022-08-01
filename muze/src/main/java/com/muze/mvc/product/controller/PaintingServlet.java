@@ -27,6 +27,20 @@ public class PaintingServlet extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String type = request.getParameter("type");
+		String searchType = request.getParameter("searchType");
+		String searchVal = request.getParameter("searchVal");
+		String isSearch = request.getParameter("isSearch");
+		
+		if(isSearch == null || isSearch.equals("false") || searchVal == null) {
+			isSearch = "false";
+			searchVal = "";
+			searchType= "";
+		} else {
+			isSearch = "true";
+		}
+		
+		String path = null;
 		int page = 0;
     	int listCount = 0;
     	PageInfo pageInfo = null;
@@ -39,14 +53,18 @@ public class PaintingServlet extends HttpServlet {
 		}
     	
     	listCount = new PaintingService().getPaintingCount();
-    	pageInfo = new PageInfo(page, 10, listCount, 5);    
+    	pageInfo = new PageInfo(page, 10, listCount, 5);
     	list = new PaintingService().getPaingingList(pageInfo);
     	
     	System.out.println(list);
     	
     	request.setAttribute("pageInfo", pageInfo);
     	request.setAttribute("list", list);
-    	request.getRequestDispatcher("/views/product/Product_painting.jsp").forward(request, response);
+    	request.setAttribute("type", type);
+		request.setAttribute("searchType", searchType);
+		request.setAttribute("searchVal", searchVal);
+		request.setAttribute("isSearch", isSearch);
+    	request.getRequestDispatcher(path).forward(request, response);
 	}
 
 }

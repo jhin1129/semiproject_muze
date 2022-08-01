@@ -3,6 +3,8 @@ package com.muze.mvc.product.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -17,7 +19,7 @@ import com.muze.mvc.product.model.vo.Writer;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-@WebServlet("/product/painting/writer")
+@WebServlet("/product/writer")
 public class WriterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -25,13 +27,18 @@ public class WriterServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/views/product/Product_painting_writer.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/product/Product_writer.jsp").forward(request, response);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<String> authority = new ArrayList<>();
+		String type = request.getParameter("type");
 		int result = 0;
 		Writer writer = null;
+		
+		
+		
 		String saveFolder = "/resources/upload/product/painting";	
 		ServletContext context = getServletContext();
 		String realFolder = context.getRealPath(saveFolder);
@@ -74,11 +81,13 @@ public class WriterServlet extends HttpServlet {
 		result = new WriterService().save(writer);
 		
 		if(result > 0) {
+			request.setAttribute("msg", "작품 등록에 성공하였습니다.");
 			request.setAttribute("location", "/product/Product_painting.jsp");
 		}else {
+			request.setAttribute("msg", "작품 등록에 실패하였습니다.");
 			request.setAttribute("location", "/product/Product_painting.jsp");
 		}
-		request.getRequestDispatcher("/views/product/Product_painting.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		
 		
 		

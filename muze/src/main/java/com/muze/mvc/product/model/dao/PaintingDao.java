@@ -41,47 +41,7 @@ public class PaintingDao {
 		List<Product> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT RNUM,"
-				+ " PRO_NO,"
-				+ " PRO_NAME,"
-				+ " PRO_SIZE,"
-				+ " PRO_PRICE,"
-				+ " PRO_QUANTITY,"
-				+ " PRO_IMG,"
-				+ " PRO_ARTIST_NO,"
-				+ " PRO_REG_DATE,"
-				+ " PRO_DESCRIPTION,"
-				+ " PRO_TYPE,"
-				+ " FROM ("
-				+ " SELECT ROWNUM AS RNUM,"
-				+ " PRO_NO,"
-				+ " PRO_NAME,"
-				+ " PRO_SIZE,"
-				+ " PRO_PRICE,"
-				+ " PRO_QUANTITY,"
-				+ " PRO_IMG,"
-				+ " PRO_ARTIST_NO,"
-				+ " PRO_REG_DATE,"
-				+ " PRO_DESCRIPTION,"
-				+ " PRO_TYPE,"
-				+ " FROM ("
-				+ " SELECT"
-				+ " PRO_NO,"
-				+ " PRO_NAME,"
-				+ " PRO_SIZE,"
-				+ " PRO_PRICE,"
-				+ " PRO_QUANTITY,"
-				+ " PRO_IMG,"
-				+ " PRO_ARTIST_NO,"
-				+ " PRO_REG_DATE,"
-				+ " PRO_DESCRIPTION,"
-				+ " PRO_TYPE,"
-				+ " FROM PRODUCT"
-				+ " JOIN MEMBER ON(PRODUCT.PRO_ARTIST_NO = MEMBER.MEMBER_NO)"
-				+ " WHERE PRO_QUANTITY = 1 ORDER BY PRO_NO DESC"
-				+ ")"
-				+ ")"
-				+ " WHERE RNUM BETWEEN ? AND ?";
+		String query = 
 		
 		
 		try {
@@ -102,7 +62,7 @@ public class PaintingDao {
 				product.setProPrice(rs.getInt("PRO_PRICE"));
 				product.setProQuantity(rs.getInt("PRO_QUANTITY"));
 				product.setProImg(rs.getString("PRO_iMG"));
-				product.setProArtistNo(rs.getInt("PRO_ARTIST_NO"));				
+				product.setProArtistNo(rs.getInt("PRO_ARTIST_NO"));			
 				product.setProRegDate(rs.getDate("PRO_REG_DATE"));
 				product.setProDescription(rs.getString("PRO_DESCIPTION"));
 				product.setProType(rs.getString("PRO_TYPE"));
