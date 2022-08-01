@@ -23,10 +23,6 @@ import com.muze.mvc.event.model.service.EventService;
 import com.muze.mvc.event.model.vo.Event;
 import com.muze.mvc.member.model.vo.Member;
 
-
-
-
-
 @WebServlet("/event")
 public class EventServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -36,18 +32,19 @@ public class EventServlet extends HttpServlet {
     
     }
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
+		
 		List<Event> list = null;
+		
 		if(loginMember != null) {
 			list = new EventService().getEventListByMemberNo(loginMember.getMemberNo());
 		}
 		
 		System.out.println(list);
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("/views/event/eventpage8.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/event/eventpage.jsp").forward(request, response);
 	}
 
 
@@ -74,7 +71,6 @@ public class EventServlet extends HttpServlet {
 			
 		}
 			
-	
 		else {
 			request.setAttribute("msg", "로그인 후 이용해주세요");
 			request.setAttribute("location", "/member/login");

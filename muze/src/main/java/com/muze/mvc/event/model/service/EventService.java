@@ -19,35 +19,11 @@ import com.muze.mvc.event.model.vo.Mileage;
 public class EventService {
 	public Event calendar_event;
 	
-//	public EventService(Event e) {
-//		calendar_event = e;
-//	}
-	
-/*	public int save(Mileage mileage) {
-		int result = 0;
-		Connection connection = getConnection();
-		
-		if(mileage.getMemberNo() != 0) {
-			result = new EventDao().insertAttMileage(connection, mileage);
-		} 
-		
-		if(result > 0) {
-			commit(connection);
-		} else {
-			rollback(connection);
-		}
-		
-		close(connection);
-		
-		return result;
-	}*/
-	
 	EventDao eventdao = new EventDao();
 	
 	public int saveEvent(Event event) {
 		int result = 0;
 		Connection connection = getConnection();
-//		result = new EventDao().insertEvent(connection, memberNo, calendar_event.getEvAttendDate());
 		
 		try {
 			result = eventdao.insertEvent(connection, event);
@@ -109,6 +85,7 @@ public class EventService {
 		
 		return false;
 	}
+	
 	public int insertEvent(int memberNo) {
 		int result = 0;
 		Connection connection = getConnection();
