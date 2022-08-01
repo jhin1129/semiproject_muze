@@ -34,7 +34,6 @@ public class BoardListServlet extends HttpServlet {
 		} else {
 			isSearch = "true";
 		}
-			
 		
 		String path = null;
 		int page = 0;

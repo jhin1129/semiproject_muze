@@ -30,6 +30,9 @@ public class BoardDao {
 		case "writer":
 			query = "SELECT COUNT(*) FROM BOARD JOIN MEMBER ON(BOARD.BRD_WRITER_NO = MEMBER.MEMBER_NO) WHERE BRD_STATUS='Y' AND BRD_TYPE=? AND MEMBER_ID LIKE '%"+searchVal+"%'";
 			break;
+		case "proNo":
+			query = "SELECT COUNT(*) FROM BOARD JOIN PRODUCT ON(BOARD.BRD_PRO_NO = PRODUCT.PRO_NO) WHERE BRD_STATUS='Y' AND BRD_TYPE=? AND PRO_NO = " + Integer.parseInt(searchVal);
+			break;
 		default:
 			query = "SELECT COUNT(*) FROM BOARD WHERE BRD_STATUS='Y' AND BRD_TYPE=?";			
 		}
@@ -72,6 +75,9 @@ public class BoardDao {
 			break;
 		case "writer":
 			subquery = " AND MEMBER_ID LIKE '%" + searchVal + "%'";
+			break;
+		case "proNo":
+			subquery = " AND PRO_NO = " + Integer.parseInt(searchVal);
 			break;
 		default:
 			subquery = "";
@@ -174,6 +180,7 @@ public class BoardDao {
 				board.setBrdRenamedFileName(rs.getString("BRD_RENAMEDFILENAME"));
 				board.setBrdImg(rs.getString("BRD_IMG"));
 				list.add(board);
+				System.out.println(board);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -185,7 +192,7 @@ public class BoardDao {
 		return list;
 	}
 
-	public Board findBoardByNo(Connection connection, int no, String type) {
+	public Board findBoardByBrdNo(Connection connection, int no, String type) {
 		Board board = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -355,7 +362,7 @@ public class BoardDao {
 		return result;
 	}
 
-	public static List<Product> findProductListByMemberNo(Connection connection, int memberNo) {
+	public static List<Product> findProductListByOrdersMemberNo(Connection connection, int memberNo) {
 		List<Product> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -372,10 +379,13 @@ public class BoardDao {
 				+ " PRO_DESCRIPTION,"
 				+ " PRO_TYPE"
 				+ " FROM PRODUCT"
+				+ " JOIN MEMBER ON (PRODUCT.PRO_ARTIST_NO = MEMBER.MEMBER_NO)"
+				+ " WHERE PRO_NO IN ("
+				+ " SELECT DISTINCT PRODUCT.PRO_NO FROM PRODUCT"
 				+ " JOIN ORDERS ON (PRODUCT.PRO_NO = ORDERS.PRO_NO)"
 				+ " JOIN MEMBER ON (PRODUCT.PRO_ARTIST_NO = MEMBER.MEMBER_NO)"
 				+ " JOIN MEMBER ON (ORDERS.MEMBER_NO = MEMBER.MEMBER_NO)"
-				+ " WHERE ORDERS.MEMBER_NO = ?";
+				+ " WHERE ORDERS.MEMBER_NO = ?)";
 
 		
 
@@ -413,7 +423,7 @@ public class BoardDao {
 		return list;
 	}
 
-	public Product findProductByNo(Connection connection, int no) {
+	public Product findProductByProNo(Connection connection, int no) {
 		Product product = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

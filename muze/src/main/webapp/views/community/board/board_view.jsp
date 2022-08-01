@@ -92,9 +92,11 @@
 
             <!-- 내용 -->
             <div class="my-3 px-3">
-                <p>
-                    ${ board.brdContent }
-                </p>
+            	<div style="min-height: 400px;">
+	                <p>
+	                    ${ board.brdContent }
+	                </p>
+            	</div>
                 <c:if test="${ loginMember.memberNo == board.brdWriterNo }">
 	                <div class="text-right">
 	                    <button onclick="location.href='${path}/board/update?no=${ board.brdNo }&type=${ type }&brdWriterNo=${board.brdWriterNo }'" class="btn btn-light py-0">수정</button>
@@ -108,7 +110,7 @@
             
 	            <hr style="border-style: dotted;">
 	            <!-- 리뷰 속 작품 -->
-	            <div class="px-3 pb-3">
+	            <div onclick="location.href='${path}/product/detail?proNo=${ product.proNo }'" class="px-3 pb-3">
 	                <h4>리뷰 속 작품</h4>
 	
 	                <div class="card">

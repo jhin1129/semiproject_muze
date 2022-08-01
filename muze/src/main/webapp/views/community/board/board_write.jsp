@@ -135,6 +135,7 @@
 	
 	
 	                <div class="text-right mt-1">
+	                    <button type="button" onclick="location.href='${path}/board/list?type=${type}'" class="btn btn-light py-0">취소</button>
 	                    <button class="btn btn-light py-0">작성</button>
 	                </div>
 	            </div>

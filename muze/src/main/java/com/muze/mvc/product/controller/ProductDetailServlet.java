@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.muze.mvc.board.model.service.BoardService;
+import com.muze.mvc.board.model.vo.Product;
+
 @WebServlet("/product/detail")
 public class ProductDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -15,6 +18,14 @@ public class ProductDetailServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int proNo = Integer.parseInt(request.getParameter("proNo"));
+		
+		Product product = new BoardService().getProductByProNo(proNo);
+		
+		
+		
+		request.setAttribute("product", product);
+		
 		request.getRequestDispatcher("/views/product/product_detail.jsp").forward(request, response);
 	}
 
