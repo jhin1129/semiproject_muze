@@ -11,9 +11,9 @@ public class Artist {
 
 	int artistNo;
 	
-	String ArtistImg;
+	String artistImg;
 	
-	String ArtistIntroduce;
+	String artistIntroduce;
 	
 	String busName;
 	
