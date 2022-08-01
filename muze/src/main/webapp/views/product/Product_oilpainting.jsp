@@ -251,7 +251,7 @@
                 </ul>
                 <div class="col-md-6">
 	            <div class="text-right mt-1">
-	                    <button class="btn btn-light py-0"  onclick="location.href='${path}/product/writer?type=Owriter'">작품 등록</button>
+	                    <button class="btn btn-light py-0"  onclick="location.href='${path}/product/oilpainting/writer'">작품 등록</button>
 	            </div>
             </div>
             </div>

@@ -39,7 +39,7 @@
 	      <c:if test="${ empty loginMember }">
 		        <a class="mr-4 text-nowrap" href="${path}/member/login">로그인</a>
 		        <a class="mr-4 text-nowrap" href="${path}/member/join_method">회원가입</a>
-		        <a href="${path }/product/shoping" class="me-5 align-items-center mb-1">
+		        <a href="#" class="me-5 align-items-center mb-1">
 		          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-cart2"
 		            viewBox="0 0 16 16">
 		            <path
