@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.muze.mvc.board.model.service.BoardService;
 import com.muze.mvc.board.model.vo.Product;
+import com.muze.mvc.member.model.vo.Artist;
 
 @WebServlet("/product/detail")
 public class ProductDetailServlet extends HttpServlet {
@@ -29,6 +30,9 @@ public class ProductDetailServlet extends HttpServlet {
 		
 		productList = new BoardService().getProductListByArtistNo(product.getProArtistNo());
 		
+		Artist artist = new BoardService().getArtistByProNo(proNo);
+		
+		request.setAttribute("artist", artist);
 		request.setAttribute("product", product);
 		request.setAttribute("productListByArtistNo", productList);
 		

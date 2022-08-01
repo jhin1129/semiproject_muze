@@ -13,6 +13,7 @@ import com.muze.mvc.board.model.vo.Board;
 import com.muze.mvc.board.model.vo.Comments;
 import com.muze.mvc.board.model.vo.Product;
 import com.muze.mvc.common.util.PageInfo;
+import com.muze.mvc.member.model.vo.Artist;
 import com.muze.mvc.member.model.vo.Member;
 
 import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
@@ -224,6 +225,17 @@ public class BoardService {
 		list = new BoardDao().findProductListByArtistNo(connection, proArtistNo);
 		
 		return list;
+	}
+
+	public Artist getArtistByProNo(int proNo) {
+		Artist artist = null;
+		Connection connection = getConnection();
+		
+		artist = new BoardDao().findArtistByProNo(connection, proNo);
+		
+		close(connection);
+		
+		return artist;
 	}
 
 

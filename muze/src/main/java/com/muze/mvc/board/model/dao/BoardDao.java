@@ -10,6 +10,8 @@ import java.util.List;
 import com.muze.mvc.board.model.vo.Board;
 import com.muze.mvc.board.model.vo.Product;
 import com.muze.mvc.common.util.PageInfo;
+import com.muze.mvc.member.model.vo.Artist;
+
 import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
 
 public class BoardDao {
@@ -553,6 +555,46 @@ public class BoardDao {
 		}		
 		
 		return list;
+	}
+
+	public Artist findArtistByProNo(Connection connection, int proNo) {
+		Artist artist = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "SELECT ARTIST_NO,"
+						   + " ARTIST_IMG,"
+				           + " ARTIST_INTRODUCE,"
+				           + " BUS_NAME,"
+				           + " BUS_LICENSE"
+				           + " FROM ARTIST_DETAIL"
+				           + " JOIN PRODUCT ON (ARTIST_DETAIL.ARTIST_NO = PRODUCT.PRO_ARTIST_NO)"
+				           + " WHERE PRO_NO = ?";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setInt(1, proNo);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				artist = new Artist();
+				
+				artist.setArtistNo(rs.getInt("ARTIST_NO"));
+				artist.setArtistImg(rs.getString("ARTIST_IMG"));
+				artist.setArtistIntroduce(rs.getString("ARTIST_INTRODUCE"));
+				artist.setBusName(rs.getString("BUS_NAME"));
+				artist.setBusLicense(rs.getString("BUS_LICENSE"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return artist;
 	}
 
 }
