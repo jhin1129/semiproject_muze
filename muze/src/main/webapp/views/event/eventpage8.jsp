@@ -38,59 +38,66 @@
             	initialView: 'dayGridMonth',
             	headerToolbar: {   
             		left: 'title',             
-            		right: 'addEventButton'},
-            		//events: "${ path }/event",
-            		events: {
-                   			//type: "POST",
-                   			url: '${ path }/event',
-            			  },
-            		/*
-            					events: function(info, successCallback, failureCallback) {
-            						$.ajax({
-            							url: '${ path }/event',
-            							type: 'POST',
-            							dataType: 'json',
-            							data: {
-            							},
-            							success: function(data) {
-            								successCallback(data);
-            							}
-            						});
-            					},*/
-            				
-            		  customButtons: {
-            	            addEventButton: {
-            	              text: '출석 체크',
-            	              click: function () {
-            	            	  if(${ empty loginMember }) {
-            	          			alert("로그인 후 이용해주세요");
-            	          			location.href = '${ path }/member/login'
-        							return;
-            	          		}
-            	              	var date = new Date(); 
-						       	var currentDate = date.getFullYear() + "-" + ( date.getMonth() + 1 ) + "-" + date.getDate(); 
-	            	                if (true) {
-	            	                  calendar.addEvent({
-	            	                    title: "출석 정보",
-	            	                    start: date,
-	            	                    allDay: true,
-	            	                  });
-	            	                  alert("출석 체크 완료");
-	            	                  check(currentDate); 
-	            	                } else {
-	            	                  alert("출석 체크 실패");
-	            	                }
-            	             	 },
-            	              },
-            	          },
-              eventContent: {
-            	  html: `<center><div><img src="${path}/resources/images/event/check.png" class="event-icon" />\</div><center>`,
-              }
+            		right: 'addEventButton'
+            	},
+
+   
+            	customButtons: {
+            	    addEventButton: {
+            	        text: '출석 체크',
+            	        click: function () {
+            	            if(${ empty loginMember }) {
+            	          		alert("로그인 후 이용해주세요");
+            	          		location.href = '${ path }/member/login';
+        						return;
+            	          	}
+	            	    	insertEvent();
+            	        },
+            	    },
+            	},
+              	eventContent: {
+            	  	html: `<center><div><img src="${path}/resources/images/event/check.png" class="event-icon" />\</div><center>`,
+              	}
             });
+
             calendar.render();
+            
+            var date = new Array();
+			<c:forEach var="event" items="${list}" varStatus="status">
+				date.push("${event.evAttendDate}");
+			</c:forEach>
+			
+			for(var i = 0; i < date.length; i++){
+				calendar.addEvent({
+	            	title: "출석 정보",
+	            	start: date[i],
+	            	allDay: true
+	            });
+			}
          });
          
-        
+		
+		function insertEvent(){
+			$.ajax({
+				type: "POST",
+				url: "${path}/event",
+				success: function(isAlreadyEvent){
+					if(isAlreadyEvent == true){
+						alert("이미 출석하셨습니다.");
+					} else {
+						calendar.addEvent({
+			            	title: "출석 정보",
+			            	start: new Date(),
+			            	allDay: true
+			            });
+						alert("출석 완료되었습니다.");
+					}
+				},
+				error: function(){
+					alert("출석에 실패하였습니다");
+				}
+			})
+		}
                 	
          
          //출석체크 날짜를 controller로 보내줌

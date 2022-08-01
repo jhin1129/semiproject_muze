@@ -1,6 +1,7 @@
 package com.muze.mvc.event.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -26,6 +27,14 @@ public class EventViewServlet extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
+		Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
+		List<Event> list = null;
+		if(loginMember != null) {
+			list = new EventService().getEventListByMemberNo(loginMember.getMemberNo());
+		}
+		
+		System.out.println(list);
 		request.getRequestDispatcher("/views/event/eventpage8.jsp").forward(request, response);
 	}
 
