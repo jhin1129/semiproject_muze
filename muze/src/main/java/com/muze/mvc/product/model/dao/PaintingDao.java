@@ -106,7 +106,7 @@ public class PaintingDao {
 				product.setProRegDate(rs.getDate("PRO_REG_DATE"));
 				product.setProDescription(rs.getString("PRO_DESCIPTION"));
 				product.setProType(rs.getString("PRO_TYPE"));
-				
+				System.out.println(product);
 				list.add(product);
 			}
 		} catch (SQLException e) {

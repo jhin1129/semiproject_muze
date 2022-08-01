@@ -24,7 +24,7 @@ public class BoardFindProductServlet extends HttpServlet {
 		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		List<Product> list = null;
 		
-		list = new BoardService().getProductListByMemberNo(memberNo);
+		list = new BoardService().getProductListByOrdersMemberNo(memberNo);
 		
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/views/community/board/findProduct.jsp").forward(request,response);

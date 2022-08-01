@@ -6,6 +6,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <jsp:include page="/views/common/header.jsp"/>
+
     <div class="container my-5">
         <div>
             <div class="card" style="border: none;">
@@ -18,32 +19,32 @@
                     <!-- 이미지 상세내용 -->
                     <div id="div1" class="col-5">
                         <div class="card-body py-0">
-                            <h4 class="card-title">작품 제목</h4>
-                            <p class="my-0">작가</p>
+                            <h4 class="card-title">${product.proName }</h4>
+                            <p class="my-0">${product.proArtistName }</p>
                             <hr class="my-2">
                             <table style="width: 100%;">
                                 <tr>
                                     <td style="width: 30%;">자체상품코드</td>
-                                    <td>2-P-CB7788</td>
+                                    <td>${product.proNo }</td>
                                 </tr>
                                 <tr>
                                     <td>사이즈</td>
-                                    <td>90.0X90.0</td>
+                                    <td>${product.proSize }</td>
                                 </tr>
                                 <tr>
                                     <td>제작방식</td>
-                                    <td>ArtPrint</td>
+                                    <td>${product.proType }</td>
                                 </tr>
                                 <tr>
                                     <td>소재</td>
-                                    <td>Art Paper</td>
+                                    <td>소재 컬럼은 안만들었었군</td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <div class="mb-2">수량</div>
                                     </td>
                                     <td>
-                                        <div class="mb-2">3</div>
+                                        <div class="mb-2">${product.proQuantity }</div>
                                     </td>
                                 </tr>
                                 <tr
@@ -51,14 +52,14 @@
                                     <td>
                                         <div class="my-2">판매가</div>
                                     </td>
-                                    <td>999999</td>
+                                    <td>${product.proPrice }</td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <div class="mt-2">수량선택</div>
                                     </td>
                                     <td>
-                                        <input class="mt-2" type="number" min="1" max="3" value="1">
+                                        <input id="quantitySelect" class="mt-2" type="number" min="1" max="${product.proQuantity }" value="1">
                                     </td>
                                 </tr>
                                 <tr style="border-bottom: 1px solid rgba(0,0,0,.1);">
@@ -66,7 +67,7 @@
                                         <div class="mb-2">총 합계금액</div>
                                     </td>
                                     <td>
-                                        <div class="mb-2">999999</div>
+                                        <div id="totalPrice" class="mb-2">${product.proPrice }</div>
                                     </td>
                                 </tr>
                             </table>
@@ -74,7 +75,7 @@
                             <table class="my-2" style="width: 100%;">
                                 <tr>
                                     <td style="width: 50%;">
-                                        <div class="py-2 text-center"
+                                        <div onclick="location.href='${path}/board/list?type=REVIEW&searchType=proNo&searchVal=${product.proNo }&isSearch=true'" class="py-2 text-center"
                                             style="border: 1px solid; width: 100%; height: 100%;">리뷰 확인</div>
                                     </td>
                                     <td style="width: 50%;">
@@ -96,191 +97,142 @@
                 </div>
             </div>
 
-            <h3>추천 상품 보기</h3>
-
-            <div class="row my-5">
-
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="card" style="width: 16rem;">
-                        <img style="background-color: black;" width="100%" height="254px">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                                the card's
-                                content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="col-lg-3 col-md-6">
-                    <div class="card" style="width: 16rem;">
-                        <img style="background-color: black;" width="100%" height="254px">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                                the card's
-                                content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="col-lg-3 col-md-6">
-                    <div class="card" style="width: 16rem;">
-                        <img style="background-color: black;" width="100%" height="254px">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                                the card's
-                                content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="col-lg-3 col-md-6">
-                    <div class="card" style="width: 16rem;">
-                        <img style="background-color: black;" width="100%" height="254px">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                                the card's
-                                content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-    
-            </div>
-
+            <h3>작가의 다른 작품</h3>
+				<div id="carousel" class="carousel slide row" data-ride="carousel" data-interval="false">
+					<div style="width:5%;" class="my-5">
+	  					<button style="width:5%; height:60px; margin-top:200px;" class="carousel-control-prev" type="button" data-target="#carousel" data-slide="prev">
+	  						<img src="${path }/resources/images/common/prev.png" style="width:100%;, object-fit:contain;">
+	    					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	    					<span class="sr-only">Previous</span>
+	  					</button>
+					</div>
+					<div style="width:90%" class="carousel-inner">
+						<c:forEach var="product" items="${ productListByArtistNo }" varStatus="status">
+							<c:if test="${status.count % 4 == 1 && !status.first}">
+								<div class="carousel-item">
+						    	<div class="row my-5 w-100 mx-0">
+							</c:if>
+							<c:if test="${status.first}">
+								<div class="carousel-item active">
+								<div class="row my-5 w-100 mx-0">
+							</c:if>
+							<div class="col-lg-3 col-md-6">
+			                    <div class="card" style="width: 14rem;" onclick="location.href='${path}/product/detail?proNo=${ product.proNo }'">
+			                        <img style="background-color: black;" width="100%" height="222px">
+					                <div class="card-body" style="width:100%; height: 140px;">
+					                    <h5 class="card-title" style="overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">${ product.proName }</h5>
+					                    <p class="card-text">${product.proArtistName }</p>
+					                    <p class="card-text" style="overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">${product.proDescription }</p>
+					                </div>
+			                    </div>
+			                </div>
+	               			<c:if test="${status.count %4 == 0 && !status.last}">
+			    				</div>
+			    				</div>
+							</c:if>
+							<c:if test="${status.last}">
+			    				</div>
+			    				</div>
+							</c:if>
+						</c:forEach>
+					</div>
+					<div style="width:5%;" class="my-5">
+	  					<button style="width:5%; height:60px; margin-top:200px;" class="carousel-control-next" type="button" data-target="#carousel" data-slide="next">
+	  						<img src="${path }/resources/images/common/next.png" style="width:100%;, object-fit:contain;">
+	    					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+	    					<span class="sr-only">Next</span>
+	  					</button>
+					</div>
+				</div>
+				
             <ul class="nav nav-tabs nav-justified">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#" style="height: 55px; line-height: 40px;">작가 소개</a>
+                    <a class="nav-link active" aria-current="page" href="#artistIntroduce" style="height: 55px; line-height: 40px;">작가 소개</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="height: 55px; line-height: 40px;">작품 소개</a>
+                    <a class="nav-link" href="#productIntroduce" style="height: 55px; line-height: 40px;">작품 소개</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="height: 55px; line-height: 40px;">배송 및 교환 안내</a>
+                    <a class="nav-link" href="#orderIntroduce" style="height: 55px; line-height: 40px;">배송 및 교환 안내</a>
                 </li>
             </ul>
 
             <div>
-                <div class="card" style="border: none;">
-                    <div class="row g-0 p-5">
-                        <!-- 이미지 -->
-                        <div class="col-6" style="min-width: 254px; width: 100%;">
-                            <img style="background-color: black; width: 445px; height: 445px;" class="rounded-start">
-                        </div>
-                        <div class="col-1"></div>
-                        <!-- 이미지 상세내용 -->
-                        <div class="col-5">
-                            <div class="card-body py-0">
-                                <h2>작가 이름</h2>
-                                <p>
-                                    작가 소개~~~~~~~~~~<br>
-                                    작가 소개~~~~~~~~~~<br>
-                                    작가 소개~~~~~~~~~~<br>
-                                    작가 소개~~~~~~~~~~<br>
-                                    작가 소개~~~~~~~~~~<br>
-                                    작가 소개~~~~~~~~~~<br>
-                                    작가 소개~~~~~~~~~~<br>
-                                    작가 소개~~~~~~~~~~<br>
-                                    작가 소개~~~~~~~~~~<br>
-                                </p>
-    
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            	<div id="artistIntroduce">
+            		<h1 class="mt-5" style="text-align:center;">ABOUT ARTIST</h1>
+	                <div class="card" style="border: none;">
+	                    <div class="row g-0 p-5">
+	                        <!-- 이미지 -->
+	                        <div class="col-6" style="min-width: 254px; width: 100%;">
+	                            <img style="background-color: black; width: 445px; height: 445px;" class="rounded-start">
+	                        </div>
+	                        <div class="col-1"></div>
+	                        <!-- 이미지 상세내용 -->
+	                        <div class="col-5">
+	                            <div class="card-body py-0">
+	                                <h2>${product.proArtistName }</h2>
+	                                <p>
+	                                    ${artist.artistIntroduce }
+	                                </p>
+	    
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+            	</div>
 
-                <div class="p-5">
-                    <img style="background-color: black; width: 100%; height: 700px;">
+                <div id="productIntroduce" class="p-5">
+       	            <h1 class="mt-5" style="text-align:center;">ABOUT PRODUCT</h1>
+                	
+                    <img class="mt-5" style="background-color: black; width: 100%; height: 700px;">
                     <p>
-                        작품소개~~~~~~~~~~~~~~~~<br>
-                        작품소개~~~~~~~~~~~~~~~~<br>
-                        작품소개~~~~~~~~~~~~~~~~<br>
-                        작품소개~~~~~~~~~~~~~~~~<br>
-                        작품소개~~~~~~~~~~~~~~~~<br>
-                        작품소개~~~~~~~~~~~~~~~~<br>
-                        작품소개~~~~~~~~~~~~~~~~<br>
-                        작품소개~~~~~~~~~~~~~~~~<br>
+                        ${product.proDescription }
                     </p>
                 </div>
 
-                <div class="p-5">
-                    배송안내~~~~~~~<br>
-                    배송안내~~~~~~~<br>
-                    배송안내~~~~~~~<br>
-                    배송안내~~~~~~~<br>
-                    배송안내~~~~~~~<br>
-                    배송안내~~~~~~~<br>
-                    배송안내~~~~~~~<br>
-                    배송안내~~~~~~~<br>
-                    배송안내~~~~~~~<br>
-                    배송안내~~~~~~~<br>
+                <div id="orderIntroduce" class="p-5">
+       	            <h1 class="mt-5" style="text-align:center;">ABOUT DELIVERY & SERVICE</h1>
+                	
+                	<div class="mt-5">
+	                    <h3>배송 안내</h3>
+	                    <p>- 배송비는 별도로 추가되지 않습니다.</h5>
+	                    
+	                    <h3>배송 기간</h3>
+	                    <p>
+		                    - MUZE의 제품은 결제 후 아티스트가 배송을 승인하는 대로 배송이 시작됩니다.<br>
+		                    - 아티스트가 배송을 승인한 후 평균 5~7일 소요됩니다.<br>
+		                    - 해외 보유 재고를 수입하여 제작되거나 대량 주문일 경우, 그 외 아티스트 사정에 따라<br>
+	                   	    &nbsp;&nbsp;&nbsp;7일~2주 정도 추가될 수 있으며, 별도 안내를 드립니다.
+	                    </p>
+	                    
+	                    <h3>취소 및 환불 안내</h3>
+	                    <p>
+	                    	- 작품의 주문 취소는 아티스트가 배송을 승인하기 전까지 가능합니다.<br>
+	                    	&nbsp;&nbsp;&nbsp;그 이후에는 환불 처리가 이루어집니다.<br>
+	                    	- 작품에 하자가 있을 시 상품 수령일로부터 7일 이내에 연락을 주셔야 환불 처리가 가능합니다.<br>
+	                    </p>
+	                    
+	                    <h3>교환 및 환불이 불가능한 경우</h3>
+	                    <p>
+	                    	- 구매자의 사용 또는 일부 소비에 의해 상품가치가 현저히 감소한 경우<br>
+	                    	- 밀봉 포장을 개봉했거나, 내부 포장재를 분실한 경우 또는 전면 보호 필름을 제거한 경우<br>
+	                    	 &nbsp;&nbsp;&nbsp;(상품 내용 확인을 위해 포장 박스를 개봉한 경우는 제외)<br>
+	                    	- 오랜 시간이 경과되어 재 판매가 어려울 정도로 상품 가치가 상실된 경우<br>
+	                    	- 기타 전자 상거래 등에서의 소비자 보호법에 관한 법률이 정하는 청약 철회 제한 사유에 해당하는 경우
+	                    </p>
+                	</div>
                 </div>
             </div>
         </div>
 
     </div>
-
-    <footer class="bg-light text-center text-lg-start">
-        <div style="background-color: rgb(238, 233, 233);">
-            <!-- Grid container -->
-            <div class="container p-4" style="background-color: rgb(238, 233, 233);">
-                <!--Grid row-->
-                <div class="row">
-                    <!--Left Grid column-->
-                    <div class="col-lg-6 col-md-12 mb-4 mb-md-0"
-                        style="text-align:center; background-color: rgb(238, 233, 233);">
-                        <h5 class="text-uppercase">Project</h5>
-                        <div style="text-align:center;"><img src="../../IMG/Common/logo.png" class="w-25 cul my-3">
-                            <br><br>
-                            <a class="text-dark" href="https://muze.com/">© 2022 Copyright: muze.com</a>
-                        </div>
-                    </div>
-                    <!--Left Grid column-->
-
-                    <!--Right Grid column-->
-                    <div class="col-lg-6 col-md-12 mb-4 mb-md-0"
-                        style="text-align:center; background-color: rgb(238, 233, 233);">
-                        <h5 class="text-uppercase">contact us</h5>
-                        <div class="cul my-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-telephone-fill" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
-                            </svg> &nbsp; 02-123-4567 &nbsp;
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-envelope-fill" viewBox="0 0 16 16">
-                                <path
-                                    d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z" />
-                            </svg> &nbsp; muzeofficial@gmail.com <br><br>
-                            <p>
-                                <a href="#!">이용안내</a> &nbsp;
-                                <a href="#!">이용약관</a> &nbsp;
-                                <a href="#!">개인정보처리방침</a>
-                            </p>
-                            <div>Business license : 706-20-01181 <br> Mall-order license : 2022-서울시-0334</div>
-                        </div>
-                    </div>
-                    <!--Right Grid column-->
-                </div>
-                <!--Grid row-->
-            </div>
-            <!-- Grid container -->
-    </footer>
-
-    <!-- Bootstrap JS -->
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
-        crossorigin="anonymous"></script>
+	
+	<script>
+			
+		
+		$("#quantitySelect").on("change", () => {
+			$("#totalPrice").text(${product.proPrice} * $("#quantitySelect").val());
+		});
+	</script>
 
 <jsp:include page="/views/common/footer.jsp"/>

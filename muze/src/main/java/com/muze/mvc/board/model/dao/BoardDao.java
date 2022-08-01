@@ -10,6 +10,8 @@ import java.util.List;
 import com.muze.mvc.board.model.vo.Board;
 import com.muze.mvc.board.model.vo.Product;
 import com.muze.mvc.common.util.PageInfo;
+import com.muze.mvc.member.model.vo.Artist;
+
 import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
 
 public class BoardDao {
@@ -29,6 +31,9 @@ public class BoardDao {
 			break;
 		case "writer":
 			query = "SELECT COUNT(*) FROM BOARD JOIN MEMBER ON(BOARD.BRD_WRITER_NO = MEMBER.MEMBER_NO) WHERE BRD_STATUS='Y' AND BRD_TYPE=? AND MEMBER_ID LIKE '%"+searchVal+"%'";
+			break;
+		case "proNo":
+			query = "SELECT COUNT(*) FROM BOARD JOIN PRODUCT ON(BOARD.BRD_PRO_NO = PRODUCT.PRO_NO) WHERE BRD_STATUS='Y' AND BRD_TYPE=? AND PRO_NO = " + Integer.parseInt(searchVal);
 			break;
 		default:
 			query = "SELECT COUNT(*) FROM BOARD WHERE BRD_STATUS='Y' AND BRD_TYPE=?";			
@@ -72,6 +77,9 @@ public class BoardDao {
 			break;
 		case "writer":
 			subquery = " AND MEMBER_ID LIKE '%" + searchVal + "%'";
+			break;
+		case "proNo":
+			subquery = " AND PRO_NO = " + Integer.parseInt(searchVal);
 			break;
 		default:
 			subquery = "";
@@ -174,6 +182,7 @@ public class BoardDao {
 				board.setBrdRenamedFileName(rs.getString("BRD_RENAMEDFILENAME"));
 				board.setBrdImg(rs.getString("BRD_IMG"));
 				list.add(board);
+				System.out.println(board);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -185,7 +194,7 @@ public class BoardDao {
 		return list;
 	}
 
-	public Board findBoardByNo(Connection connection, int no, String type) {
+	public Board findBoardByBrdNo(Connection connection, int no, String type) {
 		Board board = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -355,7 +364,7 @@ public class BoardDao {
 		return result;
 	}
 
-	public static List<Product> findProductListByMemberNo(Connection connection, int memberNo) {
+	public static List<Product> findProductListByOrdersMemberNo(Connection connection, int memberNo) {
 		List<Product> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -372,10 +381,13 @@ public class BoardDao {
 				+ " PRO_DESCRIPTION,"
 				+ " PRO_TYPE"
 				+ " FROM PRODUCT"
+				+ " JOIN MEMBER ON (PRODUCT.PRO_ARTIST_NO = MEMBER.MEMBER_NO)"
+				+ " WHERE PRO_NO IN ("
+				+ " SELECT DISTINCT PRODUCT.PRO_NO FROM PRODUCT"
 				+ " JOIN ORDERS ON (PRODUCT.PRO_NO = ORDERS.PRO_NO)"
 				+ " JOIN MEMBER ON (PRODUCT.PRO_ARTIST_NO = MEMBER.MEMBER_NO)"
 				+ " JOIN MEMBER ON (ORDERS.MEMBER_NO = MEMBER.MEMBER_NO)"
-				+ " WHERE ORDERS.MEMBER_NO = ?";
+				+ " WHERE ORDERS.MEMBER_NO = ?)";
 
 		
 
@@ -413,7 +425,7 @@ public class BoardDao {
 		return list;
 	}
 
-	public Product findProductByNo(Connection connection, int no) {
+	public Product findProductByProNo(Connection connection, int no) {
 		Product product = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -487,6 +499,102 @@ public class BoardDao {
 		}
 		
 		return result;
+	}
+
+	public List<Product> findProductListByArtistNo(Connection connection, int proArtistNo) {
+		List<Product> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String query = "SELECT PRO_NO,"
+				+ " PRO_NAME,"
+				+ " PRO_SIZE,"
+				+ " PRO_PRICE,"
+				+ " PRO_QUANTITY,"
+				+ " PRO_IMG,"
+				+ " PRO_ARTIST_NO,"
+				+ " MEMBER.MEMBER_NAME,"
+				+ " PRO_REG_DATE,"
+				+ " PRO_DESCRIPTION,"
+				+ " PRO_TYPE"
+				+ " FROM PRODUCT"
+				+ " JOIN MEMBER ON (PRODUCT.PRO_ARTIST_NO = MEMBER.MEMBER_NO)"
+				+ " WHERE PRO_ARTIST_NO = ?";
+
+		
+
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setInt(1, proArtistNo);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Product product = new Product();
+				
+				product.setProNo(rs.getInt("PRO_NO"));
+				product.setProName(rs.getString("PRO_NAME"));
+				product.setProSize(rs.getString("PRO_SIZE"));
+				product.setProPrice(rs.getInt("PRO_PRICE"));
+				product.setProQuantity(rs.getInt("PRO_QUANTITY"));
+				product.setProImg(rs.getString("PRO_IMG"));
+				product.setProArtistNo(rs.getInt("PRO_ARTIST_NO"));
+				product.setProArtistName(rs.getString("MEMBER_NAME"));
+				product.setProRegDate(rs.getDate("PRO_REG_DATE"));
+				product.setProDescription(rs.getString("PRO_DESCRIPTION"));
+				product.setProType(rs.getString("PRO_TYPE"));
+				
+				list.add(product);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}		
+		
+		return list;
+	}
+
+	public Artist findArtistByProNo(Connection connection, int proNo) {
+		Artist artist = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "SELECT ARTIST_NO,"
+						   + " ARTIST_IMG,"
+				           + " ARTIST_INTRODUCE,"
+				           + " BUS_NAME,"
+				           + " BUS_LICENSE"
+				           + " FROM ARTIST_DETAIL"
+				           + " JOIN PRODUCT ON (ARTIST_DETAIL.ARTIST_NO = PRODUCT.PRO_ARTIST_NO)"
+				           + " WHERE PRO_NO = ?";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setInt(1, proNo);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				artist = new Artist();
+				
+				artist.setArtistNo(rs.getInt("ARTIST_NO"));
+				artist.setArtistImg(rs.getString("ARTIST_IMG"));
+				artist.setArtistIntroduce(rs.getString("ARTIST_INTRODUCE"));
+				artist.setBusName(rs.getString("BUS_NAME"));
+				artist.setBusLicense(rs.getString("BUS_LICENSE"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return artist;
 	}
 
 }
