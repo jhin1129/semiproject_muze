@@ -20,11 +20,11 @@
             <table class="table table-hover" style="font-size: 1em;">
                 <thead>
                     <tr>
-                        <th class="py-0.5" style="width: 10%;">번호</th>
-                        <th class="py-0.5" style="width: 50%;">제목</th>
-                        <th class="py-0.5" style="width: 15%;">작성자</th>
-                        <th class="py-0.5" style="width: 15%;">날짜</th>
-                        <th class="py-0.5" style="width: 10%;">조회수</th>
+                        <th class="py-0.5" style="width: 10%; text-align: center;">번호</th>
+                        <th class="py-0.5" style="width: 40%; text-align: center;">제목</th>
+                        <th class="py-0.5" style="width: 15%; text-align: center;">답변 상태</th>
+                        <th class="py-0.5" style="width: 15%; text-align: center;">작성자</th>
+                        <th class="py-0.5" style="width: 20%; text-align: center;">날짜</th>
                     </tr>
                 </thead>
 
@@ -39,11 +39,14 @@
                 	<c:if test="${ not empty list }">
                 		<c:forEach var="board" items="${ list }">
 	                    <tr>
-	                        <td>${ board.rowNum }</td>
-	                        <td><a style="display: block;" href="${ path }/support/view?brdNo=${ board.brdNo }&&type=${ type }">${ board.brdTitle }</a></td>
-	                        <td>${ board.brdWriterId }</td>
-	                        <td>${ board.brdDate }</td>
-	                        <td>${ board.brdReadCount }</td>
+	                        <td style="text-align: center;">${ board.rowNum }</td>
+	                        <td style="text-align: center;"><a style="display: block;" href="${ path }/support/view?brdNo=${ board.brdNo }&&type=${ type }">${ board.brdTitle }</a></td>
+	                        <td style="text-align: center;">
+	                        <c:if test="${ not empty board.brdRepContent }">[답변 완료]</c:if>
+	                        <c:if test="${ empty board.brdRepContent }"><a href=""></a></c:if>
+	                        </td>
+	                        <td style="text-align: center;">${ board.brdWriterId }</td>
+	                        <td style="text-align: center;">${ board.brdDate }</td>
 	                    </tr>
 	                    </c:forEach>
 					</c:if>
