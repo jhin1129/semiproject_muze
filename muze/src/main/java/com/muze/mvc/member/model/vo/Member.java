@@ -11,25 +11,26 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Member {
-	private int memberNo;
+	int memberNo;
 	
-	private String memberId;
+	String memberId;
 	
-	private String memberPassword;
+	String memberPassword;
 	
-	private String memberRole;
+	String memberRole;
 	
-	private String memberName;
+	String memberName;
 	
-	private String memberPhonenumber;
+	String memberPhonenumber;
 	
-	private String memberEmail;
+	String memberEmail;
 	
-	private String memberAddress;
+	String memberAddress;
 	
-	private int point;
+	int point;
 	
-	private Date enrollDate;
+	Date enrollDate;
 	
-	private String ismember;
+	String ismember;
+
 }

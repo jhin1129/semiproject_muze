@@ -10,20 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.muze.mvc.mypage.model.service.MyOrderService;
 
-import oracle.net.aso.d;
-
 @WebServlet("/mypage/cancel")
-public class CancelServlet extends HttpServlet {
+public class MyCancelServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public CancelServlet() {
+    public MyCancelServlet() {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int result = 0;
 		int no = Integer.parseInt(request.getParameter("no"));
 		
-		System.out.println(" 넘버값 " + no);
+//		System.out.println("넘버값 " + no);
 		
     	result = new MyOrderService().orderCancel(no);
 

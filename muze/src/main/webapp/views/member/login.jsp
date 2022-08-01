@@ -10,9 +10,15 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
-
 <!-- Login CSS -->
 <link rel="stylesheet" href="${path}/resources/css/login/Login.css">
+
+<style type="text/css">
+.error {
+font-size : 13px;
+float:left;
+}
+</style>
 
 <!-- 내용 전체 컨테이너 -->
 <div class="container">
@@ -36,7 +42,7 @@
                         	<input type="text" id="memId" name="memId" placeholder="아이디" value="${ empty cookie.saveId ? '' : cookie.saveId.value }" aria-required="true" required>
                         	<input type="password" id="memPw" name="memPw" placeholder="비밀번호"  aria-required="true" required>
                       	</div>
-                    	<button type="submit" onclick="return loginCheck()" >로그인</button>
+                    	<button type="submit" >로그인</button>
                     </div>
                     <div class="id_chk">
                     	<span class="form_element">
@@ -165,7 +171,7 @@
 				$.post(form.action, $(form).serializeObject()).done(function (data, textStatus, jqXhr) {
 					console.log(data);
 					if (data.result == 0) {
-						location.replace('../mypage/order_view.php?orderNo=' + data.orderNo);
+						location.replace('${ path }/myPage' + data.orderNo);
 					} else {
 						$('.js_caution_msg2').empty().html("주문자명과 주문번호가 일치하는 주문이 존재하지 않습니다. 다시 입력해 주세요.<br><span>주문번호와 비밀번호를 잊으신 경우, 고객센터로 문의하여 주시기 바랍니다.</span>");
 					}

@@ -18,7 +18,7 @@
         <!-- 왼쪽 그리드 -->
         <div class="col-sm-2" >
         	<!--사이드 메뉴 -->
-        	<jsp:include page="/views/mypage/side_navi.jsp" flush="false"/>
+        	<jsp:include page="/views/mypage/welcome_side.jsp" flush="false"/>
         </div>
 
         <!-- 오른쪽 그리드 -->
@@ -107,4 +107,4 @@
     <!-- 내용 전체 컨테이너 끝 -->
 
 	<!-- footer -->
-	<jsp:include page="/views/mypage/myfooter.jsp"/>
+	<jsp:include page="/views/mypage/welcome_footer.jsp"/>

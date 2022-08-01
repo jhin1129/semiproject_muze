@@ -19,7 +19,7 @@
         <!-- 왼쪽 그리드 -->
         <div class="col-sm-2" >
         	<!--사이드 메뉴 -->
-        	<jsp:include page="/views/mypage/side_navi.jsp" flush="false"/>
+        	<jsp:include page="/views/mypage/welcome_side.jsp" flush="false"/>
         </div>
 
         <!-- 오른쪽 그리드 -->
@@ -29,7 +29,7 @@
             <!-- 첫번째 행 -->
 			<jsp:include page="/views/mypage/welcome_row.jsp" flush="false"/>
             <!-- 두번째 행 -->
-			<jsp:include page="/views/mypage/order_status.jsp" flush="false"/>
+			<jsp:include page="/views/mypage/welcome_status.jsp" flush="false"/>
             <!-- 세번째 행 -->
             <div class="row">
               <div class="col-sm-12" style="margin-top: 50px;">
@@ -93,4 +93,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 
 	<!-- footer -->
-	<jsp:include page="/views/mypage/myfooter.jsp"/>
+	<jsp:include page="/views/mypage/welcome_footer.jsp"/>

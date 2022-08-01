@@ -8,7 +8,9 @@ import static com.muze.mvc.common.jdbc.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.Map;
 
+import com.muze.mvc.member.model.dao.ArtistDao;
 import com.muze.mvc.member.model.dao.MemberDao;
+import com.muze.mvc.member.model.vo.Artist;
 import com.muze.mvc.member.model.vo.Member;
 
 public class MemberService {
@@ -35,7 +37,7 @@ public class MemberService {
 	}
 
 	// 회원가입
-	public int save(Member member) {
+	public int saveMember(Member member) {
 		int result = 0;
 		Connection connection = getConnection();
 		
@@ -79,16 +81,13 @@ public class MemberService {
 	// 아이디 찾기
 	public Member findId(String memberName, String memberEmail) {
 		Connection connection = getConnection();
-		Member member = null;
+
+		Member member = new MemberDao().findId(connection, memberName, memberEmail);
 		
-		try {
-			member = MemberDao.findId(connection, memberName, memberEmail);
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			close(connection);
-		}
+		close(connection);
+		
 		return member;
+	
 	}
 	
 
@@ -163,5 +162,15 @@ public class MemberService {
 			close(conn);
 		}
 		return result;
+	}
+
+	// 로그인시 아티스트 정보 받아오기
+	public Artist getArtistByNo(int memberNo) {
+		Connection conn = getConnection();
+		Artist artist = null;
+		
+		artist = new ArtistDao().findArtistByNo(conn, memberNo);
+		
+		return artist;
 	}
 }

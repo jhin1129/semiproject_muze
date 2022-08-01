@@ -18,7 +18,7 @@
         <!-- 왼쪽 그리드 -->
         <div class="col-sm-2" >
         	<!--사이드 메뉴 -->
-        	<jsp:include page="/views/mypage/side_navi.jsp" flush="false"/>
+        	<jsp:include page="/views/mypage/welcome_side.jsp" flush="false"/>
         </div>
 
         <!-- 오른쪽 그리드 -->
@@ -28,7 +28,7 @@
             <!-- 첫번째 행 -->
             <div class="row">
               <div class="col-sm-12" style="margin-top: 40px;">
-                  <span id="mySpan01">문의 내역</span> 
+                  <span id="mySpan01">나의 게시글</span> 
                   <hr style="margin-bottom: 0;">
               </div>
             </div>
@@ -41,7 +41,9 @@
                     <tr>
                         <th class="my_th" id="br_th01"><center>번호</center></th>
                         <th class="my_th" id="br_th02"><center>제목</center></th>
+                        <th class="my_th" id="br_th03"><center>작성자</center></th>
                         <th class="my_th" id="br_th04"><center>날짜</center></th>
+                        <th class="my_th" id="br_th05"><center>조회수</center></th>
                     </tr>
                 </thead>
 				
@@ -49,7 +51,7 @@
                 	<c:if test="${ empty list }">
                 		<tr>
                 			<td colspan="6">
-                				조회된 게시글이 없습니다.
+                				작성된 게시글이 존재하지 않습니다.
                 			</td>
                			</tr>
                 	</c:if>
@@ -58,7 +60,9 @@
 	                		<tr>
 		                        <td id="br_td01">${ board.rowNum }</td>
 		                        <td id="br_td01"><a href="${ path }/board/view?no=${ board.brdNo }&type=${ type }">${ board.brdTitle }</a></td>
+		                        <td id="br_td01">${ board.brdWriterId }</td>
 		                        <td id="br_td01">${ board.brdDate }</td>
+		                        <td id="br_td01">${ board.brdReadCount }</td> 
 	                    	</tr>
                 		</c:forEach>
                 	</c:if>
@@ -112,4 +116,4 @@
     <!-- 내용 전체 컨테이너 끝 -->
     
 	<!-- footer -->
-	<jsp:include page="/views/mypage/myfooter.jsp"/>
+	<jsp:include page="/views/mypage/welcome_footer.jsp"/>

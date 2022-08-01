@@ -32,16 +32,16 @@ public class FindIdServlet extends HttpServlet {
 		
 		
 		if (member != null) {
+			// 아이디 보내주기
 			member = sendEmail.sendEmailId(member);
 			
 			request.getSession().setAttribute("msg", "아이디가 이메일로 발송되었습니다.");
-			response.sendRedirect(request.getContextPath()+"/");
+			request.setAttribute("location", "/");
 		} else {
 			request.getSession().setAttribute("msg", "존재하지 않는 아이디입니다.");
-			// 뒤로가기
-			String url = request.getHeader("Referer");
-			response.sendRedirect(url);
-		};
+			request.setAttribute("location", "/member/find_id");
+		}
+		request.getRequestDispatcher("/views/member/msg.jsp").forward(request, response);
 	}
 
 }
