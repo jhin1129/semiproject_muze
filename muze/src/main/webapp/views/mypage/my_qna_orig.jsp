@@ -23,7 +23,7 @@
         <!-- 왼쪽 그리드 -->
         <div class="col-sm-2" >
         	<!--사이드 메뉴 -->
-        	<jsp:include page="/views/mypage/side_navi.jsp" flush="false"/>
+        	<jsp:include page="/views/mypage/welcome_side.jsp" flush="false"/>
         </div>
 
         <!-- 오른쪽 그리드 -->
@@ -34,71 +34,85 @@
             <div class="row">
               <div class="col-sm-12" style="margin-top: 40px;">
                 <form style="margin-bottom: 3px;">
-                  <span id="mySpan01">상품문의</span> 
+                  <span id="mySpan01">1 : 1 문의</span> 
                   <hr style="margin-bottom: 10px;">
                 </form>
               </div>
             </div>
             
             <!-- 두번째 행 -->
-            <div class="row">
-              <div class="col-sm-12" style="margin-top: 30px;">
-                <form id="myForm01">
-                  <span id="mySpan01"></span> 
-                </form>
-                <!-- 기간별 검색 -->
-                <fieldset class="mySearchDate">
-                  <!-- 버튼 -->
-                  <div class= "btnsearch" role="group" aria-label="First group">
-                    <button type="button" class="btn btn-outline-secondary">오늘</button>
-                    <button type="button" class="btn btn-outline-secondary">7일</button>
-                    <button type="button" class="btn btn-outline-secondary">15일</button>
-                    <button type="button" class="btn btn-outline-secondary">1개월</button>
-                    <button type="button" class="btn btn-outline-secondary">3개월</button>
-                    <button type="button" class="btn btn-outline-secondary">1년</button>
-
-                    <!-- 날짜 -->
-                    <input type="text" class="datepicker" id="datepicker1" >
-                    ~
-                    <input type="text" class="datepicker" id="datepicker2" >
-                    
-                    <!-- 조회버튼 -->
-                    <button type="button" class="btn btn-outline-secondary">조회</button>
-                  </div>
-                </fieldset>
-                </div>
-              </div>
             
-            <!-- 세번째 행 -->
+<!--             세번째 행
             <div class="row">
               <div class="col-sm-12" style="margin-top: 50px;">
-                <!-- 게시글 조회 테이블 -->
-                <table class="qnatable">
+                  게시글 조회 테이블
+                  <table class="qnatable">
                     <thead id="my_thead01">
-                      <tr>
-                        <th class="my_th" id="my_th05">문의 날짜</th>
+                    <tr>
+                      <th class="my_th" id="my_th05">문의 날짜</th>
                       <th class="my_th" id="my_th05">카테고리</th>
                       <th class="my_th" id="my_th02">제목</th>
                       <th class="my_th" id="my_th05">문의 상태</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <!-- <tr>
-                      <td id="my_td01">2022/07/06 </td>
-                      <td id="my_td01"></td>
-                      <td id="my_td01"></td>
-                      <td id="my_td01"></td>
-                    </tr> -->
                     <tr>
-                      <td id="my_td00" colspan="5">
-                        조회 내역이 없습니다.
-                      </td>
+                      <td id="my_td01">2022/07/06 </td>
+                      <td id="my_td01">배송</td>
+                      <td id="my_td01">배송이 안와요...</td>
+                      <td id="my_td01">답변 완료</td>
                     </tr>
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+            세번째 행 끝 -->
+            
+            
+            
+<!--             세번째 행 -->
+                <!-- 조회 테이블 -->
+                <br>
+                <table class="ordertable">
+                  <thead id="my_thead01">
+                    <tr>
+                      <th class="my_th" id="my_th05">문의 날짜</th>
+                      <th class="my_th" id="my_th05">카테고리</th>
+                      <th class="my_th" id="my_th02">제목</th>
+                      <th class="my_th" id="my_th05">문의 상태</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+					<c:if test="${ empty list }">
+                  	 	<tr>
+                      		<td id="my_td00" colspan="5">
+                       			조회 내역이 없습니다.
+                      		</td>
+                    	</tr>
+                   	</c:if>
+                   	<c:if test="${ not empty list }">
+                   		<c:forEach var="refundByDate" items="${ list }">
+		                    <tr>
+		                      <td id="my_td01">${ refundByDate.orderDate } <br>
+		                        <a href="${ path }/mypage/orderdetail?no=${ refundByDate.orderNo }" id="my_td02">${ refundByDate.orderNo }</a> <br>
+		                      </td> 
+		                      <td id="my_td01">${ refundByDate.proName }</td>
+		                      <td id="my_td01">${ refundByDate.proPrice }원 / ${ refundByDate.orderAmount }개</td>
+		                      <td id="my_td01">${ refundByDate.orderStatus }</td>
+		                      <td id="my_td01"></td>
+		                    </tr>
+	                    </c:forEach>
+                    </c:if>
                   </tbody>
                 </table>
               </div>
             </div>
-            <!-- 세번째 행 끝 -->
+           <!-- 세번째 행 끝 -->
+            
+            
+            
+            
           </div>
           <!-- 컨테이너 끝 -->
       </div>
@@ -112,4 +126,4 @@
     <!-- <script src="${path}/resources/js/Mypage_02.js"></script> -->
 
 	<!-- footer -->
-	<jsp:include page="/views/mypage/myfooter.jsp"/>
+	<jsp:include page="/views/mypage/welcome_footer.jsp"/>

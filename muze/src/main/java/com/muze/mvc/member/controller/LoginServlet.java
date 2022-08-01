@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.muze.mvc.member.model.service.MemberService;
+import com.muze.mvc.member.model.vo.Artist;
 import com.muze.mvc.member.model.vo.Member;
 
 @WebServlet(name = "login", urlPatterns = "/member/login")
@@ -32,12 +33,17 @@ public class LoginServlet extends HttpServlet {
 		String memPw = request.getParameter("memPw");
 		String saveId = request.getParameter("saveId");
 		
-		System.out.println(memId + memPw);
-		
 		Member loginMember = new MemberService().login(memId, memPw);
+
 		
 		if(loginMember != null) {
 			session = request.getSession();
+			
+			Artist artist = new MemberService().getArtistByNo(loginMember.getMemberNo());
+			
+			System.out.println(loginMember);
+			System.out.println(artist);
+			
 			
 			if (saveId != null) {
 				Cookie cookie = new Cookie("saveId", memId);
@@ -52,6 +58,7 @@ public class LoginServlet extends HttpServlet {
 			}
 			
 			session.setAttribute("loginMember", loginMember);
+			session.setAttribute("artist", artist);
 			response.sendRedirect(request.getContextPath() + "/");
 		} else {
 			request.setAttribute("msg", "아이디나 비밀번호가 일치하지 않습니다.");

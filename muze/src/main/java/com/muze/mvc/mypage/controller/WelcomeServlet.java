@@ -39,8 +39,6 @@ public class WelcomeServlet extends HttpServlet {
 	    	// 1st row
 	    	Welcome welcomeRow = null;   	
 	    	welcomeRow = new WelcomeService().getWelcomeRow(member);
-	    	System.out.println(welcomeRow);
-	    	
 	    	
 	    	// 2nd row
 			List<MyOrder> status = null;

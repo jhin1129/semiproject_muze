@@ -15,8 +15,8 @@
 	       <li id="mylist"><a id="sublist" href="${ path }/mypage/refund_list">- 환불 / 입금 내역</a></li><br>
 	     <p id="myListMain"> 회원 정보 </p> 
 	       <li id="mylist"><a id="sublist" href="${ path }/mypage/mileage">- 회원 혜택</a></li>
-	       <li id="mylist"><a id="sublist" href="${ path }/mypage/checkinfo">- 회원 정보 변경 </a></li>
-	       <li id="mylist"><a id="sublist" href="${ path }/mypage/checkinfo">- 회원 탈퇴 </a></li><br>
+	       <li id="mylist"><a id="sublist" href="${ path }/mypage/checkpwd?type=UPDATE">- 회원 정보 변경 </a></li>
+	       <li id="mylist"><a id="sublist" href="${ path }/mypage/checkpwd?type=DELETE">- 회원 탈퇴 </a></li><br>
 	     <p id="myListMain"> 문의 내역 </p> 
 	       <li id="mylist"><a id="sublist" href="${ path }/mypage/qna">- 1 : 1 문의</a></li><br>
 	     <p id="myListMain"> 내가 쓴 글</p> 

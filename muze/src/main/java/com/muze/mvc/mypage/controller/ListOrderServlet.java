@@ -16,11 +16,11 @@ import com.muze.mvc.mypage.model.service.WelcomeService;
 import com.muze.mvc.mypage.model.vo.MyOrder;
 import com.muze.mvc.mypage.model.vo.Welcome;
 
-@WebServlet("/mypage/cancel_list")
-public class CancelListServlet extends HttpServlet {
+@WebServlet("/mypage/order_list")
+public class ListOrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public CancelListServlet() {
+    public ListOrderServlet() {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,25 +38,26 @@ public class CancelListServlet extends HttpServlet {
 	    	welcomeRow = new WelcomeService().getWelcomeRow(member);
 			request.setAttribute("welcomeRow", welcomeRow);
 			
-			// 2. 검색
+			// 검색
 			List<MyOrder> list = null;
 			
 			// 매개 값 (검색 날짜) 가져오기 
 			String dateFrom = request.getParameter("dateFrom");
 			String dateTo = request.getParameter("dateTo");
-	
-			// 처리 결과 
-			list = new MyOrderService().cancelByDate(dateFrom, dateTo, member);
 			
+			// 처리 결과 
+			list = new MyOrderService().orderByDate(dateFrom, dateTo, member);
+	
 			request.setAttribute("list", list);
-	    	request.getRequestDispatcher("/views/mypage/cancel_list.jsp").forward(request, response);
+	    	request.getRequestDispatcher("/views/mypage/list_order.jsp").forward(request, response);
+    	
     	} else {
     		request.setAttribute("msg", "로그인이 필요한 서비스입니다.");
 			request.setAttribute("location", "/");		
     		
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
     	}
-
+    	
 	}
 
 }

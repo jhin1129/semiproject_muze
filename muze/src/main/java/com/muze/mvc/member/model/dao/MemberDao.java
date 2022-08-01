@@ -1,12 +1,12 @@
 package com.muze.mvc.member.model.dao;
 
+import static com.muze.mvc.common.jdbc.JDBCTemplate.close;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
-
-import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
 
 import com.muze.mvc.member.filter.MemberException;
 import com.muze.mvc.member.model.vo.Member;
@@ -14,43 +14,43 @@ import com.muze.mvc.member.model.vo.Member;
 public class MemberDao {	
 	
 	// 로그인
-	public Member findMemberById(Connection connection, String memId) {
-		Member member = null;
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		String query = "SELECT * FROM MEMBER WHERE MEMBER_ID=? AND ISMEMBER='Y'";
-		
-		try {
-			pstm = connection.prepareStatement(query);
+		public Member findMemberById(Connection connection, String memId) {
+			Member member = null;
+			PreparedStatement pstm = null;
+			ResultSet rs = null;
+			String query = "SELECT * FROM MEMBER WHERE MEMBER_ID=? AND ISMEMBER='Y'";
 			
-			pstm.setString(1, memId);
-			rs = pstm.executeQuery();
-			
-			if(rs.next()) {
-				member = new Member();
+			try {
+				pstm = connection.prepareStatement(query);
 				
-				member.setMemberNo(rs.getInt("MEMBER_NO"));
-				member.setMemberId(rs.getString("MEMBER_ID"));
-				member.setMemberPassword(rs.getString("MEMBER_PASSWORD"));
-				member.setMemberRole(rs.getString("MEMBER_ROLE"));
-				member.setMemberName(rs.getString("MEMBER_NAME"));
-				member.setMemberPhonenumber(rs.getString("MEMBER_PHONE_NUMBER"));
-				member.setMemberEmail(rs.getString("MEMBER_EMAIL"));
-				member.setMemberAddress(rs.getString("MEMBER_ADDRESS"));
-				member.setPoint(rs.getInt("POINT"));
-				member.setEnrollDate(rs.getDate("ENROLL_DATE"));
-				member.setIsmember(rs.getString("ISMEMBER"));
+				pstm.setString(1, memId);
+				rs = pstm.executeQuery();
+			
+				if(rs.next()) {
+					member = new Member();
+					
+					member.setMemberNo(rs.getInt("MEMBER_NO"));
+					member.setMemberId(rs.getString("MEMBER_ID"));
+					member.setMemberPassword(rs.getString("MEMBER_PASSWORD"));
+					member.setMemberRole(rs.getString("MEMBER_ROLE"));
+					member.setMemberName(rs.getString("MEMBER_NAME"));
+					member.setMemberPhonenumber(rs.getString("MEMBER_PHONE_NUMBER"));
+					member.setMemberEmail(rs.getString("MEMBER_EMAIL"));
+					member.setMemberAddress(rs.getString("MEMBER_ADDRESS"));
+					member.setPoint(rs.getInt("POINT"));
+					member.setEnrollDate(rs.getDate("ENROLL_DATE"));
+					member.setIsmember(rs.getString("ISMEMBER"));
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstm);
 			}
 			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstm);
+			return member;
 		}
-		
-		return member;
-	}
 
 	// 회원가입
 	public int insertMember(Connection connection, Member member) {
@@ -105,7 +105,8 @@ public class MemberDao {
 		return result;
 	}
 
-	public static Member findId(Connection connection, String memberName, String memberEmail) {
+	// 아이디 찾기
+	public Member findId(Connection connection, String memberName, String memberEmail) {
 		Member member = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
@@ -117,6 +118,7 @@ public class MemberDao {
 			
 			pstm.setString(1, memberName);
 			pstm.setString(2, memberEmail);
+			
 			rs = pstm.executeQuery();
 			
 			if(rs.next()) {

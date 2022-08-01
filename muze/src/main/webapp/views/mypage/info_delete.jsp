@@ -18,7 +18,7 @@
         <!-- 왼쪽 그리드 -->
         <div class="col-sm-2" >
         	<!--사이드 메뉴 -->
-        	<jsp:include page="/views/mypage/side_navi.jsp" flush="false"/>
+        	<jsp:include page="/views/mypage/welcome_side.jsp" flush="false"/>
         </div>
 
         <!-- 오른쪽 그리드 -->
@@ -37,6 +37,7 @@
 
             <!-- 두번째 행 -->
             <div class="row">
+            
               <div class="col-sm-12" style="margin-top: 30px;">
                 <form style="margin-bottom: 50px;">
                   <span id="mySpan01">01. 회원 탈퇴 안내</span> 
@@ -69,10 +70,10 @@
                         <th class="my_th" id="my_th01" >탈퇴사유</th>
                         <td id="my_td03" rowspan="2">
                           <div style="padding-top: 10px;">
-                            <label><input type="checkbox" value="sati-service"> 교환 / 환불 / 반품 불만 &nbsp &nbsp;</label>
+                            <label><input type="checkbox" value="sati-service"> 교환 / 환불 / 반품 불만 &nbsp; &nbsp;</label>
                             <label><input type="checkbox" value="sati-price"> 상품가격 불만 &nbsp; &nbsp;</label>
                             <label><input type="checkbox" value="sati-deliv"> 배송 불만</label> <br>
-                            <label><input type="checkbox" value="sati-service"> 고객서비스 불만 &nbsp &nbsp;</label>
+                            <label><input type="checkbox" value="sati-service"> 고객서비스 불만 &nbsp; &nbsp;</label>
                             <label><input type="checkbox" value="sati-visit"> 방문 빈도가 낮음 &nbsp; &nbsp;</label>
                             <label><input type="checkbox" value="sati-privacy"> 개인 정보유출 우려</label>
                           </div>
@@ -90,8 +91,7 @@
                   </table>
                   <!-- 테이블 끝 -->
                   <p style="text-align: center; margin-top: 10px; margin-left: 70px;">
-                    <!-- <button type="button" class="btn btn-outline-secondary" style="background-color: rgba(238, 233, 233, 0.6); color: black;">탈퇴</button> -->
-                    <button type="button" class="btn btn-outline-secondary">탈퇴</button>
+                    <button type="button" class="btn btn-outline-secondary" id="btnDelete" value="탈퇴">탈퇴</button>
                   </p>
                 </form>
               </div>
@@ -104,10 +104,15 @@
     </div>
     </div>
     <!-- 내용 전체 컨테이너 끝 -->
-
-    <!-- Java Script -->
-    <!-- My JS -->
-    <!-- <script src="${path}/resources/js/Mypage_02.js"></script> -->
-
+	<script>
+		$(document).ready(()=>{
+			$("#btnDelete").on("click", ()=>{
+				if(confirm("확인을 누르면 탈퇴가 완료됩니다.")){
+					location.replace("${ path }/mypage/deleteinfo");
+				}
+			});
+		});
+	
+	</script>
 	<!-- footer -->
-	<jsp:include page="/views/mypage/myfooter.jsp"/>
+	<jsp:include page="/views/mypage/welcome_footer.jsp"/>

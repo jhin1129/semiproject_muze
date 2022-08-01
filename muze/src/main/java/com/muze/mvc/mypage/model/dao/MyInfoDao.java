@@ -54,4 +54,56 @@ public class MyInfoDao {
 		return list;
 	}
 
+	// 회원 정보 수정 
+	public int updateMember(Connection connection, Member member) {
+		int result = 0;
+		PreparedStatement pstm = null;
+		String query = "UPDATE MEMBER "
+						+ "SET MEMBER_PASSWORD=?, MEMBER_NAME=?, MEMBER_PHONE_NUMBER=?, MEMBER_EMAIL=?, MEMBER_ADDRESS=? "
+						+ "WHERE MEMBER_NO = ? ";
+		
+		try {
+			pstm = connection.prepareStatement(query);
+			
+			pstm.setString(1, member.getMemberPassword());
+			pstm.setString(2, member.getMemberName());
+			pstm.setString(3, member.getMemberPhonenumber());
+			pstm.setString(4, member.getMemberEmail());
+			pstm.setString(5, member.getMemberAddress());
+			pstm.setInt(6, member.getMemberNo());
+			
+			result = pstm.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+		}
+		
+		return result;
+	}
+
+	// 회원 탈퇴
+	public int updateMemberStatus(Connection connection, int memberNo, String n) {
+		int result = 0;
+		PreparedStatement pstm = null;
+		String query = "UPDATE MEMBER SET ISMEMBER=? WHERE MEMBER_NO=?";
+		
+		try {
+			pstm = connection.prepareStatement(query);
+			
+			pstm.setString(1, n);
+			pstm.setInt(2, memberNo);
+			
+			result = pstm.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+		}
+		
+		return result;
+	}
+
 }

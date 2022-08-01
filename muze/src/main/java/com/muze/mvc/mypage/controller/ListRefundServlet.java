@@ -11,22 +11,22 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.muze.mvc.member.model.vo.Member;
-import com.muze.mvc.mypage.model.service.MyInfoService;
+import com.muze.mvc.mypage.model.service.MyOrderService;
 import com.muze.mvc.mypage.model.service.WelcomeService;
-import com.muze.mvc.mypage.model.vo.MyMileage;
+import com.muze.mvc.mypage.model.vo.MyOrder;
 import com.muze.mvc.mypage.model.vo.Welcome;
 
-@WebServlet("/mypage/mileage")
-public class MileageServlet extends HttpServlet {
+@WebServlet("/mypage/refund_list")
+public class ListRefundServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public MileageServlet() {
+    public ListRefundServlet() {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 로그인 체크 & 본인 게시글 여부 확인 
+    	// 로그인 체크 & 본인 게시글 여부 확인 
 		HttpSession session = request.getSession(false);
-		Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
+    	Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
 		
     	if (loginMember != null) {
     		// 로그인 객체의 PK값을 넘기기 위한 객체 생성 
@@ -34,28 +34,24 @@ public class MileageServlet extends HttpServlet {
 			member.setMemberNo(loginMember.getMemberNo());			
 			member.setMemberName(loginMember.getMemberName());
 			request.setAttribute("member", member);
-	    	
+		
 			// 1st row
 	    	Welcome welcomeRow = null;   	
 	    	welcomeRow = new WelcomeService().getWelcomeRow(member);
 			request.setAttribute("welcomeRow", welcomeRow);
 			
 			// 검색
-			List<MyMileage> list = null;
+			List<MyOrder> list = null;
 			
 			// 매개 값 (검색 날짜) 가져오기 
 			String dateFrom = request.getParameter("dateFrom");
 			String dateTo = request.getParameter("dateTo");
 			
 			// 처리 결과 
-			list = new MyInfoService().infoMileage(dateFrom, dateTo, member);
-			
-			list.forEach(System.out::println);
-			
+			list = new MyOrderService().refundByDate(dateFrom, dateTo, member);
 			
 			request.setAttribute("list", list);
-	    	request.getRequestDispatcher("/views/mypage/mileage.jsp").forward(request, response);
-	    	
+	    	request.getRequestDispatcher("/views/mypage/list_refund.jsp").forward(request, response);
     	} else {
     		request.setAttribute("msg", "로그인이 필요한 서비스입니다.");
 			request.setAttribute("location", "/");		

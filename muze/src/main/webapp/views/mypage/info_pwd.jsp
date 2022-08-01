@@ -18,7 +18,7 @@
         <!-- 왼쪽 그리드 -->
         <div class="col-sm-2" >
         	<!--사이드 메뉴 -->
-        	<jsp:include page="/views/mypage/side_navi.jsp" flush="false"/>
+        	<jsp:include page="/views/mypage/welcome_side.jsp" flush="false"/>
         </div>
 
         <!-- 오른쪽 그리드 -->
@@ -48,8 +48,20 @@
             <div class="row">
               <div class="col-sm-12" style="margin-top: 50px;">
                 <center>
-                  <input type="password" style="border: 1px solid lightgrey; border-radius: 0%; height: 34px;"">
-                  	<button type="submit" class="btn btn-outline-secondary" id="srhbtn7">확인</button>
+                 <c:if test="${ type == 'DELETE' }">
+                	<form name="checkpwdfrm" action="${ path }/mypage/checkinfo" method="post">
+                  		<input type="password" style="border: 1px solid lightgrey; border-radius: 0%; height: 34px;" name= "userpwd" id="userpwd">
+                  		<input type="hidden" name= "type" value="DELETE">
+                  		<button type="submit" class="btn btn-outline-secondary" id="srhbtn7">확인</button>
+	                </form>
+                 </c:if>
+                 <c:if test="${ type == 'UPDATE' }">
+                	<form name="checkpwdfrm" action="${ path }/mypage/checkinfo" method="post">
+                  		<input type="password" style="border: 1px solid lightgrey; border-radius: 0%; height: 34px;" name= "userpwd" id="userpwd">
+                  		<input type="hidden" name= "type" value="UPDATE">
+                  		<button type="submit" class="btn btn-outline-secondary" id="srhbtn7">확인</button>
+	                </form>
+                 </c:if>
                 </center>
               </div>
             </div>
@@ -63,4 +75,4 @@
     <!-- 내용 전체 컨테이너 끝 -->
 
 	<!-- footer -->
-	<jsp:include page="/views/mypage/myfooter.jsp"/>
+	<jsp:include page="/views/mypage/welcome_footer.jsp"/>
