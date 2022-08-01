@@ -35,6 +35,15 @@ button.button-white {
 	border: 1px solid lightgray;
 }
 
+#button-white {
+	width: 50px;
+	height: 30px;
+	margin: 0;
+	background-color: white; 
+	color: black;
+	border: 1px solid lightgray;
+}
+
 .col-sm-10 {
     height: 100%;
 }

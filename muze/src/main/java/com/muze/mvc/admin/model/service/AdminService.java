@@ -33,11 +33,27 @@ public class AdminService {
 		return list;
 	}
 
-	public int deleteContent(int[] contents) {
+	public int hideContent(int[] hcontents) {
 		int result = 0;
 		Connection connection = getConnection();
 		
-		result = new AdminDao().deleteContent(connection, contents);
+		result = new AdminDao().hideContent(connection, hcontents);
+		
+		if(result > 0) {
+			commit(connection);
+		} else {
+			rollback(connection);
+		}
+		close(connection);
+		
+		return result;
+	}
+
+	public int openContent(int[] ocontents) {
+		int result = 0;
+		Connection connection = getConnection();
+		
+		result = new AdminDao().openContent(connection, ocontents);
 		
 		if(result > 0) {
 			commit(connection);

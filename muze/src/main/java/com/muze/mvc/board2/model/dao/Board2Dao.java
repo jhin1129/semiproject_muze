@@ -41,7 +41,7 @@ public class Board2Dao {
 		int count = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT COUNT(*) FROM BOARD WHERE BRD_STATUS='Y'";
+		String query = "SELECT COUNT(*) FROM BOARD";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
@@ -212,7 +212,6 @@ public class Board2Dao {
 						+ 					   "BRD_RENAMEDFILENAME "
 						+ 				"FROM BOARD "
 						+ 				"JOIN MEMBER ON(BOARD.BRD_WRITER_NO = MEMBER.MEMBER_NO) "
-						+ 				"WHERE BRD_STATUS = 'Y' "
 						+               "ORDER BY BOARD.BRD_NO DESC"
 						+ 				") "
 						+ 		") "

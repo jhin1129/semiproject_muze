@@ -20,26 +20,26 @@
 	<!-- 컨테이너 -->
 	<div class="summary">
 		<h5>콘텐츠 관리 > 게시글 관리</h5>
-		<form name="contentMgmt" action="${ path }/admin/delete" method="get">
+		<form name="contentMgmt" action="${ path }/admin/mgmt" method="get">
 			<div class="text-right">
-				<button type="button" class="button-white" id="contentDelete"
-					style="margin: 0;">삭제</button>
-				<button type="button" class="button-white">공개</button>
-				<input type="submit" name="btn" class="button-white" value="saveOpen">
-				<input type="submit" name="btn" class="button-white" value="saveDelete">
-				
+				<input type="submit" name="btn" style="width: 50px; height: 30px; margin: 0; 
+				background-color: white; color: black; border: 1px solid lightgray;" value="공개">
+				<input type="submit" name="btn" style="width: 50px; height: 30px; margin: 0; 
+				background-color: white; color: black; border: 1px solid lightgray;" value="숨김">
 			</div>
 			<div class="mt-3">
 				<table class="table table-sm">
 					<thead class="text-center">
 						<tr style="height: 10px; color: gray">
-							<th style="width: 2%;"></th>
 							<th style="width: 10%;">번호</th>
-							<th style="width: 30%;">제목</th>
-							<th style="width: 18%;">작성자</th>
-							<th style="width: 15%;">카테고리</th>
-							<th style="width: 15%;">작성일</th>
-							<th style="width: 10%;">조회수</th>
+							<th style="width: 28%;">제목</th>
+							<th style="width: 10%;">작성자</th>
+							<th style="width: 10%;">카테고리</th>
+							<th style="width: 14%;">작성일</th>
+							<th style="width: 8%;">조회수</th>
+							<th style="width: 8%;">공개여부</th>
+							<th style="width: 6%;">공개</th>
+							<th style="width: 6%;">숨김</th>
 						</tr>
 					</thead>
 
@@ -52,14 +52,17 @@
 						<c:if test="${ not empty list }">
 							<c:forEach var="board" items="${ list }">
 								<tr>
-									<td><input type="checkbox" id="checkbox" name="deleteContent"
-										value="${ board.brdNo }"></td>
 									<td>${ board.brdNo }</td>
 									<td>${ board.brdTitle }</td>
 									<td>${ board.brdWriterId }</td>
 									<td>${ board.brdType }</td>
 									<td>${ board.brdDate }</td>
 									<td>${ board.brdReadCount }</td>
+									<td>${ board.brdStatus }</td>
+									<td><input type="checkbox" id="checkbox" name="openContent"
+										value="${ board.brdNo }"></td>
+									<td><input type="checkbox" id="checkbox" name="hideContent"
+										value="${ board.brdNo }"></td>
 								</tr>
 							</c:forEach>
 						</c:if>
@@ -101,20 +104,6 @@
 	</div>
 </div>
 
-</div>
 <!-- 내용 전체 컨테이너 끝 -->
-
-<script>
-    
-    function(contentDelete) {
-    	var cnt = $(input[name='selected']:checked").length;
-    	var arr = Array();
-    }
-    
-    $('input:checkbox').change(function() {
-    	$("input[name='selected']").removeProp("checked");
-    }
-    
-    </script>
 
 <jsp:include page="/views/common/footer.jsp" />

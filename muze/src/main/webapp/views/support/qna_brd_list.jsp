@@ -40,7 +40,7 @@
                 		<c:forEach var="board" items="${ list }">
 	                    <tr>
 	                        <td>${ board.rowNum }</td>
-	                        <td><a href="${ path }/support/view?brdNo=${ board.brdNo }&&type=${ type }">${ board.brdTitle }</a></td>
+	                        <td><a style="display: block;" href="${ path }/support/view?brdNo=${ board.brdNo }&&type=${ type }">${ board.brdTitle }</a></td>
 	                        <td>${ board.brdWriterId }</td>
 	                        <td>${ board.brdDate }</td>
 	                        <td>${ board.brdReadCount }</td>

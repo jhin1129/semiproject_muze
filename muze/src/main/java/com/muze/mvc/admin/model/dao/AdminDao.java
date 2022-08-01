@@ -87,7 +87,7 @@ public class AdminDao {
 		return list;
 	}
 
-	public int deleteContent(Connection connection, int[] contents) {
+	public int hideContent(Connection connection, int[] contents) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
@@ -98,6 +98,31 @@ public class AdminDao {
 				params += ", ";
 		}
 		String query = "UPDATE BOARD SET BRD_STATUS='N' WHERE BRD_NO IN ("+params+")";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int openContent(Connection connection, int[] ocontents) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String params = "";
+		for(int i = 0; i < ocontents.length; i++) {
+			params += ocontents[i];
+			if(i < ocontents.length - 1) 
+				params += ", ";
+		}
+		String query = "UPDATE BOARD SET BRD_STATUS='Y' WHERE BRD_NO IN ("+params+")";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
