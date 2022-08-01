@@ -38,7 +38,7 @@ public class JoinServlet extends HttpServlet {
     	
     	System.out.println(member);
     	
-    	int result = new MemberService().save(member);
+    	int result = new MemberService().saveMember(member);
     	
     	if(result > 0) {
     		// 회원 가입 완료

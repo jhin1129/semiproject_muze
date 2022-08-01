@@ -302,13 +302,13 @@
   float: left;
 }
 .find_id_sec .login_input input {
-  display: block;
-  width: 100%;
-  height: 36px;
-  margin: 15px 0 10px 0;
-  padding: 0 0 0 8px;
-  border: 1px solid #d0d0d0;
-  color: #979d9d;
+	display: block;
+    width: 292px;
+    height: 36px;
+    margin: 15px 0 10px 0;
+    padding: 0 0 0 8px;
+    border: 1px solid #d0d0d0;
+    color: #979d9d;
 }
 .find_id_sec > p {
   color: #ab3e55;
