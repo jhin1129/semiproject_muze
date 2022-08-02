@@ -6,7 +6,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 <jsp:include page="/views/common/header.jsp" />
-<jsp:include page="/views/common/adminSidebar.jsp" />
+<jsp:include page="/views/adminpage/sidebar.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/adminpage/admin.css">
 <link rel="stylesheet"
 	href="${path}/resources/css/mypage/mypage_main.css">
