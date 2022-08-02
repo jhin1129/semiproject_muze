@@ -10,9 +10,15 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
-
 <!-- Login CSS -->
 <link rel="stylesheet" href="${path}/resources/css/login/Login.css">
+
+<style type="text/css">
+.error {
+font-size : 13px;
+float:left;
+}
+</style>
 
 <!-- 내용 전체 컨테이너 -->
 <div class="container">
@@ -26,16 +32,17 @@
               		<!-- //member_tit -->
 	<div class="member_cont">
 		<form id="formLogin" action="${ path }/member/login" method="post" >
+		<c:if test="${ empty loginMember }">
  			<input type="hidden" id="mode" name="mode" value="login">
             <input type="hidden" id="returnUrl" name="returnUrl" value="#">
             	<div class="member_login_box">
                     <!-- 회원 로그인 -->
                     <div class="login_input_sec">
                     	<div>
-                        	<input type="text" id="loginId" name="loginId" placeholder="아이디" value="${ empty cookie.saveId ? '' : cookie.saveId.value }" aria-required="true" required>
-                        	<input type="password" id="loginPwd" name="loginPwd" placeholder="비밀번호"  aria-required="true" required>
+                        	<input type="text" id="memId" name="memId" placeholder="아이디" value="${ empty cookie.saveId ? '' : cookie.saveId.value }" aria-required="true" required>
+                        	<input type="password" id="memPw" name="memPw" placeholder="비밀번호"  aria-required="true" required>
                       	</div>
-                    	<button type="submit" onclick="return loginCheck()" >로그인</button>
+                    	<button type="submit" >로그인</button>
                     </div>
                     <div class="id_chk">
                     	<span class="form_element">
@@ -45,7 +52,7 @@
                     		<p class="dn js_caution_msg1" style="display :none" >아이디, 비밀번호가 일치하지 않습니다. 다시 입력해 주세요.</p>
                     </div>
                 </div>
-  
+  			</c:if>
 			<!-- //login_box -->
 			<div class="member_sns_login" style="text-align: center">
 				<a href="#" class="btn_kakao_login js_btn_kakao_login" data-kakao-type="login" data-return-url="#"> <img src="${path}/resources/images/login/kakaoLogin.png" class="img-fluid" alt="카카오 아이디 로그인"></a>
@@ -63,7 +70,7 @@
 		<div class="nonmember">
 			<form id="formOrderLogin" action="${ path }/member/login" method="post">
  				<input type="hidden" name="mode" value="guestOrder">
-				<input type="hidden" name="returnUrl" value="../mypage/order_view.php">
+				<input type="hidden" name="returnUrl" value="#">
 					<div class="nonmember_order_box">
                     	<h3>비회원 주문조회 하기</h3>
                     <div class="order_input_sec">
@@ -86,7 +93,7 @@
 </div>
 <!-- //본문 끝 contents -->
 
-<script type="text/javascript" src="/resources/js/Member/member.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/Member/member.js"></script>
 <script type="text/javascript">
 	var $formLogin;
 	$(document).ready(function () {
@@ -103,7 +110,7 @@
 			location.href = '${path}/member/find_password';
 		});
 
-		$('#loginId, #loginPwd').focusin(function () {
+		$('#memId, #memPw').focusin(function () {
 			$('.js_caution_msg1', '#formLogin').addClass('dn');
 		});
 
@@ -111,18 +118,18 @@
 		$formLogin.validate({
 			dialog: false,
 			rules: {
-				loginId: {
+				memId: {
 					required: true
 				},
-				loginPwd: {
+				memPw: {
 					required: true
 				}
 			},
 			messages: {
-				loginId: {
+				memId: {
 					required: "아이디를 입력해주세요"
 				},
-				loginPwd: {
+				memPw: {
 					required: "패스워드를 입력해주세요"
 				}
 			}, submitHandler: function (form) {
@@ -164,7 +171,7 @@
 				$.post(form.action, $(form).serializeObject()).done(function (data, textStatus, jqXhr) {
 					console.log(data);
 					if (data.result == 0) {
-						location.replace('../mypage/order_view.php?orderNo=' + data.orderNo);
+						location.replace('${ path }/myPage' + data.orderNo);
 					} else {
 						$('.js_caution_msg2').empty().html("주문자명과 주문번호가 일치하는 주문이 존재하지 않습니다. 다시 입력해 주세요.<br><span>주문번호와 비밀번호를 잊으신 경우, 고객센터로 문의하여 주시기 바랍니다.</span>");
 					}

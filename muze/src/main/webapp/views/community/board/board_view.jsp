@@ -7,7 +7,7 @@
 
 <jsp:include page="/views/common/header.jsp"/>
 <style>
-	 #comment p {
+	 .comment p {
 	     margin: 0px;
 	 }
 	
@@ -37,7 +37,7 @@
 	            <h2 style="text-align: center;"><a href="${path }/board/list?type=FREE">자유 게시판</a></h2>
         	</c:if>
         </div>
-        <!-- 후기글 전체 -->
+        
         <div class="mt-5" style="border: 1px solid rgb(238, 233, 233);">
 
             <div>
@@ -95,10 +95,12 @@
                 <p>
                     ${ board.brdContent }
                 </p>
-                <div class="text-right">
-                    <button onclick="location.href='${path}/board/update?no=${ board.brdNo }&type=${ type }'" class="btn btn-light py-0">수정</button>
-                    <button id="btnDelete" class="btn btn-light py-0">삭제</button>
-                </div>
+                <c:if test="${ loginMember.memberNo == board.brdWriterNo }">
+	                <div class="text-right">
+	                    <button onclick="location.href='${path}/board/update?no=${ board.brdNo }&type=${ type }&brdWriterNo=${board.brdWriterNo }'" class="btn btn-light py-0">수정</button>
+	                    <button id="btnDeleteBoard" class="btn btn-light py-0">삭제</button>
+	                </div>
+                </c:if>
             </div>
 
             
@@ -131,37 +133,53 @@
 
             <hr style="border-style: dotted;">
             <!-- 댓글 -->
-            <div class="px-3">
+            <div id="comment-container" class="px-3">
                 <h4>댓글</h4>
-
-                <div id="comment">
-                    <hr>
-                    <p style="font-weight: bold;">USER1</p>
-                    <p>댓글을 작성합니다.</p>
-                    <div class="row m-0">
-                        <p class="mt-2 col p-0" style="font-size: 11px;">2022.07.15 05:30</p>
-                        <div>
-                            <button class="btn btn-light py-0">수정</button>
-                            <button class="btn btn-light py-0">삭제</button>
+                <hr>
+				<div id="comment-list">
+					<c:forEach var="comments" items="${ commentsList }">
+	                <div class="comment">
+	                	<input id="commentsNo" type="hidden" value="${ comments.commentsNo}">
+	                	<input id="commentsWriterNo" type="hidden" value="${comments.commentsWriterNo }" >
+	                    <p style="font-weight: bold; margin: 0px;">${comments.commentsWriterId }</p>
+	                    <p class="commentsContent">${comments.commentsContent }</p>
+	                    <div class="row m-0">
+	                        <p class="mt-2 col p-0" style="font-size: 11px;">${comments.commentsDate }</p>
+                            <c:if test='${ loginMember.memberNo == comments.commentsWriterNo }'>
+	                        <div>
+	                            <button onclick="updateComments(event)" class="btn btn-light py-0">수정</button>
+	                            <button onclick="deleteComments(event)" class="btn btn-light py-0">삭제</button>
+	                        </div>
+	                        </c:if>
+	                    </div>
+	
+	                    <hr>
+	                </div>
+                    <div class="mb-3 comment-editor" style="display:none;">
+                    	<div class="form-control" style="height: 85px;">
+                        	<p class="commentsWriterId" style="font-weight: bold; margin: 0px;"></p>
+                        	<hr style="margin: 0px;">
+                        	<textarea id="updateCommentsContent" style="border: none; resize: none; width: 100%;"
+                            placeholder="댓글을 작성해주세요"></textarea>
                         </div>
+	                    <div class="text-right mt-1">
+	                        <button onclick="updateCommentsCancel(event)" class="btn btn-light py-0">취소</button>
+	                        <button onclick="updateCommentsCommit(event)" class="btn btn-light py-0">작성</button>
+	                    </div>
                     </div>
+					</c:forEach>
+				</div>
 
-                    <hr>
-                </div>
-
-                <div class="mb-3">
-                    <form action="">
-                        <div class="form-control" style="height: 85px;">
-                            <p style="font-weight: bold; margin: 0px;">USER2</p>
-                            <hr style="margin: 0px;">
-                            <textarea style="border: none; resize: none; width: 100%;"
-                                placeholder="댓글을 작성해주세요"></textarea>
-                        </div>
-                        <div class="text-right mt-1">
-                            <button class="btn btn-light py-0">작성</button>
-                        </div>
-                    </form>
-
+                <div id="comment-editor" class="mb-3">
+                    <div class="form-control" style="height: 85px;">
+                        <p id="loginId" style="font-weight: bold; margin: 0px;">${loginMember.memberId }</p>
+                        <hr style="margin: 0px;">
+                        <textarea id="commentsContent" onfocus="loginCheck();" style="border: none; resize: none; width: 100%;"
+                            placeholder="댓글을 작성해주세요"></textarea>
+                    </div>
+                    <div class="text-right mt-1">
+                        <button onclick="writeComments();" class="btn btn-light py-0">작성</button>
+                    </div>
                 </div>
             </div>
 
@@ -172,17 +190,124 @@
         </div>
     </div>
 <script>
+
 	$(document).ready(() => {
-		$("#btnDelete").on("click", ()=> {
+		$("#btnDeleteBoard").on("click", ()=> {
 			if(confirm("게시글을 삭제하시겠습니까?")){
-				location.replace("${path}/board/delete?no=${board.brdNo}&type=${board.brdType}");
+				location.replace("${path}/board/delete?no=${board.brdNo}&type=${board.brdType}&brdWriterNo=${board.brdWriterNo }");
 			}
 		});
 		
 		$("#fileDown").on("click", ()=> {
-			location.assign("${path}/board/fileDown?oname=${board.brdOriginalFileName}&rname=${board.brdRenamedFileName}");
+			location.assign("${path}/board/filedown?oname=${board.brdOriginalFileName}&rname=${board.brdRenamedFileName}");
 		});
+		
 	});
+	function loginCheck(){
+		if(${ empty loginMember }) {
+			alert("로그인 후 이용해주세요");
+			
+			$("#commentsContent").blur();
+		}
+	}	
+	
+	function writeComments() {
+		
+		if($("#commentsContent").val().trim()==""){
+			alert("내용을 입력해주세요");
+		} else{
+			$.ajax({
+				url: "${path}/board/commentswrite",
+				type: "POST",
+				dataType: "json",
+				data: {
+					"brdNo" : ${board.brdNo},
+					"commentsContent" : $("#commentsContent").val()
+				},
+				success: function(data) {
+					let html = "<div class='comment'>";
+					html += "<input id='commentsNo' type='hidden' value="+ data.commentsNo + ">";
+					html += "<input id='commentsWriterNo' type='hidden' value=" + data.commentsWriterNo +">";
+					html += "<p style='font-weight: bold; margin: 0px;'>"+data.commentsWriterId+"</p>";
+					html += "<p class='commentsContent'>"+data.commentsContent+"</p>";
+					html += "<div class='row m-0'>";
+					html += "<p class='mt-2 col p-0' style='font-size: 11px;'>"+ data.commentsDate + "</p>";
+					html += "<div><button onclick='updateComments(event)' class='btn btn-light py-0'>수정</button>";
+					html += "<button onclick='deleteComments(event)' class='btn btn-light py-0'>삭제</button></div></div><hr></div>";
+					html += "<div class='mb-3 comment-editor' style='display:none;'>";
+					html += "<div class='form-control' style='height: 85px;'>";
+					html += "<p class='commentsWriterId' style='font-weight: bold; margin: 0px;'></p>";
+					html += "<hr style='margin: 0px;'>";
+					html += "<textarea id='updateCommentsContent' style='border: none; resize: none; width: 100%;' placeholder='댓글을 작성해주세요'></textarea>";
+					html += "</div>";
+					html += "<div class='text-right mt-1'>";
+					html += "<button onclick='updateCommentsCancel(event)' class='btn btn-light py-0'>취소</button>";
+					html += "<button onclick='updateCommentsCommit(event)' class='btn btn-light py-0'>작성</button>";
+					html += "</div></div>";
+					
+					$("#comment-list").append(html);
+
+					$("#commentsContent").val('');
+				},
+				error: (error) => {
+					alert("댓글 작성 실패");
+				}
+			});
+		}
+		
+	}
+	
+	function deleteComments(event) {
+		$.ajax({
+			url: "${path}/board/commentsdelete",
+			type: "POST",
+			dataType: "json",
+			data: {
+				"commentsNo" : $(event.target).parent().parent().siblings("#commentsNo").val(),
+				"commentsWriterNo" : $(event.target).parent().parent().siblings("#commentsWriterNo").val()
+			},
+			success: function() {
+				$(event.target).parents(".comment").remove();
+			},
+			error: (error) => {
+				alert("댓글 삭제 실패");
+			}
+		});
+	}
+	
+	function updateComments(event) {
+		$(event.target).parents(".comment").hide();
+		$(event.target).parents(".comment").next().show();
+		$(event.target).parents(".comment").next().find("#updateCommentsContent").val($(event.target).parent().parent().prev().text());
+		$(event.target).parents(".comment").next().find(".commentsWriterId").text($(event.target).parent().parent().prev().prev().text());
+	}
+	
+	function updateCommentsCancel(event) {
+		$(event.target).parent().parent().hide();
+		$(event.target).parent().parent().prev().show();
+	}
+	
+	function updateCommentsCommit(event){
+		$.ajax({
+			url: "${path}/board/commentsupdate",
+			type: "POST",
+			dataType: "json",
+			data: {
+				"commentsNo" : $(event.target).parent().parent().prev().find("#commentsNo").val(),
+				"commentsContent" : $(event.target).parent().prev().find("#updateCommentsContent").val(),
+				"commentsWriterNo" : $(event.target).parent().parent().prev().find("#commentsWriterNo").val()
+			},
+			success: function() {
+				$(event.target).parent().parent().hide();
+				$(event.target).parent().parent().prev().show();
+				$(event.target).parent().parent().prev().find(".commentsContent").text($(event.target).parent().prev().find("#updateCommentsContent").val());
+			},
+			error: (error) => {
+				alert("댓글 수정 실패");
+			}
+			
+		});
+	}
 </script>    
     
 <jsp:include page="/views/common/footer.jsp"/>

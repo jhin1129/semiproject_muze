@@ -23,8 +23,6 @@
   <!-- Mainstyle CSS -->
   <link rel="stylesheet" type="text/css" href="${path}/resources/css/common/mainstyle.css?after">
 
-
- 
   <title>Header</title>
 </head>
 
@@ -52,7 +50,7 @@
 	      
 	      <c:if test="${ not empty loginMember }">
 		        <a class="mr-4 text-nowrap" onclick="location.replace('${ path }/member/logout')">로그아웃</a>
-		        <a class="mr-4 text-nowrap" href="#" >마이페이지</a>
+		        <a class="mr-4 text-nowrap" href="${path}/mypage/welcome" >마이페이지</a>
 		        <a href="#" class="me-5 align-items-center mb-1">
 		          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-cart2"
 		            viewBox="0 0 16 16">
@@ -84,9 +82,9 @@
           작품
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#">회화</a></li>
-          <li><a class="dropdown-item" href="#">공예</a></li>
-          <li><a class="dropdown-item" href="#">조소</a></li>
+          <li><a class="dropdown-item" href="${path}/product/painting">회화</a></li>
+          <li><a class="dropdown-item" href="${path}/product/craft">공예</a></li>
+          <li><a class="dropdown-item" href="${path}/product/oilpainting">유화</a></li>
         </ul>
       </li>
       <li class="nav-item dropdown">

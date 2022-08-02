@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.muze.mvc.member.model.service.MemberService;
 import com.muze.mvc.member.model.vo.Member;
-import com.muze.mvc.member.service.MemberService;
 
 
 @WebServlet(name = "join", urlPatterns = "/member/join")
@@ -38,12 +38,12 @@ public class JoinServlet extends HttpServlet {
     	
     	System.out.println(member);
     	
-    	int result = new MemberService().save(member);
+    	int result = new MemberService().saveMember(member);
     	
     	if(result > 0) {
     		// 회원 가입 완료
         	request.setAttribute("msg", "회원 가입 성공");
-    		request.setAttribute("location", "/");
+    		request.setAttribute("location", "/member/join_ok");
     	} else {
     		// 회원 가입 실패
         	request.setAttribute("msg", "회원 가입 실패");

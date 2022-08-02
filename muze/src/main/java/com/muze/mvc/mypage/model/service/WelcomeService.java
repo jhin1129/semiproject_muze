@@ -1,33 +1,26 @@
 package com.muze.mvc.mypage.model.service;
 
-import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
+import static com.muze.mvc.common.jdbc.JDBCTemplate.close;
+import static com.muze.mvc.common.jdbc.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 
+import com.muze.mvc.member.model.vo.Member;
 import com.muze.mvc.mypage.model.dao.WelcomeDao;
+import com.muze.mvc.mypage.model.vo.Welcome;
 
 public class WelcomeService {
 
-	public int getReviewC() {
-		int result = 0;
-		Connection connection = getConnection();
+	public Welcome getWelcomeRow(Member member) {
+		Welcome welcomeRow = null;
 		
-		result = new WelcomeDao().getReviewC(connection);
+		Connection connection = getConnection();
+
+		welcomeRow = new WelcomeDao().getWelcomeRow(connection, member);
 		
 		close(connection);
-
-		return result;
-	}
-
-	public int getMileageN() {
-		int result = 0;
-		Connection connection = getConnection();
 		
-		result = new WelcomeDao().getMileageN(connection);
-		
-		close(connection);
-
-		return result;
+		return welcomeRow;
 	}
-
+	
 }

@@ -31,4 +31,6 @@ public class Product {
 	String proDescription;
 	
 	String proType;
+	
+	int rowNum;
 }

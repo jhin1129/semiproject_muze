@@ -24,6 +24,9 @@ public class BoardDao {
 		case "title":
 			query = "SELECT COUNT(*) FROM BOARD WHERE BRD_STATUS='Y' AND BRD_TYPE=? AND BRD_TITLE LIKE '%"+searchVal+"%'";
 			break;
+		case "proName":
+			query = "SELECT COUNT(*) FROM BOARD JOIN PRODUCT ON(BOARD.BRD_PRO_NO = PRODUCT.PRO_NO) WHERE BRD_STATUS='Y' AND BRD_TYPE=? AND PRO_NAME LIKE '%"+searchVal+"%'";
+			break;
 		case "writer":
 			query = "SELECT COUNT(*) FROM BOARD JOIN MEMBER ON(BOARD.BRD_WRITER_NO = MEMBER.MEMBER_NO) WHERE BRD_STATUS='Y' AND BRD_TYPE=? AND MEMBER_ID LIKE '%"+searchVal+"%'";
 			break;
@@ -64,6 +67,9 @@ public class BoardDao {
 		case "title":
 			subquery = " AND BRD_TITLE LIKE '%" + searchVal + "%'";
 			break;
+		case "proName":
+			subquery = " AND PRO_NAME LIKE '%" + searchVal + "%'";
+			break;
 		case "writer":
 			subquery = " AND MEMBER_ID LIKE '%" + searchVal + "%'";
 			break;
@@ -86,7 +92,8 @@ public class BoardDao {
 						+ " BRD_TYPE,"
 						+ " BRD_STATUS,"
 						+ " BRD_ORIGINALFILENAME,"
-						+ " BRD_RENAMEDFILENAME"
+						+ " BRD_RENAMEDFILENAME,"
+						+ " BRD_IMG"
 						+ " FROM ("
 						+ 	" SELECT ROWNUM AS RNUM,"
 						+ 		" BRD_NO,"
@@ -103,7 +110,8 @@ public class BoardDao {
 						+ 		" BRD_TYPE,"
 						+ 		" BRD_STATUS,"
 						+ 		" BRD_ORIGINALFILENAME,"
-						+ 		" BRD_RENAMEDFILENAME"
+						+ 		" BRD_RENAMEDFILENAME,"
+						+ 		" BRD_IMG"
 						+ 			" FROM ("
 						+ 				" SELECT"
 						+ 					   " BRD_NO,"
@@ -120,7 +128,8 @@ public class BoardDao {
 						+ 					   " BRD_TYPE,"
 						+ 					   " BRD_STATUS,"
 						+ 					   " BRD_ORIGINALFILENAME,"
-						+ 					   " BRD_RENAMEDFILENAME"
+						+ 					   " BRD_RENAMEDFILENAME,"
+						+ 					   " BRD_IMG"
 						+ 				" FROM BOARD"
 						+ 				" JOIN MEMBER ON(BOARD.BRD_WRITER_NO = MEMBER.MEMBER_NO)"
 						+ 				typequery[1]
@@ -163,7 +172,7 @@ public class BoardDao {
 				board.setBrdStatus(rs.getString("BRD_STATUS"));
 				board.setBrdOriginalFileName(rs.getString("BRD_ORIGINALFILENAME"));
 				board.setBrdRenamedFileName(rs.getString("BRD_RENAMEDFILENAME"));
-				System.out.println(board);
+				board.setBrdImg(rs.getString("BRD_IMG"));
 				list.add(board);
 			}
 		} catch (SQLException e) {
@@ -200,7 +209,8 @@ public class BoardDao {
 				+ 	" BRD_TYPE,"
 				+ 	" BRD_STATUS,"
 				+ 	" BRD_ORIGINALFILENAME,"
-				+ 	" BRD_RENAMEDFILENAME"
+				+ 	" BRD_RENAMEDFILENAME,"
+				+ 	" BRD_IMG"
 				+ 	" FROM BOARD"
 				+ 	" JOIN MEMBER ON(BOARD.BRD_WRITER_NO = MEMBER.MEMBER_NO)"
 				+ 	typequery[1]
@@ -233,7 +243,7 @@ public class BoardDao {
 				board.setBrdStatus(rs.getString("BRD_STATUS"));
 				board.setBrdOriginalFileName(rs.getString("BRD_ORIGINALFILENAME"));
 				board.setBrdRenamedFileName(rs.getString("BRD_RENAMEDFILENAME"));
-				
+				board.setBrdImg(rs.getString("BRD_IMG"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -261,7 +271,8 @@ public class BoardDao {
 							+ "?,"						//BRD_TYPE
 							+ "'Y',"						//BRD_STATUS
 							+ "?,"						//BRD_ORIGINALFILENAME
-							+ "?"						//BRD_RENAMEDFILENAME
+							+ "?,"						//BRD_RENAMEDFILENAME
+							+ "?"						//BRD_IMG
 							+ ")";
 				
 		try {
@@ -278,6 +289,7 @@ public class BoardDao {
 			pstmt.setString(5, board.getBrdType());
 			pstmt.setString(6, board.getBrdOriginalFileName());
 			pstmt.setString(7, board.getBrdRenamedFileName());
+			pstmt.setString(8, board.getBrdImg());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -317,7 +329,8 @@ public class BoardDao {
 							 + " BRD_CONTENT=?,"
 							 + " BRD_PRO_NO=?,"
 							 + " BRD_ORIGINALFILENAME=?,"
-							 + " BRD_RENAMEDFILENAME=?"
+							 + " BRD_RENAMEDFILENAME=?,"
+							 + " BRD_IMG=?"
 							 + " WHERE BRD_NO=?";
 	
 		try {
@@ -328,7 +341,8 @@ public class BoardDao {
 			pstmt.setInt(3, board.getBrdProNo());
 			pstmt.setString(4, board.getBrdOriginalFileName());
 			pstmt.setString(5, board.getBrdRenamedFileName());
-			pstmt.setInt(6, board.getBrdNo());
+			pstmt.setString(6, board.getBrdImg());
+			pstmt.setInt(7, board.getBrdNo());
 			
 			result = pstmt.executeUpdate();
 			
@@ -449,6 +463,30 @@ public class BoardDao {
 		}
 		
 		return product;
+	}
+
+	public int updateReadCount(Connection connection, Board board) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "UPDATE BOARD SET BRD_READCOUNT=? WHERE BRD_NO=?";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			board.setBrdReadCount(board.getBrdReadCount() + 1);
+			
+			
+			pstmt.setInt(1, board.getBrdReadCount());
+			pstmt.setInt(2, board.getBrdNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

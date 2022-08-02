@@ -12,6 +12,17 @@
 <!-- Login CSS -->
 <link rel="stylesheet" href="${path}/resources/css/login/Login.css">
 
+<style>
+ .member_cont h3 {
+   padding: 0px 0 20px;
+   font-size: 18px;
+   color: #222222;
+   border-bottom: 1px solid #222222;
+ }
+
+</style>
+
+
 <!-- 내용 전체 컨테이너 -->
 <div class="container">
 	<div class="row m-auto">
@@ -83,7 +94,7 @@
 						<div class="form_element_join">
 							<input type="checkbox" id="termsAgree1" name="agreementInfoFl" class="require" >
 							<label class="check_s" for="termsAgree1"><strong>(필수)</strong> 이용약관</label>
-							<span><a href=#" target="_blank">전체보기</a></span>
+							<span><a href="${ pageContext.request.contextPath }/views/footer/footerlink2.jsp" target="_blank">전체보기</a></span>
 						</div>
 						<div class="agreement_box">
 							제1조(목적)<br />
@@ -312,7 +323,7 @@
 						<div class="form_element_join">
 							<input type="checkbox" id="termsAgree2" name="privateApprovalFl" class="require" >
 							<label class="check_s" for="termsAgree2"><strong>(필수)</strong> 개인정보 수집 및 이용 </label>
-							<span><a href="#" target="_blank">전체보기</a></span>
+							<span><a href="${ pageContext.request.contextPath }/views/member/agreement1.jsp"target="_blank">전체보기</a></span>
 						</div>
 						<div class="agreement_box">
 							1. - 목적 : 이용자 식별 및 본인여부 확인<br />
@@ -336,7 +347,7 @@
 						<div class="form_element_join">
 							<input type="checkbox" id="termsAgree3" name="">
 							<label class="check_s" for="termsAgree3"><strong class="choice">(선택)</strong> 개인정보 수집 및 이용 </label>
-							<span><a href="#" target="_blank">전체보기</a></span>
+							<span><a href="${ pageContext.request.contextPath }/views/member/agreement2.jsp" target="_blank">전체보기</a></span>
 						</div>
 						<div class="agreement_choice_box">
 							<!--  -->

@@ -19,7 +19,7 @@
         <!-- 왼쪽 그리드 -->
         <div class="col-sm-2" >
         	<!--사이드 메뉴 -->
-        	<jsp:include page="/views/mypage/side_navi.jsp" flush="false"/>
+        	<jsp:include page="/views/mypage/welcome_side.jsp" flush="false"/>
         </div>
 
         <!-- 오른쪽 그리드 -->
@@ -29,7 +29,7 @@
             <!-- 첫번째 행 -->
 			<jsp:include page="/views/mypage/welcome_row.jsp" flush="false"/>
             <!-- 두번째 행 -->
-			<jsp:include page="/views/mypage/orderStatus.jsp" flush="false"/>
+			<jsp:include page="/views/mypage/welcome_status.jsp" flush="false"/>
             <!-- 세번째 행 -->
             <div class="row">
               <div class="col-sm-12" style="margin-top: 50px;">
@@ -52,7 +52,7 @@
                   	<c:if test="${ empty list }">
                   	 	<tr>
                       		<td id="my_td00" colspan="5">
-                       			조회 내역이 없습니다.
+                       			최근 주문한 내역이 존재하지 않습니다.
                       		</td>
                     	</tr>
                    	</c:if>
@@ -60,13 +60,15 @@
                    		<c:forEach var="getOrderRec" items="${ list }">
 		                    <tr>
 		                      <td id="my_td01">${ getOrderRec.orderDate } <br>
-		                        <a href="${ path }/mypage/orderdetail" id="my_td02">${ getOrderRec.orderNo }</a> <br>
+		                        <a href="${ path }/mypage/orderdetail?no=${ getOrderRec.orderNo }" id="my_td02">${ getOrderRec.orderNo }</a> <br>
 		                      	  <c:if test="${ getOrderRec.orderStatus != '환불' && getOrderRec.orderStatus != '구매확정' && getOrderRec.orderStatus != '취소'}">
-		                        	<button type="button" class="btn btn-outline-secondary" id="mycbtn">주문취소 </button>
+		                        	<button type="button" class="btn btn-outline-secondary" id="mycbtn" onclick="location.href='${path}/mypage/cancel?no=${ getOrderRec.orderNo }' " >주문취소 </button>
+<!-- 		                        	<button type="button" class="btn btn-outline-secondary" id="mycbtn">주문취소 </button> -->
 		                       	  </c:if>
 		                      </td> 
 		                      <td id="my_td01">${ getOrderRec.proName }</td>
-		                      <td id="my_td01">${ getOrderRec.strPrice }원 / ${ getOrderRec.orderAmount }개</td>
+		                      <td id="my_td01">
+		                     	 <fmt:formatNumber value="${ getOrderRec.proPrice }" pattern="#,###"/>원 / ${ getOrderRec.orderAmount }개</td>
 		                      <td id="my_td01">${ getOrderRec.orderStatus }</td>
 		                      <td id="my_td01"></td>
 		                    </tr>
@@ -84,20 +86,11 @@
     </div>
     </div>
     <!-- 내용 전체 컨테이너 끝 -->
+    
     <!-- Bootstrap Js 4.6 -->
     <!-- 부트스트랩 제이쿼리 활성화 시 제이쿼리 데이트피커 동작 안함 -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 
-	<script>
-    $(document).ready(()=>{
-		$('#mycbtn').click(function() { 
-			if(confirm('주문을 취소하시겠습니까..?')) {
-				location.replace('${path}/mypage/cancel');
-			}
-		});
-	});
-    </script>
-
 	<!-- footer -->
-	<jsp:include page="/views/mypage/myfooter.jsp"/>
+	<jsp:include page="/views/mypage/welcome_footer.jsp"/>

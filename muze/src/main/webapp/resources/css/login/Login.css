@@ -302,13 +302,13 @@
   float: left;
 }
 .find_id_sec .login_input input {
-  display: block;
-  width: 100%;
-  height: 36px;
-  margin: 15px 0 10px 0;
-  padding: 0 0 0 8px;
-  border: 1px solid #d0d0d0;
-  color: #979d9d;
+	display: block;
+    width: 292px;
+    height: 36px;
+    margin: 15px 0 10px 0;
+    padding: 0 0 0 8px;
+    border: 1px solid #d0d0d0;
+    color: #979d9d;
 }
 .find_id_sec > p {
   color: #ab3e55;
@@ -683,6 +683,12 @@
   border: 1px solid #989898;
 }
 
+.member_warning .emailCheck {
+  margin: 0 0 0 5px;
+  padding: 5px 10px 5px 10px;
+  border: 1px solid #989898;
+}
+
 .base_info_box h3 {
   display: inline-block;
   font-size: 18px;
@@ -788,6 +794,11 @@
 .artist_info_box {
   margin: 40px 0 30px 0;
 }
+
+.dn {
+    display: none !important;
+}
+
 .artist_info_box .artist_info_sec {
   border-top: 1px solid #1c1c1c;
 }
@@ -944,7 +955,6 @@
 td {
   font-size: 13px;
   line-height: 1.5;
-  color: #333;
 }
 
 .join_agreement_cont .agreement_choice_box .agreement_scroll {
@@ -1547,6 +1557,82 @@ textarea {
 }
 
 .type_select_sec input[type="radio"]:checked + label {
+  background: none;
+  background-color: #221714;
+  color: white;
+}
+
+/* 부가정보 */
+.addition_info_box {
+  margin: 40px 0 0 0;
+}
+.addition_info_box .addition_info_sec {
+  border-top: 1px solid #1c1c1c;
+}
+.addition_info_sec table {
+  width: 100%;
+}
+.addition_info_sec table th {
+  font-size: 14px;
+  text-align: left;
+  border-bottom: 1px solid #dcdcdc;
+  background: #fbfbfb;
+}
+.addition_info_sec table th:first-child,
+.addition_info_sec table td:first-child {
+  border-left: none;
+}
+.addition_info_sec table td {
+  padding: 15px 0 15px 15px;
+  border-bottom: 1px solid #dcdcdc;
+}
+.addition_info_sec table input[type="text"] {
+  width: 380px;
+}
+.addition_info_sec table li {
+  list-style-type: none;
+  float: left;
+  padding: 0 30px 0 0;
+}
+
+.addition_info_sec .hobby_list li {
+  float: left;
+  width: 33%;
+  padding: 0 0 7px 0;
+}
+.addition_info_sec textarea {
+  width: 98%;
+  height: 100px;
+  margin: 0 0 10px 0;
+}
+.addition_info_sec .anniversary {
+  background: url("../../images/login/icon_calendar.png") no-repeat right center;
+}
+.join_base_wrap .btn_member_sec ul {
+  overflow: hidden;
+  margin: 25px 0 0 0;
+  text-align: center;
+  font-size: 0;
+}
+.join_base_wrap .btn_member_sec li {
+  display: inline-block;
+  margin: 0 0 0 10px;
+}
+.join_base_wrap .btn_member_sec li:first-child {
+  margin: 0;
+}
+
+.addition_info_sec .ignore {
+  display: none;
+}
+
+.addition_info_sec input[type="radio"] + label {
+  background-color: #f5f5f5;
+  padding: 6px 12px;
+  border-radius: 100px;
+}
+
+.addition_info_sec input[type="radio"]:checked + label {
   background: none;
   background-color: #221714;
   color: white;

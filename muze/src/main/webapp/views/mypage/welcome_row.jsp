@@ -11,22 +11,24 @@
 	    <!-- 카드 그룹 -->
 	    <div class="card-group">
 	      <!-- 첫번째 카드 -->
-	      <div class="card">
-	        <img src="${path}/resources/images/mypage/welcome.png" class="card-img-top" >
-	        <div class="card-body">
-	          <h5 class="card-title">${ myOrder.orderName } 님</h5>
-	          <p class="card-text">
-	            환영합니다.
-	          </p>
-	        </div>
-	      </div>
+		      <div class="card">
+		        <img src="${path}/resources/images/mypage/welcome.png" class="card-img-top" >
+		        <div class="card-body">
+		          <h5 class="card-title">${ member.memberName } 님</h5>
+		          <p class="card-text">
+		            환영합니다.
+		          </p>
+		        </div>
+		      </div>
 	      <!-- 두번째 카드 -->
 	      <div class="card">
 	        <img src="${path}/resources/images/mypage/mileage.png" class="card-img-mid" >
 	        <div class="card-body">
 	          <h5 class="card-title">마일리지</h5>
 	          <p class="card-text"> 
-	            <a href="${path}/mypage/mileage">${ welcome.mileageNow } 원</a>
+	            <a href="${path}/mypage/mileage">
+	            	${ welcomeRow.mileageNow } p
+	            </a>
 	          </p>
 	        </div>
 	      </div>
@@ -36,7 +38,7 @@
 	        <div class="card-body">
 	          <h5 class="card-title">나의 후기</h5>
 	          <p class="card-text">
-	            <a href="${path}/mypage/review">${ welcome.boardCount } 개</a>
+	            <a href="${path}/mypage/community?type=REVIEW">${ welcomeRow.boardCount } 개</a>
 	          </p>
 	        </div>
 	      </div>

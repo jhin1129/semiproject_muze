@@ -12,6 +12,23 @@
 <!-- Login CSS -->
 <link rel="stylesheet" href="${path}/resources/css/login/Login.css">
 
+<style type="text/css">
+
+#name_chk {
+font-size : 13px;
+color : #ab3e55;
+float:left;
+margin-right: 5px;
+}
+
+#email_chk {
+font-size : 13px;
+color : #ab3e55;
+float:left;
+}
+
+</style>
+
 <!-- 내용 전체 컨테이너 -->
 <div class="container">
 	<div class="row" style="text-align: center">
@@ -29,8 +46,8 @@
                                     <div class="find_id_sec">
                                         <h3 class="hidden">회원 아이디찾기</h3>
                                         <div class="form_element radio_find_type">            
-                                          <input type="radio" id="findIdEmail" name="findIdFl" value="email" checked="checked">            
-                                          <label for="findIdEmail" class="choice_s on">이메일</label>            
+                                          <input type="radio" id="findIdEmail" name="findIdFl" value="email" checked>            
+                                          <label for="findIdEmail" class="choice_s">이메일</label>            
                                           <input type="radio" id="findIdPhone" name="findIdFl" value="cellPhone">            
                                           <label for="findIdPhone" class="choice_s">휴대폰번호</label>            
                                         </div>
@@ -38,7 +55,7 @@
                                             <div>
                                                 <input type="text" id="userName" name="userName" placeholder="이름">
                                                 <input type="text" id="userCellPhoneNum" name="userCellPhoneNum" placeholder="가입휴대폰번호" disabled="disabled" style="display:none;" maxlength="12">                     
-                                                <input type="text" id="userEmail" name="userEmail" class="input_email" placeholder="가입메일주소">            
+                                                <input type="text" id="userEmail" name="userEmail" class="input_email" placeholder="가입메일주소">           
                                                 <select id="emailDomain" name="emailDomain" class="email_select">            
                                                     <option value="self">직접입력</option>            
                                                     <option value="naver.com">naver.com</option>            
@@ -52,8 +69,10 @@
                                             </div>
                                             <button type="submit" class="btn_member_id">아이디 찾기</button>
                                         </div>
-                                        <!-- <p class="dn js_caution_msg1">일치하는 회원정보가 없습니다. 다시 입력해 주세요.</p> -->
+                                              <label for="" id="name_chk"></label>
+                                              <label for="" id="email_chk"></label>
                                     </div>
+
                                     <!-- //find_id_sec -->
                                     <div class="btn_member_sec">
                                             <button class="btn_member_white js_btn_find_password">비밀번호 찾기</button>
@@ -77,88 +96,84 @@
 
 <script type="text/javascript">
 	$(document).ready(function () {
-		gd_select_email_domain('userEmail');
-		
 		$('input').keyup(function () {
 			$('.js_caution_msg1', 'form').addClass('dn');
 		});
+		
 		$('.js_btn_find_password', 'form').click(function (e) {
+			e.preventDefault();
 			location.href = "${ path }/member/find_password";
-			e.preventDefault();
 		});
+		
 		$('.js_btn_login', 'form').click(function (e) {
-			location.href = "${ path }/member/login";
 			e.preventDefault();
+			location.href = "${ path }/member/login";
 		});
+		
 		 $('input[name="findIdFl"]').on('click', function(){            
                if ($(this).val() == 'cellPhone') {            
                $('input[id="userEmail"]').attr('style','display:none !important').prop('disabled', true);
 			   $('select[id="emailDomain"]').hide().prop('disabled', true);
-               $('input[id="userCellPhoneNum"]').prop('disabled', false).show();            
-               $('#cellPhoneCountryCode').show().prop('disabled', false);            
+               $('input[id="userCellPhoneNum"]').prop('disabled', false).show();                      
               } else if ($(this).val() == 'email') {            
                 $('input[id="userCellPhoneNum"]').hide().prop('disabled', true);            
                 $('input[id="userEmail"]').prop('disabled', false).show();
-				$('select[id="emailDomain"]').prop('disabled', false).show();
-                $('#cellPhoneCountryCode').hide().prop('disabled', true);            
+				$('select[id="emailDomain"]').prop('disabled', false).show();           
               }            
-             })            
+           });            
                                 
            $('input[id="userCellPhoneNum"]').on('keyup', function(){            
            var value = $(this).val();            
            $(this).val(value.replace(/[^\d]/g, ''));            
-        })
-
-		$('#formFindId').validate({
-			dialog: false,
-			rules: {
-				userName: {
-					required: true
-				},
-				userEmail: {
-					required: true,
-					email: true
-				  },            
-                userCellPhoneNum: {            
-                    required: true,
-				}
-			},
-			messages: {
-				userName: {
-					required: "이름을 입력해주세요."
-				},
-				userEmail: {
-					required: "이메일을 입력해주세요.",
-					email: "메일 형식이 틀렸습니다."
-				},
-				 userCellPhoneNum: {            
-                    required: "휴대폰 번호를 입력해주세요.",            
-                }
-			}, submitHandler: function (form) {
-				var params = $(form).serializeArray();
-				params.push({name: "mode", value: "findId"});
-				$.post('${ path }/member/find_id', params).done(function (data, textStatus, jqXHR) {
-					if (data.result) {
-						var compiled = _.template($('#templateFindIdResult').html());
-						var templateData = {memberId: data.memberId, userName: $('#userName').val()};
-						$('.find_id_sec').html(compiled(templateData));
-					} else {
-						if (data['code'] == 500) {            
-                              alert(data['message']);            
-                           } else {
-						$(form).find('.js_caution_msg1').removeClass('dn').text(data.message);
-					}
-					}
-				});
-			}, invalidHandler: function (form, validator) {
-				var errors = validator.numberOfInvalids();
-				if (errors) {
-					$(form.target).find('.js_caution_msg1').removeClass('dn').text(validator.errorList[0].message);
-					validator.errorList[0].element.focus();
-				}
-			}
+        });   
+           
+           $("#userName").change(function(){
+        		var $userName = $("#userName");
+        		
+        		if(/^[가-힣]{2,}$/.test($userName.val()) == false){
+        			$("#name_chk").html("이름은 한글 2글자 이상이어야 합니다.");
+        			$("#name_chk").attr('style', 'visibility:visible;');
+        			return false;
+        		}else{
+        			$("#name_chk").html("");
+        			$("#name_chk").attr('style', 'visibility:hidden;');
+        		}
+        	});
+           
+           $("#userEmail").change(function(){
+       		var $userEmail = $("#userEmail");
+       		
+       		if (/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/.test($userEmail.val()) == false) {
+       			$("#email_chk").html("유효한 이메일을 입력해주세요.");
+       			$("#email_chk").attr('style', 'visibility:visible;');
+       			return false;
+       		}else{
+       			$("#email_chk").html("");
+       			$("#email_chk").attr('style', 'visibility:hidden;');
+       		}
 		});
+           
+         //제출버튼 클릭시 모든 값 유무 확인
+         $("#formFindId").submit(function(){
+        	 
+         	//이름 유효성 여부표시가 나와있으면 return
+	   		if($("#name_chk").css("visibility") != "hidden"){
+	   			alert("이름을 제대로 입력 해주세요");
+	   			$("#userName").focus();
+	   			return false;
+	   		}
+       		
+	   	//이름 유효성 여부표시가 나와있으면 return
+	   		if($("#email_chk").css("visibility") != "hidden"){
+	   			alert("이름을 제대로 입력 해주세요");
+	   			$("#userEmail").focus();
+	   			return false;
+	   		}
+       	});
 	});
+       
+	
+
 </script>
 
 <jsp:include page="/views/common/footer.jsp"/>

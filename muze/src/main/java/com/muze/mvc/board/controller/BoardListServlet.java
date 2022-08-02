@@ -59,14 +59,12 @@ public class BoardListServlet extends HttpServlet {
 		}
 		
 		list = new BoardService().getBoardList(pageInfo, type, searchType, searchVal);
-		System.out.println(listCount);
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("list", list);
 		request.setAttribute("type", type);
 		request.setAttribute("searchType", searchType);
 		request.setAttribute("searchVal", searchVal);
 		request.setAttribute("isSearch", isSearch);
-		
 		request.getRequestDispatcher(path).forward(request, response);			
 		
 	}
