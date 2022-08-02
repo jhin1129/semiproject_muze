@@ -5,13 +5,14 @@ import static com.muze.mvc.common.jdbc.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 
+import com.muze.mvc.member.model.vo.Artist;
 import com.muze.mvc.member.model.vo.Member;
 import com.muze.mvc.mypage.model.dao.WelcomeDao;
 import com.muze.mvc.mypage.model.vo.Welcome;
 
 public class WelcomeService {
 
-	public Welcome getWelcomeRow(Member member) {
+	public Welcome getWelcomeRow(int member) {
 		Welcome welcomeRow = null;
 		
 		Connection connection = getConnection();
@@ -22,5 +23,5 @@ public class WelcomeService {
 		
 		return welcomeRow;
 	}
-	
+
 }

@@ -9,9 +9,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.muze.mvc.member.model.vo.Artist;
 import com.muze.mvc.member.model.vo.Member;
-import com.muze.mvc.mypage.model.vo.MyMileage;
+import com.muze.mvc.mypage.model.vo.ArtOrder;
 import com.muze.mvc.mypage.model.vo.MyOrder;
+
+import oracle.net.aso.e;
 
 public class MyOrderDao {
 
@@ -63,54 +66,9 @@ public class MyOrderDao {
 		return orderDetail;
 	}
 
-	// 날짜별 주문 검색 
-	public List<MyOrder> getOrderByDate(Connection connection, String dateFrom, String dateTo, Member member) {
-		List<MyOrder> list = new ArrayList<>();
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String query = "SELECT O.ORDER_NO, O.ORDER_DATE, O.ORDER_AMOUNT, P.PRO_NAME, P.PRO_PRICE, OS.ORDER_STATUS, COUNT(*) AS CNT "
-						+ "FROM PRODUCT P "
-						+ "JOIN ORDERS O ON (P.PRO_NO = O.PRO_NO) "
-						+ "JOIN ORDER_STATUS OS ON (OS.ORDER_NO = O.ORDER_NO) "
-						+ "WHERE O.MEMBER_NO = ? AND O.ORDER_DATE BETWEEN ? AND ? AND NOT(ORDER_STATUS = '환불' OR ORDER_STATUS = '취소') "
-						+ "GROUP BY O.ORDER_NO, O.ORDER_DATE, O.ORDER_AMOUNT, P.PRO_NAME, P.PRO_PRICE, OS.ORDER_STATUS";
-		
-		try {
-			pstmt = connection.prepareStatement(query);
-			
-			pstmt.setInt(1, member.getMemberNo());
-			pstmt.setString(2, dateFrom);
-			pstmt.setString(3, dateTo);
-
-			rs = pstmt.executeQuery();
-
-			// 조회되는 데이터가 있으면 myOrder 객체로 만들어 리턴한다.
-			while (rs.next()) {
-				MyOrder orderByDate = new MyOrder();
-				
-				orderByDate.setOrderDate(rs.getDate("ORDER_DATE"));
-				orderByDate.setOrderNo(rs.getInt("ORDER_NO"));
-				orderByDate.setProName(rs.getString("PRO_NAME"));
-				orderByDate.setProPrice(rs.getInt("PRO_PRICE"));
-				orderByDate.setOrderAmount(rs.getInt("ORDER_AMOUNT"));
-				orderByDate.setCount(rs.getInt("CNT"));
-				orderByDate.setOrderStatus(rs.getString("ORDER_STATUS"));
-
-				
-				list.add(orderByDate);
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		return list;
-	}
 
 	// 주문 정보 (30일) 
-	public List<MyOrder> getOrderRec(Connection connection, Member member) {
+	public List<MyOrder> getOrderMem(Connection connection, int memNo) {
 		List<MyOrder> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -122,7 +80,7 @@ public class MyOrderDao {
 		
 		try {
 			pstmt = connection.prepareStatement(query);
-			pstmt.setInt(1, member.getMemberNo());
+			pstmt.setInt(1, memNo);
 			
 			rs = pstmt.executeQuery();
 
@@ -150,24 +108,17 @@ public class MyOrderDao {
 	}
 
 	// 주문 현황 
-	public List<MyOrder> getOrderStatus(Connection connection, Member member) {
+	public List<MyOrder> getOrderStatus(Connection connection, int memNo) {
 		List<MyOrder> getOrderStatus = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-        int result1 = 0;
-        int result2 = 0;
-        int result3 = 0;
-        int result4 = 0;
-        int result5 = 0;
-        int result6 = 0;
 		String query = "SELECT ORDER_STATUS "
 						+ "FROM ORDER_STATUS "
 						+ "WHERE MEMBER_NO = ? AND ORDER_DATE > SYSDATE -30";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
-			pstmt.setInt(1, member.getMemberNo());
-
+			pstmt.setInt(1, memNo);
 			
 			rs = pstmt.executeQuery();
 
@@ -216,68 +167,43 @@ public class MyOrderDao {
 		
 		return result;
 	}
-
-	// 날짜별 취소 검색 
-	public List<MyOrder> getCancelByDate(Connection connection, String dateFrom, String dateTo, Member member) {
+	
+	// 날짜별 주문 검색 
+	public List<MyOrder> getOrderByDate(Connection connection, String dateFrom, String dateTo, int memNo, String type, int artNo) {
 		List<MyOrder> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT O.ORDER_NO, O.ORDER_DATE, O.ORDER_AMOUNT, P.PRO_NAME, P.PRO_PRICE, OS.ORDER_STATUS, COUNT(*) AS CNT "
-						+ "FROM PRODUCT P "
-						+ "JOIN ORDERS O ON (P.PRO_NO = O.PRO_NO) "
-						+ "JOIN ORDER_STATUS OS ON (OS.ORDER_NO = O.ORDER_NO) "
-						+ "WHERE O.MEMBER_NO = ? AND O.ORDER_DATE BETWEEN ? AND ? AND (ORDER_STATUS = '반품' OR ORDER_STATUS = '취소') "
-						+ "GROUP BY O.ORDER_NO, O.ORDER_DATE, O.ORDER_AMOUNT, P.PRO_NAME, P.PRO_PRICE, OS.ORDER_STATUS";
+		String subquery1 = "";
+		String subquery2 = "";
 		
-		try {
-			pstmt = connection.prepareStatement(query);
-			
-			pstmt.setInt(1, member.getMemberNo()); 
-			pstmt.setString(2, dateFrom);
-			pstmt.setString(3, dateTo);
-
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				MyOrder cancelByDate = new MyOrder();
-				
-				cancelByDate.setOrderDate(rs.getDate("ORDER_DATE"));
-				cancelByDate.setOrderNo(rs.getInt("ORDER_NO"));
-				cancelByDate.setProName(rs.getString("PRO_NAME"));
-				cancelByDate.setProPrice(rs.getInt("PRO_PRICE"));
-				cancelByDate.setOrderAmount(rs.getInt("ORDER_AMOUNT"));
-				cancelByDate.setCount(rs.getInt("CNT"));
-				cancelByDate.setOrderStatus(rs.getString("ORDER_STATUS"));
-
-				
-				list.add(cancelByDate);
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstmt);
+		if(artNo != 0) {
+			subquery1 = "WHERE PRO_ARTIST_NO =";
+		}else {
+			subquery1 = "WHERE O.MEMBER_NO =";
 		}
-		return list;
-	}
 
-	// 날짜별 환불 검색 
-	public List<MyOrder> getRefundByDate(Connection connection, String dateFrom, String dateTo, Member member) {
-		List<MyOrder> list = new ArrayList<>();
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String query = "SELECT O.ORDER_NO, O.ORDER_DATE, O.ORDER_AMOUNT, P.PRO_NAME, P.PRO_PRICE, OS.ORDER_STATUS, COUNT(*) AS CNT "
-						+ "FROM PRODUCT P "
-						+ "JOIN ORDERS O ON (P.PRO_NO = O.PRO_NO) "
-						+ "JOIN ORDER_STATUS OS ON (OS.ORDER_NO = O.ORDER_NO) "
-						+ "WHERE O.MEMBER_NO = ? AND O.ORDER_DATE BETWEEN ? AND ? AND (ORDER_STATUS = '환불') "
-						+ "GROUP BY O.ORDER_NO, O.ORDER_DATE, O.ORDER_AMOUNT, P.PRO_NAME, P.PRO_PRICE, OS.ORDER_STATUS";
+		if(type.equals("ORDER")) {
+			subquery2 = "AND NOT(ORDER_STATUS = '환불' OR ORDER_STATUS = '취소') ";
+		} else if (type.equals("CANCEL")) {
+			subquery2 = "AND (ORDER_STATUS = '반품' OR ORDER_STATUS = '취소') ";
+		} else if(type.equals("REFUND")) {
+			subquery2 = "AND (ORDER_STATUS = '환불') ";
+		}
+		
+		String query = "SELECT O.ORDER_DATE, O.ORDER_NO, P.PRO_NAME, P.PRO_PRICE,  O.ORDER_AMOUNT, P.PRO_NO, P.PRO_ARTIST_NO, OS.ORDER_STATUS, COUNT(*) AS CNT "
+						+ "FROM ORDER_STATUS OS "
+						+ "JOIN ORDERS O ON (OS.ORDER_NO = O.ORDER_NO) "
+						+ "JOIN PRODUCT P ON (P.PRO_NO = O.PRO_NO) "
+						+ "JOIN ARTIST_DETAIL A ON (A.ARTIST_NO = P.PRO_ARTIST_NO) "
+						+ subquery1
+						+ "? AND O.ORDER_DATE BETWEEN ? AND ? "
+						+ subquery2
+						+ "GROUP BY O.ORDER_DATE, O.ORDER_NO, P.PRO_NAME, P.PRO_PRICE, O.ORDER_AMOUNT, P.PRO_NO, P.PRO_ARTIST_NO, OS.ORDER_STATUS";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
 			
-			pstmt.setInt(1, member.getMemberNo()); 
+			pstmt.setInt(1, memNo);
 			pstmt.setString(2, dateFrom);
 			pstmt.setString(3, dateTo);
 
@@ -285,18 +211,17 @@ public class MyOrderDao {
 
 			// 조회되는 데이터가 있으면 myOrder 객체로 만들어 리턴한다.
 			while (rs.next()) {
-				MyOrder refundByDate = new MyOrder();
+				MyOrder orderByDate = new MyOrder();
 				
-				refundByDate.setOrderDate(rs.getDate("ORDER_DATE"));
-				refundByDate.setOrderNo(rs.getInt("ORDER_NO"));
-				refundByDate.setProName(rs.getString("PRO_NAME"));
-				refundByDate.setProPrice(rs.getInt("PRO_PRICE"));
-				refundByDate.setOrderAmount(rs.getInt("ORDER_AMOUNT"));
-				refundByDate.setCount(rs.getInt("CNT"));
-				refundByDate.setOrderStatus(rs.getString("ORDER_STATUS"));
-
+				orderByDate.setOrderDate(rs.getDate("ORDER_DATE"));
+				orderByDate.setOrderNo(rs.getInt("ORDER_NO"));
+				orderByDate.setProName(rs.getString("PRO_NAME"));
+				orderByDate.setProPrice(rs.getInt("PRO_PRICE"));
+				orderByDate.setOrderAmount(rs.getInt("ORDER_AMOUNT"));
+				orderByDate.setCount(rs.getInt("CNT"));
+				orderByDate.setOrderStatus(rs.getString("ORDER_STATUS"));
 				
-				list.add(refundByDate);
+				list.add(orderByDate);
 			}
 			
 		} catch (SQLException e) {
@@ -307,5 +232,4 @@ public class MyOrderDao {
 		}
 		return list;
 	}
-
 }

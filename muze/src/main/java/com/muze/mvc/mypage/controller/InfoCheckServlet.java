@@ -17,14 +17,47 @@ public class InfoCheckServlet extends HttpServlet {
        
     public InfoCheckServlet() {
     }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
+		HttpSession session = request.getSession(false);
+		Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
+		
+		if (loginMember != null) {
+			 
+			Member member = new Member();
+			member.setMemberNo(loginMember.getMemberNo());			
+			request.setAttribute("member", member);
+		
+			String type = request.getParameter("type");
+			String path = null;
+			
+			if(type.equals("DELETE")) {
+				path = "/views/mypage/info_pwd.jsp";
+			} else if(type.equals("UPDATE")) {
+				path = "/views/mypage/info_pwd.jsp";
+			}
+			
+			request.setAttribute("type", type);
+			request.getRequestDispatcher(path).forward(request, response);	
+		
+		} else {
+					
+			request.setAttribute("msg", "로그인이 필요한 서비스입니다.");
+			request.setAttribute("location", "/");		
+						
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}
+		
+	}
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession(false);
 		Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
-
 		
 		if (loginMember != null) {
+			
 			Member member = new Member();
 			member.setMemberNo(loginMember.getMemberNo());			
 			member.setMemberPassword(loginMember.getMemberPassword());
@@ -32,17 +65,10 @@ public class InfoCheckServlet extends HttpServlet {
 
 			String inputPwd = request.getParameter("userpwd");
 			
-//			System.out.println(inputPwd); // ok 
-//			System.out.println(member.getMemberPassword()); // ok
-
-			
 			if(member.getMemberPassword().equals(inputPwd)) {
 				// 페이지 이동 
 				String type = request.getParameter("type");
 				String path = null;
-				
-				// 타입 넘어왔나 확인 
-//				System.out.println(type); // ok
 				
 					if(type.equals("DELETE")) {
 						path = "/views/mypage/info_delete.jsp";

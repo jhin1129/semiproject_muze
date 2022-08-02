@@ -32,21 +32,23 @@ public class WelcomeServlet extends HttpServlet {
     	if (loginMember != null) {
     		// 로그인 객체의 PK값을 넘기기 위한 객체 생성 
 			Member member = new Member();
-			member.setMemberNo(loginMember.getMemberNo());			
+//			member.setMemberNo(loginMember.getMemberNo());			
 			member.setMemberName(loginMember.getMemberName());
-			request.setAttribute("member", member);
+    		int memNo = loginMember.getMemberNo();
+    		
+    		request.setAttribute("member", member);
 	    	
 	    	// 1st row
 	    	Welcome welcomeRow = null;   	
-	    	welcomeRow = new WelcomeService().getWelcomeRow(member);
+	    	welcomeRow = new WelcomeService().getWelcomeRow(memNo);
 	    	
 	    	// 2nd row
 			List<MyOrder> status = null;
-			status = new MyOrderService().getOrderStatus(member);
+			status = new MyOrderService().getOrderStatus(memNo);
 			
 	    	// 3rd row 
 			List<MyOrder> list = null;
-			list = new MyOrderService().getOrderRec(member);
+			list = new MyOrderService().getOrderRec(memNo);
 	
 			request.setAttribute("welcomeRow", welcomeRow);
 			request.setAttribute("status", status);
