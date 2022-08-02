@@ -5,7 +5,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
-<jsp:include page="/views/common/header.jsp"/>
+<jsp:include page="/views/common/mainpageheader.jsp"/>
     <!-- 슬라이드 인디케이터-->
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
