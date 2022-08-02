@@ -17,7 +17,7 @@ import com.muze.mvc.product.model.vo.Writer;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-@WebServlet("/product/painting/writer")
+@WebServlet("/product/writer")
 public class WriterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -25,7 +25,7 @@ public class WriterServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/views/product/Product_painting_writer.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/product/Product_writer.jsp").forward(request, response);
 	}
 
 	@Override
@@ -60,13 +60,14 @@ public class WriterServlet extends HttpServlet {
 		
 		writer = new Writer();
 		
-		writer.setProNo(1);
+		
 		writer.setProName(pname);
 		writer.setProSize(psize);
-		writer.setProPrice(25000);
+		writer.setProPrice(Integer.parseInt(mr.getParameter("pprice")));
 		writer.setProQuantity(1);
 		writer.setProOriginalFileName(originalFileName);
 		writer.setProRenamedFileName(filename);
+		writer.setProImg(filename);
 		writer.setProArtistNo(partist);
 		writer.setProDescription(description);
 		writer.setProType(ptype);
@@ -74,11 +75,13 @@ public class WriterServlet extends HttpServlet {
 		result = new WriterService().save(writer);
 		
 		if(result > 0) {
-			request.setAttribute("location", "/product/Product_painting.jsp");
+			request.setAttribute("msg", "게시글 작성에 성공하였습니다.");
+			request.setAttribute("location", "/product/painting");
 		}else {
-			request.setAttribute("location", "/product/Product_painting.jsp");
+			request.setAttribute("msg", "게시글 작성에 실패하였습니다.");
+			request.setAttribute("location", "/product/painting");
 		}
-		request.getRequestDispatcher("/views/product/Product_painting.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		
 		
 		

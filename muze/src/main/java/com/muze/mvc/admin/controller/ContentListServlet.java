@@ -33,7 +33,7 @@ public class ContentListServlet extends HttpServlet {
 		}
 		
 		listCount = new Board2Service().getBoardCountAll();
-		pageInfo = new PageInfo(page, 5, listCount, 20);
+		pageInfo = new PageInfo(page, 5, listCount, 15);
 		list = new Board2Service().getBoardListAll(pageInfo);
 		
 		System.out.println(listCount);

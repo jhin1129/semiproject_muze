@@ -39,7 +39,7 @@
 	      <c:if test="${ empty loginMember }">
 		        <a class="mr-4 text-nowrap" href="${path}/member/login">로그인</a>
 		        <a class="mr-4 text-nowrap" href="${path}/member/join_method">회원가입</a>
-		        <a href="#" class="me-5 align-items-center mb-1">
+		        <a href="${paht}/product/cart" class="me-5 align-items-center mb-1">
 		          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-cart2"
 		            viewBox="0 0 16 16">
 		            <path
@@ -50,7 +50,14 @@
 	      
 	      <c:if test="${ not empty loginMember }">
 		        <a class="mr-4 text-nowrap" onclick="location.replace('${ path }/member/logout')">로그아웃</a>
-		        <a class="mr-4 text-nowrap" href="${path}/mypage/welcome" >마이페이지</a>
+		        <c:choose>
+					<c:when test="${ memId  == 'admin' }">
+						<a class="mr-4 text-nowrap" href="${path}/admin/main">관리자페이지</a>
+					</c:when>
+					<c:otherwise>
+						<a class="mr-4 text-nowrap" href="${path}/mypage/welcome">마이페이지</a>
+					</c:otherwise>
+					</c:choose>
 		        <a href="#" class="me-5 align-items-center mb-1">
 		          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-cart2"
 		            viewBox="0 0 16 16">
@@ -115,7 +122,7 @@
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
           <li><a class="dropdown-item" href="${path}/support/list?type=NOTICE">공지사항</a></li>
           <li><a class="dropdown-item" href="${path}/support/list?type=FAQ">자주하는 질문</a></li>
-          <li><a class="dropdown-item" href="${path}/support/list?type=QNA">1:1 문의</a></li>
+          <li><a class="dropdown-item" href="${path}/support/write?type=QNA">1:1 문의</a></li>
         </ul>
       </li>
       <!-- <ul class="nav justify-content-end" id="search">

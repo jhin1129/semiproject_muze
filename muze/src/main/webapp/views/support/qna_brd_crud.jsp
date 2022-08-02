@@ -39,7 +39,7 @@
 			</tr>
 			<tr>
 				<td style="height: 8%;"><b>제목</b></td>
-				<td><input type="text" name="brdTitle" size="40" style="padding-left: 0.5em;" placeholder="제목을 입력해 주세요."></td>
+				<td><input type="text" name="brdTitle" size="40" style="padding-left: 0.5em;" placeholder="제목을 입력해 주세요." required></td>
 			</tr>
 			<tr>
 				<td style="height: 68%;"><b>본문</b></td>

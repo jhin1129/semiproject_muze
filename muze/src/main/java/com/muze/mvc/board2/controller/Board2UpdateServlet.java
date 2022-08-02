@@ -72,7 +72,6 @@ public class Board2UpdateServlet extends HttpServlet {
 		board.setBrdTitle(mr.getParameter("brdTitle"));
 		board.setBrdContent(mr.getParameter("brdContent"));
 //		board.setBrdWriterId(mr.getParameter("brdWriterId"));
-
 		
 		System.out.println(board);
     	

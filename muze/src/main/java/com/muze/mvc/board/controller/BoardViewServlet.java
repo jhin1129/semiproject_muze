@@ -66,11 +66,11 @@ public class BoardViewServlet extends HttpServlet {
     	}    	
     	
     	
-    	board = new BoardService().getBoardByNo(no, hasRead, type);
+    	board = new BoardService().getBoardByBrdNo(no, hasRead, type);
     	
     	if(type.equals("REVIEW")) {
     		Product product = new Product();
-    		product = new BoardService().getProductByNo(board.getBrdProNo());
+    		product = new BoardService().getProductByProNo(board.getBrdProNo());
     		request.setAttribute("product", product);
     	}
     	

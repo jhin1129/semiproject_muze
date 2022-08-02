@@ -135,6 +135,7 @@
 	
 	
 	                <div class="text-right mt-1">
+	                    <button type="button" onclick="location.href='${path}/board/list?type=${type}'" class="btn btn-light py-0">취소</button>
 	                    <button class="btn btn-light py-0">작성</button>
 	                </div>
 	            </div>
@@ -156,8 +157,8 @@
 	                        <div class="col-md-8">
 	                            <div class="card-body">
 	                                <h5 id="proName" class="card-title"></h5>
-	                                <p id="proDescription" class="card-text"></p>
 	                                <p id="proArtistName" class="card-text"><small class="text-muted"></small></p>
+	                                <p id="proDescription" class="card-text"></p>
 	                            </div>
 	                        </div>
 	                    </div>

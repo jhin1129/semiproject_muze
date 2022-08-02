@@ -35,13 +35,13 @@ public class BoardUpdateServlet extends HttpServlet {
 			request.setAttribute("location", "/board/view?type="+type+"&no="+brdNo);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
     	}else {
-    		board = new BoardService().getBoardByNo(brdNo, true, type);
+    		board = new BoardService().getBoardByBrdNo(brdNo, true, type);
     		
     		request.setAttribute("board", board);
     		request.setAttribute("type", type);
     		if(type.equals("REVIEW")) {
     			Product product = new Product();
-    			product = new BoardService().getProductByNo(board.getBrdProNo());
+    			product = new BoardService().getProductByProNo(board.getBrdProNo());
     			request.setAttribute("product", product);
     		}
     		

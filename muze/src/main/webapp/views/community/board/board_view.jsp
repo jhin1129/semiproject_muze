@@ -92,9 +92,11 @@
 
             <!-- 내용 -->
             <div class="my-3 px-3">
-                <p>
-                    ${ board.brdContent }
-                </p>
+            	<div style="min-height: 400px;">
+	                <p>
+	                    ${ board.brdContent }
+	                </p>
+            	</div>
                 <c:if test="${ loginMember.memberNo == board.brdWriterNo }">
 	                <div class="text-right">
 	                    <button onclick="location.href='${path}/board/update?no=${ board.brdNo }&type=${ type }&brdWriterNo=${board.brdWriterNo }'" class="btn btn-light py-0">수정</button>
@@ -121,8 +123,11 @@
 	                        <div class="col-md-8">
 	                            <div class="card-body">
 	                                <h5 class="card-title">${product.proName }</h5>
-	                                <p class="card-text">${product.proDescription }</p>
 	                                <p class="card-text"><small class="text-muted">${product.proArtistName}</small></p>
+	                                <p style="height:80px;" class="card-text">${product.proDescription }</p>
+	                                <div class="text-right">
+	                                	<a href="${path}/product/detail?proNo=${ product.proNo }" class="btn btn-light">작품 상세보기</a>
+	                    			</div>
 	                            </div>
 	                        </div>
 	                    </div>

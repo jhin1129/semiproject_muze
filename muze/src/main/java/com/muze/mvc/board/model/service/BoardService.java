@@ -13,6 +13,7 @@ import com.muze.mvc.board.model.vo.Board;
 import com.muze.mvc.board.model.vo.Comments;
 import com.muze.mvc.board.model.vo.Product;
 import com.muze.mvc.common.util.PageInfo;
+import com.muze.mvc.member.model.vo.Artist;
 import com.muze.mvc.member.model.vo.Member;
 
 import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
@@ -41,11 +42,11 @@ public class BoardService {
 		return list;
 	}
 
-	public Board getBoardByNo(int brdNo, boolean hasRead, String type) {
+	public Board getBoardByBrdNo(int brdNo, boolean hasRead, String type) {
 		Board board = null;
 		Connection connection = getConnection();
 		
-		board = new BoardDao().findBoardByNo(connection, brdNo, type);
+		board = new BoardDao().findBoardByBrdNo(connection, brdNo, type);
 		
 		// 게시글 조회수 증가 로직
 		if(board != null && !hasRead) {
@@ -115,20 +116,20 @@ public class BoardService {
 		return result;
 	}
 
-	public List<Product> getProductListByMemberNo(int memberNo) {
+	public List<Product> getProductListByOrdersMemberNo(int memberNo) {
 		List<Product> list = null;
 		Connection connection = getConnection();
 		
-		list = BoardDao.findProductListByMemberNo(connection, memberNo);
+		list = BoardDao.findProductListByOrdersMemberNo(connection, memberNo);
 		
 		return list;
 	}
-
-	public Product getProductByNo(int brdProNo) {
+	// PRODUCT SERVICE?
+	public Product getProductByProNo(int brdProNo) {
 		Product product = null;
 		Connection connection = getConnection();
 		
-		product = new BoardDao().findProductByNo(connection, brdProNo);
+		product = new BoardDao().findProductByProNo(connection, brdProNo);
 		
 		close(connection);
 		
@@ -213,8 +214,37 @@ public class BoardService {
 		if(content.indexOf("src=\"") == -1) {
 			return null;
 		}
-		System.out.println("리뷰글 작성. 이미지명 : " + content.substring(content.indexOf("src=\"")).split("temporary/")[1].split("\"")[0]);
 		return content.substring(content.indexOf("src=\"")).split("temporary/")[1].split("\"")[0];
+	}
+	//PRODUCT SERVICE
+	public List<Product> getProductListByArtistNo(int proArtistNo) {
+		List<Product> list = null;
+		Connection connection = getConnection();
+		
+		list = new BoardDao().findProductListByArtistNo(connection, proArtistNo);
+		
+		return list;
+	}
+	//PRODUCT SERVICE
+	public Artist getArtistByProNo(int proNo) {
+		Artist artist = null;
+		Connection connection = getConnection();
+		
+		artist = new BoardDao().findArtistByProNo(connection, proNo);
+		
+		close(connection);
+		
+		return artist;
+	}
+	//PRODUCT SERVICE
+	public int getTotalPrice(List<Product> list) {
+		int totalPrice = 0;
+		
+		for(Product product : list) {
+			totalPrice += product.getProPrice() * product.getPayQuantity();
+		}
+		
+		return totalPrice;
 	}
 
 

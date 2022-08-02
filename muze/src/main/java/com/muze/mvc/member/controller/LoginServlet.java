@@ -57,6 +57,7 @@ public class LoginServlet extends HttpServlet {
 				response.addCookie(cookie);
 			}
 			
+			session.setAttribute("memId", memId);
 			session.setAttribute("loginMember", loginMember);
 			session.setAttribute("artist", artist);
 			response.sendRedirect(request.getContextPath() + "/");

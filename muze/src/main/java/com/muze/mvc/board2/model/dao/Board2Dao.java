@@ -41,7 +41,7 @@ public class Board2Dao {
 		int count = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT COUNT(*) FROM BOARD WHERE BRD_STATUS='Y'";
+		String query = "SELECT COUNT(*) FROM BOARD";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
@@ -212,7 +212,6 @@ public class Board2Dao {
 						+ 					   "BRD_RENAMEDFILENAME "
 						+ 				"FROM BOARD "
 						+ 				"JOIN MEMBER ON(BOARD.BRD_WRITER_NO = MEMBER.MEMBER_NO) "
-						+ 				"WHERE BRD_STATUS = 'Y' "
 						+               "ORDER BY BOARD.BRD_NO DESC"
 						+ 				") "
 						+ 		") "
@@ -321,16 +320,17 @@ public class Board2Dao {
 	public int updateBoard(Connection connection, Board2 board) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "UPDATE BOARD SET BRD_TITLE=?,BRD_CONTENT=?,BRD_ORIGINALFILENAME=?,BRD_RENAMEDFILENAME=? WHERE BRD_NO=?";
+		String query = "UPDATE BOARD SET BRD_TITLE=?,BRD_CONTENT=?,BRD_REP_CONTENT=?,BRD_ORIGINALFILENAME=?,BRD_RENAMEDFILENAME=? WHERE BRD_NO=?";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
 			
 			pstmt.setString(1, board.getBrdTitle());
 			pstmt.setString(2, board.getBrdContent());
-			pstmt.setString(3, board.getBrdOriginalFileName());
-			pstmt.setString(4, board.getBrdRenamedFileName());
-			pstmt.setInt(5, board.getBrdNo());
+			pstmt.setString(3, board.getBrdRepContent());
+			pstmt.setString(4, board.getBrdOriginalFileName());
+			pstmt.setString(5, board.getBrdRenamedFileName());
+			pstmt.setInt(6, board.getBrdNo());
 			
 			result = pstmt.executeUpdate();
 			
@@ -354,7 +354,7 @@ public class Board2Dao {
 				+ "?, "						//BRD_WRITER_NO
 				+ "?, "						//BRD_PRO_NO
 				+ "?, "						//BRD_CATEGORY
-				+ "NULL, "					//BRD_REP_CONTENT
+				+ "?, "						//BRD_REP_CONTENT
 				+ "?, "						//BRD_TYPE
 				+ "'Y' ,"					//BRD_STATUS
 				+ "?, "						//BRD_ORIGINALFILENAME
@@ -378,10 +378,11 @@ public class Board2Dao {
 			} else {
 				pstmt.setString(5, "");				
 			}
-			pstmt.setString(6, board.getBrdType());
-			pstmt.setString(7, board.getBrdOriginalFileName());
-			pstmt.setString(8, board.getBrdRenamedFileName());
-			pstmt.setString(9, board.getBrdImg());
+			pstmt.setString(6, board.getBrdRepContent());
+			pstmt.setString(7, board.getBrdType());
+			pstmt.setString(8, board.getBrdOriginalFileName());
+			pstmt.setString(9, board.getBrdRenamedFileName());
+			pstmt.setString(10, board.getBrdImg());
 			
 			result = pstmt.executeUpdate();
 			

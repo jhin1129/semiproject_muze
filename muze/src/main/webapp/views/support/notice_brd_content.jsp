@@ -62,6 +62,8 @@
             <button type="button" class="button-white" style="margin: 0;" 
             onclick="location.href='${ path }/support/update?brdNo=${ board.brdNo }&type=NOTICE'"><b>수정</b></button>
             <button type="button" class="button-white" id="btnDelete" style="margin: 0;"><b>삭제</b></button>
+            <button type="button" class="button-white" style="margin: 0;" 
+            onclick="location.href='${ path }/support/update?brdNo=${ board.brdNo }&type=NOTICE'"><b>답글</b></button>
 <%--        </c:if>  --%>
             <button type="button" class="button-white" style="margin: 0;" 
             onclick="location.href='${ path }/support/list?type=NOTICE'"><b>목록</b></button>

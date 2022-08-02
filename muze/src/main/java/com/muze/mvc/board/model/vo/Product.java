@@ -33,4 +33,6 @@ public class Product {
 	String proType;
 	
 	int rowNum;
+	
+	int payQuantity;
 }
