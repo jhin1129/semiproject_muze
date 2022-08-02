@@ -19,6 +19,7 @@
                             <a href="javascript:recentlist();">최신순</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
                             <a href="javascript:pricelist();">낮은가격</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
                             <a href="javascript:pricelistdesc();">높은가격</a>
+                           
                         </p>
                     </div>
             </div>
@@ -33,210 +34,28 @@
                 </form>
             </div>
         </div>
-        <div class="row my-5">
-
-            <div class="col-lg-3 col-md-6">
-                <div class="card" style="width: 16rem;">
-                    <img style="background-color: black;" width="100%" height="254px">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's
-                            content.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <div class="card" style="width: 16rem;">
-                    <img style= width="100%" height="254px" src="${ path }/resources/upload/product/painting">
-                    <div class="card-body">
-                        <h5 class="card-title">${ product.proName}</h5>
-                        <p class="card-text">${ product.proSize }
-                        					 </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <div class="card" style="width: 16rem;">
-                    <img style="background-color: black;" width="100%" height="254px">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's
-                            content.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <div class="card" style="width: 16rem;">
-                    <img style="background-color: black;" width="100%" height="254px">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's
-                            content.</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+        
 
         <div class="row my-5">
 
-            <div class="col-lg-3 col-md-6">
+       	<c:forEach var="product" items="${ list }">
+			<div class="col-lg-3 col-md-6">
                 <div class="card" style="width: 16rem;">
-                    <img style="background-color: black;" width="100%" height="254px">
+                    <img src='${path}/resources/upload/product/painting/${fn:replace(product.proImg,"\\","/")}' width="100%" height="254px">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's
-                            content.</p>
+                        <h5 class="card-title">${product.proName }</h5>
+                        <p class="card-text"> ${product.proSize}<br>
+                        ${product.proPrice} </p>
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6">
-                <div class="card" style="width: 16rem;">
-                    <img style="background-color: black;" width="100%" height="254px">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's
-                            content.</p>
-                    </div>
-                </div>
-            </div>
+		</c:forEach>
+		
+	
+        
 
-            <div class="col-lg-3 col-md-6">
-                <div class="card" style="width: 16rem;">
-                    <img style="background-color: black;" width="100%" height="254px">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's
-                            content.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <div class="card" style="width: 16rem;">
-                    <img style="background-color: black;" width="100%" height="254px">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's
-                            content.</p>
-                    </div>
-                </div>
-            </div>
-
-        <div class="row my-5">
-
-            <div class="col-lg-3 col-md-6">
-                <div class="card" style="width: 16rem;">
-                    <img style="background-color: black;" width="100%" height="254px">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's
-                            content.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <div class="card" style="width: 16rem;">
-                    <img style="background-color: black;" width="100%" height="254px">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's
-                            content.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <div class="card" style="width: 16rem;">
-                    <img style="background-color: black;" width="100%" height="254px">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's
-                            content.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="card" style="width: 16rem;">
-                    <img style="background-color: black;" width="100%" height="254px">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's
-                            content.</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="row my-5">
-
-            <div class="col-lg-3 col-md-6">
-                <div class="card" style="width: 16rem;">
-                    <img style="background-color: black;" width="100%" height="254px">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's
-                            content.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <div class="card" style="width: 16rem;">
-                    <img style="background-color: black;" width="100%" height="254px">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's
-                            content.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <div class="card" style="width: 16rem;">
-                    <img style="background-color: black;" width="100%" height="254px">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's
-                            content.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <div class="card" style="width: 16rem;">
-                    <img style="background-color: black;" width="100%" height="254px">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's
-                            content.</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
+		</div>
         <div class="row">
             <div class="col-4"></div>
             <div class="col-4">
@@ -261,14 +80,10 @@
             </div>
 
             <div class="col-4 text-right">
-                <button class="btn btn-light text-nowrap" onclick="location.href='${path}/product/painting?type=FREE'">글 쓰기</button>
+                <button class="btn btn-light text-nowrap" onclick="location.href='${ path }/product/writer'">작품 등록</button>
             </div>
         </div>
-            <div class="col-md-6">
-	            <div class="text-right mt-1">
-	                    <button class="btn btn-light py-0"  onclick="location.href='${ path }/product/painting/writer'">작품 등록</button>
-	            </div>
-            </div>
+
         </div>
         </div>
 
