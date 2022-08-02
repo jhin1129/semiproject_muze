@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.muze.mvc.member.model.vo.Artist;
+import com.muze.mvc.member.model.vo.Member;
 
 public class ArtistDao {
 	public Artist findArtistByNo(Connection connection, int memberNo) {
@@ -42,4 +43,30 @@ public class ArtistDao {
 		
 		return artist;
 	}
+
+	public static int insertArtist(Connection connection, Artist artist) {
+		int result = 0;
+
+		PreparedStatement pstm = null;
+		String query = "INSERT INTO ARTIST_DETAIL VALUES (?, ?, ?, ?, ?)";
+		
+		try {
+			pstm = connection.prepareStatement(query);
+			
+			pstm.setInt(1, artist.getArtistNo());
+			pstm.setString(2, artist.getArtistImg());
+			pstm.setString(3, artist.getArtistIntroduce());
+			pstm.setString(4, artist.getBusName());
+			pstm.setString(5, artist.getBusLicense());
+					
+			result = pstm.executeUpdate();		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+		}
+		
+		return result;
+	}
+	
 }
