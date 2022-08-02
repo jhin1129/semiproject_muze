@@ -52,14 +52,14 @@
                                     <td>
                                         <div class="my-2">판매가</div>
                                     </td>
-                                    <td>${product.proPrice }</td>
+                                    <td>${product.proPrice}</td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <div class="mt-2">수량선택</div>
                                     </td>
                                     <td>
-                                        <input id="quantitySelect" class="mt-2" type="number" min="1" max="${product.proQuantity }" value="1">
+                                        <input id="quantitySelect" class="mt-2" type="number" min="1" max="${product.proQuantity}" value="1">
                                     </td>
                                 </tr>
                                 <tr style="border-bottom: 1px solid rgba(0,0,0,.1);">
@@ -73,22 +73,42 @@
                             </table>
 
                             <table class="my-2" style="width: 100%;">
-                                <tr>
-                                    <td style="width: 50%;">
-                                        <button type="button" onclick="location.href='${path}/board/list?type=REVIEW&searchType=proNo&searchVal=${product.proNo }&isSearch=true'" class="py-2 text-center"
-                                            style="border: 1px solid; width: 100%; height: 100%;">리뷰 확인</div>
-                                    </td>
-                                    <td style="width: 50%;">
-                                        <button id="insertCart" class="py-2 text-center"
-                                            style="border: 1px solid; width: 100%; height: 100%;">장바구니</button>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td colspan="2">
-                                        <button id="payment" class="col-12 my-2 py-2 text-center" style="border: 1px solid;">구매하기</button>
-                                    </td>
-                                </tr>
+                            	<c:if test="${loginMember.memberRole == 'MEMBER_ROLE_ARTIST' || loginMember.memberRole == 'MEMBER_ROLE_ADMIN'}">
+	                                <tr>
+	                                    <td style="width: 50%;">
+	                                        <button type="button" class="py-2 text-center"
+	                                            style="border: 1px solid; width: 100%; height: 100%;">수정</div>
+	                                    </td>
+	                                    <td style="width: 50%;">
+	                                        <button class="py-2 text-center"
+	                                            style="border: 1px solid; width: 100%; height: 100%;">삭제</button>
+	                                    </td>
+	                                </tr>
+	
+	                                <tr>
+	                                    <td colspan="2">
+	                                        <button onclick="location.href='${path}/board/list?type=REVIEW&searchType=proNo&searchVal=${product.proNo }&isSearch=true'" class="col-12 my-2 py-2 text-center" style="border: 1px solid;">리뷰 확인</button>
+	                                    </td>
+	                                </tr>
+                            	</c:if>
+                            	<c:if test="${loginMember.memberRole != 'MEMBER_ROLE_ARTIST' && loginMember.memberRole != 'MEMBER_ROLE_ADMIN'}">
+	                                <tr>
+	                                    <td style="width: 50%;">
+	                                        <button type="button" onclick="location.href='${path}/board/list?type=REVIEW&searchType=proNo&searchVal=${product.proNo }&isSearch=true'" class="py-2 text-center"
+	                                            style="border: 1px solid; width: 100%; height: 100%;">리뷰 확인</div>
+	                                    </td>
+	                                    <td style="width: 50%;">
+	                                        <button id="insertCart" class="py-2 text-center"
+	                                            style="border: 1px solid; width: 100%; height: 100%;">장바구니</button>
+	                                    </td>
+	                                </tr>
+	
+	                                <tr>
+	                                    <td colspan="2">
+	                                        <button id="payment" class="col-12 my-2 py-2 text-center" style="border: 1px solid;">구매하기</button>
+	                                    </td>
+	                                </tr>
+                            	</c:if>
                             </table>
 
 
