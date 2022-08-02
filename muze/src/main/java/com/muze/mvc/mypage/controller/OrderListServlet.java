@@ -10,53 +10,78 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.muze.mvc.member.model.service.MemberService;
+import com.muze.mvc.member.model.vo.Artist;
 import com.muze.mvc.member.model.vo.Member;
 import com.muze.mvc.mypage.model.service.MyOrderService;
 import com.muze.mvc.mypage.model.service.WelcomeService;
 import com.muze.mvc.mypage.model.vo.MyOrder;
 import com.muze.mvc.mypage.model.vo.Welcome;
 
-@WebServlet("/mypage/cancel_list")
-public class ListCancelServlet extends HttpServlet {
+@WebServlet("/mypage/list")
+public class OrderListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ListCancelServlet() {
+    public OrderListServlet() {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
     	Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
+		Artist loginArtist = new MemberService().getArtistByNo(loginMember.getMemberNo());
+		int artNo = 0; 
 		
     	if (loginMember != null) {
-			Member member = new Member();
-			member.setMemberNo(loginMember.getMemberNo());			
-			member.setMemberName(loginMember.getMemberName());
-			request.setAttribute("member", member);
+    		if(loginArtist!= null) {
+    			artNo = loginArtist.getArtistNo();
+    		}
+    		
+    		int memNo = loginMember.getMemberNo();
 			
 			// 1st row
 	    	Welcome welcomeRow = null;   	
-	    	welcomeRow = new WelcomeService().getWelcomeRow(member);
+	    	welcomeRow = new WelcomeService().getWelcomeRow(memNo);
+			Member member = new Member();
+//			member.setMemberNo(loginMember.getMemberNo());			
+			member.setMemberName(loginMember.getMemberName());
+    		
+    		request.setAttribute("member", member);
 			request.setAttribute("welcomeRow", welcomeRow);
 			
-			// 2. 검색
+			// 검색
 			List<MyOrder> list = null;
 			
 			// 매개 값 (검색 날짜) 가져오기 
 			String dateFrom = request.getParameter("dateFrom");
 			String dateTo = request.getParameter("dateTo");
-	
-			// 처리 결과 
-			list = new MyOrderService().cancelByDate(dateFrom, dateTo, member);
 			
+			System.out.println(dateFrom);
+			System.out.println(dateTo);
+			
+			// 검색 타입 가져오기 
+			String type = request.getParameter("type");
+			String path = null;
+			
+			if(type.equals("ORDER")) {
+				path = "/views/mypage/list_order.jsp";
+			} else if(type.equals("CANCEL")) {
+				path = "/views/mypage/list_cancel.jsp";
+			} else if(type.equals("REFUND")) {
+				path = "/views/mypage/list_refund.jsp";
+			}
+	
+			list = new MyOrderService().orderByDate(dateFrom, dateTo, memNo, type, artNo);
+
 			request.setAttribute("list", list);
-	    	request.getRequestDispatcher("/views/mypage/list_cancel.jsp").forward(request, response);
+			request.setAttribute("type", type);
+			request.getRequestDispatcher(path).forward(request, response);	
     	} else {
     		request.setAttribute("msg", "로그인이 필요한 서비스입니다.");
 			request.setAttribute("location", "/");		
     		
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
     	}
-
+    	
 	}
 
 }

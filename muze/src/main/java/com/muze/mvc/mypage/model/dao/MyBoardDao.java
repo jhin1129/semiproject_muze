@@ -15,17 +15,32 @@ import com.muze.mvc.common.util.PageInfo;
 
 public class MyBoardDao {
 	
-	public int getBoardCount(Connection connection, String type, String searchVal) {
+	public int getBoardCount(Connection connection, String type, int searchVal) {
 		int count = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String query = null;
+		String subquery = null;
 
-		query = "SELECT COUNT(*) FROM BOARD JOIN MEMBER ON(BOARD.BRD_WRITER_NO = MEMBER.MEMBER_NO) WHERE BRD_STATUS='Y' AND BRD_TYPE=? AND MEMBER_ID LIKE '%"+searchVal+"%'";
+		if(type.equals("REVIEW")) {
+			subquery = "AND BRD_TYPE= 'REVIEW' AND MEMBER_NO = ";
+		}else if (type.equals("REVIEW_ART")) {
+			subquery = "AND BRD_TYPE= 'REVIEW' AND PRO_ARTIST_NO = ";
+		}else if (type.equals("FREE")){
+			subquery = "AND BRD_TYPE= 'FREE' AND MEMBER_NO = ";
+		}else if (type.equals("QNA")){
+			subquery = "AND BRD_TYPE= 'QNA' AND MEMBER_NO = ";
+		}
+
+//		query = "SELECT COUNT(*) FROM BOARD JOIN MEMBER ON(BOARD.BRD_WRITER_NO = MEMBER.MEMBER_NO) WHERE BRD_STATUS='Y'" + subquery + searchVal;
+		query = "SELECT COUNT(*) "
+				+ "FROM BOARD "
+				+ "FULL JOIN MEMBER ON(BOARD.BRD_WRITER_NO = MEMBER.MEMBER_NO) "
+				+ "FULL JOIN PRODUCT ON(BOARD.BRD_PRO_NO = PRODUCT.PRO_NO) "
+				+ "WHERE BRD_STATUS='Y' " + subquery + searchVal;
 		
 		try {
 			pstmt = connection.prepareStatement(query);
-			pstmt.setString(1, type);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
@@ -41,19 +56,29 @@ public class MyBoardDao {
 		return count;
 	}
 
-	public List<Board> findAll(Connection connection, PageInfo pageInfo, String type, String searchVal) {
+	public List<Board> findAll(Connection connection, PageInfo pageInfo, String type, int searchVal) {
 		List<Board> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String typequery[] = {"",""};
+		String typequery[] = {"","",""};
 		String subquery = "";
 		if(type.equals("REVIEW")) {
 			typequery[0] = " PRO_NAME,";
 			typequery[1] = " JOIN PRODUCT ON (BOARD.BRD_PRO_NO = PRODUCT.PRO_NO)";
+			typequery[2] = " AND BRD_TYPE = 'REVIEW'"  ;
+			subquery = " AND MEMBER_NO = " + searchVal ;
+		}else if(type.equals("REVIEW_ART")) {
+			typequery[0] = " PRO_NAME,";
+			typequery[1] = " JOIN PRODUCT ON (BOARD.BRD_PRO_NO = PRODUCT.PRO_NO)";
+			typequery[2] = " AND BRD_TYPE = 'REVIEW'"  ;
+			subquery = " AND PRO_ARTIST_NO = " + searchVal ;
+		}else if(type.equals("FREE")){
+			typequery[2] = " AND BRD_TYPE = 'FREE'"  ;
+			subquery = " AND MEMBER_NO = " + searchVal ;
+		}else if(type.equals("QNA")){
+			typequery[2] = " AND BRD_TYPE = 'QNA'"  ;
+			subquery = " AND MEMBER_NO = " + searchVal ;
 		}
-
-			subquery = " AND MEMBER_ID LIKE '%" + searchVal + "%'";
-	
 		
 		String query = "SELECT RNUM,"
 						+ " BRD_NO,"
@@ -109,20 +134,20 @@ public class MyBoardDao {
 						+ 				" JOIN MEMBER ON(BOARD.BRD_WRITER_NO = MEMBER.MEMBER_NO)"
 						+ 				typequery[1]
 						+ 				" WHERE BRD_STATUS = 'Y'"
-						+               " AND BRD_TYPE= ?"    
+						+               typequery[2]    
+//						+               " AND BRD_TYPE= ?"    
 						+				subquery
 						+               " ORDER BY BOARD.BRD_NO DESC"
 						+ 				")"
 						+ 		")"
 						+ 	" WHERE RNUM BETWEEN ? AND ?";
 		
-		
 		try {
 			pstmt = connection.prepareStatement(query);
 			
-			pstmt.setString(1, type);
-			pstmt.setInt(2, pageInfo.getStartList());
-			pstmt.setInt(3, pageInfo.getEndList());
+//			pstmt.setString(1, type);
+			pstmt.setInt(1, pageInfo.getStartList());
+			pstmt.setInt(2, pageInfo.getEndList());
 			
 			rs = pstmt.executeQuery();
 			
@@ -138,7 +163,7 @@ public class MyBoardDao {
 				board.setBrdWriterNo(rs.getInt("BRD_WRITER_NO"));
 				board.setBrdWriterId(rs.getString("MEMBER_ID"));
 				board.setBrdProNo(rs.getInt("BRD_PRO_NO"));
-				if(type.equals("REVIEW"))
+				if(type.equals("REVIEW") || type.equals("REVIEW_ART"))
 					board.setBrdProName(rs.getString("PRO_NAME"));
 				board.setBrdCategory(rs.getString("BRD_CATEGORY"));
 				board.setBrdRepContent(rs.getString("BRD_REP_CONTENT"));
@@ -158,11 +183,11 @@ public class MyBoardDao {
 		return list;
 	}
 
-	public List<Board2> getQnAList(Connection connection, PageInfo pageInfo, String type, String searchVal) {
+	public List<Board2> getQnAList(Connection connection, PageInfo pageInfo, String type, int searchVal) {
 		List<Board2> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String subquery = "WHERE BRD_STATUS = 'Y' AND BRD_TYPE= ? AND MEMBER_ID LIKE '%" + searchVal + "%' ";
+		String subquery = "WHERE BRD_STATUS = 'Y' AND BRD_TYPE= ? AND MEMBER_NO = " + searchVal;
 		String query = "SELECT RNUM, "
 						+ "BRD_NO, "
 						+ "BRD_TITLE, "

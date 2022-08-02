@@ -15,7 +15,7 @@ import com.muze.mvc.mypage.model.vo.MyMileage;
 public class MyInfoDao {
 
 	// 마일리지 가져오기 
-	public List<MyMileage> getMileage(Connection connection, String dateFrom, String dateTo, Member member) {
+	public List<MyMileage> getMileage(Connection connection, String dateFrom, String dateTo, int memNo) {
 		List<MyMileage> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -28,7 +28,7 @@ public class MyInfoDao {
 			
 			pstmt.setString(1, dateFrom);
 			pstmt.setString(2, dateTo);
-			pstmt.setInt(3, member.getMemberNo()); 
+			pstmt.setInt(3, memNo); 
 
 			rs = pstmt.executeQuery();
 

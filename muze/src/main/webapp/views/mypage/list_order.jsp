@@ -34,7 +34,7 @@
         	<div class="container">
           
             <!-- 첫번째 행 -->
-			<jsp:include page="/views/mypage/welcome_row.jsp" flush="false"/>
+			<jsp:include page="/views/mypage/welcome_row_common.jsp" flush="false"/>
 
            <!-- 두번째 행 -->
 			<div class="row">
@@ -44,13 +44,11 @@
 			   </form>
 			   	  <!-- 기간별 검색 -->
 			      <fieldset class="mySearchDate">
-     				<form action="${ path }/mypage/order_list" method="get">
 					  <div class= "btnsearch" role="group" aria-label="First group">
 						<jsp:include page="/views/mypage/list_datepick.jsp" flush="false"/>
 						<!-- 조회버튼 -->
 			       		<button type="submit" class="btn btn-outline-secondary" id="srhbtn7">조회</button>
 			          </div>
-			       </form>
   				 </fieldset>
 			  </div>
             </div>
@@ -118,13 +116,19 @@
     
     <script>
     $(document).ready(()=>{
+    	
 		$('#mycbtn').click(function() { 
 			if(confirm('주문을 취소하시겠습니까..?')) {
 				location.replace('${path}/mypage/cancel');
 			}
 		});
+		
+	    $("#srhbtn7").on("click", () => {
+			let datepicker1 = $('#datepicker1').val();
+			let datepicker2 = $('#datepicker2').val();
+			location.href="${path}/mypage/list?type=ORDER"+"&dateFrom="+datepicker1+"&dateTo="+datepicker2;
+		});
     }); 
-
     </script>
 
 	<!-- footer -->
