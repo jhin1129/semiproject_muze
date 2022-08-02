@@ -2,7 +2,9 @@ package com.muze.mvc.product.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Logger;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,17 +18,14 @@ import com.muze.mvc.product.model.service.PaintingService;
 
 @WebServlet(name = "paintingServlet", urlPatterns = { "/product/painting" })
 public class PaintingServlet extends HttpServlet {
+	private static final Logger log = Logger.getLogger(PaintingServlet.class.getName()); 
 	private static final long serialVersionUID = 1L;
        
     public PaintingServlet() {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/views/product/Product_painting.jsp").forward(request, response);
-	}
-
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		int page = 0;
     	int listCount = 0;
     	PageInfo pageInfo = null;
@@ -38,15 +37,24 @@ public class PaintingServlet extends HttpServlet {
 			page = 1;
 		}
     	
-    	listCount = new PaintingService().getPaintingCount();
-    	pageInfo = new PageInfo(page, 10, listCount, 5);    
-    	list = new PaintingService().getPaingingList(pageInfo);
+    	listCount = new PaintingService().getPaintingCount(); // 페이지 숫자를 넘버링하기 위한 총 리스트 갯수
+    	pageInfo = new PageInfo(page, 10, listCount, 4); // 페이지 정보 만들기
+    	list = new PaintingService().getPaingingList(pageInfo); // 페이지 별 실제 리스트 개수
     	
-    	System.out.println(list);
     	
     	request.setAttribute("pageInfo", pageInfo);
     	request.setAttribute("list", list);
-    	request.getRequestDispatcher("/views/product/Product_painting.jsp").forward(request, response);
+    	
+    	
+
+		request.getRequestDispatcher("/views/product/Product_painting.jsp").forward(request, response);
+	}
+	
+	
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 	}
 
 }

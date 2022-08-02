@@ -1,5 +1,7 @@
 package com.muze.mvc.product.model.dao;
 
+import static com.muze.mvc.common.jdbc.JDBCTemplate.close;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,9 +12,7 @@ import java.util.List;
 import com.muze.mvc.board.model.vo.Product;
 import com.muze.mvc.common.util.PageInfo;
 
-import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
-
-public class PaintingDao {
+public class CraftDao {
 
 	public int getPaintingCount(Connection connection) {
 		int count = 0;
@@ -21,7 +21,7 @@ public class PaintingDao {
 		String query = "SELECT "
 				+ " COUNT(*)"
 				+ " FROM PRODUCT"
-				+ " WHERE PRO_TYPE = '회화'";
+				+ " WHERE PRO_TYPE = '공예'";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
@@ -68,7 +68,7 @@ public class PaintingDao {
 				+ " PRO_DESCRIPTION,"
 				+ " PRO_TYPE"
 				+ " FROM PRODUCT"
-				+ " WHERE PRO_TYPE = '회화' ORDER BY PRO_NO DESC"
+				+ " WHERE PRO_TYPE = '공예' ORDER BY PRO_NO DESC"
 				+ ")"
 				+ " WHERE RNUM BETWEEN ? AND ?";
 		
@@ -108,7 +108,5 @@ public class PaintingDao {
 		
 		return list;
 	}
-
-	
 
 }
