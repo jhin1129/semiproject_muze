@@ -75,18 +75,18 @@
                             <table class="my-2" style="width: 100%;">
                                 <tr>
                                     <td style="width: 50%;">
-                                        <div onclick="location.href='${path}/board/list?type=REVIEW&searchType=proNo&searchVal=${product.proNo }&isSearch=true'" class="py-2 text-center"
+                                        <button type="button" onclick="location.href='${path}/board/list?type=REVIEW&searchType=proNo&searchVal=${product.proNo }&isSearch=true'" class="py-2 text-center"
                                             style="border: 1px solid; width: 100%; height: 100%;">리뷰 확인</div>
                                     </td>
                                     <td style="width: 50%;">
-                                        <div class="py-2 text-center"
-                                            style="border: 1px solid; width: 100%; height: 100%;">장바구니</div>
+                                        <button id="insertCart" class="py-2 text-center"
+                                            style="border: 1px solid; width: 100%; height: 100%;">장바구니</button>
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <td colspan="2">
-                                        <div class="col-12 my-2 py-2 text-center" style="border: 1px solid;">구매하기</div>
+                                        <button id="payment" class="col-12 my-2 py-2 text-center" style="border: 1px solid;">구매하기</button>
                                     </td>
                                 </tr>
                             </table>
@@ -228,11 +228,20 @@
     </div>
 	
 	<script>
-			
-		
 		$("#quantitySelect").on("change", () => {
 			$("#totalPrice").text(${product.proPrice} * $("#quantitySelect").val());
 		});
+		
+		$("#payment").on("click", () => {
+			var value = $("#quantitySelect").val();
+			var min = $("#quantitySelect").attr("min");
+			var max = $("#quantitySelect").attr("max");
+			if(value >= min && value <= max){
+				location.href="${path}/product/payment?proNo=${product.proNo}&payQuantity=" + $("#quantitySelect").val();
+			} else {
+				alert("수량을 다시 입력해주세요");
+			}
+		})
 	</script>
 
 <jsp:include page="/views/common/footer.jsp"/>

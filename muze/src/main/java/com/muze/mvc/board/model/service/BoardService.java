@@ -124,7 +124,7 @@ public class BoardService {
 		
 		return list;
 	}
-
+	// PRODUCT SERVICE?
 	public Product getProductByProNo(int brdProNo) {
 		Product product = null;
 		Connection connection = getConnection();
@@ -214,10 +214,9 @@ public class BoardService {
 		if(content.indexOf("src=\"") == -1) {
 			return null;
 		}
-		System.out.println("리뷰글 작성. 이미지명 : " + content.substring(content.indexOf("src=\"")).split("temporary/")[1].split("\"")[0]);
 		return content.substring(content.indexOf("src=\"")).split("temporary/")[1].split("\"")[0];
 	}
-
+	//PRODUCT SERVICE
 	public List<Product> getProductListByArtistNo(int proArtistNo) {
 		List<Product> list = null;
 		Connection connection = getConnection();
@@ -226,7 +225,7 @@ public class BoardService {
 		
 		return list;
 	}
-
+	//PRODUCT SERVICE
 	public Artist getArtistByProNo(int proNo) {
 		Artist artist = null;
 		Connection connection = getConnection();
@@ -236,6 +235,16 @@ public class BoardService {
 		close(connection);
 		
 		return artist;
+	}
+	//PRODUCT SERVICE
+	public int getTotalPrice(List<Product> list) {
+		int totalPrice = 0;
+		
+		for(Product product : list) {
+			totalPrice += product.getProPrice() * product.getPayQuantity();
+		}
+		
+		return totalPrice;
 	}
 
 
