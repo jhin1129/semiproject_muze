@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.ServletException;
@@ -13,9 +14,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+import com.muze.mvc.board.model.service.BoardService;
+import com.muze.mvc.event.model.dao.EventDao;
+import com.muze.mvc.event.model.service.EventService;
 import com.muze.mvc.event.model.vo.Event;
-
+import com.muze.mvc.member.model.vo.Member;
 
 @WebServlet("/event")
 public class EventServlet extends HttpServlet {
@@ -26,47 +32,53 @@ public class EventServlet extends HttpServlet {
     
     }
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
+		Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
 		
-		request.getRequestDispatcher("/views/event/eventpage8.jsp").forward(request, response);
+		List<Event> list = null;
+		
+		if(loginMember != null) {
+			list = new EventService().getEventListByMemberNo(loginMember.getMemberNo());
+		}
+		
+		System.out.println(list);
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("/views/event/eventpage.jsp").forward(request, response);
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int result = 0;
+		boolean isAlreadyEvent = false;
+		// 로그인 체크
+		HttpSession session = request.getSession(false);
+		Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
 		
-		
-		String checkDate = request.getParameter("checkDate");
-		
-		System.out.println(checkDate);
-		
-		Event event = new Event();
-		//Date date = parse("checkDate");
-		  
-		
-//		event.setEvAttendDate(request.getParameter("checkDate"));
-//		event.setEvAttendDate(request.getParameter("attDate"));
+		// 로그인된 회원만 이용할 수 있음
+		if (loginMember != null ) {
+			isAlreadyEvent = new EventService().isAlreadyEvent(loginMember.getMemberNo());
+			
+			if(isAlreadyEvent == false) {
+				new EventService().insertEvent(loginMember.getMemberNo());
+				response.setContentType("application/json;charset=UTF-8");
+				new Gson().toJson(isAlreadyEvent, response.getWriter());
 
-//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.US);
-//		LocalDate checkDate = LocalDate.parse(checkDate, formatter);
-//
-//		System.out.println(checkDate);
-//		System.out.println(formatter.format(checkDate));
-		
-//		event.setEvAttendDate(request.getParameter("checkDate1"));
-		
-		  
-//			  String checkDate = request.getParameter("checkDate");
-//	            String str = checkDate;
-//	            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//	            Date date = format.parse(str);
-//	            System.out.println("Date : " + date);
-	     
-	        
-		  
-//		  event.setEvAttendDate(request.getParameter("checkDate"));
-		
-	    }
+			} else {
+				response.setContentType("application/json;charset=UTF-8");
+				new Gson().toJson(isAlreadyEvent, response.getWriter());
+			}
+			
+		}
+			
+		else {
+			request.setAttribute("msg", "로그인 후 이용해주세요");
+			request.setAttribute("location", "/member/login");
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}
 	}
+
+
+}
 
 

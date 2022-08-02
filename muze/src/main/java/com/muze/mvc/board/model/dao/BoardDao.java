@@ -182,7 +182,6 @@ public class BoardDao {
 				board.setBrdRenamedFileName(rs.getString("BRD_RENAMEDFILENAME"));
 				board.setBrdImg(rs.getString("BRD_IMG"));
 				list.add(board);
-				System.out.println(board);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -424,7 +423,7 @@ public class BoardDao {
 		
 		return list;
 	}
-
+	//PRODUCT DAO?
 	public Product findProductByProNo(Connection connection, int no) {
 		Product product = null;
 		PreparedStatement pstmt = null;
@@ -500,7 +499,7 @@ public class BoardDao {
 		
 		return result;
 	}
-
+	//PRODUCT SERVICE
 	public List<Product> findProductListByArtistNo(Connection connection, int proArtistNo) {
 		List<Product> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -556,7 +555,7 @@ public class BoardDao {
 		
 		return list;
 	}
-
+	//PRODUCTDAO
 	public Artist findArtistByProNo(Connection connection, int proNo) {
 		Artist artist = null;
 		PreparedStatement pstmt = null;

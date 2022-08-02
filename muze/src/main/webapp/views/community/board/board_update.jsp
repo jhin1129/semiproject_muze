@@ -61,7 +61,11 @@
 							<c:if test="${board.brdType == 'REVIEW' }">
 		                        <tr>
 		                            <th class="table-active">리뷰 작품</th>
-		                            <td><button type="button" class="btn btn-light py-0" id="btnFindProduct">찾아보기</button>${product.proName }</td>
+		                            <td>
+			                            <button type="button" class="btn btn-light py-0" id="btnFindProduct">찾아보기</button>
+	                           	       	<input type="text" id="product" name="product" readonly style="border: 0px;" value="${product.proName }">
+		                            	<input type="hidden" id="proNo" name="proNo">
+		                            </td>
 		                        </tr>
 	                        </c:if>
 	
@@ -163,9 +167,9 @@
 	                        <!-- 이미지 상세내용 -->
 	                        <div class="col-md-8">
 	                            <div class="card-body">
-	                                <h5 class="card-title">${product.proName }</h5>
-	                                <p class="card-text"><small class="text-muted">${product.proArtistName }</small></p>
-	                                <p class="card-text">${product.proDescription }</p>
+	                                <h5 id="proName" class="card-title">${product.proName }</h5>
+	                                <p id="proArtistName" class="card-text"><small class="text-muted">${product.proArtistName }</small></p>
+	                                <p id="proDescription" class="card-text">${product.proDescription }</p>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -184,7 +188,7 @@
 <script>
 	$(document).ready(() => {
 		$("#btnFindProduct").on("click", () => {
-			let url ="${path}/board/findProduct?memberNo=${board.brdWriterNo}&isUpdate=FALSE";
+			let url ="${path}/board/findProduct?memberNo=${board.brdWriterNo}";
 			let status = "left=500px,top=200px,width=600px,height=600px";
 			
 			open(url,"",status);
