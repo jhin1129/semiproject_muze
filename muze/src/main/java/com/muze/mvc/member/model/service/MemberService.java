@@ -8,6 +8,8 @@ import static com.muze.mvc.common.jdbc.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.Map;
 
+import com.muze.mvc.board.model.dao.CommentsDao;
+import com.muze.mvc.board.model.vo.Comments;
 import com.muze.mvc.member.model.dao.ArtistDao;
 import com.muze.mvc.member.model.dao.MemberDao;
 import com.muze.mvc.member.model.vo.Artist;
@@ -33,16 +35,42 @@ public class MemberService {
 		} else {
 			return member;			
 		}
-		
 	}
+	
+	// 로그인시 아티스트 정보 받아오기
+		public Artist getArtistByNo(int memberNo) {
+			Connection conn = getConnection();
+			Artist artist = null;
+			
+			artist = new ArtistDao().findArtistByNo(conn, memberNo);
+			
+			return artist;
+		}
 
-	// 회원가입
+	// 회원가입 - 개인 회원
 	public int saveMember(Member member) {
 		int result = 0;
 		Connection connection = getConnection();
 		
 		try {
 			result = memberDao.insertMember(connection, member);
+			commit(connection);
+		} catch (Exception e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+		return result;
+	}
+	
+	// 회원가입 - 아티스트 회원
+	public int saveArtist(Artist artist) {
+		int result = 0;
+		Connection connection = getConnection();
+		
+		try {
+			result = new ArtistDao().insertArtist(connection, artist);
 			commit(connection);
 		} catch (Exception e) {
 			rollback(connection);
@@ -163,14 +191,5 @@ public class MemberService {
 		}
 		return result;
 	}
-
-	// 로그인시 아티스트 정보 받아오기
-	public Artist getArtistByNo(int memberNo) {
-		Connection conn = getConnection();
-		Artist artist = null;
-		
-		artist = new ArtistDao().findArtistByNo(conn, memberNo);
-		
-		return artist;
-	}
+	
 }
