@@ -500,7 +500,7 @@ public class BoardDao {
 		return result;
 	}
 	//PRODUCT SERVICE
-	public List<Product> findProductListByArtistNo(Connection connection, int proArtistNo) {
+	public List<Product> findProductListByArtistNoNotSelfProduct(Connection connection, int proArtistNo, int proNo) {
 		List<Product> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -544,7 +544,9 @@ public class BoardDao {
 				product.setProDescription(rs.getString("PRO_DESCRIPTION"));
 				product.setProType(rs.getString("PRO_TYPE"));
 				
-				list.add(product);
+				if(proNo != product.getProNo()) {
+					list.add(product);
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

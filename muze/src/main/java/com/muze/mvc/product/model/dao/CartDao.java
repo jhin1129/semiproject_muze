@@ -1,4 +1,4 @@
-package com.muze.mvc.product.model.service;
+package com.muze.mvc.product.model.dao;
 
 import static com.muze.mvc.common.jdbc.JDBCTemplate.close;
 
@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.muze.mvc.event.model.vo.Event;
 import com.muze.mvc.product.model.vo.Cart;
 
 public class CartDao {
@@ -65,6 +64,26 @@ public class CartDao {
 			close(pstmt);
 		}
 
+		return result;
+	}
+
+	public int deleteCartByMemberNoProNo(Connection connection, int memberNo, int proNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "DELETE FROM CART WHERE MEMBER_NO = ? AND PRO_NO = ?";
+				
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, proNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		return result;
 	}
 

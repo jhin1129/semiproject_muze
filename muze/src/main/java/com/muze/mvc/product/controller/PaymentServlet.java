@@ -29,7 +29,13 @@ public class PaymentServlet extends HttpServlet {
 			product.setPayQuantity(payQuantity);
 			list.add(product);
 		} else {
-			
+			String[] proNoStrList = request.getParameterValues("list");
+			List<Integer> proNoList = new ArrayList<Integer>();
+			String[] splitProNo = proNoStrList[0].split(",");
+			for(String str : splitProNo) {
+				proNoList.add(Integer.parseInt(str));
+			}
+			list = new BoardService().getProductListByproNoList(proNoList);
 		}
 		int totalPrice = new BoardService().getTotalPrice(list);
 		
