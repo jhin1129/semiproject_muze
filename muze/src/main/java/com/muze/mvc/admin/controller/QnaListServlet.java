@@ -13,14 +13,15 @@ import com.muze.mvc.board2.model.service.Board2Service;
 import com.muze.mvc.board2.model.vo.Board2;
 import com.muze.mvc.common.util.PageInfo;
 
-@WebServlet("/admin/content")
-public class ContentListServlet extends HttpServlet {
+@WebServlet("/admin/qna")
+public class QnaListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ContentListServlet() {
+    public QnaListServlet() {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String type = request.getParameter("type");
 		int page = 0;
 		int listCount = 0;
 		PageInfo pageInfo = null;
@@ -32,17 +33,18 @@ public class ContentListServlet extends HttpServlet {
 			page = 1;
 		}
 		
-		listCount = new Board2Service().getBoardCountAll();
-		pageInfo = new PageInfo(page, 5, listCount, 15);
-		list = new Board2Service().getBoardListAll(pageInfo);
+		listCount = new Board2Service().getBoardCount(type);
+		pageInfo = new PageInfo(page, 5, listCount, 20);
+		list = new Board2Service().getBoardList(pageInfo, type);
 		
 		System.out.println(listCount);
 		System.out.println(list);
 		
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("list", list);
+		request.setAttribute("type", type);
 		
-		request.getRequestDispatcher("/views/adminpage/contents.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/adminpage/qna.jsp").forward(request, response);
 	}
 
 }

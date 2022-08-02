@@ -6,7 +6,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 <jsp:include page="/views/common/header.jsp" />
-<jsp:include page="/views/common/adminSidebar.jsp" />
+<jsp:include page="/views/adminpage/sidebar.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/adminpage/admin.css">
 <link rel="stylesheet"
 	href="${path}/resources/css/mypage/mypage_main.css">
@@ -18,7 +18,7 @@
 <!-- 오른쪽 그리드 -->
 <div class="col-sm-10" style="border: 1px solid lightgray;">
 	<!-- 컨테이너 -->
-	<div class="summary">
+	<div class="summary" style="height: 560px;">
 		<h5>콘텐츠 관리 > 게시글 관리</h5>
 		<form name="contentMgmt" action="${ path }/admin/mgmt" method="get">
 			<div class="text-right">

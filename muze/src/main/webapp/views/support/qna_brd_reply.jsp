@@ -13,7 +13,7 @@
 <div class="container my-5">
 
 	<div>
-		<h3 style="text-align: left; margin-left: 60px; margin-bottom: 20px;">공지사항</h3>
+		<h3 style="text-align: left; margin-left: 60px; margin-bottom: 20px;">1 : 1 문의 답변</h3>
 	</div>
 
 	<form action="${ path }/support/reply?type=QNA" method="POST" enctype="multipart/form-data">
@@ -23,23 +23,27 @@
 		<input type="hidden" name="originalFileName	" value=${ board.brdOriginalFileName }>
 		<input type="hidden" name="renamedFileName" value=${ board.brdRenamedFileName }>
 		
-		<table class="table-support" style="border: 1px; width: 1000px; height: 600px; margin: auto;">
+		<table class="table-support" style="border: 1px; width: 1000px; height: 1000px; margin: auto;">
 
 			<tr>
-				<td style="width: 15%; height: 8%;"><b>작성자</b></td>
+				<td style="width: 15%; height: 5%;"><b>작성자</b></td>
 				<td><input type="text" name="brdWriterId" style="padding-left: 1em;" value="${ board.brdWriterId }" readonly></td>
 			</tr>
 			<tr>
-				<td style="height: 8%;"><b>제목</b></td>
+				<td style="height: 5%;"><b>제목</b></td>
 				<td><input type="text" name="brdTitle" size="40" style="padding-left: 1em;" placeholder="제목을 입력해 주세요."
-				value="${ board.brdTitle }"></td>
+				value="${ board.brdTitle }" readonly></td>
 			</tr>
 			<tr>
-				<td style="height: 68%;"><b>본문</b></td>
-				<td><textarea name="brdContent" cols="90%" rows="15" style="padding: 1em; resize: none;">${ board.brdContent }</textarea></td>
+				<td style="height: 40%;"><b>본문</b></td>
+				<td><textarea name="brdContent" cols="90%" rows="15" style="padding: 1em; resize: none;" readonly>${ board.brdContent }</textarea></td>
 			</tr>
 			<tr>
-				<td style="height: 8%;"><b>첨부파일</b></td>
+				<td style="height: 40%;"><b>답변내용</b></td>
+				<td><textarea name="brdRepContent" cols="90%" rows="15" style="padding: 1em; resize: none;"></textarea></td>
+			</tr>
+			<tr>
+				<td style="height: 5%;"><b>첨부파일</b></td>
 				<td>
 					<input type="file" name="upfile">
 					<c:if test="${ not empty board.brdOriginalFileName }">

@@ -19,61 +19,52 @@
 <div class="col-sm-10" style="border: 1px solid lightgray;">
 	<!-- 컨테이너 -->
 	<div class="summary">
-		<h5>회원 관리</h5>
-		<div class="text-right">
-			<button type="button" class="button-white">삭제</button>
-			<button type="button" class="button-white">저장</button>
-		</div>
-		<div class="mt-3">
-			<table class="table table-sm">
-				<thead class="text-center">
-					<tr style="height: 10px; color: gray">
-						<th style="width: 2%;"><input type="checkbox"></th>
-						<th style="width: 10%;">유저번호</th>
-						<th style="width: 15%;">아이디</th>
-						<th style="width: 8%;">이름</th>
-						<th style="width: 15%;">전화번호</th>
-						<th style="width: 20%;">이메일</th>
-						<th style="width: 12%;">가입일</th>
-						<th style="width: 10%;">계정타입</th>
-						<th style="width: 8%;">회원여부</th>
-					</tr>
-				</thead>
-
-				<tbody class="text-center">
-					<c:if test="${ empty list }">
+		<h5>1 : 1 문의</h5>
+			<div class="mt-3">
+				<table class="table table-sm">
+					<thead class="text-center">
 						<tr>
-							<td colspan="9">조회된 회원이 없습니다.</td>
+							<th class="py-0.5" style="width: 10%; text-align: center;">번호</th>
+							<th class="py-0.5" style="width: 40%; text-align: center;">제목</th>
+							<th class="py-0.5" style="width: 15%; text-align: center;">답변
+								상태</th>
+							<th class="py-0.5" style="width: 15%; text-align: center;">작성자</th>
+							<th class="py-0.5" style="width: 20%; text-align: center;">날짜</th>
 						</tr>
-					</c:if>
-					<c:if test="${ not empty list }">
-						<c:forEach var="board" items="${ list }">
-							<tr>
-								<td><input type="checkbox"></td>
-								<td>${ member.memberNo }</td>
-								<td>${ member.memberId }</td>
-								<td>${ member.memberName }</td>
-								<td>${ member.memberPhoneNumber }</td>
-								<td>${ member.memberEmail }</td>
-								<td>${ member.enrollDate }</td>
-								<td>${ member.memberRole }</td>
-								<td>${ member.ismember }</td>
-							</tr>
-						</c:forEach>
-					</c:if>
-				</tbody>
+					</thead>
 
-			</table>
-		</div>
+					<tbody class="text-center">
+						<c:if test="${ empty list }">
+							<tr>
+								<td colspan="5">조회된 게시글이 없습니다.</td>
+							</tr>
+						</c:if>
+						<c:if test="${ not empty list }">
+							<c:forEach var="board" items="${ list }">
+								<tr>
+									<td style="text-align: center;">${ board.brdNo }</td>
+									<td style="text-align: center;"><a style="display: block;"
+										href="${ path }/support/view?brdNo=${ board.brdNo }&&type=${ type }">${ board.brdTitle }</a></td>
+									<td style="text-align: center;"><c:if
+											test="${ not empty board.brdRepContent }">[답변 완료]</c:if></td>
+									<td style="text-align: center;">${ board.brdWriterId }</td>
+									<td style="text-align: center;">${ board.brdDate }</td>
+								</tr>
+							</c:forEach>
+						</c:if>
+					</tbody>
+
+				</table>
+			</div>
 	</div>
 	<div class="row" style="margin-bottom: 25px;">
 		<div class="col-4"></div>
 		<div class="col-4">
 			<ul class="pagination justify-content-center">
 				<li class="page-item"><a class="page-link"
-					href="${ path }/admin/member?page=1">&lt;&lt;</a></li>
+					href="${ path }/admin/qna?page=1&&type=QNA">&lt;&lt;</a></li>
 				<li class="page-item"><a class="page-link"
-					href="${ path }/admin/member?page=${ pageInfo.prevPage }">&lt;</a></li>
+					href="${ path }/admin/qna?page=${ pageInfo.prevPage }&&type=QNA">&lt;</a></li>
 
 				<!--  10개 페이지 목록 -->
 				<c:forEach begin="${ pageInfo.startPage }"
@@ -83,15 +74,14 @@
 					</c:if>
 					<c:if test="${ status.current != pageInfo.currentPage }">
 						<li class="page-item"><a class="page-link"
-							href="${ path }/admin/member?page=${ status.current }">${ status.current }</a></li>
-
+							href="${ path }/admin/qna?page=${ status.current }&&type=QNA">${ status.current }</a></li>
 					</c:if>
 				</c:forEach>
 
 				<li class="page-item"><a class="page-link"
-					href="${ path }/admin/member?page=${ pageInfo.nextPage }">&gt;</a></li>
+					href="${ path }/admin/qna?page=${ pageInfo.nextPage }&&type=QNA">&gt;</a></li>
 				<li class="page-item"><a class="page-link"
-					href="${ path }/admin/member?page=${ pageInfo.maxPage }">&gt;&gt;</a></li>
+					href="${ path }/admin/qna?page=${ pageInfo.maxPage }&&type=QNA">&gt;&gt;</a></li>
 
 			</ul>
 		</div>

@@ -20,7 +20,7 @@
           <p id="myListMain"><a href="${ path }/admin/content"> 콘텐츠 관리 </a></p>
           <li id="mylist"><a id="sublist" href="${ path }/admin/content">- 게시글 관리 </a></li>
           <li id="mylist"><a id="sublist" href="${ path }/admin/content">- 댓글 관리 </a></li><br>
-          <p id="myListMain"><a href="${ path }/support/list?type=QNA"> 문의/신고 관리 </a></p><br>
+          <p id="myListMain"><a href="${ path }/admin/qna?type=QNA"> 1 : 1 문의 </a></p><br>
           <p id="myListMain"><a href="${ path }/support/list?type=NOTICE"> 공지사항 </a></p>
         </div>
       </div>
