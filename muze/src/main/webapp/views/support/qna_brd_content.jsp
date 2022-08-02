@@ -64,10 +64,10 @@
                 <button type="button" class="button-white" style="margin: 0;"
                 onclick="location.href='${ path }/support/update?brdNo=${ board.brdNo }&type=QNA'"><b>수정</b></button>
                 <button type="button" class="button-white" id="btnDelete" style="margin: 0;"><b>삭제</b></button>
-        		<c:if test="${ not empty loginMember && board.brdWriterNo eq '1' }">
+<%--         		<c:if test="${ not empty loginMember && board.brdWriterNo eq '1' }"> --%>
                 <button type="button" class="button-white" style="margin: 0;"
                 onclick="location.href='${ path }/support/reply?brdNo=${ board.brdNo }&type=QNA'"><b>답글</b></button>
-       			</c:if>  
+<%--       			</c:if>  --%>
                 <button type="button" class="button-white" style="margin: 0;"
                 onclick="location.href='${ path }/support/list?type=QNA'"><b>목록</b></button>
             </p>
