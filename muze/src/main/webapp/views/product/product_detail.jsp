@@ -228,20 +228,53 @@
     </div>
 	
 	<script>
+	$(document).ready(() => {
 		$("#quantitySelect").on("change", () => {
 			$("#totalPrice").text(${product.proPrice} * $("#quantitySelect").val());
 		});
 		
 		$("#payment").on("click", () => {
-			var value = $("#quantitySelect").val();
-			var min = $("#quantitySelect").attr("min");
-			var max = $("#quantitySelect").attr("max");
-			if(value >= min && value <= max){
-				location.href="${path}/product/payment?proNo=${product.proNo}&payQuantity=" + $("#quantitySelect").val();
-			} else {
-				alert("수량을 다시 입력해주세요");
+			if(${empty loginMember}){
+				alert("로그인이 필요합니다.");
+			} else{
+				var value = $("#quantitySelect").val();
+				var min = $("#quantitySelect").attr("min");
+				var max = $("#quantitySelect").attr("max");
+				if(value >= min && value <= max){
+					location.href="${path}/product/payment?proNo=${product.proNo}&payQuantity=" + $("#quantitySelect").val();
+				} else {
+					alert("수량을 다시 입력해주세요");
+				}
 			}
-		})
+		});
+		
+		$("#insertCart").on("click", () => {
+			if(${empty loginMember}){
+				alert("로그인이 필요합니다.");
+			} else {
+				if(confirm("장바구니에 담으시겠습니까?")){
+					$.ajax({
+						type: "POST",
+						url: "${path}/cart/insert",
+						dataType: "json",
+						data: {
+							"proNo" : ${product.proNo}
+						},
+						success: (data) => {
+							alert(data);
+							if(confirm("장바구니에 담았습니다. 장바구니 페이지로 이동하시겠습니까?")){
+								location.href="${path}/product/cart/view?memberNo=${loginMember.memberNo}";
+							}
+						},
+						error: () => {
+							alert("장바구니 담기에 실패하였습니다.");
+						}
+					});
+				}
+			}
+		});
+		
+	});
 	</script>
 
 <jsp:include page="/views/common/footer.jsp"/>
