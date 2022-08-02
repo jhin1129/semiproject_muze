@@ -8,13 +8,14 @@ import static com.muze.mvc.common.jdbc.JDBCTemplate.rollback;
 import java.sql.Connection;
 
 import com.muze.mvc.event.model.dao.EventDao;
+import com.muze.mvc.event.model.vo.Mileage;
 
 public class MileageService {
 
 	public int insertMileage(int memberNo) {
 		int result = 0;
 		Connection connection = getConnection();
-		result = new MileageDao().insertMileage(connection, memberNo);
+		result = new MileageDao().insertAttMileage(connection, memberNo);
 	
 		if(result > 0) {
 			commit(connection);
@@ -25,6 +26,18 @@ public class MileageService {
 		close(connection);
 		
 		return result;
+	}
+	
+	public Mileage currentMileage(int memberNo) {
+		Mileage mileage = null;
+		Connection connection = getConnection();
+		mileage = new MileageDao().currentMileage(connection, memberNo);
+	
+		
+		
+		close(connection);
+		
+		return mileage;
 	}
 
 }
