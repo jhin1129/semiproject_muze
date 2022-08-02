@@ -45,8 +45,7 @@
 									<td style="text-align: center;">${ board.brdNo }</td>
 									<td style="text-align: center;"><a style="display: block;"
 										href="${ path }/support/view?brdNo=${ board.brdNo }&&type=${ type }">${ board.brdTitle }</a></td>
-									<td style="text-align: center;"><c:if
-											test="${ not empty board.brdRepContent }">[답변 완료]</c:if></td>
+									<td style="text-align: center;"><c:if test="${ not empty board.brdRepContent }">[답변 완료]</c:if></td>
 									<td style="text-align: center;">${ board.brdWriterId }</td>
 									<td style="text-align: center;">${ board.brdDate }</td>
 								</tr>
