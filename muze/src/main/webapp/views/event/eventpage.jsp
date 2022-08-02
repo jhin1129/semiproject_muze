@@ -119,6 +119,7 @@
         </script>
         
         <div class="mt-3"><h6 style="text-align: center;">매일 출석 하고 100 마일리지 가져가세요!</h6></div>
+        <div class="mt-3"><h6 style="text-align: center;">나의 출석 마일리지는 ${ currentResult }입니다 </h6></div>
         <div class="mt-4" id='calendar'></div>
       </div>
     </div>

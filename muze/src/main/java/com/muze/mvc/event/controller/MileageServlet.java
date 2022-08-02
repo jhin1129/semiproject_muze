@@ -33,5 +33,4 @@ public class MileageServlet extends HttpServlet {
 		
 		new MileageService().insertMileage(loginMember.getMemberNo());
 	}
-
 }

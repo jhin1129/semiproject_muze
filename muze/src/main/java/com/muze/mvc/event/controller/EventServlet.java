@@ -20,7 +20,9 @@ import com.google.gson.Gson;
 import com.muze.mvc.board.model.service.BoardService;
 import com.muze.mvc.event.model.dao.EventDao;
 import com.muze.mvc.event.model.service.EventService;
+import com.muze.mvc.event.model.service.MileageService;
 import com.muze.mvc.event.model.vo.Event;
+import com.muze.mvc.event.model.vo.Mileage;
 import com.muze.mvc.member.model.vo.Member;
 
 @WebServlet("/event")
@@ -50,6 +52,7 @@ public class EventServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int result = 0;
+		int insertresult = 0;
 		boolean isAlreadyEvent = false;
 		// 로그인 체크
 		HttpSession session = request.getSession(false);
@@ -63,6 +66,7 @@ public class EventServlet extends HttpServlet {
 				new EventService().insertEvent(loginMember.getMemberNo());
 				response.setContentType("application/json;charset=UTF-8");
 				new Gson().toJson(isAlreadyEvent, response.getWriter());
+				insertresult = new MileageService().insertMileage(loginMember.getMemberNo());
 
 			} else {
 				response.setContentType("application/json;charset=UTF-8");
