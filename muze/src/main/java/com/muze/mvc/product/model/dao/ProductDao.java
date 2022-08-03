@@ -49,6 +49,26 @@ public class ProductDao {
 		return result;
 	}
 
+	public int updateStatus(Connection connection, int proNo, String status) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "UPDATE PRODUCT SET PRO_STATUS=? WHERE PRO_NO=?";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setString(1, status);
+			pstmt.setInt(2, proNo);		
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 
 
 }

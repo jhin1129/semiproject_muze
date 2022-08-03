@@ -18,16 +18,16 @@
 
 <script src="${ path }/resources/summernote-0.8.18-dist/summernote-lite.js"></script>
 <link rel="stylesheet" href="${ path }/resources/summernote-0.8.18-dist/summernote-lite.css">
-    
+
     <!-- 내용 전체 컨테이너 -->
     <div class="container mt-5">
 
         <div>
         	<c:if test="${ board.brdType == 'REVIEW'}">
-            	<h2 style="text-align: center;"><a href="${path }/board/list?type=REVIEW">리뷰 게시판</a></h2>
+            	<h2 style="text-align: center;"><a style="text-decoration-line: none;" href="${path }/board/list?type=REVIEW">리뷰 게시판</a></h2>
            	</c:if>
         	<c:if test="${ board.brdType == 'FREE'}">
-            	<h2 style="text-align: center;"><a href="${path }/board/list?type=FREE">자유 게시판</a></h2>
+            	<h2 style="text-align: center;"><a style="text-decoration-line: none;" href="${path }/board/list?type=FREE">자유 게시판</a></h2>
            	</c:if>
         </div>
 		
@@ -64,7 +64,7 @@
 		                            <td>
 			                            <button type="button" class="btn btn-light py-0" id="btnFindProduct">찾아보기</button>
 	                           	       	<input type="text" id="product" name="product" readonly style="border: 0px;" value="${product.proName }">
-		                            	<input type="hidden" id="proNo" name="proNo">
+		                            	<input type="hidden" id="proNo" name="proNo" value="${board.brdProNo }">
 		                            </td>
 		                        </tr>
 	                        </c:if>
@@ -74,7 +74,8 @@
 	                            <td>
 	                                <input type="file" name="upfile" class="py-0"></input>
                						<c:if test="${ not empty board.brdOriginalFileName }">
-										<!-- <img src="${ path }/resources/images/file.png" width="20px" height="20px"> -->
+										기존파일 : 
+										<img src="${ path }/resources/images/board/file.png" width="20px" height="20px">
 										<span>${ board.brdOriginalFileName }</span>
 									</c:if>
 	                            </td>

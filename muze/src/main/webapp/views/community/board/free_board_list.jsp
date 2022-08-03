@@ -11,7 +11,7 @@
     <div class="container my-5">
 
         <div>
-            <h2 style="text-align: center;"><a href="${path }/board/list?type=FREE">자유 게시판</a></h2>
+            <h2 style="text-align: center;"><a style="text-decoration-line: none;" href="${path }/board/list?type=FREE">자유 게시판</a></h2>
         </div>
 
         <div class="mt-5">
@@ -38,7 +38,7 @@
                 		<c:forEach var="board" items="${ list }">
 	                		<tr>
 		                        <td id="td">${ board.rowNum }</td>
-		                        <td id="td"><a href="${ path }/board/view?no=${ board.brdNo }&type=${ type }">${ board.brdTitle }</a></td>
+		                        <td id="td"><a style="text-decoration-line: none;" href="${ path }/board/view?no=${ board.brdNo }&type=${ type }">${ board.brdTitle }</a></td>
 		                        <td id="td">${ board.brdWriterId }</td>
 		                        <td id="td">${ board.brdDate }</td>
 		                        <td id="td">${ board.brdReadCount }</td>
@@ -98,7 +98,6 @@
 
         </div>
     </div>
-</div>
 
 <script>
 	$(document).ready(() => {
