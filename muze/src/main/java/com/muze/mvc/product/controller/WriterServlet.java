@@ -3,6 +3,8 @@ package com.muze.mvc.product.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -12,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.muze.mvc.board.model.service.BoardService;
+import com.muze.mvc.member.model.vo.Member;
 import com.muze.mvc.product.model.service.WriterService;
 import com.muze.mvc.product.model.vo.Writer;
 import com.oreilly.servlet.MultipartRequest;
@@ -38,6 +42,7 @@ public class WriterServlet extends HttpServlet {
 		
 		System.out.println("realFolder : ------> " + realFolder + "<br>");
 		
+		
 		int maxSize = 20971520; //20mb
 		String encoding = "UTF-8";
 		MultipartRequest mr = new MultipartRequest(request, realFolder, maxSize, encoding, new DefaultFileRenamePolicy());
@@ -49,6 +54,7 @@ public class WriterServlet extends HttpServlet {
 		String pcount = mr.getParameter("pcount");
 		String partist = mr.getParameter("partist");
 		String description = mr.getParameter("description");
+		
 		
 		String filename = mr.getFilesystemName("pimg");
 		String flag = mr.getParameter("flag");
@@ -68,11 +74,12 @@ public class WriterServlet extends HttpServlet {
 		writer.setProOriginalFileName(originalFileName);
 		writer.setProRenamedFileName(filename);
 		writer.setProImg(filename);
-		writer.setProArtistNo(partist);
+//		writer.setProArtistNo(partist);
 		writer.setProDescription(description);
 		writer.setProType(ptype);
 		
 		result = new WriterService().save(writer);
+		
 		
 		if(result > 0) {
 			request.setAttribute("msg", "게시글 작성에 성공하였습니다.");

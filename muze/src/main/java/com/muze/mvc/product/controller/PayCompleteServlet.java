@@ -42,7 +42,7 @@ public class PayCompleteServlet extends HttpServlet {
 		
 		request.setAttribute("list", list);
 		request.setAttribute("totalPrice", totalPrice);
-		request.getRequestDispatcher("/views/product/Payment_complete.jsp").forward(request, response);
+//		request.getRequestDispatcher("/views/product/Payment_complete.jsp").forward(request, response);
 		
 		HttpSession session = request.getSession(false);
 		Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
@@ -62,7 +62,6 @@ public class PayCompleteServlet extends HttpServlet {
 		pay.setBuyName("receiverName");
 		pay.setBuyAdress("receiverAddressSub");
 		pay.setBuyPhone("receiverCellPhone");
-		pay.setPaymentType("settleKind");
 //		pay.setBuyAcc(Integer.parseInt(request.getParameter("bankSender")));//계좌번호
 //		pay.setAdminAcc(Integer.parseInt(request.getParameter("adminAcc")));//대표계좌
 //		pay.setPointNo(Integer.parseInt(request.getParameter("mileageNumber.getPointNo()"))); //포인트번호

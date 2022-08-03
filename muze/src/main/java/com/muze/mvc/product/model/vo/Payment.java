@@ -26,12 +26,6 @@ public class Payment {
 	
 	String buyPhone; //구매자연락처
 	
-	String paymentType; //결제종류
-	
-	int buyAcc; //구매자계좌
-	
-	int adminAcc; //대표계좌
-	
 	int pointNo; //포인트번호
 
 }

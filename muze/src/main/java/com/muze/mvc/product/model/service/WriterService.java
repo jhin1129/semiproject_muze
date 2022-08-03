@@ -6,7 +6,12 @@ import static com.muze.mvc.common.jdbc.JDBCTemplate.getConnection;
 import static com.muze.mvc.common.jdbc.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import com.muze.mvc.member.model.vo.Member;
 import com.muze.mvc.product.model.dao.WriterDao;
 import com.muze.mvc.product.model.vo.Writer;
 
@@ -30,5 +35,6 @@ public class WriterService {
 		
 		return result;
 	}
+
 
 }

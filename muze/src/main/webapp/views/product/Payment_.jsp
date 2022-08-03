@@ -313,9 +313,11 @@
                             </table>
                         </div>
                     </div>
+                    <!-- 
                     <hr>
+                     -->
                     <!-- //payment_info -->
-
+					<!-- 
                     <div class="payment_progress">
                         <div class="order_zone_tit">
                             <h4>결제수단 선택 / 결제</h4>
@@ -323,9 +325,11 @@
 
                         <div class="payment_progress_list">
                             <div class="js_pay_content">
+					 -->
 
 
                                 <!-- N : 일반결제 시작 -->
+                                <!-- 
                                 <div id="settlekind_general" class="general_payment">
                                     <dl>
                                         <dt>일반결제</dt>
@@ -342,9 +346,11 @@
                                                     </li>
                                                 </ul>
                                             </div>
+                                 -->
 
                                             <!-- N : 무통장입금 -->
-                                            <div id="settlekind_general_gb" class="pay_bankbook_box" style="display: block;">
+                                            <!-- 
+                                             <div id="settlekind_general_gb" class="pay_bankbook_box" style="display: block;">
                                                 <em class="pay_bankbook_txt">( 무통장 입금 의 경우 입금확인 후부터 배송단계가 진행됩니다. )</em>
                                                 <ul>
                                                     <li>
@@ -357,22 +363,10 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <!-- //pay_bankbook_box -->
-                                            <!-- 신용카드 컨텐츠 -->
-                                            <div class="card" id="settlekind_general_pc" style="display: none;"></div>
-                                            <!-- //신용카드 컨텐츠 -->
-                                            <!-- 계좌이체 컨텐츠 -->
-                                            <div class="account-bank" id="settlekind_general_pb" style="display: none;"></div>
-                                            <!-- //계좌이체 컨텐츠 -->
-                                            <!-- 가상계좌 컨텐츠 -->
-                                            <div class="virtual-bank" id="settlekind_general_pv" style="display: none;"></div>
-                                            <!-- //가상계좌 컨텐츠 -->
-                                            <!-- 휴대폰 컨텐츠 -->
-                                            <div class="cellphone" id="settlekind_general_ph" style="display: none;"></div>
-                                            <!-- //휴대폰 컨텐츠 -->
                                         </dd>
                                     </dl>
                                 </div>
+                                             -->
                                 <!-- //general_payment -->
                                 <!-- N : 일반결제 끝 -->
                         <!-- //payment_progress_list -->
