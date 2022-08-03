@@ -24,10 +24,10 @@
 
         <div>
         	<c:if test="${ type == 'REVIEW'}">
-            	<h2 style="text-align: center;"><a href="${path }/board/list?type=REVIEW">리뷰 게시판</a></h2>
+            	<h2 style="text-align: center;"><a style="text-decoration-line: none;" href="${path }/board/list?type=REVIEW">리뷰 게시판</a></h2>
            	</c:if>
         	<c:if test="${ type == 'FREE'}">
-            	<h2 style="text-align: center;"><a href="${path }/board/list?type=FREE">자유 게시판</a></h2>
+            	<h2 style="text-align: center;"><a style="text-decoration-line: none;" href="${path }/board/list?type=FREE">자유 게시판</a></h2>
            	</c:if>
         </div>
         <!-- 후기글 전체 -->

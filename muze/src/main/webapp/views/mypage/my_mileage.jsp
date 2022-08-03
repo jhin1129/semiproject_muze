@@ -34,7 +34,7 @@
         	<div class="container">
           
             <!-- 첫번째 행 -->
-			<jsp:include page="/views/mypage/welcome_row.jsp" flush="false"/>
+			<jsp:include page="/views/mypage/welcome_row_common.jsp" flush="false"/>
 
            <!-- 두번째 행 -->
 			<div class="row">

@@ -4,8 +4,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
-<!DOCTYPE html>
-<html lang="ko">
+
 <jsp:include page="/views/common/header.jsp"/>
 
 <div class="container">
@@ -31,70 +30,47 @@
 
         <!-- order_tit -->
         <form id="frmCart" name="frmCart" method="post" target="ifrmProcess">
-            <input type="hidden" name="mode" value="">
-            <input type="hidden" name="cart[cartSno]" value="">
-            <input type="hidden" name="cart[goodsNo]" value="">
-            <input type="hidden" name="cart[goodsCnt]" value="">
-            <input type="hidden" name="cart[addGoodsNo]" value="">
-            <input type="hidden" name="cart[addGoodsCnt]" value="">
-            <input type="hidden" name="cart[couponApplyNo]" value="">
-            <input type="hidden" name="useBundleGoods" value="1">
+
                 <!-- 장바구니 상품리스트 시작 -->
                 <div class="cart_cont_list">
                     <div class="order_cart_tit">
                     </div>
-                    <!-- //order_cart_tit -->
 
                     <div class="order_table_type">
                         <table>
-                            <colgroup>
-                                <col style="width:3%">  <!-- 체크박스 -->
-                                <col>					<!-- 상품명/옵션 -->
-                                <col style="width:5%">  <!-- 수량 -->
-                                <col style="width:10%"> <!-- 상품금액 -->
-                                <col style="width:13%"> <!-- 할인/적립 -->
-                                <col style="width:10%"> <!-- 합계금액 -->
-                                <col style="width:10%"> <!-- 배송비 -->
-                            </colgroup>
+
                             <thead>
                                 <tr>
                                     <th>
                                         <div class="form_element">
-                                            <input type="checkbox" id="allCheck1" class="gd_select_all_goods" data-target-id="cartSno1_" data-target-form="#frmCart" checked="checked">
+                                            <input type="checkbox" id="allCheck1" class="gd_select_all_goods" data-target-id="cartSno1_" data-target-form="#frmCart">
                                             <label for="allCheck1" class="check_s on"></label>
                                         </div>
                                     </th>
-                                    <th>상품/옵션 정보</th>
-                                    <th>수량</th>
-                                    <th>상품금액</th>
-                                    <th>할인/적립</th>
-                                    <th>합계금액</th>
-                                    <th>배송비</th>
+                                    <th style="width:70%">상품/옵션 정보</th>
+                                    <th style="width:10%">수량</th>
+                                    <th style="width:10%">상품금액</th>
+                                    <th style="width:10%">합계금액</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                	<c:forEach var="product" items="${ list }">
                                     <tr>
-                                        <!-- AceCounter eCommerce (Cart_Inout) v8.0 Start -->
-
-                                        <!-- AceCounter eCommerce (Cart_InOut) v8.0 End -->
-                                        <td class="td_chk">
+                                        <td>
                                             <div class="form_element">
-                                                <input type="checkbox" id="cartSno1_212360" name="cartSno[]" value="212360" checked="checked" data-price="1490000" data-mileage="0" data-goodsdc="0" data-memberdc="0" data-coupondc="0" data-possible="y" data-goods-key="0" data-goods-no="1163545" data-goods-nm="[FRAME] At the fair" data-option-nm="서울/경기(+40,000원)" data-fixed-sales="option" data-sales-unit="1" data-fixed-order-cnt="option" data-min-order-cnt="1" data-max-order-cnt="0" data-default-goods-cnt="1">
+                                                <input type="checkbox" value="${product.proNo }" class="checkProduct" id="cartSno1_212360" name="cartSno[]" data-possible="y" data-goods-key="0" data-goods-no="1163545" data-goods-nm="[FRAME] At the fair" data-option-nm="서울/경기(+40,000원)" data-fixed-sales="option" data-sales-unit="1" data-fixed-order-cnt="option" data-min-order-cnt="1" data-max-order-cnt="0" data-default-goods-cnt="1">
                                                 <label for="cartSno1_212360" class="check_s on"></label>
                                             </div>
                                         </td>
-                                        <td class="td_left">
+                                        <td>
                                             
                                             <div class="pick_add_cont">
                                                 <span class="pick_add_img">
-                                                    <a href=""><img src="" width="40" alt="[FRAME] At the fair" title="[FRAME] At the fair" class="middle"></a>
+                                                    <a href=""><img src="" width="40" alt="${product.proName }" title="${product.proName }" class="middle"></a>
                                                 </span>
                                                 <div class="pick_add_info">
-                                                    <em><a href="">[FRAME] At the fair</a></em>
-                                                    <!-- //icon_pick_list -->
-                                                    <div class="pick_option_box">
-                                                        <span class="text_type_cont">배송선택 : 서울/경기(+40,000원) <strong>(+40,000원)</strong></span>
-                                                    </div>
+                                                    <em><a href="">${product.proName }</a></em>
+
                                                     <div class="pick_option_box">
                                                     </div>
                                                 </div>
@@ -104,31 +80,19 @@
                                         </td>
                                         <td class="td_order_amount">
                                             <div class="order_goods_num">
-                                                <strong>1개</strong>
+                                                <input style="width:60px;" class="quantitySelect" type="number" min="1" max="${product.proQuantity}" value="1">
                                             </div>
                                         </td>
                                         <td>
-                                            <strong class="order_sum_txt price">1,490,000원</strong>
+                                            <strong class="proPrice">${product.proPrice }</strong>원
                                             <p class="add_currency"></p>
-                                        </td>
-                                        <td class="td_benefit">
-                                                <ul class="benefit_list">
-                                                </ul>
                                         </td>
                                         <td>
-                                            
-                                            <strong class="order_sum_txt">1,490,000원</strong>
+                                            <strong class="sumPrice">${product.proPrice }</strong>원
                                             <p class="add_currency"></p>
                                         </td>
-                                        <td class="td_delivery" rowspan="1">
-                                            기본 - 금액별배송비<br>
-                                            0원
-        
-                                            <br>
-                                            (택배)
-                                        </td>
                                     </tr>
-        
+        							</c:forEach>
                                     </tbody>
         
         
@@ -150,8 +114,8 @@
                             <div class="row">
                                 <div class="col-md-4 mb-4">
                                     <dl>
-                                        <dt>총 <strong id="totalGoodsCnt">1</strong> 개의 상품금액 </dt>
-                                        <dd><strong id="totalGoodsPrice">1,490,000</strong>원</dd>
+                                        <dt>총 <strong id="totalGoodsCnt">${fn:length(list)}</strong> 개의 상품금액 </dt>
+                                        <dd><strong id="totalGoodsPrice" class="totalPrice">0</strong>원</dd>
                                     </dl>
                                 </div>
                                 <span></span>
@@ -164,7 +128,7 @@
                                 <div class="col-md-4 mb-4">
                                     <dl class="price_total">
                                         <dt>합계</dt>
-                                        <dd><strong id="totalSettlePrice">1,490,000</strong>원
+                                        <dd><strong id="totalSettlePrice" class="totalPrice">0</strong>원
                                         </dd>
                                     </dl>
                                 </div>
@@ -179,15 +143,13 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <span class="btn_left_box">
-                                    <button type="button" class="btn_order_choice_del" onclick="">쇼핑 계속하기</button>
-                                    <button type="button" class="btn_order_choice_wish" onclick="">관심상품</button>
-                                    <button type="button" class="btn_order_choice_del" onclick="">삭제</button>
+                                    <button type="button" id="deleteCart" class="btn_order_choice_del">삭제</button>
                                 </span>
                             </div>
                             <div class="col-md-6">
                                 <span class="btn_right_box">
-                                    <button type="button" class="btn_order_choice_buy" onclick="">선택 상품 주문</button>
-                                    <button type="button" class="btn_order_whole_buy" onclick="">전체 상품 주문</button>
+                                    <button type="button" id="selectedProductPayment">선택 상품 주문</button>
+                                    <button type="button" id="allProductPayment">전체 상품 주문</button>
                                 </span>
                             </div>
                         </div>
@@ -197,7 +159,85 @@
                     <em class="chk_none">주문서 작성단계에서 할인/마일리지 적용을 하실 수 있습니다.</em>
             </div>
         </div>
+<script>
+	$(document).ready(() => {
+		$(".quantitySelect").on("change", (event) => {
+			var quantity = $(event.target).val();
+			var proPrice = $(event.target).parent().parent().next().find(".proPrice").text();
+			$(event.target).parent().parent().next().next().find(".sumPrice").text(quantity * proPrice);
+			getTotalPrice();
+		});
+		
+		$("#deleteCart").on("click", ()=> {
+			var arr = [];
+			$("input:checkbox[name='cartSno[]']:checked").each(function(){
+				var proNo = $(this).val();
+				arr.push(proNo);
+			});
+			if(arr.length !=0){
+				location.href="${path}/cart/delete?list="+arr;
+			}else{
+				alert("작품을 선택해주세요");
+			}
+		});
+		
+		$("#selectedProductPayment").on("click", () => {
+			var arr = [];
+			var quanarr = [];
+			$("input:checkbox[name='cartSno[]']:checked").each(function(){
+				var proNo = $(this).val();
+				var quantity = $(this).parent().parent().next().next().find(".quantitySelect").val();
+				arr.push(proNo);
+				quanarr.push(quantity);
+			});
+			if(arr.length !=0){
+				location.href="${path}/product/payment?list="+arr+"&quantity="+quanarr;
+			}else{
+				alert("작품을 선택해주세요");
+			}
+		});
+		
+		$("#allProductPayment").on("click", ()=> {
+			var arr = [];
+			var quanarr = [];
+			$("input:checkbox[name='cartSno[]']").each(function(){
+				var proNo = $(this).val();
+				var quantity = $(this).parent().parent().next().next().find(".quantitySelect").val();
+				arr.push(proNo);
+				quanarr.push(quantity);
+
+			});
+			if(arr.length !=0){
+				location.href="${path}/product/payment?list="+arr+"&quantity="+quanarr;
+			}else{
+				alert("장바구니에 작품이 없습니다.");
+			}
+		});
+		
+		$(".checkProduct").change(function(){
+			getTotalPrice();
+	    });
+		
+		$("#allCheck1").change(function() {
+			if($("#allCheck1").is(":checked")){
+				$('.checkProduct').prop('checked',true);
+				getTotalPrice();
+	        }else{
+	        	$('.checkProduct').prop('checked',false);
+				getTotalPrice();
+	        }
+		});
+	});
+	
+	function getTotalPrice(){
+		var arr = [];
+		var totalPrice = 0;
+		$("input:checkbox[name='cartSno[]']:checked").each(function(){
+			totalPrice += Number($(this).parent().parent().next().next().next().next().find(".sumPrice").text());
+		});
+
+		$(".totalPrice").text(totalPrice);
+	}
+</script>
 
   <jsp:include page="/views/common/footer.jsp"/>
-</body>
-</html>

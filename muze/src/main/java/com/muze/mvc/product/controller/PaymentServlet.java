@@ -36,10 +36,29 @@ public class PaymentServlet extends HttpServlet {
 			product.setPayQuantity(payQuantity);
 			list.add(product);
 		} else {
+			String[] proNoStrList = request.getParameterValues("list");
+			List<Integer> proNoList = new ArrayList<Integer>();
+
+			String[] splitProNo = proNoStrList[0].split(",");
+			for(String str : splitProNo) {
+				proNoList.add(Integer.parseInt(str));
+			}
+			list = new BoardService().getProductListByproNoList(proNoList);
+			
+			String[] payQuantityStrList = request.getParameterValues("quantity");
+			List<Integer> payQuantityList = new ArrayList<Integer>();
+			
+			String[] splitPayQuantity = payQuantityStrList[0].split(",");
+			for(String str : splitPayQuantity) {
+				payQuantityList.add(Integer.parseInt(str));
+			}
+			
+			for(int i = 0; i < list.size(); i++) {
+				list.get(i).setPayQuantity(payQuantityList.get(i));
+			}
 			
 		}
 		int totalPrice = new BoardService().getTotalPrice(list);
-		
 		request.setAttribute("list", list);
 		request.setAttribute("totalPrice", totalPrice);
 		request.getRequestDispatcher("/views/product/Payment_.jsp").forward(request, response);

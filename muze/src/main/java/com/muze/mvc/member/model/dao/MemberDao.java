@@ -54,28 +54,37 @@ public class MemberDao {
 
 	// 회원가입
 	public int insertMember(Connection connection, Member member) {
-		int result = 0;
+		int memberNo = 0;
+		ResultSet rs = null;
 		PreparedStatement pstm = null;
-		String query = "INSERT INTO MEMBER VALUES(SEQ_MEMBER.NEXTVAL,?,?,DEFAULT,?,?,?,?,DEFAULT,DEFAULT,DEFAULT)";
+		String query = "INSERT INTO MEMBER VALUES(SEQ_MEMBER.NEXTVAL,?,?,?,?,?,?,?,DEFAULT,DEFAULT,DEFAULT)";
 		
 		try {
-			pstm = connection.prepareStatement(query);
+			pstm = connection.prepareStatement(query, new String[] {"MEMBER_NO"} );
 			
 			pstm.setString(1, member.getMemberId());
 			pstm.setString(2, member.getMemberPassword());
-			pstm.setString(3, member.getMemberName());
-			pstm.setString(4, member.getMemberPhonenumber());
-			pstm.setString(5, member.getMemberEmail());
-			pstm.setString(6, member.getMemberAddress());
+			pstm.setString(3, member.getMemberRole());
+			pstm.setString(4, member.getMemberName());
+			pstm.setString(5, member.getMemberPhonenumber());
+			pstm.setString(6, member.getMemberEmail());
+			pstm.setString(7, member.getMemberAddress());
 			
-			result = pstm.executeUpdate();			
+			pstm.executeUpdate();			
+					
+			rs = pstm.getGeneratedKeys();
+			if(rs.next()) {
+				memberNo = rs.getInt(1);
+			}
+			
+			System.out.println(memberNo);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstm);
 		}
 		
-		return result;
+		return memberNo;
 
 	}
 

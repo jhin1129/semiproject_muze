@@ -57,6 +57,5 @@ $(document).ready(()=>{
 		let datepicker2 = $('#datepicker2').val(today);
         
     });
-    
 
 });

@@ -22,6 +22,10 @@
     color: #329cff;
     text-align: left;
 }
+
+#introduction_chk{
+margin-right: 100px;
+}
 </style>
 
 
@@ -29,6 +33,7 @@
 <div class="container">
     <div class="row m-auto">
         <div class="col-12">
+        <form id="formJoin" name="formJoin" action="${ path }/member/join" method="post" novalidate="novalidate">	
             <div class="location_wrap hidden">
                 <div class="location_cont">
                     <em><a href="#" class="local_home">HOME</a>" > 회원가입 > 정보입력"</em>
@@ -52,11 +57,11 @@
                                 <div class="form_element">
                                     <ul>
                                         <li>
-                                            <input type="radio" id="memberFlDefault" name="memberFl" class="ignore" value="personal" checked="">
+                                            <input type="radio" id="memberFlDefault" name="memberFl" class="ignore" value="MEMBER_ROLE_USER" checked="">
                                             <label for="memberFlDefault" class="choice_s">개인회원</label>
                                         </li>
                                         <li>
-                                            <input type="radio" id="memberFlartist" name="memberFl" class="ignore" value="artist">
+                                            <input type="radio" id="memberFlartist" name="memberFl" class="ignore" value="MEMBER_ROLE_ARTIST">
                                             <label for="memberFlartist" class="choice_s">아티스트 회원</label>
                                         </li>
                                     </ul>
@@ -74,7 +79,6 @@
         <div class="row">
             <div class="col"></div>
                 <div class="col-8">  
-                <form id="formJoin" name="formJoin" action="${ path }/member/join" method="post" novalidate="novalidate">
                     <h3>기본정보</h3>
                     <div class="important" id="base_info_p">표시는 반드시 입력하셔야 하는 항목입니다.</div>
                         <div class="base_info_sec">
@@ -215,7 +219,8 @@
                                     <th><span class="important">이미지</span></th>
                                     <td>
                                         <div class="member_warning">
-                                            <input type="file" name="image"  data-pattern="gdMemberNmGlobal" class="ignore">
+                                            <input type="file" name="image" id="image"  class="ignore"><br>
+                                            <label for="" id="image_chk"></label>
                                         </div>
                                     </td>
                                 </tr>
@@ -223,7 +228,8 @@
                                     <th><span class="important">소개글</span></th>
                                     <td>
                                         <div class="member_warning">
-                                            <textarea rows="5" name="introduction" data-pattern="gdMemberNmGlobal" id="introduction" class="ignore"></textarea>
+                                            <textarea rows="5" name="introduction" id="introduction" class="ignore"></textarea>
+                                            <label for="" id="introduction_chk"></label>
                                         </div>
                                     </td>
                                 </tr>
@@ -239,7 +245,7 @@
                                     <th><span>사업자번호</span></th>
                                     <td>
                                         <div class="member_warning">
-                                            <input type="text" name="busiNo" id="busiNo" data-pattern="gdNum" maxlength="10" placeholder="- -없이 입력하세요." value="" data-overlap-businofl="y" data-charlen="10" data-oldbusino="" class="ignore">
+                                            <input type="text" name="busiNo" id="busiNo" maxlength="10" placeholder="- -없이 입력하세요." value="" data-overlap-businofl="y" data-charlen="10" data-oldbusino="" class="ignore">
                                             <div id="busiNo-error" class="text_warning" style="">사업자번호는 10자로 입력해야 합니다.</div>
                                         </div>
                                     </td>
@@ -248,56 +254,14 @@
                             </table>
                         </div>    
                     </div>
-<!--                <div class="addition_info_box">
-                      <h3>부가 정보</h3>
-                      <div class="addition_info_sec">
-                          <table border="0" cellpadding="0" cellspacing="0">
-                              <colgroup>
-                                  <col width="25%">
-                                  <col width="75%">
-                              </colgroup>
-                              <tbody>
-                              <tr>
-                                  <th><span>성별</span></th>
-                                  <td>
-                                      <div class="member_warning">
-                                          <div class="form_element">
-                                              <ul>
-                                                  <li>
-                                                      <input type="radio" id="sexFlMan" name="sexFl" class="ignore" value="m">
-                                                      <label for="sexFlMan" class="choice_s ">남자</label>
-                                                  </li>
-                                                  <li>
-                                                      <input type="radio" id="sexFlWoman" name="sexFl" class="ignore" value="w">
-                                                      <label for="sexFlWoman" class="choice_s ">여자</label>
-                                                  </li>
-                                              </ul>
-                                          </div>
-                                      </div>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <th><span>생일</span></th>
-                                  <td class="member_birthday">
-                                      <div class="member_warning">
-                                      </div>
-                                      <div class="member_warning">
-                                          <input type="text" id="birthDt" name="birthDt" class="anniversary js_datepicker" value="" placeholder="예시) 19991224">
-                                      </div>
-                                  </td>
-                              </tr>
-                              </tbody>
-                          </table>
-                      </div>
-                  </div>
-                  -->
+
                     <div class="btn_center_box">
                         <button type="button" id="btnCancel" class="btn_member_cancel">취소</button>
                         <button type="submit" id="btnComfirm" class="btn_comfirm js_btn_join" value="회원가입">회원가입</button>
                     </div>
-                    </form>
                 </div>
             <div class="col"></div>  
+            </form>
         </div>          
     </div>
 </div>  
@@ -314,7 +278,7 @@ $(document).ready(function () {
 	// 아티스트 유형 클릭시
 	$(':radio[name="memberFl"]').change(function() {
 		var $artistinfo = $('.artist_info_box');
-		if (this.value == 'artist') {
+		if (this.value == 'MEMBER_ROLE_ARTIST') {
 			$artistinfo.removeClass('dn');
 			$artistinfo.find('input, select').removeClass('ignore');
 		} else {
@@ -525,6 +489,31 @@ $(document).ready(function () {
 			
 		}
 	});
+	
+	//아티스트 이미지 유효성검사
+	$("#image").change(function(){
+		if($("#image").get(0).files.length === 0){
+			$("#image_chk").html("이미지를 첨부해주세요.");
+			$("#image_chk").attr('style', 'visibility:visible;');
+			return false;
+		}else{
+			$("#image_chk").html("");
+			$("#image_chk").attr('style', 'visibility:hidden;');
+		}
+	});
+	
+	//아티스트 소개글 유효성검사
+	$("#introduction").change(function(){
+	
+		if(!$("#introduction").val()){
+			$("#introduction_chk").html("소개글을 등록해주세요.");
+			$("#introduction_chk").attr('style', 'visibility:visible;');
+			return false;
+		}else{
+			$("#introduction_chk").html("");
+			$("#introduction_chk").attr('style', 'visibility:hidden;');
+		}
+	});
 
 	//제출버튼 클릭시 모든 값 유무 확인
 	$("#formJoin").submit(function(){
@@ -580,6 +569,20 @@ $(document).ready(function () {
 		if($("#address_chk").val == '') {
 			alert("상세 주소를 입력해주세요");
 			$("#addressSub").focus();
+			return false;
+		}
+		
+		//아티스트 이미지가 비어있으면 return
+		if($("#image_chk").val == '') {
+			alert("이미지를 첨부해주세요.");
+			$("#image").focus();
+			return false;
+		}
+		
+		//아티스트 소개글이 비어있으면 return
+		if($("#introduction_chk").val == '') {
+			alert("소개글을 등록해주세요");
+			$("#introduction").focus();
 			return false;
 		}
 	});

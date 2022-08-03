@@ -39,7 +39,7 @@
 	      <c:if test="${ empty loginMember }">
 		        <a class="mr-4 text-nowrap" href="${path}/member/login">로그인</a>
 		        <a class="mr-4 text-nowrap" href="${path}/member/join_method">회원가입</a>
-		        <a href="${paht}/product/cart" class="me-5 align-items-center mb-1">
+		        <a href="${path}/cart/view" class="me-5 align-items-center mb-1">
 		          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-cart2"
 		            viewBox="0 0 16 16">
 		            <path
@@ -54,11 +54,15 @@
 					<c:when test="${ memId  == 'admin' }">
 						<a class="mr-4 text-nowrap" href="${path}/admin/main">관리자페이지</a>
 					</c:when>
+					<c:when test="${ loginMember.getMemberRole()  == 'MEMBER_ROLE_ARTIST' }">
+						<a class="mr-4 text-nowrap" href="${path}/mypage/artist">아티스트 페이지</a>
+					</c:when>
 					<c:otherwise>
 						<a class="mr-4 text-nowrap" href="${path}/mypage/welcome">마이페이지</a>
 					</c:otherwise>
+
 					</c:choose>
-		        <a href="#" class="me-5 align-items-center mb-1">
+		        	<a href="${path}/cart/view" class="me-5 align-items-center mb-1">
 		          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-cart2"
 		            viewBox="0 0 16 16">
 		            <path
@@ -100,7 +104,6 @@
           커뮤니티
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="${path}/exhibition/list">공모전/전시회</a></li>
           <li><a class="dropdown-item" href="${path}/board/list?type=REVIEW">리뷰 게시판</a></li>
           <li><a class="dropdown-item" href="${path}/board/list?type=FREE">자유 게시판</a></li>
         </ul>

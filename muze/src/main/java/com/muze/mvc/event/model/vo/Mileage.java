@@ -16,4 +16,6 @@ public class Mileage {
 	String pointRoute;
 	Date pointDate;
 	String pointInOut;
+	int pointBefore;
+	int pointAfter;
 }

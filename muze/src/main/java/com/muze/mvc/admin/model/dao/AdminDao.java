@@ -137,4 +137,29 @@ public class AdminDao {
 		return result;
 	}
 
+	public int delMember(Connection connection, int[] dmembers) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String params = "";
+		for(int i = 0; i < dmembers.length; i++) {
+			params += dmembers[i];
+			if(i < dmembers.length - 1)
+				params += ", ";
+		}
+		String query = "UPDATE MEMBER SET ISMEMBER='N' WHERE MEMBER_NO IN ("+params+")";
+
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) { 
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }

@@ -2,6 +2,7 @@ package com.muze.mvc.board.model.service;
 
 import java.io.File;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,8 +16,7 @@ import com.muze.mvc.board.model.vo.Product;
 import com.muze.mvc.common.util.PageInfo;
 import com.muze.mvc.member.model.vo.Artist;
 import com.muze.mvc.member.model.vo.Member;
-import com.muze.mvc.product.model.dao.WriterDao;
-import com.muze.mvc.product.model.vo.Payment;
+import com.muze.mvc.product.model.dao.CartDao;
 
 import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
 
@@ -219,11 +219,11 @@ public class BoardService {
 		return content.substring(content.indexOf("src=\"")).split("temporary/")[1].split("\"")[0];
 	}
 	//PRODUCT SERVICE
-	public List<Product> getProductListByArtistNo(int proArtistNo) {
+	public List<Product> getProductListByArtistNoNotSelfProduct(int proArtistNo, int proNo) {
 		List<Product> list = null;
 		Connection connection = getConnection();
 		
-		list = new BoardDao().findProductListByArtistNo(connection, proArtistNo);
+		list = new BoardDao().findProductListByArtistNoNotSelfProduct(connection, proArtistNo, proNo);
 		
 		return list;
 	}
@@ -249,7 +249,33 @@ public class BoardService {
 		return totalPrice;
 	}
 
+	public List<Product> getProductListByproNoList(List<Integer> proNoList) {
+		List<Product> list = new ArrayList<Product>();
+		Connection connection = getConnection();
+		
+		for(int proNo : proNoList) {
+			list.add(new BoardDao().findProductByProNo(connection, proNo));
+		}
+		
+		return list;
+	}
 
+	public void deleteCartByProNoList(int memberNo, List<Integer> proNoList) {
+		int result = 0;
+		Connection connection = getConnection();
+		
+		for(int proNo : proNoList) {
+			result = new CartDao().deleteCartByMemberNoProNo(connection, memberNo, proNo);
+			if(result > 0) {
+				commit(connection);
+			} else {
+				rollback(connection);
+			}
+		}
+		
+		
+		close(connection);
+	}
 
 
 

@@ -13,7 +13,7 @@
                 <div class="row g-0 p-5">
                     <!-- 이미지 -->
                     <div class="col-6" style="min-width: 254px; width: 100%;">
-                        <img style="background-color: black; width: 445px; height: 445px;" class="rounded-start">
+                        <img style="background-color: black; width: 435px; height: 435px;" class="rounded-start">
                     </div>
                     <div class="col-1"></div>
                     <!-- 이미지 상세내용 -->
@@ -32,13 +32,10 @@
                                     <td>${product.proSize }</td>
                                 </tr>
                                 <tr>
-                                    <td>제작방식</td>
+                                    <td>작품타입</td>
                                     <td>${product.proType }</td>
                                 </tr>
-                                <tr>
-                                    <td>소재</td>
-                                    <td>소재 컬럼은 안만들었었군</td>
-                                </tr>
+
                                 <tr>
                                     <td>
                                         <div class="mb-2">수량</div>
@@ -52,14 +49,14 @@
                                     <td>
                                         <div class="my-2">판매가</div>
                                     </td>
-                                    <td>${product.proPrice }</td>
+                                    <td>${product.proPrice}</td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <div class="mt-2">수량선택</div>
                                     </td>
                                     <td>
-                                        <input id="quantitySelect" class="mt-2" type="number" min="1" max="${product.proQuantity }" value="1">
+                                        <input id="quantitySelect" class="mt-2" type="number" min="1" max="${product.proQuantity}" value="1">
                                     </td>
                                 </tr>
                                 <tr style="border-bottom: 1px solid rgba(0,0,0,.1);">
@@ -73,22 +70,42 @@
                             </table>
 
                             <table class="my-2" style="width: 100%;">
-                                <tr>
-                                    <td style="width: 50%;">
-                                        <button type="button" onclick="location.href='${path}/board/list?type=REVIEW&searchType=proNo&searchVal=${product.proNo }&isSearch=true'" class="py-2 text-center"
-                                            style="border: 1px solid; width: 100%; height: 100%;">리뷰 확인</div>
-                                    </td>
-                                    <td style="width: 50%;">
-                                        <button id="insertCart" class="py-2 text-center"
-                                            style="border: 1px solid; width: 100%; height: 100%;">장바구니</button>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td colspan="2">
-                                        <button id="payment" class="col-12 my-2 py-2 text-center" style="border: 1px solid;">구매하기</button>
-                                    </td>
-                                </tr>
+                            	<c:if test="${loginMember.memberNo == product.proArtistNo || loginMember.memberRole == 'MEMBER_ROLE_ADMIN'}">
+	                                <tr>
+	                                    <td style="width: 50%;">
+	                                        <button type="button" class="py-2 text-center"
+	                                            style="border: 1px solid; width: 100%; height: 50px;">수정</div>
+	                                    </td>
+	                                    <td style="width: 50%;">
+	                                        <button class="py-2 text-center"
+	                                            style="border: 1px solid; width: 100%; height: 50px;" onclick="location.href='${path}/product/delete?proNo=${product.proNo}&proType=${product.proType }'">삭제</button>
+	                                    </td>
+	                                </tr>
+	
+	                                <tr>
+	                                    <td colspan="2">
+	                                        <button onclick="location.href='${path}/board/list?type=REVIEW&searchType=proNo&searchVal=${product.proNo }&isSearch=true'" class="col-12 my-2 py-2 text-center" style="border: 1px solid; height:50px">리뷰 확인</button>
+	                                    </td>
+	                                </tr>
+                            	</c:if>
+                            	<c:if test="${loginMember.memberNo != product.proArtistNo && loginMember.memberRole != 'MEMBER_ROLE_ADMIN'}">
+	                                <tr>
+	                                    <td style="width: 50%;">
+	                                        <button type="button" onclick="location.href='${path}/board/list?type=REVIEW&searchType=proNo&searchVal=${product.proNo }&isSearch=true'" class="py-2 text-center"
+	                                            style="border: 1px solid; width: 100%; height: 50px;">리뷰 확인</div>
+	                                    </td>
+	                                    <td style="width: 50%;">
+	                                        <button id="insertCart" class="py-2 text-center"
+	                                            style="border: 1px solid; width: 100%; height: 50px;">장바구니</button>
+	                                    </td>
+	                                </tr>
+	
+	                                <tr>
+	                                    <td colspan="2">
+	                                        <button id="payment" class="col-12 my-2 py-2 text-center" style="border: 1px solid; height: 50px">구매하기</button>
+	                                    </td>
+	                                </tr>
+                            	</c:if>
                             </table>
 
 
@@ -96,7 +113,7 @@
                     </div>
                 </div>
             </div>
-
+			<c:if test="${ not empty productListByArtistNo}">
             <h3>작가의 다른 작품</h3>
 				<div id="carousel" class="carousel slide row" data-ride="carousel" data-interval="false">
 					<div style="width:5%;" class="my-5">
@@ -144,7 +161,7 @@
 	  					</button>
 					</div>
 				</div>
-				
+			</c:if>
             <ul class="nav nav-tabs nav-justified">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#artistIntroduce" style="height: 55px; line-height: 40px;">작가 소개</a>
@@ -184,7 +201,6 @@
                 <div id="productIntroduce" class="p-5">
        	            <h1 class="mt-5" style="text-align:center;">ABOUT PRODUCT</h1>
                 	
-                    <img class="mt-5" style="background-color: black; width: 100%; height: 700px;">
                     <p>
                         ${product.proDescription }
                     </p>
@@ -237,9 +253,9 @@
 			if(${empty loginMember}){
 				alert("로그인이 필요합니다.");
 			} else{
-				var value = $("#quantitySelect").val();
-				var min = $("#quantitySelect").attr("min");
-				var max = $("#quantitySelect").attr("max");
+				var value = Number($("#quantitySelect").val());
+				var min = Number($("#quantitySelect").attr("min"));
+				var max = Number($("#quantitySelect").attr("max"));
 				if(value >= min && value <= max){
 					location.href="${path}/product/payment?proNo=${product.proNo}&payQuantity=" + $("#quantitySelect").val();
 				} else {
@@ -261,13 +277,22 @@
 							"proNo" : ${product.proNo}
 						},
 						success: (data) => {
-							alert(data);
-							if(confirm("장바구니에 담았습니다. 장바구니 페이지로 이동하시겠습니까?")){
-								location.href="${path}/product/cart/view?memberNo=${loginMember.memberNo}";
+							if(data==1){
+								if(confirm("장바구니에 담았습니다. 장바구니 페이지로 이동하시겠습니까?")){
+									location.href="${path}/cart/view";
+								}
+							} else if(data==2){
+								alert("일반 계정으로 로그인해 주세요");
+							} else if(data==3){
+								if(confirm("이미 장바구니에 등록되어 있습니다. 장바구니 페이지로 이동하시겠습니까?")){
+									location.href="${path}/cart/view";
+								}
+							} else if(data==4){
+								alert("장바구니 등록에 실패하였습니다.")
 							}
 						},
 						error: () => {
-							alert("장바구니 담기에 실패하였습니다.");
+							alert("장바구니 등록에 실패하였습니다.");
 						}
 					});
 				}

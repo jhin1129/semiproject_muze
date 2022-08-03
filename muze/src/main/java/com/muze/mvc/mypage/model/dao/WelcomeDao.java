@@ -7,12 +7,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.muze.mvc.member.model.vo.Artist;
 import com.muze.mvc.member.model.vo.Member;
 import com.muze.mvc.mypage.model.vo.Welcome;
 
 public class WelcomeDao {
 
-	public Welcome getWelcomeRow(Connection connection, Member member) {
+	public Welcome getWelcomeRow(Connection connection, int member) {
 		Welcome welcomeRow = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -25,7 +26,7 @@ public class WelcomeDao {
 		
 		try {
 			pstmt = connection.prepareStatement(query);
-			pstmt.setInt(1, member.getMemberNo());
+			pstmt.setInt(1, member);
 
 			rs = pstmt.executeQuery();
 			
@@ -59,5 +60,5 @@ public class WelcomeDao {
 		
 		return welcomeRow;
 	}
-	
+
 }

@@ -4,20 +4,22 @@ import static com.muze.mvc.common.jdbc.JDBCTemplate.close;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import com.muze.mvc.event.model.vo.Mileage;
 
 public class MileageDao {
 
-	public int insertMileage(Connection connection, int memberNo) {
+	public int insertAttMileage(Connection connection, int memberNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "INSERT INTO MILEAGE(MEMBER_NO, EV_ATTEND_DATE) VALUES()";
+		String query = "INSERT INTO MILEAGE VALUES(SEQ_POINT.NEXTVAL, ?, 100, 'ATT', SYSDATE, 'IN', 0, 100)";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
 			
-			pstmt.setInt(1, event.getMemberNo());
-			pstmt.setDate(2, event.getEvAttendDate());				
+			pstmt.setInt(1, memberNo);
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -27,6 +29,31 @@ public class MileageDao {
 		}
 		
 		return result;
+	}
+	
+	public Mileage currentMileage(Connection connection, int memberNo) {
+		Mileage mileage = null;
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		String query = "SELECT SUM(POINT_AFTER) FROM MILEAGE WHERE MEMBER_NO='?'";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+			mileage = new Mileage();
+			
+			mileage.setPointAfter(rs.getInt("POINT_AFTER"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return mileage;
 	}
 	
 

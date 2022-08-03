@@ -15,6 +15,19 @@ import com.muze.mvc.mypage.model.vo.MyOrder;
 
 public class MyOrderService {
 
+	// 날짜별 주문 검색 
+	public List<MyOrder> orderByDate(String dateFrom, String dateTo, int memNo, String type, int artNo) {
+		List<MyOrder> orderByDate = null;
+		
+		Connection connection = getConnection();
+
+		orderByDate = new MyOrderDao().getOrderByDate(connection, dateFrom, dateTo, memNo, type, artNo);
+		
+		close(connection);
+		
+		return orderByDate;
+	}
+	
 	// 주문 상세 
 	public MyOrder getOrderDetail(int no) {
 		MyOrder orderDetail = null;
@@ -28,34 +41,40 @@ public class MyOrderService {
 		return orderDetail;
 	}
 
-	// 날짜별 주문 검색 
-	public List<MyOrder> orderByDate(String dateFrom, String dateTo, Member member) {
-		List<MyOrder> orderByDate = null;
-		
-		Connection connection = getConnection();
-
-		orderByDate = new MyOrderDao().getOrderByDate(connection, dateFrom, dateTo, member);
-		
-		close(connection);
-		
-		return orderByDate;
-	}
 
 	// 주문 정보 (30일)
-	public List<MyOrder> getOrderRec(Member member) {
+	public List<MyOrder> getOrderRec(int memNo) {
 		List<MyOrder> getOrderRec = null;
 		
 		Connection connection = getConnection();
-
-		getOrderRec = new MyOrderDao().getOrderRec(connection, member);
+		
+		getOrderRec = new MyOrderDao().getOrderMem(connection, memNo);
 		
 		close(connection);
 		
 		return getOrderRec;
 	}
 	
+	// 주문 취소 
+	public int orderCancel(int no) {
+		int result = 0; 
+		Connection connection = getConnection();
+		
+		result = new MyOrderDao().orderCancel(connection, no);
+		
+		if(result > 0) {
+			commit(connection);
+		} else {
+			rollback(connection);
+		}
+		
+		close(connection);
+		
+		return result;
+	}
+
 	// 주문 현황 
-	public List<MyOrder> getOrderStatus(Member member) {
+	public List<MyOrder> getOrderStatus(int memNo) {
 		List<MyOrder> getOrderStatus = null;
         int result1 = 0;
         int result2 = 0;
@@ -68,7 +87,7 @@ public class MyOrderService {
 		
 		Connection connection = getConnection();
 
-		getOrderStatus = new MyOrderDao().getOrderStatus(connection, member);
+		getOrderStatus = new MyOrderDao().getOrderStatus(connection, memNo);
 		
 		for (int i = 0; i < getOrderStatus.size(); i++) {
 			
@@ -119,51 +138,6 @@ public class MyOrderService {
 		close(connection);
 		
 		return getOrderStatus;
-	}
-
-	// 주문 취소 
-	public int orderCancel(int no) {
-		int result = 0; 
-		Connection connection = getConnection();
-		
-		result = new MyOrderDao().orderCancel(connection, no);
-		
-		// Dao에서 값을 받아오는 과정이 제대로 이루어져, 양수값을 반환한다면
-		if(result > 0) {
-			commit(connection);
-		} else {
-			rollback(connection);
-		}
-		
-		close(connection);
-		
-		return result;
-	}
-
-	// 날짜별 취소 검색 
-	public List<MyOrder> cancelByDate(String dateFrom, String dateTo, Member member) {
-		List<MyOrder> cancelByDate = null;
-		
-		Connection connection = getConnection();
-
-		cancelByDate = new MyOrderDao().getCancelByDate(connection, dateFrom, dateTo, member);
-		
-		close(connection);
-		
-		return cancelByDate;
-	}
-
-	// 날짜별 환불 검색 
-	public List<MyOrder> refundByDate(String dateFrom, String dateTo, Member member) {
-		List<MyOrder> refundByDate = null;
-		
-		Connection connection = getConnection();
-
-		refundByDate = new MyOrderDao().getRefundByDate(connection, dateFrom, dateTo, member);
-		
-		close(connection);
-		
-		return refundByDate;
 	}
 	
 }
