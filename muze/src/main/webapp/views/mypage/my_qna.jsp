@@ -96,10 +96,9 @@
             </div>
 
             <div class="col-3 text-right">
-                <button type="button" class="btn btn-outline-secondary" onclick="location.href='${path}/board/write?type=FREE'" id="srhbtn8">글 쓰기</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="location.href='${path}/support/write?type=QNA'" id="srhbtn8">글 쓰기</button>
             </div>
         </div>
-            
             <!-- 세번째 행 -->
             <div class="row">
               <div class="col-sm-12" style="margin-top: 50px;">

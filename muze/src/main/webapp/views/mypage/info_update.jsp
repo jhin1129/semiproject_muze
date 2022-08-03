@@ -82,7 +82,7 @@
                                     <th><span class="important">비밀번호 확인</span></th>
                                     <td>
                                         <div class="member_warning">
-                                            <input type="password" class="check-id" name="memPwRe" autocomplete="off" required>
+                                            <input type="password" id="checkPassword" class="check-id" name="memPwRe" autocomplete="off" required>
                                         	<label for="" id="pwd_chk2"></label>
                                         </div>
                                     </td>
@@ -261,7 +261,7 @@ $(document).ready(function () {
 	});
 	
 	//이름 유효성검사
-	$("#memNm").change(function(){
+/* 	$("#memNm").change(function(){
 	var $memNm = $("#memNm");
 	
 		if(/^[가-힣]{2,}$/.test($memNm.val()) == false){
@@ -272,7 +272,7 @@ $(document).ready(function () {
 			$("#name_chk").html("");
 			$("#name_chk").attr('style', 'visibility:hidden;');
 		}
-	});
+	}); */
 	
 	//이메일 인증하기 구현 
 	$(emailCheck).click(function(){
@@ -396,13 +396,6 @@ $(document).ready(function () {
 	//제출버튼 클릭시 모든 값 유무 확인
 	$("#formUpdate").submit(function(){
 		
-		//중복검사 실시 유무
-		if($("[name=idTest]").val() != "1"){
-			alert("중복검사를 해주세요");
-			$("#newMemId").focus();
-			return false;
-		}
-		
 		//비밀번호 유효성 여부결과표시가 나와있으면 return
 		if($("#pwd_chk1").css("visibility") != "hidden"){
 			alert("비밀번호를 제대로 입력 해주세요");
@@ -411,19 +404,19 @@ $(document).ready(function () {
 		}
 		
 		if($("#pwd_chk2").css("visibility") != "hidden"){
-			alert("비밀번호를 제대로 입력 해주세요");
+			alert("비밀번호가 일치하지 않습니다");
 			$("#checkPassword").focus();
 			return false;
 		}
 		
-		//이름 유효성 여부표시가 나와있으면 return
+/* 		//이름 유효성 여부표시가 나와있으면 return
 		if($("#name_chk").css("visibility") != "hidden"){
 			alert("이름을 제대로 입력 해주세요");
 			$("#memNm").focus();
 			return false;
-		}
+		} */
 		
-		//이메일 인증 실시 유무
+/* 		//이메일 인증 실시 유무
 		if($("[name=emailTest]").val() != "1"){
 			alert("이메일 인증을 해주세요");
 			return false;
@@ -434,14 +427,14 @@ $(document).ready(function () {
 			alert("이메일 인증을 해주세요");
 			$("#email").focus();
 			return false;
-		}
+		} */
 		
-		//휴대폰유효성 여부표시가 나와있으면 return
+/* 		//휴대폰유효성 여부표시가 나와있으면 return
 		if($("#phone_chk").css("visibility") != "hidden"){
 			alert("휴대폰번호를 제대로 입력 해주세요");
 			$("#cellPhone").focus();
 			return false;
-		}
+		} */
 		
 		//주소 상세주소가 비어있으면 return
 		if($("#address_chk").val == '') {
@@ -451,7 +444,6 @@ $(document).ready(function () {
 		}
 	});
 });
-
 
 
 

@@ -28,7 +28,7 @@ public class ProductDetailServlet extends HttpServlet {
 		
 		List<Product> productList = new ArrayList<Product>();
 		
-		productList = new BoardService().getProductListByArtistNo(product.getProArtistNo());
+		productList = new BoardService().getProductListByArtistNoNotSelfProduct(product.getProArtistNo(), proNo);
 		
 		Artist artist = new BoardService().getArtistByProNo(proNo);
 		

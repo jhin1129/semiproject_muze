@@ -20,7 +20,7 @@
 	<!-- 컨테이너 -->
 	<div class="summary" style="height: 560px;">
 		<h5>콘텐츠 관리 > 게시글 관리</h5>
-		<form name="contentMgmt" action="${ path }/admin/mgmt" method="get">
+		<form name="contentMgmt" action="${ path }/admin/content/mgmt" method="get">
 			<div class="text-right">
 				<input type="submit" name="btn" style="width: 50px; height: 30px; margin: 0; 
 				background-color: white; color: black; border: 1px solid lightgray;" value="공개">

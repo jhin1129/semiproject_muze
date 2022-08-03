@@ -20,51 +20,64 @@
 	<!-- 컨테이너 -->
 	<div class="summary">
 		<h5>회원 관리</h5>
-		<div class="text-right">
-			<button type="button" class="button-white">삭제</button>
-			<button type="button" class="button-white">저장</button>
-		</div>
-		<div class="mt-3">
-			<table class="table table-sm">
-				<thead class="text-center">
-					<tr style="height: 10px; color: gray">
-						<th style="width: 2%;"><input type="checkbox"></th>
-						<th style="width: 10%;">유저번호</th>
-						<th style="width: 15%;">아이디</th>
-						<th style="width: 8%;">이름</th>
-						<th style="width: 15%;">전화번호</th>
-						<th style="width: 20%;">이메일</th>
-						<th style="width: 12%;">가입일</th>
-						<th style="width: 10%;">계정타입</th>
-						<th style="width: 8%;">회원여부</th>
-					</tr>
-				</thead>
-
-				<tbody class="text-center">
-					<c:if test="${ empty list }">
-						<tr>
-							<td colspan="9">조회된 회원이 없습니다.</td>
+		<form name="contentMgmt" action="${ path }/admin/member/mgmt"
+			method="get">
+			<div class="text-right">
+				<input type="submit" name="btn"
+					style="width: 50px; height: 30px; margin-right: 10px; background-color: white; color: black; border: 1px solid lightgray;"
+					value="저장">
+			</div>
+			<div class="mt-3">
+				<table class="table table-sm">
+					<thead class="text-center">
+						<tr style="height: 10px; color: gray">
+							<th style="width: 10%;">유저번호</th>
+							<th style="width: 12%;">아이디</th>
+							<th style="width: 10%;">이름</th>
+							<th style="width: 12%;">전화번호</th>
+							<th style="width: 18%;">이메일</th>
+							<th style="width: 12%;">가입일</th>
+							<th style="width: 10%;">계정타입</th>
+							<th style="width: 8%;">회원여부</th>
+							<th style="width: 8%;">회원정지</th>
 						</tr>
-					</c:if>
-					<c:if test="${ not empty list }">
-						<c:forEach var="board" items="${ list }">
-							<tr>
-								<td><input type="checkbox"></td>
-								<td>${ member.memberNo }</td>
-								<td>${ member.memberId }</td>
-								<td>${ member.memberName }</td>
-								<td>${ member.memberPhoneNumber }</td>
-								<td>${ member.memberEmail }</td>
-								<td>${ member.enrollDate }</td>
-								<td>${ member.memberRole }</td>
-								<td>${ member.ismember }</td>
-							</tr>
-						</c:forEach>
-					</c:if>
-				</tbody>
+					</thead>
 
-			</table>
-		</div>
+					<tbody class="text-center">
+						<c:if test="${ empty list }">
+							<tr>
+								<td colspan="9">조회된 회원이 없습니다.</td>
+							</tr>
+						</c:if>
+						<c:if test="${ not empty list }">
+							<c:forEach var="member" items="${ list }">
+								<tr>
+									<td>${ member.memberNo }</td>
+									<td>${ member.memberId }</td>
+									<td>${ member.memberName }</td>
+									<td>${ member.memberPhonenumber }</td>
+									<td>${ member.memberEmail }</td>
+									<td>${ member.enrollDate }</td>
+									<c:if test="${ member.memberRole eq 'MEMBER_ROLE_ADMIN'}">
+										<td>관리자</td>
+									</c:if>
+									<c:if test="${ member.memberRole eq 'MEMBER_ROLE_ARTIST'}">
+										<td>아티스트</td>
+									</c:if>
+									<c:if test="${ member.memberRole eq 'MEMBER_ROLE_USER'}">
+										<td>일반회원</td>
+									</c:if>
+									<td>${ member.ismember }</td>
+									<td><input type="checkbox" id="checkbox" name="delMember"
+										value="${ member.memberNo }"></td>
+								</tr>
+							</c:forEach>
+						</c:if>
+					</tbody>
+
+				</table>
+			</div>
+		</form>
 	</div>
 	<div class="row" style="margin-bottom: 25px;">
 		<div class="col-4"></div>

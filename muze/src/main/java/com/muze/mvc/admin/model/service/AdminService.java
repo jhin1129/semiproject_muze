@@ -65,4 +65,20 @@ public class AdminService {
 		return result;
 	}
 
+	public int delMember(int[] dmembers) {
+		int result = 0;
+		Connection connection = getConnection();
+		
+		result = new AdminDao().delMember(connection, dmembers);
+		
+		if(result > 0) {
+			commit(connection);
+		} else {
+			rollback(connection);
+		}
+		close(connection);
+
+		return result;
+	}
+
 }

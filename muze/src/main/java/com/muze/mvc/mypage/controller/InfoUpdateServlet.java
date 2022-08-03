@@ -38,13 +38,11 @@ public class InfoUpdateServlet extends HttpServlet {
 	    		
 	    		result = new MyInfoService().save(member);
 	    		
-	    		System.out.println(member.getMemberNo()); //ok
-	    		
 	        	if (result > 0) {
-	        		request.setAttribute("msg", "회원 정보 수정 완료");
-	    			request.setAttribute("location", "/mypage/welcome");	
+	        		request.setAttribute("msg", "회원 정보 수정 완료. 다시 로그인해 주세요.");
+	    			request.setAttribute("location", "/member/logout");	
 				}else {
-		    		request.setAttribute("msg", "회원 정보 수정 실패");
+		    		request.setAttribute("msg", "회원 정보 수정에 실패하였습니다. 관리자에게 문의해 주세요.");
 					request.setAttribute("location", "/mypage/welcome");	
 				}
         	

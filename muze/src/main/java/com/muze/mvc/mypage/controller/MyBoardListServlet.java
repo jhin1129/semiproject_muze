@@ -26,20 +26,15 @@ public class MyBoardListServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		  // 로그인 체크 & 본인 게시글 여부 확인 
 		  HttpSession session = request.getSession(false);
 		  Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
 		
 		  	if (loginMember != null) {
-		  		// 로그인 객체의 PK값을 넘기기 위한 객체 생성 
 				Member member = new Member();
-				member.setMemberId(loginMember.getMemberId());
+				member.setMemberNo(loginMember.getMemberNo());
 			
-		
-				// 검색을 위한 파라미터 
 				String type = request.getParameter("type");
-				String searchVal = member.getMemberId();
-				String isSearch = "true";			
+				int searchVal = member.getMemberNo();
 				String path = null;
 				int page = 0;
 				int listCount = 0;
@@ -53,7 +48,7 @@ public class MyBoardListServlet extends HttpServlet {
 					page = 1;
 				}
 				
-				// 게시판종류, 서치타입(작성자, 제목), 서치내용
+				// 게시판종류, 서치내용
 				listCount = new MyBoardService().getBoardCount(type, searchVal);
 				
 				if(type.equals("REVIEW")) {
@@ -61,11 +56,15 @@ public class MyBoardListServlet extends HttpServlet {
 					path = "/views/mypage/my_review.jsp";
 				} else if(type.equals("FREE")) {
 					pageInfo = new PageInfo(page, 5, listCount, 10);
-					path = "/views/mypage/my_community.jsp";
+					path = "/views/mypage/my_free_board.jsp";
+				} else if(type.equals("REVIEW_ART")) {
+					pageInfo = new PageInfo(page, 5, listCount, 8);
+					path = "/views/mypage/my_review.jsp";
+				} else if(type.equals("QNA")) {
+					pageInfo = new PageInfo(page, 5, listCount, 10);
+					path = "/views/mypage/my_qna.jsp";
 				}
 				
-				// 그려주기위한 리스트에, 페이지 번호와 검색용 파라미터값을 넣어준다. (위에서 ""로 초기화하여 널값 처리를 해둠)
-				// 선택된 값들로 가져온 객체들을 리스트에 담아온다. 
 				list = new MyBoardService().getBoardList(pageInfo, type, searchVal);
 					
 					request.setAttribute("pageInfo", pageInfo);

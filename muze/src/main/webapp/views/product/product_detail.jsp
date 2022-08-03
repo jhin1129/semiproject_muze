@@ -116,7 +116,7 @@
                     </div>
                 </div>
             </div>
-
+			<c:if test="${ not empty productListByArtistNo}">
             <h3>작가의 다른 작품</h3>
 				<div id="carousel" class="carousel slide row" data-ride="carousel" data-interval="false">
 					<div style="width:5%;" class="my-5">
@@ -164,7 +164,7 @@
 	  					</button>
 					</div>
 				</div>
-				
+			</c:if>
             <ul class="nav nav-tabs nav-justified">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#artistIntroduce" style="height: 55px; line-height: 40px;">작가 소개</a>
@@ -281,13 +281,22 @@
 							"proNo" : ${product.proNo}
 						},
 						success: (data) => {
-							alert(data);
-							if(confirm("장바구니에 담았습니다. 장바구니 페이지로 이동하시겠습니까?")){
-								location.href="${path}/product/cart/view?memberNo=${loginMember.memberNo}";
+							if(data==1){
+								if(confirm("장바구니에 담았습니다. 장바구니 페이지로 이동하시겠습니까?")){
+									location.href="${path}/cart/view";
+								}
+							} else if(data==2){
+								alert("일반 계정으로 로그인해 주세요");
+							} else if(data==3){
+								if(confirm("이미 장바구니에 등록되어 있습니다. 장바구니 페이지로 이동하시겠습니까?")){
+									location.href="${path}/cart/view";
+								}
+							} else if(data==4){
+								alert("장바구니 등록에 실패하였습니다.")
 							}
 						},
 						error: () => {
-							alert("장바구니 담기에 실패하였습니다.");
+							alert("장바구니 등록에 실패하였습니다.");
 						}
 					});
 				}

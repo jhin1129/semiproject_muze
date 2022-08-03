@@ -15,12 +15,12 @@ import com.muze.mvc.mypage.model.vo.MyMileage;
 public class MyInfoService {
 
 	// 마일리지 검색 
-	public List<MyMileage> infoMileage(String dateFrom, String dateTo, Member member) {
+	public List<MyMileage> infoMileage(String dateFrom, String dateTo, int memNo) {
 		List<MyMileage> myMileage = null;
 		
 		Connection connection = getConnection();
 
-		myMileage = new MyInfoDao().getMileage(connection, dateFrom, dateTo, member);
+		myMileage = new MyInfoDao().getMileage(connection, dateFrom, dateTo, memNo);
 		
 		close(connection);
 		
