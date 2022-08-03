@@ -8,8 +8,6 @@ import static com.muze.mvc.common.jdbc.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.Map;
 
-import com.muze.mvc.board.model.dao.CommentsDao;
-import com.muze.mvc.board.model.vo.Comments;
 import com.muze.mvc.member.model.dao.ArtistDao;
 import com.muze.mvc.member.model.dao.MemberDao;
 import com.muze.mvc.member.model.vo.Artist;
@@ -22,11 +20,12 @@ public class MemberService {
 	public static final String MEMBER_ROLE_ADMIN = "D";
 	public static final String MEMBER_ROLE_ARTIST = "R";
 
-	// 로그인
+	// 로그인 회원 정보 확인
 	public Member login(String memId, String memPw) {
 		Connection connection = getConnection();
 		
-		Member member = new MemberDao().findMemberById(connection, memId);
+		new MemberDao();
+		Member member = MemberDao.findMemberById(connection, memId);
 		
 		close(connection);
 		
@@ -45,6 +44,33 @@ public class MemberService {
 			artist = new ArtistDao().findArtistByNo(conn, memberNo);
 			
 			return artist;
+		}
+		
+		// 카카오 로그인 회원 정보 확인, 비밀번호 찾기할 때 회원 정보 확인
+		public Member loginMember(String userId) {
+			Connection conn = getConnection();
+			
+			Member loginMember = MemberDao.findMemberById(conn, userId);
+			
+			close(conn);
+
+			return loginMember;
+		}
+		
+		// 카카오 자동 회원가입
+		public int kakaoJoin(Member joinMember, String userId) {
+			Connection conn = getConnection();
+
+			int result = memberDao.kakaoJoin(conn, joinMember);
+			
+			if(result > 0) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+			close(conn);
+			
+			return result;
 		}
 
 	// 회원가입 - 개인 회원
@@ -85,7 +111,8 @@ public class MemberService {
 	public Boolean isDuplicateID(String newMemId) {
 		Connection connection = getConnection();
 		
-		Member member = new MemberDao().findMemberById(connection, newMemId);
+		new MemberDao();
+		Member member = MemberDao.findMemberById(connection, newMemId);
 		
 		close(connection);
 		
@@ -139,7 +166,8 @@ public class MemberService {
 	public Member findPasswordById(String memberId) {
 		Connection connection = getConnection();
 		
-		Member member = new MemberDao().findMemberById(connection, memberId);
+		new MemberDao();
+		Member member = MemberDao.findMemberById(connection, memberId);
 		
 		close(connection);
 		
