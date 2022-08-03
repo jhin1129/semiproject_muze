@@ -32,7 +32,7 @@
                                     <td>${product.proSize }</td>
                                 </tr>
                                 <tr>
-                                    <td>제작방식</td>
+                                    <td>작품타입</td>
                                     <td>${product.proType }</td>
                                 </tr>
 
@@ -70,25 +70,25 @@
                             </table>
 
                             <table class="my-2" style="width: 100%;">
-                            	<c:if test="${loginMember.memberRole == 'MEMBER_ROLE_ARTIST' || loginMember.memberRole == 'MEMBER_ROLE_ADMIN'}">
+                            	<c:if test="${loginMember.memberNo == product.proArtistNo || loginMember.memberRole == 'MEMBER_ROLE_ADMIN'}">
 	                                <tr>
 	                                    <td style="width: 50%;">
 	                                        <button type="button" class="py-2 text-center"
-	                                            style="border: 1px solid; width: 100%; height: 100%;">수정</div>
+	                                            style="border: 1px solid; width: 100%; height: 50px;">수정</div>
 	                                    </td>
 	                                    <td style="width: 50%;">
 	                                        <button class="py-2 text-center"
-	                                            style="border: 1px solid; width: 100%; height: 100%;">삭제</button>
+	                                            style="border: 1px solid; width: 100%; height: 50px;" onclick="location.href='${path}/product/delete?proNo=${product.proNo}&proType=${product.proType }'">삭제</button>
 	                                    </td>
 	                                </tr>
 	
 	                                <tr>
 	                                    <td colspan="2">
-	                                        <button onclick="location.href='${path}/board/list?type=REVIEW&searchType=proNo&searchVal=${product.proNo }&isSearch=true'" class="col-12 my-2 py-2 text-center" style="border: 1px solid;">리뷰 확인</button>
+	                                        <button onclick="location.href='${path}/board/list?type=REVIEW&searchType=proNo&searchVal=${product.proNo }&isSearch=true'" class="col-12 my-2 py-2 text-center" style="border: 1px solid; height:50px">리뷰 확인</button>
 	                                    </td>
 	                                </tr>
                             	</c:if>
-                            	<c:if test="${loginMember.memberRole != 'MEMBER_ROLE_ARTIST' && loginMember.memberRole != 'MEMBER_ROLE_ADMIN'}">
+                            	<c:if test="${loginMember.memberNo != product.proArtistNo && loginMember.memberRole != 'MEMBER_ROLE_ADMIN'}">
 	                                <tr>
 	                                    <td style="width: 50%;">
 	                                        <button type="button" onclick="location.href='${path}/board/list?type=REVIEW&searchType=proNo&searchVal=${product.proNo }&isSearch=true'" class="py-2 text-center"
@@ -201,7 +201,6 @@
                 <div id="productIntroduce" class="p-5">
        	            <h1 class="mt-5" style="text-align:center;">ABOUT PRODUCT</h1>
                 	
-                    <img class="mt-5" style="background-color: black; width: 100%; height: 700px;">
                     <p>
                         ${product.proDescription }
                     </p>

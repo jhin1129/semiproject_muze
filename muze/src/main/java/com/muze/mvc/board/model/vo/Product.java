@@ -35,4 +35,6 @@ public class Product {
 	int rowNum;
 	
 	int payQuantity;
+	
+	String PRO_STATUS;
 }
