@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Payment {
+public class Orders {
 	int orderNo; //주문코드
 	
 	int proNo; //작품코드
@@ -19,6 +19,14 @@ public class Payment {
 	Date orderDate; //주문날짜
 	
 	int memberNo; //유저번호
+	
+	String orderName;
+	
+	String orderAdress;
+	
+	String orderPhone;
+	
+	String orderEmail;
 	
 	String buyName; //구매자이름
 	

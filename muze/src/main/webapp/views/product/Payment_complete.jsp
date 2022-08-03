@@ -30,7 +30,7 @@
         <hr class="mt-4">
 
         <!-- order_tit -->
-        <form id="frmCart" name="frmCart" method="post" target="ifrmProcess">
+        <form id="frmCart" name="frmCart" method="POST" target="ifrmProcess">
             <input type="hidden" name="mode" value="">
             <input type="hidden" name="cart[cartSno]" value="">
             <input type="hidden" name="cart[goodsNo]" value="">
