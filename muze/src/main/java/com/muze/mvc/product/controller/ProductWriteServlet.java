@@ -3,7 +3,6 @@ package com.muze.mvc.product.controller;
 
 import java.io.IOException;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +15,6 @@ import com.muze.mvc.common.util.FileRename;
 import com.muze.mvc.member.model.vo.Member;
 import com.muze.mvc.product.model.service.ProductService;
 import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @WebServlet("/product/write")
 public class ProductWriteServlet extends HttpServlet {

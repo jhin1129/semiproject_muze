@@ -23,7 +23,8 @@ public class ProductDao {
 				+ "?," 		 // PRO_ARTIST_NO
 				+ "SYSDATE," // PRO_REG_DATE
 				+ "?,"		 // PRO_DESCRIPTION
-				+ "?"		 // PRO_TYPE
+				+ "?,"		 // PRO_TYPE
+				+ "'Y'"		 // PRO_STATUS
 				+ ")";		 
 		
 		try {
