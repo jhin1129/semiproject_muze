@@ -19,7 +19,7 @@ public class PaintingService {
 		
 		close(connection);
 		
-		return count; 
+		return count;
 		
 	}
 

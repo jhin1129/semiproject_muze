@@ -11,7 +11,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 mt-3">
-                <h2 class="basket">주문서작성/결재</h2>
+                <h2 class="basket">주문서작성/결제</h2>
             </div>
             <div class="col-md-6 mt-3">
                 <div id="page">
@@ -19,7 +19,7 @@
                         <strong>01 장바구니</strong>&nbsp&nbsp&nbsp<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
                             <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
                         </svg>&nbsp&nbsp&nbsp
-                        <strong>02 주문서작성/결재</strong>&nbsp&nbsp&nbsp<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                        <strong>02 주문서작성/결제</strong>&nbsp&nbsp&nbsp<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
                             <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
                         </svg>&nbsp&nbsp&nbsp
                         <strong>03 주문완료</strong>
@@ -30,7 +30,7 @@
         <hr class="mt-4">
 
         <!-- order_tit -->
-        <form id="frmCart" name="frmCart" method="post" target="ifrmProcess">
+        <form id="frmCart" name="frmCart" method="post" enctype="multipart/form-data">
             <input type="hidden" name="mode" value="">
             <input type="hidden" name="cart[cartSno]" value="">
             <input type="hidden" name="cart[goodsNo]" value="">
@@ -135,7 +135,7 @@
                         <!-- 장바구니 상품리스트 끝 -->
         
         
-                    </form>
+                    
                     <hr>
         
         
@@ -194,12 +194,7 @@
                                     <td><input type="text" name="orderAddress" id="orderAddress" value="" data-pattern="gdEngKor" maxlength="300">            
                                 </td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">전화번호</th>
-                                    <td>
-                                        <input type="text" id="phoneNum" name="orderPhone" value="" maxlength="20">
-                                    </td>
-                                </tr>
+
                                 <tr>
                                     <th scope="row"><span class="important">휴대폰 번호</span></th>
                                     <td>
@@ -251,20 +246,10 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">전화번호</th>
-                                    <td>
-                                        <input type="text" id="receiverPhone" name="receiverPhone">
-                                    </td>
-                                </tr>
-                                <tr>
                                     <th scope="row"><span class="important">휴대폰 번호</span></th>
                                     <td>
                                         <input type="text" id="receiverCellPhone" name="receiverCellPhone">
                                     </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">남기실 말씀</th>
-                                    <td class="td_last_say"><input type="text" name="orderMemo"></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -290,7 +275,7 @@
                                 <tr>
                                     <th scope="row">상품 합계 금액</th>
                                     <td>
-                                        <strong id="totalGoodsPrice" class="order_payment_sum">1,490,000원</strong>
+                                        <strong id="totalGoodsPrice" class="order_payment_sum">${totalPrice}</strong>
                                     </td>
                                 </tr>
                                 <tr>
@@ -300,123 +285,18 @@
                                         <span class="multi_shipping_text"></span>
                                     </td>
                                 </tr>
-                                <tr id="rowDeliveryInsuranceFee" class="dn">
-                                    <th scope="row">해외배송 보험료</th>
-                                    <td>
-                                        <span id="deliveryInsuranceFee">0</span>원
-                                        <input type="hidden" name="deliveryInsuranceFee" value="0">
-                                    </td>
-                                </tr>
-                                <tr id="rowDeliverAreaCharge" class="dn">
-                                    <th scope="row">지역별 배송비</th>
-                                    <td>
-                                        <span id="deliveryAreaCharge">0</span>원
-                                        <input type="hidden" name="totalDeliveryCharge" value="0">
-                                        <input type="hidden" name="deliveryAreaCharge" value="0">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">할인 및 적립</th>
-                                    <td>
-                                        <ul class="order_benefit_list">
-                                            <li class="order_benefit_sale">
-                                                <em id="saleDefault">
-                                                    할인 : <strong>(-) <b class="total-member-dc-price">0</b>원</strong>
-                                                    <span>(
-                                                    상품 0원
-                                                    , 회원 <span class="member-dc-price">0원</span>
-                                                    , 쿠폰 <span class="goods-coupon-dc-price">0</span>원
-                                                    )</span>
-                                                </em>
-                                                <em id="saleWithoutMember" class="dn">
-                                                    할인 : <strong>(-) <b class="total-member-dc-price-without-member">0</b>원</strong>
-                                                    <span>(
-                                                    상품 0원
-                                                    , 회원 0원
-                                                    , 쿠폰 <span class="goods-coupon-dc-price-without-member">0</span>원</span>
-                                                    )
-                                                </em>
-                                            </li>
-                                            <li class="order_benefit_mileage js_mileage">
-                                                <em id="mileageDefault">
-                                                    적립 마일리지 : <strong>(+) <b class="total-member-mileage">4,100</b>원</strong>
-                                                    <span>
-                                                        (
-                                                        상품 <span class="goods-mileage">0</span>원,
-                                                        회원 <span class="member-mileage">4,100</span>원,
-                                                        쿠폰 <span class="goods-coupon-add-mileage">0</span>원
-                                                        )
-                                                    </span>
-                                                </em>
-                                                <em id="mileageWithoutMember" class="js_mileage dn">
-                                                    적립 마일리지 : <strong>(+) <b class="total-member-mileage-without-member">0</b>원</strong>
-                                                    <span>
-                                                        (
-                                                        상품 0원,
-                                                        회원 0원,
-                                                        쿠폰 <span class="goods-coupon-add-mileage-without-member">0</span>원
-                                                        )
-                                                    </span>
-                                                </em>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">쿠폰 사용</th>
-                                    <td>
-                                        <input type="hidden" name="couponApplyOrderNo" value="">
-                                        <input type="hidden" name="totalCouponOrderDcPrice" value="">
-                                        <input type="hidden" name="totalCouponOrderPrice" value="">
-                                        <input type="hidden" name="totalCouponOrderMileage" value="">
-                                        <input type="hidden" name="totalCouponDeliveryDcPrice" value="">
-                                        <input type="hidden" name="totalCouponDeliveryPrice" value="">
-                                        <ul class="order_benefit_list order_coupon_benefits  dn">
-                                            <li class="order_benefit_sale">
-                                                <em>
-                                                    주문할인 : <strong>(-) <b id="useDisplayCouponDcPrice">0</b>원</strong>
-                                                </em>
-                                            </li>
-                                            <li class="order_benefit_sale">
-                                                <em>
-                                                    배송비할인 : <strong>(-) <b id="useDisplayCouponDelivery">0</b>원</strong>
-                                                </em>
-                                            </li>
-                                            <li class="order_benefit_mileage js_mileage">
-                                                <em>
-                                                    적립 마일리지 : <strong>(+) <b id="useDisplayCouponMileage">0</b>원</strong>
-                                                </em>
-                                            </li>
-                                        </ul>
-                                        <span class="btn_gray_list">
-                                            <button type="button" href="#couponOrderApplyLayer" class="btn_gray_mid btn_open_layer"><span>쿠폰 조회 및 적용</span></button>
-                                        </span>
-                                    </td>
-                                </tr>
+                                
                                 <tr>
                                     <th scope="row">마일리지 사용</th>
                                     <td>
                                         <div class="order_money_use">
                                             <b><input type="text" name="useMileage"> 원</b>
                                             <div class="form_element">
-                                                <input type="checkbox" id="useMileageAll" onclick="gd_mileage_use_all();">
-                                                <label for="useMileageAll" class="check_s">전액 사용하기</label>
+                                                
+                                                
                                                 <span class="money_use_sum">(보유 마일리지 : 1,000 원)</span>
                                             </div>
-                                            <em class="money_use_txt js-mileageInfoArea">※ 1,000원만 사용 가능합니다.</em>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">예치금 사용</th>
-                                    <td>
-                                        <div class="order_money_use">
-                                            <b><input type="text" name="useDeposit" onblur="gd_deposit_use_check();"> 원</b>
-                                            <div class="form_element">
-                                                <input type="checkbox" id="useDepositAll" onclick="deposit_use_all();">
-                                                <label for="useDepositAll" class="check_s">전액 사용하기</label>
-                                                <span class="money_use_sum">(보유 예치금 : 0 원)</span>
-                                            </div>
+                                            
                                         </div>
                                     </td>
                                 </tr>
@@ -456,21 +336,9 @@
                                                         <input type="radio" id="settleKind_gb" name="settleKind" value="gb">
                                                         <label for="settleKind_gb" class="choice_s on">무통장 입금</label>
                                                     </li>
-                                                    <li id="settlekindType_pc">
-                                                        <input type="radio" id="settleKind_pc" name="settleKind" value="pc">
-                                                        <label for="settleKind_pc" class="choice_s">신용카드</label>
-                                                    </li>
                                                     <li id="settlekindType_pb">
                                                         <input type="radio" id="settleKind_pb" name="settleKind" value="pb">
                                                         <label for="settleKind_pb" class="choice_s">계좌이체</label>
-                                                    </li>
-                                                    <li id="settlekindType_pv">
-                                                        <input type="radio" id="settleKind_pv" name="settleKind" value="pv">
-                                                        <label for="settleKind_pv" class="choice_s">가상계좌</label>
-                                                    </li>
-                                                    <li id="settlekindType_ph">
-                                                        <input type="radio" id="settleKind_ph" name="settleKind" value="ph">
-                                                        <label for="settleKind_ph" class="choice_s">휴대폰결제</label>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -480,7 +348,7 @@
                                                 <em class="pay_bankbook_txt">( 무통장 입금 의 경우 입금확인 후부터 배송단계가 진행됩니다. )</em>
                                                 <ul>
                                                     <li>
-                                                        <strong>입금자명</strong>
+                                                        <strong>계좌 번호</strong>
                                                         <input type="text" name="bankSender">
                                                     </li>
                                                     <li>
@@ -525,7 +393,8 @@
                             </div>
                             <hr>
                             <div class="btn_center_box">
-                                <button class="btn_order_buy order-buy"><em>결제하기</em></button>
+                                <button class="btn_order_buy order-buy" onclick="location.href='${path}/product/complete'"><em>결제하기</em></button>
                             </div>
                         </div>
+                        
           <jsp:include page="/views/common/footer.jsp"/>
