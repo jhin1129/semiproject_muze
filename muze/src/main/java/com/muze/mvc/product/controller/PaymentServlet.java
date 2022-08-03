@@ -16,7 +16,6 @@ import com.muze.mvc.board.model.service.BoardService;
 import com.muze.mvc.board.model.vo.Product;
 import com.muze.mvc.event.model.vo.Mileage;
 import com.muze.mvc.member.model.vo.Member;
-import com.muze.mvc.product.model.vo.Payment;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 

@@ -11,7 +11,6 @@ import com.muze.mvc.board.model.vo.Board;
 import com.muze.mvc.board.model.vo.Product;
 import com.muze.mvc.common.util.PageInfo;
 import com.muze.mvc.member.model.vo.Artist;
-import com.muze.mvc.product.model.vo.Payment;
 
 import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
 
