@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.muze.mvc.board.model.vo.Product;
 import com.muze.mvc.common.util.PageInfo;
 import com.muze.mvc.product.model.service.PaintingService;
+import com.muze.mvc.product.model.service.ProductService;
 
 @WebServlet("/product/list")
 public class ProductListServlet extends HttpServlet {
@@ -44,9 +45,9 @@ public class ProductListServlet extends HttpServlet {
 			page = 1;
 		}
     	
-    	listCount = new PaintingService().getPaintingCount(); // 페이지 숫자를 넘버링하기 위한 총 리스트 갯수
+    	listCount = new ProductService().getProductCount(type); // 페이지 숫자를 넘버링하기 위한 총 리스트 갯수
     	pageInfo = new PageInfo(page, 10, listCount, 4); // 페이지 정보 만들기
-    	list = new PaintingService().getPaingingList(pageInfo); // 페이지 별 실제 리스트 개수
+    	list = new ProductService().getProductList(pageInfo, type); // 페이지 별 실제 리스트 개수
     	
     	
     	request.setAttribute("pageInfo", pageInfo);

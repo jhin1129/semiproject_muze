@@ -141,7 +141,9 @@
 	                    	});
 	                    }
 	                    
-	                </script>
+	                    $("#content").html(data.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g,'"').replace(/&#40;/g,'(').replace(/&#41;/g,')').replace(/&#35;/g,'#'));
+
+					 </script>
 	                
 	                <div class="text-right mt-1">
 	                    <button type="button" onclick="location.href='${path}/product/list?type=${type}'" class="btn btn-light py-0">취소</button>
@@ -197,5 +199,6 @@
 	     str = String(str);
 	     return str.replace(/[^\d]+/g, '');
 	 }
+	 
 </script>
 <jsp:include page="/views/common/footer.jsp"/>
