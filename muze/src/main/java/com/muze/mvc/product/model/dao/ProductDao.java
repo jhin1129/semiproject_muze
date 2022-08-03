@@ -1,13 +1,12 @@
 package com.muze.mvc.product.model.dao;
 
-import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
+import static com.muze.mvc.common.jdbc.JDBCTemplate.close;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import com.muze.mvc.board.model.vo.Product;
-import com.muze.mvc.product.model.vo.Writer;
 
 public class ProductDao {
 	

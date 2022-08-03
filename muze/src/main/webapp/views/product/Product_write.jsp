@@ -46,12 +46,12 @@
 	                    <thead>
 	                    <tr>
 							<th class="table-active">작품 구분</td>
-							<td style="width: 85%;"><select name="ptype" id="brdCategory" style="width: 150px; color: gray;" required>
+							<td style="width: 85%;"><select name="type" id="type" style="width: 150px; color: gray;" required>
 									<option>작품 주제 선택</option>
-									<option value="인물" >인물</option>
-									<option value="풍경">풍경</option>
-									<option value="정물">정물</option>
-									<option value="추상">추상</option>
+									<option value="PORTRAIT">인물</option>
+									<option value="LANDSCAPE">풍경</option>
+									<option value="STILL-LIFE">정물</option>
+									<option value="ABSTRACT">추상</option>
 							</select></td>
 						</tr>
 	                    </thead>
@@ -158,7 +158,7 @@
     
 <script>
 	function submitCheck() {
-		if($("#ptype").val().trim()==""){
+		if($("#type").val().trim()==""){
 			alert("작품 주제를 선택해 주세요");
 			return false;
 		}

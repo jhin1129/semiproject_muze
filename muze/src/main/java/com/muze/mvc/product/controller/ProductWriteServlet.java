@@ -31,7 +31,7 @@ public class ProductWriteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int result = 0;
 		
-		String type = request.getParameter("ptype");
+		String type = request.getParameter("type");
 		
 		String path = getServletContext().getRealPath("/resources/upload/product/painting");	
 //		ServletContext context = getServletContext();
@@ -47,7 +47,6 @@ public class ProductWriteServlet extends HttpServlet {
 		
 //		String pcode = mr.getParameter("pcode");
 	//	int partistno = Integer.parseInt(mr.getParameter("partistno"));
-		String ptype = mr.getParameter("ptype");
 		String pname = mr.getParameter("pname");
 		int pcount = Integer.parseInt(mr.getParameter("pcount"));
 		String psize = mr.getParameter("psize");
@@ -56,7 +55,7 @@ public class ProductWriteServlet extends HttpServlet {
 		int pprice = Integer.parseInt(mr.getParameter("pprice"));
 		String description = mr.getParameter("description");
 		
-		System.out.println(ptype);
+		System.out.println(type);
 		System.out.println(pname);
 		System.out.println(pcount);
 		System.out.println(psize);
@@ -76,7 +75,7 @@ public class ProductWriteServlet extends HttpServlet {
 //		if(loginMember != null) {
 		Product product = new Product();
 		product.setProArtistNo(loginMember.getMemberNo());
-		product.setProType(ptype);
+		product.setProType(type);
 		product.setProName(pname);
 		product.setProQuantity(pcount);
 		product.setProSize(psize);
@@ -89,10 +88,10 @@ public class ProductWriteServlet extends HttpServlet {
 		
 		if(result > 0) {
 			request.setAttribute("msg", "게시글 작성에 성공하였습니다.");
-			request.setAttribute("location", "/product/painting?type=" + ptype);
+			request.setAttribute("location", "/product/painting?type=" + type);
 		}else {
 			request.setAttribute("msg", "게시글 작성에 실패하였습니다.");
-			request.setAttribute("location", "/product/painting?type=" + ptype);
+			request.setAttribute("location", "/product/painting?type=" + type);
 		}
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 //	}
