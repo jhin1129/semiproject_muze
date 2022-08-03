@@ -30,15 +30,10 @@
         <hr class="mt-4">
 
         <!-- order_tit -->
-        <form id="frmCart" name="frmCart" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="mode" value="">
-            <input type="hidden" name="cart[cartSno]" value="">
-            <input type="hidden" name="cart[goodsNo]" value="">
-            <input type="hidden" name="cart[goodsCnt]" value="">
-            <input type="hidden" name="cart[addGoodsNo]" value="">
-            <input type="hidden" name="cart[addGoodsCnt]" value="">
-            <input type="hidden" name="cart[couponApplyNo]" value="">
-            <input type="hidden" name="useBundleGoods" value="1">
+        <form id="frmCart" name="frmCart" method="post" action="${path}/product/complete">
+        <input type="hidden" value="${ list }" name="list">
+        <input type="hidden" value="${ totalPrice }" name="totalPrice">
+            
                 <!-- 장바구니 상품리스트 시작 -->
                 <div class="cart_cont_list">
                     <div class="order_cart_tit">
@@ -87,12 +82,7 @@
                                                 <div class="pick_add_info">
                                                     <em><a href="">${product.proName }</a></em>
                                                     <!-- //icon_pick_list -->
-                                                    <div class="pick_option_box">
-                                                        <span class="text_type_cont">배송선택 : 서울/경기(+40,000원) <strong>(+40,000원)</strong></span>
-                                                    </div>
-                                                    <div class="pick_option_box">
-                                                    </div>
-                                                </div>
+                                                                                                    </div>
                                             </div>
                                             <!-- //pick_add_cont -->
                                             <!-- //pick_add_list -->
@@ -387,8 +377,9 @@
                             </div>
                             <hr>
                             <div class="btn_center_box">
-                                <button class="btn_order_buy order-buy" onclick="location.href='${path}/product/complete'"><em>결제하기</em></button>
+                                <button class="btn_order_buy order-buy"><em>결제하기</em></button>
                             </div>
+        </form>
                         </div>
                         
           <jsp:include page="/views/common/footer.jsp"/>
