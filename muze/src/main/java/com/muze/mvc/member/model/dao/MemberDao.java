@@ -14,7 +14,7 @@ import com.muze.mvc.member.model.vo.Member;
 public class MemberDao {	
 	
 	// 로그인
-		public Member findMemberById(Connection connection, String memId) {
+		public static Member findMemberById(Connection connection, String memId) {
 			Member member = null;
 			PreparedStatement pstm = null;
 			ResultSet rs = null;
@@ -52,6 +52,30 @@ public class MemberDao {
 			return member;
 		}
 
+		// 카카오 자동 회원가입
+		public int kakaoJoin(Connection conn, Member joinMember) {
+			int result = 0;
+			PreparedStatement pstm =null;
+			String query = "INSERT INTO MEMBER(MEMBER_NO, MEMBER_ID, MEMBER_PASSWORD, MEMBER_ROLE, MEMBER_NAME, MEMBER_PHONE_NUMBER) VALUES(SEQ_MEMBER.NEXTVAL,?,?,DEFAULT,?,?)";
+			
+			try {
+				pstm = conn.prepareStatement(query);
+				
+				pstm.setString(1, joinMember.getMemberId());
+				pstm.setString(2, joinMember.getMemberPassword());
+				pstm.setString(3, joinMember.getMemberName());
+				pstm.setString(4, joinMember.getMemberPhonenumber());
+			
+				result = pstm.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstm);
+			}
+			return result;
+		}
+		
 	// 회원가입
 	public int insertMember(Connection connection, Member member) {
 		int memberNo = 0;
@@ -277,4 +301,6 @@ public class MemberDao {
 		}
 		return result;
 	}
+	
+
 }	
