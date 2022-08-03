@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
-import com.muze.mvc.board.model.vo.Comments;
+import com.muze.mvc.common.util.FileRename;
 import com.muze.mvc.member.model.service.MemberService;
 import com.muze.mvc.member.model.vo.Artist;
 import com.muze.mvc.member.model.vo.Member;
+import com.oreilly.servlet.MultipartRequest;
 
 
 @WebServlet(name = "join", urlPatterns = "/member/join")
@@ -33,19 +33,29 @@ public class JoinServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	HttpSession session = null;
     	Member member = new Member();
+    	
+		// 파일 저장 경로
+		String path = getServletContext().getRealPath("/resources/upload/artistImg");
+		
+		// 파일 최대 사이즈
+		int maxSize = 10485760;
+		
+		String encoding = "UTF-8";
+		
+		MultipartRequest mr = new MultipartRequest(request, path, maxSize, encoding, new FileRename());
+    	
     	int resultArtist = 0;
 
-	    String joinType = request.getParameter("memberFl");
+	    String joinType = mr.getParameter("memberFl");
 	    
-	    	member.setMemberId(request.getParameter("memId"));
-	    	member.setMemberPassword(request.getParameter("memPw"));
+	    	member.setMemberId(mr.getParameter("memId"));
+	    	member.setMemberPassword(mr.getParameter("memPw"));
 	    	member.setMemberRole(joinType);
-	    	member.setMemberName(request.getParameter("memNm"));
-	    	member.setMemberEmail(request.getParameter("email"));
-	    	member.setMemberPhonenumber(request.getParameter("cellPhone"));
-	    	member.setMemberAddress(request.getParameter("address"));
+	    	member.setMemberName(mr.getParameter("memNm"));
+	    	member.setMemberEmail(mr.getParameter("email"));
+	    	member.setMemberPhonenumber(mr.getParameter("cellPhone"));
+	    	member.setMemberAddress(mr.getParameter("address"));
 	    	
-		
 	    	System.out.println(joinType);
 	    	System.out.println(member);
 	    	
@@ -54,17 +64,17 @@ public class JoinServlet extends HttpServlet {
 	    	
 	    	if ("MEMBER_ROLE_ARTIST".equals(joinType)) {
 	    	   	Artist artist = new Artist();
-	    		
+	    				
 	    		artist.setArtistNo(resultMember);
-	    		artist.setArtistImg(request.getParameter("image"));
-	    		artist.setArtistIntroduce(request.getParameter("introduction"));
-	    		artist.setBusName(request.getParameter("company"));
-	    		artist.setBusLicense(request.getParameter("busiNo"));
-	    		
+	    		artist.setArtistImg(mr.getFilesystemName("image"));
+	    		artist.setArtistIntroduce(mr.getParameter("introduction"));
+	    		artist.setBusName(mr.getParameter("company"));
+	    		artist.setBusLicense(mr.getParameter("busiNo"));
+
 	    		System.out.println(artist);
 
 		    	resultArtist = new MemberService().saveArtist(artist);
-
+		    	
 		    	if(resultMember > 0 && resultArtist > 0) {
 		    		session = request.getSession();
 		    		// 회원 가입 완료

@@ -33,7 +33,7 @@ margin-right: 100px;
 <div class="container">
     <div class="row m-auto">
         <div class="col-12">
-        <form id="formJoin" name="formJoin" action="${ path }/member/join" method="post" novalidate="novalidate">	
+        <form id="formJoin" name="formJoin" action="${ path }/member/join" method="post" enctype="multipart/form-data" novalidate="novalidate">	
             <div class="location_wrap hidden">
                 <div class="location_cont">
                     <em><a href="#" class="local_home">HOME</a>" > 회원가입 > 정보입력"</em>
