@@ -39,7 +39,7 @@
         <!-- 후기글 전체 -->
         <div class="mt-5" style="border: 1px solid rgb(238, 233, 233);">
 		
-			<form action="${ path }/product/write?type=LANDSCAPE" onsubmit="return submitCheck()" method="POST" enctype="multipart/form-data">
+			<form action="${ path }/product/write?type=${ type }" onsubmit="return submitCheck()" method="POST" enctype="multipart/form-data">
 				<input type="hidden" name="partistno" value=${ loginMember.memberNo }>
 	            <div>
 	                <table class="table m-0">

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.muze.mvc.board.model.vo.Product;
 import com.muze.mvc.common.util.PageInfo;
-import com.muze.mvc.product.model.service.PaintingService;
 import com.muze.mvc.product.model.service.ProductService;
 
 @WebServlet("/product/list")
@@ -29,15 +28,16 @@ public class ProductListServlet extends HttpServlet {
     	PageInfo pageInfo = null;
     	List<Product> list = null;
     	
-		if(type.equals("PORTRAIT")) {
-			path = "/views/product/product_portrait.jsp";
-		} else if(type.equals("LANDSCAPE")) {
-			path = "/views/product/product_landscape.jsp";
-		} else if(type.equals("STILL-LIFE")) {
-			path = "/views/product/product_still-life.jsp";
-		} else if(type.equals("ABSTRACT")) {
-			path = "/views/product/product_abstract.jsp";
-		}
+    	path = "/views/product/product_list.jsp";
+//		if(type.equals("PORTRAIT")) {
+//			path = "/views/product/product_portrait.jsp";
+//		} else if(type.equals("LANDSCAPE")) {
+//			path = "/views/product/product_landscape.jsp";
+//		} else if(type.equals("STILL-LIFE")) {
+//			path = "/views/product/product_still-life.jsp";
+//		} else if(type.equals("ABSTRACT")) {
+//			path = "/views/product/product_abstract.jsp";
+//		}
 
     	try {
     		page = Integer.parseInt(request.getParameter("page"));

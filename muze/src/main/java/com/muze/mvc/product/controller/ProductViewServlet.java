@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.muze.mvc.board.model.service.BoardService;
 import com.muze.mvc.board.model.vo.Product;
 import com.muze.mvc.member.model.vo.Artist;
 import com.muze.mvc.product.model.service.ProductService;
@@ -29,15 +28,15 @@ public class ProductViewServlet extends HttpServlet {
 		
 		List<Product> productList = new ArrayList<Product>();
 		
-		productList = new ProductService().getProductListByArtistNoNotSelfProduct(product.getProArtistNo(), proNo);
+//		productList = new ProductService().getProductListByArtistNoNotSelfProduct(product.getProArtistNo(), proNo);
 		
 		Artist artist = new ProductService().getArtistByProNo(proNo);
-		
+		System.out.println(artist);
 		request.setAttribute("artist", artist);
 		request.setAttribute("product", product);
 		request.setAttribute("productListByArtistNo", productList);
 		
-		request.getRequestDispatcher("/views/product/product_detail.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/product/product_view.jsp").forward(request, response);
 	}
 
 }

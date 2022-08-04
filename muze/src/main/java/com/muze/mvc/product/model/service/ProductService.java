@@ -76,7 +76,7 @@ public class ProductService {
 	public List<Product> getProductListByArtistNoNotSelfProduct(int proArtistNo, int proNo) {
 		List<Product> list = null;
 		Connection connection = getConnection();
-		
+		System.out.println(list);
 		list = new ProductDao().findProductListByArtistNoNotSelfProduct(connection, proArtistNo, proNo);
 		
 		return list;
@@ -87,7 +87,7 @@ public class ProductService {
 		Connection connection = getConnection();
 		
 		artist = new ProductDao().findArtistByProNo(connection, proNo);
-		
+		System.out.println(artist);
 		close(connection);
 		
 		return artist;
