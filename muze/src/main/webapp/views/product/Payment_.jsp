@@ -182,25 +182,25 @@
                                
                                 <tr>
                                     <th scope="row"><span class="important">주문하시는 분</span></th>
-                                    <td><input type="text" name="orderName" id="orderName" value="" data-pattern="gdEngKor" maxlength="20">            
+                                    <td><input type="text" name="orderName" id="orderName" value="" data-pattern="gdEngKor" maxlength="20" placeholder="ex) 홍길동">            
                                 </td>
                                 </tr>
                                 <tr>
                                     <th scope="row"><span class="important">주소</span></th>
-                                    <td><input type="text" name="orderAddress" id="orderAddress" value="" data-pattern="gdEngKor" maxlength="300">            
+                                    <td><input type="text" name="orderAddress" id="orderAddress" value="" data-pattern="gdEngKor" maxlength="300" placeholder="ex) 서울 강남구 영동대로 513">            
                                 </td>
                                 </tr>
 
                                 <tr>
                                     <th scope="row"><span class="important">휴대폰 번호</span></th>
                                     <td>
-                                        <input type="text" id="mobileNum" name="orderCellPhone" value="" maxlength="20">
+                                        <input type="text" id="mobileNum" name="orderCellPhone" value="" maxlength="20" placeholder="ex) 010-0000-0000">
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row"><span class="important">이메일</span></th>
                                     <td class="member_email">
-                                        <input type="text" id="orderEmail" name="orderEmail" value="">
+                                        <input type="text" id="orderEmail" name="orderEmail" value="" placeholder="ex) Email11@naver.com">
                                     </td>
                                 </tr>
                                 </tbody>
@@ -224,23 +224,23 @@
                                 <tbody>
                                 <tr>
                                     <th scope="row"><span class="important">받으실분</span></th>
-                                    <td><input type="text" id="receiverName" name="receiverName" data-pattern="gdEngKor" maxlength="20"></td>
+                                    <td><input type="text" id="receiverName" name="receiverName" data-pattern="gdEngKor" maxlength="20" placeholder="ex) 홍길동"></td>
                                 </tr>
                                 <tr>
                                     <th><span class="important">주소</span></th>
                                     <td class="member_address">
                                         <div class="address_postcode">
-                                            <input type="text" name="zonecode" readonly="readonly" value="" required>
+                                            <input type="text" name="zonecode" readonly="readonly" placeholder="우편번호" value="" required>
                                             <button type="button" id="btnPostcode" class="btn_post_search">우편번호검색</button>
                                             <input type="hidden" name="zipcode" value="">
                                         </div>
                                         <div class="address_input">
                                             <div class="member_warning">
-                                                <input type="text" id="address" name="address" readonly="readonly" value="" required>
+                                                <input type="text" id="address" name="address" readonly="readonly" value="" placeholder="주소" required>
                                                            
                                             </div>
                                             <div class="member_warning js_address_sub">
-                                                <input type="text" id="addressSub" name="addressSub" value="">
+                                                <input type="text" id="addressSub" name="addressSub" placeholder="상세주소" value="">
                                                 <label for="" id="address_chk"></label>
                                             </div>
                                         </div>
@@ -249,7 +249,7 @@
                                 <tr>
                                     <th scope="row"><span class="important">휴대폰 번호</span></th>
                                     <td>
-                                        <input type="text" id="receiverCellPhone" name="receiverCellPhone">
+                                        <input type="text" id="receiverCellPhone" name="receiverCellPhone" placeholder="ex) 010-0000-0000">
                                     </td>
                                 </tr>
                                 </tbody>
