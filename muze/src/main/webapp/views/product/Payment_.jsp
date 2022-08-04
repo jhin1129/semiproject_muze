@@ -228,24 +228,20 @@
 					<tbody>
 						<tr>
 							<th scope="row"><span class="important">받으실분</span></th>
-							<td><input type="text" name="receiverName"
-								data-pattern="gdEngKor" maxlength="20"></td>
+							<td><input type="text" name="receiverName" data-pattern="gdEngKor" maxlength="20"></td>
+						</tr>
+						<tr>
+							<th scope="row"><span class="important">연락처</span></th>
+							<td><input type="text" id="receiverCellPhone" name="receiverCellPhone"></td>
 						</tr>
 						<tr>
 							<th rowspan="1" scope="row"><span class="important">받으실 곳</span></th>
-							<td class="member_address"><input type="text"
-								id="sample6_postcode" placeholder="우편번호"> <input
-								type="button" onclick="sample6_execDaumPostcode()"
-								value="우편번호 찾기"><br> <input type="text"
-								id="sample6_address" placeholder="주소"><br> <input
-								type="text" id="sample6_detailAddress" placeholder="상세주소">
-								<input type="text" id="sample6_extraAddress" placeholder="참고항목">
+							<td class="member_address">
+								<input type="text" id="sample6_postcode" placeholder="우편번호"> 
+								<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+								<input type="text" id="sample6_address" placeholder="주소"><br>
+								<input type="text" id="sample6_detailAddress" placeholder="상세주소">
 							</td>
-						</tr>
-						<tr>
-							<th scope="row"><span class="important">휴대폰 번호</span></th>
-							<td><input type="text" id="receiverCellPhone"
-								name="receiverCellPhone"></td>
 						</tr>
 					</tbody>
 				</table>
@@ -421,12 +417,6 @@
                     if(data.buildingName !== '' && data.apartment === 'Y'){
                         extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
                     }
-                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                    if(extraAddr !== ''){
-                        extraAddr = ' (' + extraAddr + ')';
-                    }
-                    // 조합된 참고항목을 해당 필드에 넣는다.
-                    document.getElementById("sample6_extraAddress").value = extraAddr;
                 
                 } else {
                     document.getElementById("sample6_extraAddress").value = '';
