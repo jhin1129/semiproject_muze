@@ -30,6 +30,8 @@ public class ProductUpdateServlet extends HttpServlet {
 		
 		product = new ProductService().getProductByProNo(proNo);
 		
+		request.setAttribute("product", product);
+		
 		request.setAttribute("proNo", proNo);
 		
 		request.getRequestDispatcher("/views/product/product_update.jsp").forward(request, response);
@@ -49,7 +51,7 @@ public class ProductUpdateServlet extends HttpServlet {
 
 		MultipartRequest mr = new MultipartRequest(request, path, maxSize, encoding, new FileRename());
 
-		int proNo = Integer.parseInt(request.getParameter("proNo"));
+		String type = mr.getParameter("type");
 		String pname = mr.getParameter("pname");
 		int pcount = Integer.parseInt(mr.getParameter("pcount"));
 		String psize = mr.getParameter("psize");
@@ -58,7 +60,7 @@ public class ProductUpdateServlet extends HttpServlet {
 		int pprice = Integer.parseInt(mr.getParameter("pprice"));
 		String description = mr.getParameter("description");
 		
-		System.out.println(proNo);
+		System.out.println(type);
 		System.out.println(pname);
 		System.out.println(pcount);
 		System.out.println(psize);
@@ -67,13 +69,16 @@ public class ProductUpdateServlet extends HttpServlet {
 		System.out.println(pprice);
 		System.out.println(description);
 		
+		int proNo = Integer.parseInt(request.getParameter("proNo"));
+		System.out.println(proNo);
+		
     	HttpSession session = request.getSession(false);
 		Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
 
 		Product product = new Product();
+		product.setProType(type);
 		product.setProNo(proNo);
 		product.setProArtistNo(loginMember.getMemberNo());
-//		product.setProType(type);
 		product.setProName(pname);
 		product.setProQuantity(pcount);
 		product.setProSize(psize);

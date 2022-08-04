@@ -26,9 +26,9 @@
         </div>
         <!-- 후기글 전체 -->
         <div class="mt-5" style="border: 1px solid rgb(238, 233, 233);">
-			<input type="hidden" name="proNo" value=${ product.proNo }>
 			<form action="${ path }/product/update?proNo=${ product.proNo }" onsubmit="return submitCheck()" method="POST" enctype="multipart/form-data">
 				<input type="hidden" name="partistno" value=${ loginMember.memberNo }>
+				<input type="hidden" name="proNo" value=${ product.proNo }>
 	            <div>
 	                <table class="table m-0">
 	                    <thead>
@@ -46,27 +46,27 @@
 	                    <tbody>
 	                    <tr>
 	                    	<th class="table-active">작품명</td>
-	                    	<td><input type="text" name="pname" id="pname" style="width: 400px; padding-left: 0.5em;">${product.proName }</td>
+	                    	<td><input type="text" name="pname" id="pname" style="width: 400px; padding-left: 0.5em;" value="${product.proName }" required></td>
 	                    </tr>
 	                    <tr>
 	                    	<th class="table-active">작품 수량(개)</td>
-	                    	<td><input type="number" name="pcount" id="pcount" value="0" min="0" max="999" step="1" style="width: 80px; padding-left: 0.5em;" required>${product.proQuantity }</td>
+	                    	<td><input type="number" name="pcount" id="pcount" value="0" min="0" max="999" step="1" style="width: 80px; padding-left: 0.5em;" value="${product.proQuantity }" required></td>
 	                    </tr>
 	                    <tr>
 	                    	<th class="table-active">작품 사이즈</td>
-	                    	<td><input type="text" name="psize" style="width: 150px; padding-left: 0.5em;" required>${product.proSize } &nbsp &nbsp 예시) '80 x 120cm'와 같이 작성</td>
+	                    	<td><input type="text" name="psize" style="width: 150px; padding-left: 0.5em;" value="${product.proSize }" required> &nbsp &nbsp 예시) '80 x 120cm'와 같이 작성</td>
 <!-- 	                    	<td><label for="width">가로(cm) : &nbsp</label><input type="text" name="psize" id="width" style="width: 80px; padding-left: 0.5em;" required> &nbsp &nbsp
 	                    		<label for="height">세로(cm) : &nbsp</label><input type="text" name="psize" id="height" style="width: 80px; padding-left: 0.5em;" required>
 	                    	</td>  -->
 	                    </tr>
                         <tr>
                             <th class="table-active">작품 이미지</th>
-                            <td><input type="file" name="pimg" id="pimg" class="py-0" required>${ product.proImg }</td>
+                            <td><input type="file" name="pimg" id="pimg" class="py-0" value="${ product.proImg }" required></td>
                         </tr>
                         <tr>
                             <th class="table-active">판매 가격(원)</th>
 <!--                        <td><input type="text" name="pprice" id="pprice" onkeyup="inputNumberFormat(this)" style="width: 160px; padding-left: 0.5em;" required></td> -->
-                            <td><input type="text" name="pprice" id="pprice" style="width: 160px; padding-left: 0.5em;" required>${product.proPrice}</td>
+                            <td><input type="text" name="pprice" id="pprice" style="width: 160px; padding-left: 0.5em;" value="${product.proPrice}" required></td>
                         </tr>
 	                    </tbody>
 
@@ -80,7 +80,7 @@
 					<textarea id="summernote" name="description"></textarea>
 	                <script>
 	                    $('#summernote').summernote({
-	                        placeholder: '내용을 입력해주세요',
+	                        placeholder: '${ product.proDescription }',
 	                        focus: true,
 	                        height: 400,
 	                        toolbar: [
