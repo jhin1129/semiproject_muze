@@ -179,6 +179,7 @@
                                     <col style="width:85%;">
                                 </colgroup>
                                 <tbody>
+                               
                                 <tr>
                                     <th scope="row"><span class="important">주문하시는 분</span></th>
                                     <td><input type="text" name="orderName" id="orderName" value="" data-pattern="gdEngKor" maxlength="20">            
@@ -199,7 +200,7 @@
                                 <tr>
                                     <th scope="row"><span class="important">이메일</span></th>
                                     <td class="member_email">
-                                        <input type="text" name="orderEmail" value="">
+                                        <input type="text" id="orderEmail" name="orderEmail" value="">
                                     </td>
                                 </tr>
                                 </tbody>
@@ -223,20 +224,25 @@
                                 <tbody>
                                 <tr>
                                     <th scope="row"><span class="important">받으실분</span></th>
-                                    <td><input type="text" name="receiverName" data-pattern="gdEngKor" maxlength="20"></td>
+                                    <td><input type="text" id="receiverName" name="receiverName" data-pattern="gdEngKor" maxlength="20"></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row"><span class="important">받으실 곳</span></th>
+                                    <th><span class="important">주소</span></th>
                                     <td class="member_address">
                                         <div class="address_postcode">
-                                            <input type="text" name="receiverZonecode" readonly="readonly">
-                                            <input type="hidden" name="receiverZipcode">
-                                            <span id="receiverZipcodeText" class="old_post_code"></span>
-                                            <button type="button" class="btn_post_search">우편번호검색</button>
+                                            <input type="text" name="zonecode" readonly="readonly" value="" required>
+                                            <button type="button" id="btnPostcode" class="btn_post_search">우편번호검색</button>
+                                            <input type="hidden" name="zipcode" value="">
                                         </div>
                                         <div class="address_input">
-                                            <input type="text" name="receiverAddress" readonly="readonly">
-                                            <input type="text" name="receiverAddressSub">
+                                            <div class="member_warning">
+                                                <input type="text" id="address" name="address" readonly="readonly" value="" required>
+                                                           
+                                            </div>
+                                            <div class="member_warning js_address_sub">
+                                                <input type="text" id="addressSub" name="addressSub" value="">
+                                                <label for="" id="address_chk"></label>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
@@ -369,7 +375,7 @@
                                 <hr>
                             </div>
                             <div class="payment_final_check">
-                                <div class="form_element">
+                                <div class="form_element" id="termAgree_orderCheck_div">
                                     <input type="checkbox" id="termAgree_orderCheck" class="require">
                                     <label for="termAgree_orderCheck" class="check_s"><em><b>(필수)</b> 구매하실 상품의 결제정보를 확인하였으며, 구매진행에 동의합니다.</em></label>
                                 </div>
@@ -380,10 +386,67 @@
                             </div>
         				</form>
                         </div>
+         
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>               
 <script>
 	$(document).ready(function(){
+		// 주소 api
+		$("#btnPostcode").click(function() {
+			new daum.Postcode({
+			oncomplete: function(data) {
+				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+				// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+				// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+				var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+	            var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+
+	            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                extraRoadAddr += data.bname;
+	            }
+	            // 건물명이 있고, 공동주택일 경우 추가한다.
+	            if(data.buildingName !== '' && data.apartment === 'Y'){
+	               extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	            }
+	            // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	            if(extraRoadAddr !== ''){
+	                extraRoadAddr = ' (' + extraRoadAddr + ')';
+	            }
+	            // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+	            if(fullRoadAddr !== ''){
+	                fullRoadAddr += extraRoadAddr;
+	            }
+
+	            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	            console.log(data.zonecode);
+	            console.log(fullRoadAddr);
+	            
+	            
+	            $("[name=zonecode]").val(data.zonecode);
+	            $("[name=address]").val(fullRoadAddr);
+	            
+	            document.getElementById('zonecode').value = data.zonecode; //5자리 새우편번호 사용
+	            document.getElementById('address').value = fullRoadAddr;
+	            
+				// 커서를 상세주소 필드로 이동한다.
+				document.getElementById("addressSub").focus();
+				}
+			}).open();
+		});
 		
 		$("#frmCart").submit(function(e){
+			// 입력 x시 반환
+			if($("#orderName").val().length==0){alert("주문자명을 입력하세요.");$("#orderName").focus();return false;}
+			if($("#orderAddress").val().length==0){alert("주문자 주소를 입력하세요.");$("#orderAddress").focus();return false;}
+			if($("#mobileNum").val().length==0){alert("휴대폰번호를 입력하세요.");$("#mobileNum").focus();return false;}
+			if($("#orderEmail").val().length==0){alert("이메일을 입력하세요.");$("#orderEmail").focus();return false;}
+			if($("#receiverName").val().length==0){alert("받으실 분 성함 을 입력하세요.");$("#receiverName").focus();return false;}
+			if($("#address").val().length==0){alert("우편번호를 검색해 주세요.");$("#address").focus();return false;}
+			if($("#addressSub").val().length==0){alert("세부 주소를 입력하세요.");$("#addressSub").focus();return false;}
+			if($("#receiverCellPhone").val().length==0){alert("받으실 분 전화번호를 입력하세요.");$("#receiverCellPhone").focus();return false;}
+			if ($("#termAgree_orderCheck_div").length>0){if(!$('#termAgree_orderCheck').prop('checked')){pass = false;alert("필수 조건에 동의해 주세요.");$("#termsAgreeDiv").attr("tabindex",-1).focus();return false;}}
 			if(${mileage} < ${totalPrice}){
 				alert("보유 마일리지가 부족합니다.");
 				e.preventDefault();
@@ -416,5 +479,6 @@
 			
 		});
 	});
+	
 </script>
           <jsp:include page="/views/common/footer.jsp"/>
