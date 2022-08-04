@@ -49,7 +49,7 @@ public class ProductUpdateServlet extends HttpServlet {
 
 		MultipartRequest mr = new MultipartRequest(request, path, maxSize, encoding, new FileRename());
 
-		int proNo = Integer.parseInt(mr.getParameter("proNo"));
+		int proNo = Integer.parseInt(request.getParameter("proNo"));
 		String pname = mr.getParameter("pname");
 		int pcount = Integer.parseInt(mr.getParameter("pcount"));
 		String psize = mr.getParameter("psize");

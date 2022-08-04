@@ -24,7 +24,8 @@ public class ProductDao {
 		String query = "SELECT "
 				+ " COUNT(*)"
 				+ " FROM PRODUCT"
-				+ " WHERE PRO_TYPE = ?";
+				+ " WHERE PRO_TYPE = ?"
+				+ " AND PRO_STATUS = 'Y'";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
@@ -58,7 +59,8 @@ public class ProductDao {
 				+ " PRO_ARTIST_NO,"
 				+ " PRO_REG_DATE,"
 				+ " PRO_DESCRIPTION,"
-				+ " PRO_TYPE"
+				+ " PRO_TYPE,"
+				+ " PRO_STATUS"
 				+ " FROM ("
 				+ " SELECT ROWNUM AS RNUM,"
 				+ " PRO_NO,"
@@ -70,9 +72,12 @@ public class ProductDao {
 				+ " PRO_ARTIST_NO,"
 				+ " PRO_REG_DATE,"
 				+ " PRO_DESCRIPTION,"
-				+ " PRO_TYPE"
+				+ " PRO_TYPE,"
+				+ " PRO_STATUS"
 				+ " FROM PRODUCT"
-				+ " WHERE PRO_TYPE = ? ORDER BY PRO_NO DESC"
+				+ " WHERE PRO_TYPE = ?"
+				+ " AND PRO_STATUS = 'Y'"
+				+ " ORDER BY PRO_NO DESC"
 				+ ")"
 				+ " WHERE RNUM BETWEEN ? AND ?";
 		
@@ -101,6 +106,7 @@ public class ProductDao {
 				product.setProRegDate(rs.getDate("PRO_REG_DATE"));
 				product.setProDescription(rs.getString("PRO_DESCRIPTION"));
 				product.setProType(rs.getString("PRO_TYPE"));
+				product.setPRO_STATUS(rs.getString("PRO_STATUS"));
 				list.add(product);
 				
 			}

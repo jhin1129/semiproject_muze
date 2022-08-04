@@ -89,13 +89,12 @@
 								test="${loginMember.memberRole == 'MEMBER_ROLE_ARTIST' || loginMember.memberRole == 'MEMBER_ROLE_ADMIN'}">
 								<tr>
 									<td style="width: 50%;">
-										<button type="button" class="py-2 text-center"
-											style="border: 1px solid; width: 100%; height: 100%;" onclick="location.href='${ path }/product/update?proNo=${ product.proNo }'">
-											수정</button>
+										<button type="button" class="py-2 text-center" id="btnUpdate"
+											style="border: 1px solid; width: 100%; height: 100%;">수정</button>
 									</td>
 									<td style="width: 50%;">
-										<button class="py-2 text-center"
-											style="border: 1px solid; width: 100%; height: 100%;" onclick="location.href='${ path }/product/delete?proNo=${ product.proNo }'">삭제</button>
+										<button class="py-2 text-center" id="btnDelete"
+											style="border: 1px solid; width: 100%; height: 100%;">삭제</button>
 									</td>
 								</tr>
 
@@ -341,5 +340,22 @@
 		
 	});
 	</script>
+	<script>
+$(document).ready(() => {
+	$("#btnDelete").on("click", () => {
+		if(confirm("정말로 게시글을 삭제하시겠습니까?")) {
+			location.replace("${ path }/product/delete?proNo=${ product.proNo }&type=${ product.proType }");
+		}
+	});
+	
+	$("#btnUpdate").on("click", () => {
+			location.replace("${ path }/product/update?proNo=${ product.proNo }");
+	});
+	
+	$("#fileDown").on("click", () => {
+		location.assign("${ path }/support/filedown?oname=${ board.brdOriginalFileName }&rname=${ board.brdRenamedFileName }")
+	});
+});
+</script>
 
 <jsp:include page="/views/common/footer.jsp" />
