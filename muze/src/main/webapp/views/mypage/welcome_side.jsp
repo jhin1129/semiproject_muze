@@ -39,5 +39,6 @@
 	     <p id="myListMain"> 내가 쓴 글</p> 
 	       <li id="mylist"><a id="sublist" href="${ path }/mypage/community?type=REVIEW">- 구매 후기</a></li>
 	       <li id="mylist"><a id="sublist" href="${ path }/mypage/community?type=FREE">- 나의 게시글</a></li><br>
-	 </c:if>
+<!-- 	       <iframe src="https://service.dongledongle.com/muze" frameborder="0" width="100%" height="400"></iframe> -->	 
+	</c:if>
 	 </div>

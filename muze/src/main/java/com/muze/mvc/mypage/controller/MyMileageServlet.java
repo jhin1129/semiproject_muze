@@ -31,7 +31,6 @@ public class MyMileageServlet extends HttpServlet {
     	if (loginMember != null) {
     		// 로그인 객체의 PK값을 넘기기 위한 객체 생성 
 			Member member = new Member();
-//			member.setMemberNo(loginMember.getMemberNo());			
 			member.setMemberName(loginMember.getMemberName());
     		int memNo = loginMember.getMemberNo();
     		

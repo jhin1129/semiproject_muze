@@ -63,11 +63,11 @@
                 </c:if>
                 <c:if test="${ not empty list }">
 	                <form id="myForm01">
- 	                  <span id="mySpan01">주문취소 / 환불내역 총 ${ list.get(list.size()-1).getCount() } 건</span> 
+ 	                  <span id="mySpan01">주문취소 / 환불내역</span> 
 	                </form>
                 </c:if>
                 <!-- 조회 테이블 -->
-                <table class="ordertable">
+                <table class="ordertable" style="margin-bottom:30px;">
                   <thead id="my_thead01">
                     <tr>
                       <th class="my_th" id="my_th01">날짜/주문번호</th>
@@ -92,7 +92,7 @@
 		                        <a href="${ path }/mypage/orderdetail?no=${ cancelByDate.orderNo }" id="my_td02">${ cancelByDate.orderNo }</a> <br>
 		                      </td> 
 		                      <td id="my_td01">${ cancelByDate.proName }</td>
-		                      <td id="my_td01"><fmt:formatNumber value="${ cancelByDate.proPrice }" pattern="#,###"/>p / ${ cancelByDate.orderAmount }개</td>
+		                      <td id="my_td01"><fmt:formatNumber value="${ cancelByDate.proPrice }" pattern="#,###"/> p / ${ cancelByDate.orderAmount } 개</td>
 		                      <td id="my_td01">${ cancelByDate.orderStatus }</td>
 		                      <td id="my_td01"></td>
 		                    </tr>

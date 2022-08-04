@@ -77,7 +77,8 @@ public class MyOrderDao {
 						+ "FROM PRODUCT P "
 						+ "JOIN ORDERS O ON (P.PRO_NO = O.PRO_NO) "
 						+ "JOIN ORDER_STATUS OS ON (OS.ORDER_NO = O.ORDER_NO) "
-						+ "WHERE O.MEMBER_NO = ? AND O.ORDER_DATE > SYSDATE -30";
+						+ "WHERE O.MEMBER_NO = ? AND O.ORDER_DATE > SYSDATE -30 "
+						+ "ORDER BY ORDER_DATE DESC";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
@@ -189,10 +190,6 @@ public class MyOrderDao {
 			subquery2 = "AND (ORDER_STATUS = '반품' OR ORDER_STATUS = '취소' OR ORDER_STATUS = '환불') ";
 		} 
 		
-//		else if(type.equals("REFUND")) {
-//			subquery2 = "AND (ORDER_STATUS = '환불') ";
-//		}
-		
 		String query = "SELECT O.ORDER_DATE, O.ORDER_NO, P.PRO_NAME, P.PRO_PRICE,  O.ORDER_AMOUNT, P.PRO_NO, P.PRO_ARTIST_NO, OS.ORDER_STATUS, COUNT(*) AS CNT "
 						+ "FROM ORDER_STATUS OS "
 						+ "JOIN ORDERS O ON (OS.ORDER_NO = O.ORDER_NO) "
@@ -201,7 +198,8 @@ public class MyOrderDao {
 						+ subquery1
 						+ "? AND O.ORDER_DATE BETWEEN ? AND TO_DATE(TO_CHAR( ? ))+1 "
 						+ subquery2
-						+ "GROUP BY O.ORDER_DATE, O.ORDER_NO, P.PRO_NAME, P.PRO_PRICE, O.ORDER_AMOUNT, P.PRO_NO, P.PRO_ARTIST_NO, OS.ORDER_STATUS";
+						+ "GROUP BY O.ORDER_DATE, O.ORDER_NO, P.PRO_NAME, P.PRO_PRICE, O.ORDER_AMOUNT, P.PRO_NO, P.PRO_ARTIST_NO, OS.ORDER_STATUS "
+						+ "ORDER BY ORDER_DATE DESC";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
@@ -212,7 +210,6 @@ public class MyOrderDao {
 
 			rs = pstmt.executeQuery();
 
-			// 조회되는 데이터가 있으면 myOrder 객체로 만들어 리턴한다.
 			while (rs.next()) {
 				MyOrder orderByDate = new MyOrder();
 				

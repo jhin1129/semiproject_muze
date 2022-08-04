@@ -32,7 +32,7 @@
                   <span id="mySpan01">주문 / 배송 내역</span> 
                   <span id="mySpan02">최근 30일 내 판매하신 내역입니다.</span>
                 <!-- 조회 테이블 -->
-                <table class="ordertable">
+                <table class="ordertable" style="margin-bottom:30px;">
                   <thead id="my_thead01">
                     <tr>
                       <th class="my_th" id="my_th05">확인</th>
@@ -61,7 +61,7 @@
 		                      </td> 
 			                      <td id="my_td01">${ getOrderRec.proName }</td>
 			                      <td id="my_td01">
-		                     		 <fmt:formatNumber value="${ getOrderRec.proPrice }" pattern="#,###"/>p / ${ getOrderRec.orderAmount }개</td>
+		                     		 <fmt:formatNumber value="${ getOrderRec.proPrice }" pattern="#,###"/> p / ${ getOrderRec.orderAmount } 개</td>
 			                      <td id="my_td01">${ getOrderRec.orderStatus }</td>
 		                    </tr>
  	                    </c:forEach>

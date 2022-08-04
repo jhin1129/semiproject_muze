@@ -54,8 +54,8 @@ public class OrderListServlet extends HttpServlet {
 			String dateFrom = request.getParameter("dateFrom");
 			String dateTo = request.getParameter("dateTo");
 			
-			System.out.println(dateFrom);
-			System.out.println(dateTo);
+//			System.out.println(dateFrom);
+//			System.out.println(dateTo);
 			
 			// 검색 타입 가져오기 
 			String type = request.getParameter("type");

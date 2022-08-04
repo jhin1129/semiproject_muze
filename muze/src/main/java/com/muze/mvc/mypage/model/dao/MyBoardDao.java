@@ -143,7 +143,6 @@ public class MyBoardDao {
 		try {
 			pstmt = connection.prepareStatement(query);
 			
-//			pstmt.setString(1, type);
 			pstmt.setInt(1, pageInfo.getStartList());
 			pstmt.setInt(2, pageInfo.getEndList());
 			

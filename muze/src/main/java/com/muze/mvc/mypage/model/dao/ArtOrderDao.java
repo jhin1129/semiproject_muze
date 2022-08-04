@@ -26,7 +26,8 @@ public class ArtOrderDao {
 						+ "JOIN ORDERS O ON (OS.ORDER_NO = O.ORDER_NO) "
 						+ "JOIN PRODUCT P ON (P.PRO_NO = O.PRO_NO) "
 						+ "JOIN ARTIST_DETAIL A ON (A.ARTIST_NO = P.PRO_ARTIST_NO) "
-						+ "WHERE A.ARTIST_NO = ? AND O.ORDER_DATE > SYSDATE -30";
+						+ "WHERE A.ARTIST_NO = ? AND O.ORDER_DATE > SYSDATE -30 "
+						+ "ORDER BY ORDER_DATE DESC";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
@@ -82,7 +83,7 @@ public class ArtOrderDao {
 	public int insertMileage(Connection connection, String status, int buyMemNo, int buyMemMil) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "INSERT INTO MILEAGE VALUES(SEQ_POINT.NEXTVAL, ?, ?, '환불', SYSDATE, 'IN', ?)";
+		String query = "INSERT INTO MILEAGE VALUES(SEQ_POINT.NEXTVAL, ?, ?, 'REFUND', SYSDATE, 'IN', ?)";
 		
 			try {
 				pstmt = connection.prepareStatement(query);

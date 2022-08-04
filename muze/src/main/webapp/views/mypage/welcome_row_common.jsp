@@ -71,7 +71,7 @@
 			        <img src="${path}/resources/images/mypage/uparrow.png" class="card-img-mid" >
 			        <div class="card-body">
 			          <p class="card-text"> 
-			            <a href="${path}/product/writer">
+			            <a href="${path}/product/write">
 			          		<h5 class="card-title">작품 등록하기</h5>
 			            </a>
 			          </p>

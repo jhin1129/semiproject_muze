@@ -62,7 +62,7 @@
 	               <span id="mySpan01">마일리지 내역</span> 
 	             </form>
                 <!-- 조회 테이블 -->
-                <table class="ordertable">
+                <table class="ordertable" style="margin-bottom:30px;">
                   <thead id="my_thead01">
                     <tr>
                       <th class="my_th" id="my_th05">날짜</th>
@@ -84,8 +84,8 @@
 		                    <tr>
 		                      <td id="my_td01" style ="padding : 10px;">${ myMileage.pointDate }</td> 
 		                      <td id="my_td01">${ myMileage.route } </td>
-		                      <td id="my_td01">${ myMileage.inOut }<fmt:formatNumber value="${ myMileage.point }" pattern="#,###"/>p</td>
-		                      <td id="my_td01"><fmt:formatNumber value="${ myMileage.pointcur }" pattern="#,###"/>p</td>
+		                      <td id="my_td01">${ myMileage.inOut }<fmt:formatNumber value="${ myMileage.point }" pattern="#,###"/> p</td>
+		                      <td id="my_td01"><fmt:formatNumber value="${ myMileage.pointcur }" pattern="#,###"/> p</td>
 		                    </tr>
 	                    </c:forEach>
                     </c:if>

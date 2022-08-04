@@ -54,7 +54,7 @@
                       </td> 
                       <td id="my_td01">${ orderDetail.proName }</td>
                       <td id="my_td01">
-                      <fmt:formatNumber value="${ orderDetail.proPrice }" pattern="#,###"/>원 / ${ orderDetail.orderAmount }개 
+                      <fmt:formatNumber value="${ orderDetail.proPrice }" pattern="#,###"/> 원 / ${ orderDetail.orderAmount } 개 
                       </td>
                     </tr>
                   </tbody>
@@ -112,7 +112,7 @@
                       <tr>
                         <th class="my_th" id="my_th06" >상품 금액</th>
                         <td id="my_td04">
-                        	<fmt:formatNumber value="${ orderDetail.proPrice }" pattern="#,###"/>원
+                        	<fmt:formatNumber value="${ orderDetail.proPrice }" pattern="#,###"/> 원
                         </td>
                       </tr>
                       <tr>
@@ -124,7 +124,7 @@
                       <tr>
                         <th class="my_th" id="my_th06">배송비</th>
                         <td id="my_td04">
-                        	<fmt:formatNumber value="${ orderDetail.delFee }" pattern="#,###"/>원
+                        	<fmt:formatNumber value="${ orderDetail.delFee }" pattern="#,###"/> 원
                         </td>
                       </tr>
                       <tr>
@@ -150,7 +150,7 @@
                       <tr>
                         <th class="my_th" id="my_th06">총 결제 금액</th>
                         <td id="my_td04">
-                          <fmt:formatNumber value="${ orderDetail.totalPrice }" pattern="#,###"/>원
+                          <fmt:formatNumber value="${ orderDetail.totalPrice }" pattern="#,###"/> 원
                         </td>
                       </tr>
                   </table>
