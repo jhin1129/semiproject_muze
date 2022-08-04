@@ -20,19 +20,21 @@ public class ProductDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int result = 0;
 		int proNo = Integer.parseInt(request.getParameter("proNo"));
+		int proType = Integer.parseInt(request.getParameter("proType"));
 		String type = request.getParameter("proType");
-		System.out.println(type);
-		String typepath = "";
-		String path = "";
-
-		result = new ProductService().deleteProduct(proNo);
+		System.out.println(proNo);
+		System.out.println(proType);
 		
+		result = new ProductService().deleteProduct(proNo);
+		System.out.println(result);
 		if(result > 0) {
-			path = request.getContextPath()+"/";
+			request.setAttribute("msg", "게시글 삭제 성공");
+			request.setAttribute("location", "/support/view?proNo=" + proNo);
 		} else {
-			path = request.getContextPath()+"/";
+			request.setAttribute("msg", "게시글 삭제 실패");
+			request.setAttribute("location", "/support/view?proNo=" + proNo);
 		}
-		response.sendRedirect(path);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
     	
 	}
 

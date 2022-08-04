@@ -43,8 +43,12 @@ public class ProductService {
 		
 		Connection connection = getConnection();
 		
-		result = new ProductDao().insertProduct(connection, product);
-
+		if(product.getProNo() != 0) {
+			result = new ProductDao().updateProduct(connection, product);
+		} else {
+			result = new ProductDao().insertProduct(connection, product);
+		}
+		
 		if(result > 0) {
 			commit(connection);
 		} else {
@@ -103,11 +107,11 @@ public class ProductService {
 		return totalPrice;
 	}
 	
-	public Product getProductByProNo(int brdProNo) {
+	public Product getProductByProNo(int proNo) {
 		Product product = null;
 		Connection connection = getConnection();
 		
-		product = new BoardDao().findProductByProNo(connection, brdProNo);
+		product = new ProductDao().findProductByProNo(connection, proNo);
 		
 		close(connection);
 		

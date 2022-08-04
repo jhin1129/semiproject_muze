@@ -11,7 +11,6 @@
     integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
     crossorigin="anonymous"></script>
 
-
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
@@ -23,18 +22,18 @@
     <div class="container mt-5">
 
         <div>
-        	<h2 style="text-align: center;">작품 등록</h2>
+           	<h2 style="text-align: center;">작품 등록 수정</h2>
         </div>
         <!-- 후기글 전체 -->
         <div class="mt-5" style="border: 1px solid rgb(238, 233, 233);">
-		
-			<form action="${ path }/product/write?type=${ type }" onsubmit="return submitCheck()" method="POST" enctype="multipart/form-data">
+			<input type="hidden" name="proNo" value=${ product.proNo }>
+			<form action="${ path }/product/update?proNo=${ product.proNo }" onsubmit="return submitCheck()" method="POST" enctype="multipart/form-data">
 				<input type="hidden" name="partistno" value=${ loginMember.memberNo }>
 	            <div>
 	                <table class="table m-0">
 	                    <thead>
 	                    <tr>
-							<th class="table-active">작품 구분</th>
+							<th class="table-active">작품 구분</td>
 							<td style="width: 85%;"><select name="type" id="type" style="width: 150px; color: gray;" required>
 									<option>작품 주제 선택</option>
 									<option value="PORTRAIT">인물</option>
@@ -46,28 +45,28 @@
 	                    </thead>
 	                    <tbody>
 	                    <tr>
-	                    	<th class="table-active">작품명</th>
-	                    	<td><input type="text" name="pname" id="pname" style="width: 400px; padding-left: 0.5em;" required></td>
+	                    	<th class="table-active">작품명</td>
+	                    	<td><input type="text" name="pname" id="pname" style="width: 400px; padding-left: 0.5em;">${product.proName }</td>
 	                    </tr>
 	                    <tr>
-	                    	<th class="table-active">작품 수량(개)</th>
-	                    	<td><input type="number" name="pcount" id="pcount" value="0" min="0" max="999" step="1" style="width: 80px; padding-left: 0.5em;" required></td>
+	                    	<th class="table-active">작품 수량(개)</td>
+	                    	<td><input type="number" name="pcount" id="pcount" value="0" min="0" max="999" step="1" style="width: 80px; padding-left: 0.5em;" required>${product.proQuantity }</td>
 	                    </tr>
 	                    <tr>
-	                    	<th class="table-active">작품 사이즈</th>
-	                    	<td><input type="text" name="psize" style="width: 150px; padding-left: 0.5em;" required> &nbsp &nbsp 예시) '80 x 120cm'와 같이 작성</td>
+	                    	<th class="table-active">작품 사이즈</td>
+	                    	<td><input type="text" name="psize" style="width: 150px; padding-left: 0.5em;" required>${product.proSize } &nbsp &nbsp 예시) '80 x 120cm'와 같이 작성</td>
 <!-- 	                    	<td><label for="width">가로(cm) : &nbsp</label><input type="text" name="psize" id="width" style="width: 80px; padding-left: 0.5em;" required> &nbsp &nbsp
 	                    		<label for="height">세로(cm) : &nbsp</label><input type="text" name="psize" id="height" style="width: 80px; padding-left: 0.5em;" required>
 	                    	</td>  -->
 	                    </tr>
                         <tr>
                             <th class="table-active">작품 이미지</th>
-                            <td><input type="file" name="pimg" id="pimg" class="py-0" required></input></td>
+                            <td><input type="file" name="pimg" id="pimg" class="py-0" required>${ product.proImg }</td>
                         </tr>
                         <tr>
                             <th class="table-active">판매 가격(원)</th>
 <!--                        <td><input type="text" name="pprice" id="pprice" onkeyup="inputNumberFormat(this)" style="width: 160px; padding-left: 0.5em;" required></td> -->
-                            <td><input type="text" name="pprice" id="pprice" style="width: 160px; padding-left: 0.5em;" required></td>
+                            <td><input type="text" name="pprice" id="pprice" style="width: 160px; padding-left: 0.5em;" required>${product.proPrice}</td>
                         </tr>
 	                    </tbody>
 
