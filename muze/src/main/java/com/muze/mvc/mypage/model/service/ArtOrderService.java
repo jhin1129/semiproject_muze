@@ -29,21 +29,17 @@ public class ArtOrderService {
 		return getArtOrder;
 	}
 
-	public int updateStatus(int[] orderNo, String status, int buyMemNo, int buyMemMil) {
+	public int updateStatus(int orderNo, String status, int buyMemNo, int buyMemMil) {
 		int result1 = 0; 
 		int result2 = 0; 
 		Connection connection = getConnection();
 		
 		if(status.equals("환불")) {
-			for (int i = 0; i < orderNo.length; i++) {
-				result1 = new ArtOrderDao().updateStatus(connection, status, orderNo[i]);
+				result1 = new ArtOrderDao().updateStatus(connection, status, orderNo);
 				result2 = new ArtOrderDao().insertMileage(connection, status, buyMemNo, buyMemMil);
-			}
 
 		}else {
-			for (int j = 0; j < orderNo.length; j++) {
-				result1 = new ArtOrderDao().updateStatus(connection, status, orderNo[j]);
-			}
+				result1 = new ArtOrderDao().updateStatus(connection, status, orderNo);
 		}
 			
 		if(result1 + result2 > 0) {

@@ -35,7 +35,7 @@
                 <table class="ordertable" style="margin-bottom:30px;">
                   <thead id="my_thead01">
                     <tr>
-                      <th class="my_th" id="my_th05">확인</th>
+                      <th class="my_th" id="my_th05">선택</th>
                       <th class="my_th" id="my_th05">날짜/주문번호</th>
                       <th class="my_th" id="my_th02">상품명/옵션</th>
                       <th class="my_th" id="my_th03">상품금액/수량</th>
@@ -54,7 +54,9 @@
                    		<c:forEach var="getOrderRec" items="${ list }"> 
 		                    <tr>
 		                      <td id="my_td01">
-		                      	<input type="checkbox" name="orderNo" value="${ getOrderRec.orderNo }">
+					      		<c:if test="${ getOrderRec.orderStatus != '환불' }">
+		                      		<input type="checkbox" name="orderNo" value="${ getOrderRec.orderNo }">
+								</c:if>
 		                      </td>
 		                      <td id="my_td01"> ${ getOrderRec.orderDate } <br>
 		                        <a href="${ path }/mypage/orderdetail?no=${ getOrderRec.orderNo }" id="my_td02">${ getOrderRec.orderNo }</a> <br>
