@@ -185,10 +185,12 @@ public class MyOrderDao {
 		if(type.equals("ORDER")) {
 			subquery2 = "AND NOT(ORDER_STATUS = '환불' OR ORDER_STATUS = '취소') ";
 		} else if (type.equals("CANCEL")) {
-			subquery2 = "AND (ORDER_STATUS = '반품' OR ORDER_STATUS = '취소') ";
-		} else if(type.equals("REFUND")) {
-			subquery2 = "AND (ORDER_STATUS = '환불') ";
-		}
+			subquery2 = "AND (ORDER_STATUS = '반품' OR ORDER_STATUS = '취소' OR ORDER_STATUS = '환불') ";
+		} 
+		
+//		else if(type.equals("REFUND")) {
+//			subquery2 = "AND (ORDER_STATUS = '환불') ";
+//		}
 		
 		String query = "SELECT O.ORDER_DATE, O.ORDER_NO, P.PRO_NAME, P.PRO_PRICE,  O.ORDER_AMOUNT, P.PRO_NO, P.PRO_ARTIST_NO, OS.ORDER_STATUS, COUNT(*) AS CNT "
 						+ "FROM ORDER_STATUS OS "
@@ -196,7 +198,7 @@ public class MyOrderDao {
 						+ "JOIN PRODUCT P ON (P.PRO_NO = O.PRO_NO) "
 						+ "JOIN ARTIST_DETAIL A ON (A.ARTIST_NO = P.PRO_ARTIST_NO) "
 						+ subquery1
-						+ "? AND O.ORDER_DATE BETWEEN ? AND ? "
+						+ "? AND O.ORDER_DATE BETWEEN ? AND TO_DATE(TO_CHAR( ? ))+1 "
 						+ subquery2
 						+ "GROUP BY O.ORDER_DATE, O.ORDER_NO, P.PRO_NAME, P.PRO_PRICE, O.ORDER_AMOUNT, P.PRO_NO, P.PRO_ARTIST_NO, OS.ORDER_STATUS";
 		

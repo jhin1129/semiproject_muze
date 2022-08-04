@@ -41,7 +41,7 @@
 		                      </td> 
 		                      <td id="my_td01">${ getOrderRec.proName }</td>
 		                      <td id="my_td01">
-		                     	 <fmt:formatNumber value="${ getOrderRec.proPrice }" pattern="#,###"/>원 / ${ getOrderRec.orderAmount }개</td>
+		                     	 <fmt:formatNumber value="${ getOrderRec.proPrice }" pattern="#,###"/> p / ${ getOrderRec.orderAmount }개</td>
 		                      <td id="my_td01">${ getOrderRec.orderStatus }</td>
 		                      <td id="my_td01"></td>
 		                    </tr>

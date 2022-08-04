@@ -32,7 +32,6 @@ public class MyBoardDao {
 			subquery = "AND BRD_TYPE= 'QNA' AND MEMBER_NO = ";
 		}
 
-//		query = "SELECT COUNT(*) FROM BOARD JOIN MEMBER ON(BOARD.BRD_WRITER_NO = MEMBER.MEMBER_NO) WHERE BRD_STATUS='Y'" + subquery + searchVal;
 		query = "SELECT COUNT(*) "
 				+ "FROM BOARD "
 				+ "FULL JOIN MEMBER ON(BOARD.BRD_WRITER_NO = MEMBER.MEMBER_NO) "
@@ -135,7 +134,6 @@ public class MyBoardDao {
 						+ 				typequery[1]
 						+ 				" WHERE BRD_STATUS = 'Y'"
 						+               typequery[2]    
-//						+               " AND BRD_TYPE= ?"    
 						+				subquery
 						+               " ORDER BY BOARD.BRD_NO DESC"
 						+ 				")"

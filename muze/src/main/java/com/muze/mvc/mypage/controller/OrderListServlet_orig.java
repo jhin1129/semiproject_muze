@@ -65,10 +65,9 @@ public class OrderListServlet extends HttpServlet {
 				path = "/views/mypage/list_order.jsp";
 			} else if(type.equals("CANCEL")) {
 				path = "/views/mypage/list_cancel.jsp";
+			} else if(type.equals("REFUND")) {
+				path = "/views/mypage/list_refund.jsp";
 			} 
-//			  else if(type.equals("REFUND")) {
-//				path = "/views/mypage/list_refund.jsp";
-//			} 
 	
 			list = new MyOrderService().orderByDate(dateFrom, dateTo, memNo, type, artNo);
 

@@ -66,7 +66,6 @@
                   <thead id="my_thead01">
                     <tr>
                       <th class="my_th" id="my_th05">날짜</th>
-                      <th class="my_th" id="my_th05">유형</th>
                       <th class="my_th" id="my_th02">내용</th>
                       <th class="my_th" id="my_th05">마일리지 내역</th>
                       <th class="my_th" id="my_th05">잔여 마일리지</th>
@@ -84,10 +83,9 @@
                    		<c:forEach var="myMileage" items="${ list }">
 		                    <tr>
 		                      <td id="my_td01">${ myMileage.pointDate }</td> 
-		                      <td id="my_td01">${ myMileage.inOut } </td>
 		                      <td id="my_td01">${ myMileage.route } </td>
-		                      <td id="my_td01">${ myMileage.point }</td>
-		                      <td id="my_td01">${ myMileage.point }</td>
+		                      <td id="my_td01">${ myMileage.inOut }<fmt:formatNumber value="${ myMileage.point }" pattern="#,###"/> p</td>
+		                      <td id="my_td01"><fmt:formatNumber value="${ myMileage.pointcur }" pattern="#,###"/> p</td>
 		                    </tr>
 	                    </c:forEach>
                     </c:if>

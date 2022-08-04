@@ -36,11 +36,11 @@
             <!-- 첫번째 행 -->
 			<jsp:include page="/views/mypage/welcome_row_common.jsp" flush="false"/>
 
-           <!-- 두번째 행 -->
+            <!-- 두번째 행 -->
 			<div class="row">
 			 <div class="col-sm-12" style="margin-top: 30px;">
 			   <form id="myForm01">
-			     <span id="mySpan01">주문목록 / 배송조회</span> 
+			     <span id="mySpan01">주문취소 / 반품조회</span> 
 			   </form>
 			   	  <!-- 기간별 검색 -->
 			      <fieldset class="mySearchDate">
@@ -58,12 +58,12 @@
               <div class="col-sm-12" style="margin-top: 50px;" >
                 <c:if test="${empty list }">
 	                <form id="myForm01">
-	                  <span id="mySpan01">주문목록 / 배송조회</span> 
+	                  <span id="mySpan01">주문취소 / 반품조회</span> 
 	                </form>
                 </c:if>
                 <c:if test="${ not empty list }">
 	                <form id="myForm01">
- 	                  <span id="mySpan01">주문목록 / 배송내역 총 ${ list.get(list.size()-1).getCount() } 건</span> 
+ 	                  <span id="mySpan01">주문취소 / 반품내역 총 ${ list.get(list.size()-1).getCount() } 건</span> 
 	                </form>
                 </c:if>
                 <!-- 조회 테이블 -->
@@ -78,7 +78,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                  	<c:if test="${ empty list }">
+					<c:if test="${ empty list }">
                   	 	<tr>
                       		<td id="my_td00" colspan="5">
                        			조회 내역이 존재하지 않습니다.
@@ -86,17 +86,14 @@
                     	</tr>
                    	</c:if>
                    	<c:if test="${ not empty list }">
-                   		<c:forEach var="orderByDate" items="${ list }">
+                   		<c:forEach var="cancelByDate" items="${ list }">
 		                    <tr>
-		                      <td id="my_td01">${ orderByDate.orderDate } <br>
-	   								<a href="${path}/mypage/orderdetail?no=${ orderByDate.orderNo }" id="my_td02">${ orderByDate.orderNo }</a><br>
-		                        <c:if test="${ orderByDate.orderStatus != '환불' && orderByDate.orderStatus != '구매확정'}">
-		                        	<button type="button" class="btn btn-outline-secondary" id="mycbtn">주문취소 </button>
-		                       	</c:if>
+		                      <td id="my_td01">${ cancelByDate.orderDate } <br>
+		                        <a href="${ path }/mypage/orderdetail?no=${ cancelByDate.orderNo }" id="my_td02">${ cancelByDate.orderNo }</a> <br>
 		                      </td> 
-		                      <td id="my_td01">${ orderByDate.proName }</td>
-		                      <td id="my_td01"> <fmt:formatNumber value="${ orderByDate.proPrice }" pattern="#,###"/> p / ${ orderByDate.orderAmount }개</td>
-		                      <td id="my_td01">${ orderByDate.orderStatus }</td>
+		                      <td id="my_td01">${ cancelByDate.proName }</td>
+		                      <td id="my_td01"><fmt:formatNumber value="${ cancelByDate.proPrice }" pattern="#,###"/>원 / ${ cancelByDate.orderAmount }개</td>
+		                      <td id="my_td01">${ cancelByDate.orderStatus }</td>
 		                      <td id="my_td01"></td>
 		                    </tr>
 	                    </c:forEach>
@@ -116,19 +113,14 @@
     
     <script>
     $(document).ready(()=>{
-    	
-		$('#mycbtn').click(function() { 
-			if(confirm('주문을 취소하시겠습니까..?')) {
-				location.replace('${path}/mypage/cancel');
-			}
-		});
 		
 	    $("#srhbtn7").on("click", () => {
 			let datepicker1 = $('#datepicker1').val();
 			let datepicker2 = $('#datepicker2').val();
-			location.href="${path}/mypage/list?type=ORDER"+"&dateFrom="+datepicker1+"&dateTo="+datepicker2;
+			location.href="${path}/mypage/list?type=CANCEL"+"&dateFrom="+datepicker1+"&dateTo="+datepicker2;
 		});
     }); 
+
     </script>
 
 	<!-- footer -->
