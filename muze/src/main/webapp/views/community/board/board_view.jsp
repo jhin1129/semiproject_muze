@@ -31,10 +31,10 @@
 
         <div>
         	<c:if test="${ type == 'REVIEW'}">
-	            <h2 style="text-align: center;"><a href="${path }/board/list?type=REVIEW">리뷰 게시판</a></h2>
+	            <h2 style="text-align: center;"><a style="text-decoration-line: none;" href="${path }/board/list?type=REVIEW">리뷰 게시판</a></h2>
         	</c:if>
         	<c:if test="${ type == 'FREE'}">
-	            <h2 style="text-align: center;"><a href="${path }/board/list?type=FREE">자유 게시판</a></h2>
+	            <h2 style="text-align: center;"><a style="text-decoration-line: none;" href="${path }/board/list?type=FREE">자유 게시판</a></h2>
         	</c:if>
         </div>
         
@@ -73,6 +73,7 @@
 									<span>-</span>
 								</c:if>
 								<c:if test="${ not empty board.brdOriginalFileName }">
+									<img src="${ path }/resources/images/board/file.png" width="20px" height="20px">
 									<a href="javascript:" id="fileDown">
 										<span>${ board.brdOriginalFileName }</span>
 									</a>

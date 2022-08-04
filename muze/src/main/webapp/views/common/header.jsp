@@ -39,13 +39,6 @@
 	      <c:if test="${ empty loginMember }">
 		        <a class="mr-4 text-nowrap" href="${path}/member/login">로그인</a>
 		        <a class="mr-4 text-nowrap" href="${path}/member/join_method">회원가입</a>
-		        <a href="${path}/cart/view" class="me-5 align-items-center mb-1">
-		          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-cart2"
-		            viewBox="0 0 16 16">
-		            <path
-		              d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
-		          </svg>
-		        </a>
 	      </c:if>
 	      
 	      <c:if test="${ not empty loginMember }">
@@ -56,6 +49,7 @@
 					</c:when>
 					<c:when test="${ loginMember.getMemberRole()  == 'MEMBER_ROLE_ARTIST' }">
 						<a class="mr-4 text-nowrap" href="${path}/mypage/artist">아티스트 페이지</a>
+						<a class="mr-4 text-nowrap" href="${path}/product/write">작품 등록</a>
 					</c:when>
 					<c:otherwise>
 						<a class="mr-4 text-nowrap" href="${path}/mypage/welcome">마이페이지</a>
@@ -72,7 +66,6 @@
 	      </c:if>
 	</div>   	
     </div>
-	</div>
 </header>
 
   <div class="container">
@@ -93,9 +86,10 @@
           작품
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="${path}/product/painting">회화</a></li>
-          <li><a class="dropdown-item" href="${path}/product/craft">공예</a></li>
-          <li><a class="dropdown-item" href="${path}/product/oilpainting">유화</a></li>
+          <li><a class="dropdown-item" href="${path}/product/list?type=PORTRAIT">인물</a></li>
+          <li><a class="dropdown-item" href="${path}/product/list?type=LANDSCAPE">풍경</a></li>
+          <li><a class="dropdown-item" href="${path}/product/list?type=STILL-LIFE">정물</a></li>
+          <li><a class="dropdown-item" href="${path}/product/list?type=ABSTRACT">추상</a></li>
         </ul>
       </li>
       <li class="nav-item dropdown">

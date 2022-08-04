@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.muze.mvc.board.model.service.BoardService;
 import com.muze.mvc.board.model.vo.Board;
+import com.muze.mvc.board.model.vo.Product;
 import com.muze.mvc.common.util.FileRename;
 import com.muze.mvc.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
@@ -38,12 +39,27 @@ public class BoardWriteServlet extends HttpServlet {
 		boolean authorityCheck = new BoardService().authorityCheck(request, authority);
 		
 		if(!authorityCheck) {
-			request.setAttribute("msg", "접근 권한이 없습니다.");
+			if(type.equals("FREE")) {
+				request.setAttribute("msg", "로그인해 주세요");
+			} else if(type.equals("REVIEW")) {
+				request.setAttribute("msg", "일반 계정으로 로그인해 주세요");
+			}
 			request.setAttribute("location", "/board/list?type="+type);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}else {
-			request.setAttribute("type", type);
-			request.getRequestDispatcher("/views/community/board/board_write.jsp").forward(request, response);
+			HttpSession session = request.getSession(false);
+			Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
+			List<Product> list = null;
+			list = new BoardService().getProductListByOrdersMemberNo(loginMember.getMemberNo());
+			if(list.size() == 0) {
+				request.setAttribute("msg", "구매하신 작품이 없습니다. 작품 구매후 리뷰글을 작성해주세요.");
+				request.setAttribute("location", "/board/list?type="+type);
+				request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			} else {
+				request.setAttribute("type", type);
+				request.getRequestDispatcher("/views/community/board/board_write.jsp").forward(request, response);
+			}
+			
 		}
 	}
 

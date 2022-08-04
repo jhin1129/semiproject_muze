@@ -23,54 +23,65 @@
     <div class="container mt-5">
 
         <div>
-        	<c:if test="${ type == 'REVIEW'}">
-            	<h2 style="text-align: center;"><a style="text-decoration-line: none;" href="${path }/board/list?type=REVIEW">리뷰 게시판</a></h2>
+        	<c:if test="${ type == 'PORTRAIT'}">
+            	<h2 style="text-align: center;"><a href="${path }/product/write?type=PORTRAIT">인물</a></h2>
            	</c:if>
-        	<c:if test="${ type == 'FREE'}">
-            	<h2 style="text-align: center;"><a style="text-decoration-line: none;" href="${path }/board/list?type=FREE">자유 게시판</a></h2>
+        	<c:if test="${ type == 'LANDSCAPE'}">
+            	<h2 style="text-align: center;"><a href="${path }/product/write?type=LANDSCAPE">풍경</a></h2>
+           	</c:if>
+        	<c:if test="${ type == 'STILL-LIFE'}">
+            	<h2 style="text-align: center;"><a href="${path }/product/write?type=STILL-LIFE">정물</a></h2>
+           	</c:if>
+        	<c:if test="${ type == 'ABSTRACT'}">
+            	<h2 style="text-align: center;"><a href="${path }/product/write?type=ABSTRACT">추상</a></h2>
            	</c:if>
         </div>
         <!-- 후기글 전체 -->
         <div class="mt-5" style="border: 1px solid rgb(238, 233, 233);">
 		
-			<form action="${ path }/board/write?type=${type}" onsubmit="return submitCheck()" method="POST" enctype="multipart/form-data">
-				<input type="hidden" name="writerNo" value=${ loginMember.memberNo }>
+			<form action="${ path }/product/write?type=LANDSCAPE" onsubmit="return submitCheck()" method="POST" enctype="multipart/form-data">
+				<input type="hidden" name="partistno" value=${ loginMember.memberNo }>
 	            <div>
 	                <table class="table m-0">
 	                    <thead>
-	                        <tr>
-	                            <th class="table-active" style="width: 20%;">제목</th>
-	                            <td style="width: 80%;">
-	                            	<input type="text" id="title" name="title" placeholder="제목을 입력해주세요." style="width: 80%;">
-	                            </td>
-	                        </tr>
+	                    <tr>
+							<th class="table-active">작품 구분</td>
+							<td style="width: 85%;"><select name="type" id="type" style="width: 150px; color: gray;" required>
+									<option>작품 주제 선택</option>
+									<option value="PORTRAIT">인물</option>
+									<option value="LANDSCAPE">풍경</option>
+									<option value="STILL-LIFE">정물</option>
+									<option value="ABSTRACT">추상</option>
+							</select></td>
+						</tr>
 	                    </thead>
-	
 	                    <tbody>
-	                        <tr>
-	                            <th class="table-active">작성자</th>
-	                            <td>
-	                            	<input type="text" name="writer" value=${loginMember.memberId } readonly style="border: 0px;">
-	                            </td>
-	                        </tr>
-	                       	<c:if test="${ type == 'REVIEW'}">
-	                        <tr>
-	                            <th class="table-active">리뷰 작품</th>
-	                            <td>
-	                            	<button type="button" id="btnFindProduct" class="btn btn-light py-0">찾아보기</button>
-	                            	<input type="text" id="product" name="product" readonly style="border: 0px;">
-	                            	<input type="hidden" id="proNo" name="proNo">
-	                            </td>
-	                        </tr>
-							</c:if>
-	                        <tr>
-	                            <th class="table-active">첨부 파일</th>
-	                            <td>
-	                                <input type="file" name="upfile" class="py-0"></input>
-	                            </td>
-	                        </tr>
+	                    <tr>
+	                    	<th class="table-active">작품명</td>
+	                    	<td><input type="text" name="pname" id="pname" style="width: 400px; padding-left: 0.5em;" required></td>
+	                    </tr>
+	                    <tr>
+	                    	<th class="table-active">작품 수량(개)</td>
+	                    	<td><input type="number" name="pcount" id="pcount" value="0" min="0" max="999" step="1" style="width: 80px; padding-left: 0.5em;" required></td>
+	                    </tr>
+	                    <tr>
+	                    	<th class="table-active">작품 사이즈</td>
+	                    	<td><input type="text" name="psize" style="width: 150px; padding-left: 0.5em;" required> &nbsp &nbsp 예시) '80 x 120cm'와 같이 작성</td>
+<!-- 	                    	<td><label for="width">가로(cm) : &nbsp</label><input type="text" name="psize" id="width" style="width: 80px; padding-left: 0.5em;" required> &nbsp &nbsp
+	                    		<label for="height">세로(cm) : &nbsp</label><input type="text" name="psize" id="height" style="width: 80px; padding-left: 0.5em;" required>
+	                    	</td>  -->
+	                    </tr>
+                        <tr>
+                            <th class="table-active">작품 이미지</th>
+                            <td><input type="file" name="pimg" id="pimg" class="py-0" required></input></td>
+                        </tr>
+                        <tr>
+                            <th class="table-active">판매 가격(원)</th>
+<!--                        <td><input type="text" name="pprice" id="pprice" onkeyup="inputNumberFormat(this)" style="width: 160px; padding-left: 0.5em;" required></td> -->
+                            <td><input type="text" name="pprice" id="pprice" style="width: 160px; padding-left: 0.5em;" required></td>
+                        </tr>
 	                    </tbody>
-	
+
 	                </table>
 	            </div>
 	
@@ -78,7 +89,7 @@
 	            <!-- 내용 -->
 	            <div class="my-3 px-3">
 	
-					<textarea id="summernote" name="content"></textarea>
+					<textarea id="summernote" name="description"></textarea>
 	                <script>
 	                    $('#summernote').summernote({
 	                        placeholder: '내용을 입력해주세요',
@@ -131,43 +142,13 @@
 	                    }
 	                    
 	                </script>
-	
-	
-	
+	                
 	                <div class="text-right mt-1">
-	                    <button type="button" onclick="location.href='${path}/board/list?type=${type}'" class="btn btn-light py-0">취소</button>
+	                    <button type="button" onclick="location.href='${path}/product/list?type=${type}'" class="btn btn-light py-0">취소</button>
 	                    <button class="btn btn-light py-0">작성</button>
 	                </div>
 	            </div>
 			</form>
-
-			<c:if test="${ type == 'REVIEW' }">
-	            <hr style="border-style: dotted;">
-	            <!-- 리뷰 속 작품 -->
-	            <div class="px-3 pb-3">
-	                <h4>리뷰 속 작품</h4>
-	
-	                <div class="card">
-	                    <div class="row g-0">
-	                        <!-- 이미지 -->
-	                        <div class="col-md-4" style="min-width: 254px;">
-	                            <img style="background-color: black; width: 254px; height: 254px;" class="rounded-start">
-	                        </div>
-	                        <!-- 이미지 상세내용 -->
-	                        <div class="col-md-8">
-	                            <div class="card-body">
-	                                <h5 id="proName" class="card-title"></h5>
-	                                <p id="proArtistName" class="card-text"><small class="text-muted"></small></p>
-	                                <p id="proDescription" class="card-text"></p>
-	                            </div>
-	                        </div>
-	                    </div>
-	                </div>
-	
-	            </div>
-			
-			</c:if>
-
         </div>
         <!-- 목록버튼 -->
         <div class="text-center mt-3 mb-5">
@@ -177,23 +158,44 @@
     
 <script>
 	function submitCheck() {
-		if($("#title").val().trim()==""){
-			alert("제목을 입력해주세요");
+		if($("#type").val().trim()==""){
+			alert("작품 주제를 선택해 주세요");
 			return false;
 		}
-		if($("#proNo").val()==""){
-			alert("리뷰작품을 선택해주세요");
+		if($("#pname").val()==""){
+			alert("작품명을 입력해 주세요");
+			return false;
+		}
+		if($("#pcount").val()==""){
+			alert("작품 수량을 입력해 주세요");
+			return false;
+		}
+		if($("#pimg").val()==""){
+			alert("작품 이미지를 등록해 주세요");
+			return false;
+		}
+		if($("#pimg").val()==""){
+			alert("작품 이미지를 등록해 주세요");
+			return false;
+		}
+		if($("#proPrice").val()==""){
+			alert("작품 가격을 입력해 주세요");
 			return false;
 		}
 	};
-	$(document).ready(() => {
-		$("#btnFindProduct").on("click", () => {
-			let url ="${path}/board/findProduct?memberNo=${loginMember.memberNo}";
-			let status = "left=500px,top=200px,width=600px,height=600px";
-			
-			open(url,"",status);
-		});
-	});
 	
+	 function inputNumberFormat(obj) {
+	     obj.value = comma(uncomma(obj.value));
+	 }
+
+	 function comma(str) {
+	     str = String(str);
+	     return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+	 }
+
+	 function uncomma(str) {
+	     str = String(str);
+	     return str.replace(/[^\d]+/g, '');
+	 }
 </script>
 <jsp:include page="/views/common/footer.jsp"/>
