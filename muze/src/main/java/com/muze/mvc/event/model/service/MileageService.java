@@ -71,6 +71,15 @@ public class MileageService {
 		return result;
 		
 	}
-
+	
+	public int getCurrentMileage(int memberNo) {
+		Connection connection = getConnection();
+		int mileage = new MileageDao().getPointCur(connection, memberNo);
+		
+		close(connection);
+		
+		return mileage;
+		
+	}
 }
 

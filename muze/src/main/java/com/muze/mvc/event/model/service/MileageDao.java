@@ -84,7 +84,7 @@ public class MileageDao {
 		return pointNo;
 	}
 
-	private int getPointCur(Connection connection, int memberNo) {
+	public int getPointCur(Connection connection, int memberNo) {
 		int pointCur = 0;
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;

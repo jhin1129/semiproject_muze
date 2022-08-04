@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.muze.mvc.board.model.dao.BoardDao;
 import com.muze.mvc.board.model.vo.Product;
 import com.muze.mvc.common.util.PageInfo;
 import com.muze.mvc.member.model.vo.Artist;
@@ -267,6 +268,26 @@ public class ProductDao {
 		}
 		
 		return artist;
+	}
+
+	public int reduceProQuantity(Connection connection, int proNo, int orderQuantity) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "UPDATE PRODUCT SET PRO_QUANTITY=? WHERE PRO_NO=?";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setInt(1, new BoardDao().findProductByProNo(connection, proNo).getProQuantity() - orderQuantity);
+			pstmt.setInt(2, proNo);		
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 
