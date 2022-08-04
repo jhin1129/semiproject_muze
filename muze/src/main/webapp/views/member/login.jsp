@@ -248,8 +248,6 @@ $(document).on("click", "#naverLogin", function(){
               },
             })
           }
-     
-        
         </script>
 
 <jsp:include page="/views/common/footer.jsp"/>

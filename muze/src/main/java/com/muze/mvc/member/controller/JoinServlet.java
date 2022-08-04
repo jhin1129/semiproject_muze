@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.muze.mvc.common.util.FileRename;
+import com.muze.mvc.event.model.service.MileageService;
 import com.muze.mvc.member.model.service.MemberService;
 import com.muze.mvc.member.model.vo.Artist;
 import com.muze.mvc.member.model.vo.Member;
@@ -60,6 +61,7 @@ public class JoinServlet extends HttpServlet {
 	    	System.out.println(member);
 	    	
 	    	int resultMember = new MemberService().saveMember(member);
+	    	int insertMileage = new MileageService().insertJoinMileage(resultMember);	    	
 	    	
 	    	
 	    	if ("MEMBER_ROLE_ARTIST".equals(joinType)) {
@@ -75,7 +77,7 @@ public class JoinServlet extends HttpServlet {
 
 		    	resultArtist = new MemberService().saveArtist(artist);
 		    	
-		    	if(resultMember > 0 && resultArtist > 0) {
+		    	if(resultMember > 0 && resultArtist > 0 && insertMileage > 0) {
 		    		session = request.getSession();
 		    		// 회원 가입 완료
 		    		
@@ -92,7 +94,7 @@ public class JoinServlet extends HttpServlet {
 				
 	    	} else {
 	    		
-	    	if(resultMember > 0) {
+	    	if(resultMember > 0 && insertMileage > 0) {
     			session = request.getSession();
     			// 회원 가입 완료
     			

@@ -30,9 +30,8 @@
         <hr class="mt-4">
 
         <!-- order_tit -->
-        <form id="frmCart" name="frmCart" method="post" action="${path}/product/complete">
+
         <input type="hidden" value="${ list }" name="list">
-        <input type="hidden" value="${ totalPrice }" name="totalPrice">
             
                 <!-- 장바구니 상품리스트 시작 -->
                 <div class="cart_cont_list">
@@ -63,7 +62,8 @@
                                 <tbody>
                                 	
                        	            <c:forEach var="product" items="${ list }">
-                                	
+                                	<input type="hidden" name="proNo" value="${product.proNo}">
+                                	<input type="hidden" name="payQuantity" value="${product.payQuantity }">
                                     <tr>
                                         <!-- AceCounter eCommerce (Cart_Inout) v8.0 Start -->
                                         <script language="javascript">
@@ -161,6 +161,11 @@
                     <!-- //price_sum -->
                     <hr>
                     <br><br>
+                    
+                <form id="frmCart" name="frmCart" method="post" action="${path}/product/complete">
+                    <input type="hidden" value="${ totalPrice }" name="totalPrice">
+                    <input type="hidden" id="proNoList" name="proNoList">
+                    <input type="hidden" id="payQuantityList" name="payQuantityList">
                     <div class="order_info">
                         <div class="order_zone_tit">
                             <h4>주문자 정보</h4>
@@ -277,16 +282,10 @@
                                 </tr>
                                 
                                 <tr>
-                                    <th scope="row">마일리지 사용</th>
+                                    <th scope="row">보유 마일리지</th>
                                     <td>
                                         <div class="order_money_use">
-                                            <b><input type="text" name="useMileage"> 원</b>
-                                            <div class="form_element">
-                                                
-                                                
-                                                <span class="money_use_sum">(보유 마일리지 : 1,000 원)</span>
-                                            </div>
-                                            
+                                            <b>${mileage }</b>
                                         </div>
                                     </td>
                                 </tr>
@@ -379,7 +378,43 @@
                             <div class="btn_center_box">
                                 <button class="btn_order_buy order-buy"><em>결제하기</em></button>
                             </div>
-        </form>
+        				</form>
                         </div>
-                        
+<script>
+	$(document).ready(function(){
+		
+		$("#frmCart").submit(function(e){
+			if(${mileage} < ${totalPrice}){
+				alert("보유 마일리지가 부족합니다.");
+				e.preventDefault();
+			}else{
+				var proNoList = new Array();
+				var payQuantityList = new Array();
+				var productList = new Array();
+				$("input:hidden[name='proNo']").each(function(){
+					var proNo = $(this).val();
+					proNoList.push(proNo);
+	
+				});
+				$("input:hidden[name='payQuantity']").each(function(){
+					var payQuantity = $(this).val();
+					payQuantityList.push(payQuantity);
+				});
+				
+				
+				for(var i=0; i< proNoList.length; i++){
+					var product = {
+							proNo : proNoList[i],
+							payQuantity : payQuantityList[i]
+					};
+					productList.push(product);
+				}
+				$("#proNoList").val(proNoList);
+				$("#payQuantityList").val(payQuantityList);
+			}
+			
+			
+		});
+	});
+</script>
           <jsp:include page="/views/common/footer.jsp"/>

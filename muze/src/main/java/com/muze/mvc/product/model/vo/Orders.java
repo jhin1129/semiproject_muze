@@ -14,19 +14,11 @@ public class Orders {
 	
 	int proNo; //작품코드
 	
-	int orderAmount; //구매수량
-	
 	Date orderDate; //주문날짜
 	
+	int orderAmount; //구매수량
+	
 	int memberNo; //유저번호
-	
-	String orderName;
-	
-	String orderAdress;
-	
-	String orderPhone;
-	
-	String orderEmail;
 	
 	String buyName; //구매자이름
 	

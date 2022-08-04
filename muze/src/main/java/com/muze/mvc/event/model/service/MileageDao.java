@@ -84,7 +84,7 @@ public class MileageDao {
 		return pointNo;
 	}
 
-	private int getPointCur(Connection connection, int memberNo) {
+	public int getPointCur(Connection connection, int memberNo) {
 		int pointCur = 0;
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
@@ -105,5 +105,24 @@ public class MileageDao {
 		return pointCur;
 	}
 	
-
+	// 회원가입 시 마일리지
+		public int insertJoinMileage(Connection connection, int memberNo) {
+			int result = 0;
+			PreparedStatement pstmt = null;
+			String query = "INSERT INTO MILEAGE VALUES(SEQ_POINT.NEXTVAL, ?, 10000, 'JOIN', SYSDATE, 'IN', 10000)";
+			
+			try {
+				pstmt = connection.prepareStatement(query);
+				
+				pstmt.setInt(1, memberNo);
+				
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
+		}
 }
