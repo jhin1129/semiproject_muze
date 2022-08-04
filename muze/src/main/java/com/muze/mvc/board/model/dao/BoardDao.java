@@ -1,5 +1,7 @@
 package com.muze.mvc.board.model.dao;
 
+import static com.muze.mvc.common.jdbc.JDBCTemplate.close;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,8 +13,6 @@ import com.muze.mvc.board.model.vo.Board;
 import com.muze.mvc.board.model.vo.Product;
 import com.muze.mvc.common.util.PageInfo;
 import com.muze.mvc.member.model.vo.Artist;
-
-import static com.muze.mvc.common.jdbc.JDBCTemplate.*;
 
 public class BoardDao {
 
