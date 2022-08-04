@@ -23,9 +23,9 @@ public class MyOrderDao {
 		MyOrder orderDetail = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT O.ORDER_NO, O.ORDER_DATE, O.BUY_NAME, O.ORDER_AMOUNT, O.BUY_ADDRESS, "
+		String query = "SELECT O.ORDER_NO, O.ORDER_DATE, O.BUY_NAME, O.ORDER_AMOUNT, O.BUY_ADDRESS, OS.MEMBER_NO, "
 						+ "P.PRO_NAME, P.PRO_PRICE, OS.ORDER_STATUS, REGEXP_REPLACE(BUY_PHONE, '(.{3})(.+)(.{4})', '\\1-\\2-\\3') BUY_PHONE, "
-						+ "M.MEMBER_EMAIL, I.POINT_PROCESS "
+						+ "M.MEMBER_EMAIL, I.POINT_CUR "
 						+ "FROM PRODUCT P "
 						+ "JOIN ORDERS O ON (P.PRO_NO = O.PRO_NO) "
 						+ "JOIN ORDER_STATUS OS ON (OS.ORDER_NO = O.ORDER_NO) "
@@ -42,6 +42,7 @@ public class MyOrderDao {
 			if (rs.next()) {
 				orderDetail = new MyOrder();
 			
+				orderDetail.setMemNo(rs.getInt("MEMBER_NO"));
 				orderDetail.setOrderName(rs.getString("BUY_NAME"));
 				orderDetail.setOrderAddr(rs.getString("BUY_ADDRESS"));
 				orderDetail.setOrderPhone(rs.getString("BUY_PHONE"));
@@ -52,7 +53,7 @@ public class MyOrderDao {
 				orderDetail.setProName(rs.getString("PRO_NAME"));
 				orderDetail.setProPrice(rs.getInt("PRO_PRICE"));
 				orderDetail.setDelFee(2500);
-				orderDetail.setMileage(rs.getInt("POINT_PROCESS"));
+				orderDetail.setMileage(rs.getInt("POINT_CUR"));
 				orderDetail.setOrderStatus(rs.getString("ORDER_STATUS"));
 			}
 			

@@ -20,7 +20,7 @@ public class MyMileage {
 	private int pointcur;
 	
 	public void setRoute(String route) {
-		if (route.equals("ATT")|| route.equals("출석")) {
+		if (route.equals("ATT")) {
 			this.route = "출석 이벤트";
 			
 		} else if (route.equals("JOIN")) {
@@ -28,6 +28,9 @@ public class MyMileage {
 
 		} else if (route.equals("ORDER")) {
 			this.route = "상품 구매";
+			
+		} else if (route.equals("REFUND")) {
+			this.route = "환불";
 		}
 	}
 	
@@ -39,5 +42,4 @@ public class MyMileage {
 			this.inOut = "-";
 		}
 	}
-	
 }

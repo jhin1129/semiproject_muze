@@ -92,10 +92,11 @@
                 <li class="page-item"><a class="page-link" style="color: grey;" href="${path }/board/list?page=${pageInfo.maxPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&gt;&gt;</a></li>
             </ul>
         </div>
-
+	<c:if test="${ loginMember.getMemberRole()  == 'MEMBER_ROLE_USER' }">
         <div class="col-4 text-right">
             <button type="button" class="btn btn-outline-secondary" onclick="location.href='${path}/board/write?type=REVIEW'" id="srhbtn8">글 쓰기</button>
         </div>
+	 </c:if>
     </div>
             <!-- 세번째 행 끝 -->
           </div>

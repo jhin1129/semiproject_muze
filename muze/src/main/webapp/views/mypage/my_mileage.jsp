@@ -82,10 +82,10 @@
                    	<c:if test="${ not empty list }">
                    		<c:forEach var="myMileage" items="${ list }">
 		                    <tr>
-		                      <td id="my_td01">${ myMileage.pointDate }</td> 
+		                      <td id="my_td01" style ="padding : 10px;">${ myMileage.pointDate }</td> 
 		                      <td id="my_td01">${ myMileage.route } </td>
-		                      <td id="my_td01">${ myMileage.inOut }<fmt:formatNumber value="${ myMileage.point }" pattern="#,###"/> p</td>
-		                      <td id="my_td01"><fmt:formatNumber value="${ myMileage.pointcur }" pattern="#,###"/> p</td>
+		                      <td id="my_td01">${ myMileage.inOut }<fmt:formatNumber value="${ myMileage.point }" pattern="#,###"/>p</td>
+		                      <td id="my_td01"><fmt:formatNumber value="${ myMileage.pointcur }" pattern="#,###"/>p</td>
 		                    </tr>
 	                    </c:forEach>
                     </c:if>

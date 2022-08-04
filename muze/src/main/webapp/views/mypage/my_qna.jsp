@@ -41,6 +41,7 @@
                     <tr>
                         <th class="my_th" id="br_th01"><center>번호</center></th>
                         <th class="my_th" id="br_th02"><center>제목</center></th>
+                        <th class="my_th" id="br_th03"><center>답변</center></th>
                         <th class="my_th" id="br_th03"><center>작성자</center></th>
                         <th class="my_th" id="br_th04"><center>날짜</center></th>
                         <th class="my_th" id="br_th05"><center>조회수</center></th>
@@ -60,6 +61,7 @@
 	                		<tr>
 		                        <td id="br_td01">${ board.rowNum }</td>
 		                        <td id="br_td01"><a href="${ path }/board/view?no=${ board.brdNo }&type=${ type }">${ board.brdTitle }</a></td>
+		                        <td id="br_td01"><c:if test="${ not empty board.brdRepContent }">[답변 완료]</c:if></td>
 		                        <td id="br_td01">${ board.brdWriterId }</td>
 		                        <td id="br_td01">${ board.brdDate }</td>
 		                        <td id="br_td01">${ board.brdReadCount }</td> 

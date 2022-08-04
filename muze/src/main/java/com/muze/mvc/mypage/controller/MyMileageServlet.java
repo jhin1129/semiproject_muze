@@ -52,9 +52,6 @@ public class MyMileageServlet extends HttpServlet {
 			// 처리 결과 
 			list = new MyInfoService().infoMileage(dateFrom, dateTo, memNo);
 			
-//			list.forEach(System.out::println);
-			
-			
 			request.setAttribute("list", list);
 	    	request.getRequestDispatcher("/views/mypage/my_mileage.jsp").forward(request, response);
 	    	

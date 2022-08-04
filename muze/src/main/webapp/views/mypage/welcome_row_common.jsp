@@ -28,7 +28,7 @@
 	          <h5 class="card-title">마일리지</h5>
 	          <p class="card-text"> 
 	            <a href="${path}/mypage/mileage">
-	            	${ welcomeRow.mileageNow } p
+	            	<fmt:formatNumber value="${ welcomeRow.mileageNow }" pattern="#,###"/> p
 	            </a>
 	          </p>
 	        </div>
@@ -60,7 +60,7 @@
 				      <div class="card" style="padding-top:25px;">
 				        <img src="${path}/resources/images/mypage/paintb.png" class="card-img-top" >
 				        <div class="card-body">
-				          <h5 class="card-title">${ artist.busName }의 </h5>
+				          <h5 class="card-text">${ artist.busName }의 </h5>
 				          <p class="card-text">
 				            내일을 응원합니다.
 				          </p>
@@ -72,7 +72,7 @@
 			        <div class="card-body">
 			          <p class="card-text"> 
 			            <a href="${path}/product/writer">
-			          		<h5 class="card-title">상품 등록하기</h5>
+			          		<h5 class="card-title">작품 등록하기</h5>
 			            </a>
 			          </p>
 			        </div>

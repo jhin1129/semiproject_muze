@@ -19,9 +19,17 @@ public class MyInfoDao {
 		List<MyMileage> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		String subquery = " ";
+				
+		if(dateFrom.equals("null") || dateTo.equals("null")) {
+			subquery = "WHERE MEMBER_NO = ?";
+		} else {
+			subquery = "WHERE POINT_DATE BETWEEN ? AND TO_DATE(TO_CHAR( ? ))+1 AND MEMBER_NO = ?";
+		}
+		
 		String query = "SELECT POINT_NO, MEMBER_NO, POINT, POINT_ROUTE, POINT_DATE, POINT_IN_OUT, POINT_CUR "
 						+ "FROM MILEAGE "
-						+ "WHERE POINT_DATE BETWEEN ? AND TO_DATE(TO_CHAR( ? ))+1 AND MEMBER_NO = ?";
+						+ subquery ;
 		
 		try {
 			pstmt = connection.prepareStatement(query);

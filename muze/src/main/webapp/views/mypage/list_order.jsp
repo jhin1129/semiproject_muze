@@ -95,7 +95,7 @@
 		                       	</c:if>
 		                      </td> 
 		                      <td id="my_td01">${ orderByDate.proName }</td>
-		                      <td id="my_td01"> <fmt:formatNumber value="${ orderByDate.proPrice }" pattern="#,###"/> p / ${ orderByDate.orderAmount }개</td>
+		                      <td id="my_td01"> <fmt:formatNumber value="${ orderByDate.proPrice }" pattern="#,###"/>p / ${ orderByDate.orderAmount }개</td>
 		                      <td id="my_td01">${ orderByDate.orderStatus }</td>
 		                      <td id="my_td01"></td>
 		                    </tr>
