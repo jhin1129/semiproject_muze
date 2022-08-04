@@ -11,14 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.muze.mvc.board.model.service.BoardService;
-import com.muze.mvc.board.model.vo.Product;
-import com.muze.mvc.event.model.service.MileageService;
-import com.muze.mvc.event.model.vo.Mileage;
 import com.muze.mvc.member.model.vo.Member;
-import com.muze.mvc.product.model.service.OrderService;
 import com.muze.mvc.product.model.vo.Orders;
-import com.oreilly.servlet.MultipartRequest;
 
 @WebServlet("/product/complete")
 public class PayCompleteServlet extends HttpServlet {
@@ -75,31 +69,40 @@ public class PayCompleteServlet extends HttpServlet {
 	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String[] parameterValues = request.getParameterValues("list");
 		HttpSession session = request.getSession(false);
         Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
-//		System.out.println(request.getParameter("totalPrice"));
-        System.out.println(parameterValues[0]);
-        System.out.println(loginMember.getMemberNo());
         
-        int pointNo = 0;
-        pointNo = new MileageService().insertOrderMileage(loginMember.getMemberNo(), Integer.parseInt(request.getParameter("totalPrice")));
-		Orders order = null;
-		String encoding = "UTF-8";
+        //마일리지 테이블에 넣는 작업
+//        int pointNo = 0;
+//        pointNo = new MileageService().insertOrderMileage(loginMember.getMemberNo(), Integer.parseInt(request.getParameter("totalPrice")));
+//		
+        
+        //orders테이블에 넣는 작업
+		String proNoStrList = request.getParameter("proNoList");
+		String[] proNoSplit = proNoStrList.split(",");
+		String payQuantityStrList = request.getParameter("payQuantityList");
+		String[] payQuantitySplit = payQuantityStrList.split(",");
 		
-		System.out.println(pointNo);
 		
-		order = new Orders();
 		
-		order.setOrderName(request.getParameter("orderName"));
-		order.setOrderAdress(request.getParameter("orderAddress"));
-		order.setOrderPhone(request.getParameter("orderCellPhone"));
-		order.setOrderEmail(request.getParameter("orderEmail"));
-		order.setBuyName(request.getParameter("receiverName"));
-		order.setBuyAdress(request.getParameter("receiverAddressSub"));
-		order.setBuyPhone(request.getParameter("receiverCellPhone"));
-		
-		System.out.println(order);
+		List<Orders> orderList = new ArrayList<Orders>();
+		for(int i = 0; i < proNoSplit.length; i++) {
+			Orders order = new Orders();
+			order.setProNo(Integer.parseInt(proNoSplit[i]));
+			order.setOrderAmount(Integer.parseInt(payQuantitySplit[i]));
+			order.setMemberNo(loginMember.getMemberNo());
+//			order.setOrderName(request.getParameter("orderName"));
+//			order.setOrderAdress(request.getParameter("orderAddress"));
+//			order.setOrderPhone(request.getParameter("orderCellPhone"));
+//			order.setOrderEmail(request.getParameter("orderEmail"));
+			order.setBuyName(request.getParameter("receiverName"));
+			order.setBuyAdress(request.getParameter("receiverAddressSub"));
+			order.setBuyPhone(request.getParameter("receiverCellPhone"));
+//			order.setPointNo(pointNo);
+			System.out.println(order);
+			orderList.add(order);
+		}
+		System.out.println(orderList);
 		
 	}
 
