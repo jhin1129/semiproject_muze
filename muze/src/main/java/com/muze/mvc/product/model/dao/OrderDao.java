@@ -6,11 +6,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import com.muze.mvc.product.model.vo.Payment;
+import com.muze.mvc.product.model.vo.Orders;
+
 
 public class OrderDao {
 	
-	public int insertPayment(Connection connection, Payment pay) {
+	public int insertPayment(Connection connection, Orders orders) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = "INSERT INTO ORDERS VALUES("
@@ -29,12 +30,12 @@ public class OrderDao {
 			pstmt = connection.prepareStatement(query);
 
 //			pstmt.setInt(1, pay.getOrderNo());
-			pstmt.setInt(1, pay.getProNo());
-			pstmt.setInt(2, pay.getMemberNo());
-			pstmt.setString(3, pay.getBuyName());
-			pstmt.setString(4, pay.getBuyAdress());
-			pstmt.setString(5, pay.getBuyPhone());
-			pstmt.setInt(6, pay.getPointNo());
+			pstmt.setInt(1, orders.getProNo());
+			pstmt.setInt(2, orders.getMemberNo());
+			pstmt.setString(3, orders.getBuyName());
+			pstmt.setString(4, orders.getBuyAdress());
+			pstmt.setString(5, orders.getBuyPhone());
+			pstmt.setInt(6, orders.getPointNo());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

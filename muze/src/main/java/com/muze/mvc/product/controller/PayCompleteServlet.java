@@ -75,7 +75,9 @@ public class PayCompleteServlet extends HttpServlet {
 	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//리스트 불러오기
 		String[] parameterValues = request.getParameterValues("list");
+		//loginMember에서 memberNo 가져오기
 		HttpSession session = request.getSession(false);
         Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
 //		System.out.println(request.getParameter("totalPrice"));
