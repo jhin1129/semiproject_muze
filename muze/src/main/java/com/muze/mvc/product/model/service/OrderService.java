@@ -6,23 +6,18 @@ import static com.muze.mvc.common.jdbc.JDBCTemplate.getConnection;
 import static com.muze.mvc.common.jdbc.JDBCTemplate.rollback;
 
 import java.sql.Connection;
-import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import com.muze.mvc.product.model.dao.OrderDao;
+import com.muze.mvc.product.model.vo.Payment;
 
-import com.muze.mvc.member.model.vo.Member;
-import com.muze.mvc.product.model.dao.WriterDao;
-import com.muze.mvc.product.model.vo.Writer;
-
-public class WriterService {
-
-	public int save(Writer writer) {
+public class OrderService {
+	
+	public int save(Payment pay) {
 		int result = 0;
 		
 		Connection connection = getConnection();
 		
-		result = new WriterDao().insertWriter(connection, writer);
+		result = new OrderDao().insertPayment(connection, pay);
 
 		if(result > 0) {
 			commit(connection);
@@ -35,6 +30,5 @@ public class WriterService {
 		
 		return result;
 	}
-
 
 }

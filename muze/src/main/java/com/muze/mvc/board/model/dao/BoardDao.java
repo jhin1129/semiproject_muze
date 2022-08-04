@@ -598,4 +598,6 @@ public class BoardDao {
 		return artist;
 	}
 
+	
+
 }

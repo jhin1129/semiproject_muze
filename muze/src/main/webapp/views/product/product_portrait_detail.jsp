@@ -13,7 +13,7 @@
                 <div class="row g-0 p-5">
                     <!-- 이미지 -->
                     <div class="col-6" style="min-width: 254px; width: 100%;">
-                        <img style="background-color: black; width: 435px; height: 435px;" class="rounded-start">
+                        <img style="background-color: black; width: 445px; height: 445px;" class="rounded-start">
                     </div>
                     <div class="col-1"></div>
                     <!-- 이미지 상세내용 -->
@@ -24,18 +24,21 @@
                             <hr class="my-2">
                             <table style="width: 100%;">
                                 <tr>
-                                    <td style="width: 30%;">자체상품코드</td>
+                                    <td style="width: 30%;">작품명</td>
+                                    <td>${product.proName }</td>
+                                </tr>
+                                <tr>
+                                    <td>작품번호</td>
                                     <td>${product.proNo }</td>
+                                </tr>
+                                <tr>
+                                    <td>작품분류</td>
+                                    <td>${product.proType }</td>
                                 </tr>
                                 <tr>
                                     <td>사이즈</td>
                                     <td>${product.proSize }</td>
                                 </tr>
-                                <tr>
-                                    <td>작품타입</td>
-                                    <td>${product.proType }</td>
-                                </tr>
-
                                 <tr>
                                     <td>
                                         <div class="mb-2">수량</div>
@@ -70,39 +73,39 @@
                             </table>
 
                             <table class="my-2" style="width: 100%;">
-                            	<c:if test="${loginMember.memberNo == product.proArtistNo || loginMember.memberRole == 'MEMBER_ROLE_ADMIN'}">
+                            	<c:if test="${loginMember.memberRole == 'MEMBER_ROLE_ARTIST' || loginMember.memberRole == 'MEMBER_ROLE_ADMIN'}">
 	                                <tr>
 	                                    <td style="width: 50%;">
 	                                        <button type="button" class="py-2 text-center"
-	                                            style="border: 1px solid; width: 100%; height: 50px;">수정</div>
+	                                            style="border: 1px solid; width: 100%; height: 100%;">수정</div>
 	                                    </td>
 	                                    <td style="width: 50%;">
 	                                        <button class="py-2 text-center"
-	                                            style="border: 1px solid; width: 100%; height: 50px;" onclick="location.href='${path}/product/delete?proNo=${product.proNo}&proType=${product.proType }'">삭제</button>
+	                                            style="border: 1px solid; width: 100%; height: 100%;">삭제</button>
 	                                    </td>
 	                                </tr>
 	
 	                                <tr>
 	                                    <td colspan="2">
-	                                        <button onclick="location.href='${path}/board/list?type=REVIEW&searchType=proNo&searchVal=${product.proNo }&isSearch=true'" class="col-12 my-2 py-2 text-center" style="border: 1px solid; height:50px">리뷰 확인</button>
+	                                        <button onclick="location.href='${path}/board/list?type=REVIEW&searchType=proNo&searchVal=${product.proNo }&isSearch=true'" class="col-12 my-2 py-2 text-center" style="border: 1px solid;">리뷰 확인</button>
 	                                    </td>
 	                                </tr>
                             	</c:if>
-                            	<c:if test="${loginMember.memberNo != product.proArtistNo && loginMember.memberRole != 'MEMBER_ROLE_ADMIN'}">
+                            	<c:if test="${loginMember.memberRole != 'MEMBER_ROLE_ARTIST' && loginMember.memberRole != 'MEMBER_ROLE_ADMIN'}">
 	                                <tr>
 	                                    <td style="width: 50%;">
 	                                        <button type="button" onclick="location.href='${path}/board/list?type=REVIEW&searchType=proNo&searchVal=${product.proNo }&isSearch=true'" class="py-2 text-center"
-	                                            style="border: 1px solid; width: 100%; height: 50px;">리뷰 확인</div>
+	                                            style="border: 1px solid; width: 100%; height: 100%;">리뷰 확인</div>
 	                                    </td>
 	                                    <td style="width: 50%;">
 	                                        <button id="insertCart" class="py-2 text-center"
-	                                            style="border: 1px solid; width: 100%; height: 50px;">장바구니</button>
+	                                            style="border: 1px solid; width: 100%; height: 100%;">장바구니</button>
 	                                    </td>
 	                                </tr>
 	
 	                                <tr>
 	                                    <td colspan="2">
-	                                        <button id="payment" class="col-12 my-2 py-2 text-center" style="border: 1px solid; height: 50px">구매하기</button>
+	                                        <button id="payment" class="col-12 my-2 py-2 text-center" style="border: 1px solid;">구매하기</button>
 	                                    </td>
 	                                </tr>
                             	</c:if>
@@ -189,7 +192,8 @@
 	                            <div class="card-body py-0">
 	                                <h2>${product.proArtistName }</h2>
 	                                <p>
-	                                    ${artist.artistIntroduce }
+	                                	-- 작가 소개 내용 부분 --
+<!-- 	                                    ${artist.artistIntroduce }  -->
 	                                </p>
 	    
 	                            </div>
@@ -201,6 +205,7 @@
                 <div id="productIntroduce" class="p-5">
        	            <h1 class="mt-5" style="text-align:center;">ABOUT PRODUCT</h1>
                 	
+                    <img class="mt-5" style="background-color: black; width: 100%; height: 700px;">
                     <p>
                         ${product.proDescription }
                     </p>
@@ -253,9 +258,9 @@
 			if(${empty loginMember}){
 				alert("로그인이 필요합니다.");
 			} else{
-				var value = Number($("#quantitySelect").val());
-				var min = Number($("#quantitySelect").attr("min"));
-				var max = Number($("#quantitySelect").attr("max"));
+				var value = $("#quantitySelect").val();
+				var min = $("#quantitySelect").attr("min");
+				var max = $("#quantitySelect").attr("max");
 				if(value >= min && value <= max){
 					location.href="${path}/product/payment?proNo=${product.proNo}&payQuantity=" + $("#quantitySelect").val();
 				} else {

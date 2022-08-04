@@ -30,7 +30,7 @@
         <hr class="mt-4">
 
         <!-- order_tit -->
-        <form id="frmCart" name="frmCart" method="post" target="ifrmProcess">
+        <form id="frmCart" name="frmCart" method="POST" target="ifrmProcess">
             <input type="hidden" name="mode" value="">
             <input type="hidden" name="cart[cartSno]" value="">
             <input type="hidden" name="cart[goodsNo]" value="">
@@ -40,7 +40,7 @@
             <input type="hidden" name="cart[couponApplyNo]" value="">
             <input type="hidden" name="useBundleGoods" value="1">
                 <!-- 장바구니 상품리스트 시작 -->
-                <div class="cart_cont_list">
+                 <div class="cart_cont_list">
                     <div class="order_cart_tit">
                     </div>
                     <!-- //order_cart_tit -->
@@ -66,15 +66,26 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                	
+                       	            <c:forEach var="product" items="${ list }">
+                                	
                                     <tr>
+                                        <!-- AceCounter eCommerce (Cart_Inout) v8.0 Start -->
+                                        <script language="javascript">
+                                            var _products=(function(){
+                                                var c={pd:'1163545', pn:'[FRAME] At the fair', am:'1,490,000원'.replace(/[^0-9]/g,''), qy:'1', ct:''};
+                                                var u=(!_products)?[]:_products; u['@'+c.pd]=c;return u;
+                                            })();
+                                        </script>
+                                        <!-- AceCounter eCommerce (Cart_InOut) v8.0 End -->
                                         <td class="td_left">
                                             
                                             <div class="pick_add_cont">
                                                 <span class="pick_add_img">
-                                                    <a href=""><img src="" width="40" alt="[FRAME] At the fair" title="[FRAME] At the fair" class="middle"></a>
+                                                    <a href=""><img src="" width="40" alt="${product.proName }" title="[FRAME] At the fair" class="middle"></a>
                                                 </span>
                                                 <div class="pick_add_info">
-                                                    <em><a href="">[FRAME] At the fair</a></em>
+                                                    <em><a href="">${product.proName }</a></em>
                                                     <!-- //icon_pick_list -->
                                                     <div class="pick_option_box">
                                                         <span class="text_type_cont">배송선택 : 서울/경기(+40,000원) <strong>(+40,000원)</strong></span>
@@ -88,11 +99,11 @@
                                         </td>
                                         <td class="td_order_amount">
                                             <div class="order_goods_num">
-                                                <strong>1개</strong>
+                                                <strong>${product.payQuantity }</strong>
                                             </div>
                                         </td>
                                         <td>
-                                            <strong class="order_sum_txt price">1,490,000원</strong>
+                                            <strong class="order_sum_txt price">${product.proPrice }</strong>
                                             <p class="add_currency"></p>
                                         </td>
                                         <td class="td_benefit">
@@ -101,7 +112,7 @@
                                         </td>
                                         <td>
                                             
-                                            <strong class="order_sum_txt">1,490,000원</strong>
+                                            <strong class="order_sum_txt">${product.payQuantity * product.proPrice}</strong>
                                             <p class="add_currency"></p>
                                         </td>
                                         <td class="td_delivery" rowspan="1">
@@ -112,7 +123,7 @@
                                             (택배)
                                         </td>
                                     </tr>
-        
+        							</c:forEach>
                                     </tbody>
         
         
@@ -132,8 +143,8 @@
                             <div class="row">
                                 <div class="col-md-4 mb-4">
                                     <dl>
-                                        <dt>총 <strong id="totalGoodsCnt">1</strong> 개의 상품금액 </dt>
-                                        <dd><strong id="totalGoodsPrice">1,490,000</strong>원</dd>
+                                        <dt>총 <strong id="totalGoodsCnt">${fn:length(list)}</strong> 개의 상품금액 </dt>
+                                        <dd><strong id="totalGoodsPrice">${totalPrice}</strong>원</dd>
                                     </dl>
                                 </div>
                                 <span></span>
@@ -146,7 +157,7 @@
                                 <div class="col-md-4 mb-4">
                                     <dl class="price_total">
                                         <dt>합계</dt>
-                                        <dd><strong id="totalSettlePrice">1,490,000</strong>원
+                                        <dd><strong id="totalSettlePrice">${totalPrice }</strong>원
                                         </dd>
                                     </dl>
                                 </div>

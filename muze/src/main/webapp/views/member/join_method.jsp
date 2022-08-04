@@ -28,7 +28,8 @@
 	                      href="#"
 	                      class="btn_kakao_join js_btn_kakao_join"
 	                      data-kakao-type="join_method"
-	                      data-return-url="#">
+	                      data-return-url="#"
+	                      onclick="kakaoLogin();">
 	                      <img src="${path}/resources/images/login/kakao.png"  class="img-fluid" alt="카카오 아이디 회원가입"/>
 	                    </a>
 	                    <a
@@ -70,5 +71,72 @@
 		});
 	});
 </script>
+
+<%-- 네이버 스크립트 --%>
+<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+<script>
+const naverLogin = new naver.LoginWithNaverId(
+		{
+			clientId: "ADu2lc9ebSDr0cdZSCrY",
+			callbackUrl: "http://localhost:8090/muze/naverCallback",
+			loginButton: {color: "white", type: 3, height: 60, width:500}
+		}
+	);
+naverLogin.init();
+
+$(document).on("click", "#naverLogin", function(){
+    var naverLogin = document.getElementById("naverIdLogin").firstChild;
+    naverLogin.click();
+});
+
+</script>
+
+<%-- 카카오 스크립트 --%>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
+	<script>
+        Kakao.init('74b3fafd7b1cd90a5f4cd0cd8b97fc90'); // 카카오에서 발급받은 JavaScript 키 (초기화 함수 호출)
+        console.log(Kakao.isInitialized()); // sdk초기화여부판단 (초기화 잘 됐는지 확인하는 함수)
+        //카카오로그인
+        function kakaoLogin() {
+            Kakao.Auth.login({
+              success: function (res) {
+                Kakao.API.request({
+                  url: '/v2/user/me',
+                  success: function (res) {
+                   		var token = Kakao.Auth.getAccessToken();
+                   		Kakao.Auth.setAccessToken(token);			// 토큰 설정
+                	  
+                        var userEmail = res.kakao_account.email; 	// 카카오 email
+                        var userName = res.properties.nickname; 	// 카카오 닉네임(이름)
+                        var kakaoId = res.id						// 비밀번호로 사용할 카카오 아이디
+                       
+                       $.ajax({
+                    	method:"GET",
+                        url:"${ path }/member/kakaoLogin",
+                        data:{ userEmail,
+                        	   userName,
+                        	   kakaoId,
+                        	   token },
+                        	   
+                        success:function(data){
+                        	location.href="${ path }/";
+                        	alert("카카오 로그인 성공");
+                        }
+                    });
+                  },
+    		     
+                  fail: function (error) {
+                	  // 카카오 로그인 실패 시 alert 창
+                	  alert('로그인에 실패하였습니다.');
+                  },
+                })
+              },
+              fail: function (error) {
+            	  location.href="${ path }/member/login";
+              },
+            })
+          }        
+        </script>
 
 <jsp:include page="/views/common/footer.jsp"/>

@@ -47,9 +47,10 @@
                                             <label for="allCheck1" class="check_s on"></label>
                                         </div>
                                     </th>
-                                    <th style="width:80%">상품/옵션 정보</th>
+                                    <th style="width:70%">상품/옵션 정보</th>
                                     <th style="width:10%">수량</th>
                                     <th style="width:10%">상품금액</th>
+                                    <th style="width:10%">합계금액</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -79,14 +80,17 @@
                                         </td>
                                         <td class="td_order_amount">
                                             <div class="order_goods_num">
-                                                <strong>1개</strong>
+                                                <input style="width:60px;" class="quantitySelect" type="number" min="1" max="${product.proQuantity}" value="1">
                                             </div>
                                         </td>
                                         <td>
-                                            <strong class="order_sum_txt price">${product.proPrice }원</strong>
+                                            <strong class="proPrice">${product.proPrice }</strong>원
                                             <p class="add_currency"></p>
                                         </td>
-
+                                        <td>
+                                            <strong class="sumPrice">${product.proPrice }</strong>원
+                                            <p class="add_currency"></p>
+                                        </td>
                                     </tr>
         							</c:forEach>
                                     </tbody>
@@ -157,6 +161,13 @@
         </div>
 <script>
 	$(document).ready(() => {
+		$(".quantitySelect").on("change", (event) => {
+			var quantity = $(event.target).val();
+			var proPrice = $(event.target).parent().parent().next().find(".proPrice").text();
+			$(event.target).parent().parent().next().next().find(".sumPrice").text(quantity * proPrice);
+			getTotalPrice();
+		});
+		
 		$("#deleteCart").on("click", ()=> {
 			var arr = [];
 			$("input:checkbox[name='cartSno[]']:checked").each(function(){
@@ -172,12 +183,15 @@
 		
 		$("#selectedProductPayment").on("click", () => {
 			var arr = [];
+			var quanarr = [];
 			$("input:checkbox[name='cartSno[]']:checked").each(function(){
 				var proNo = $(this).val();
+				var quantity = $(this).parent().parent().next().next().find(".quantitySelect").val();
 				arr.push(proNo);
+				quanarr.push(quantity);
 			});
 			if(arr.length !=0){
-				location.href="${path}/product/payment?list="+arr;
+				location.href="${path}/product/payment?list="+arr+"&quantity="+quanarr;
 			}else{
 				alert("작품을 선택해주세요");
 			}
@@ -185,12 +199,16 @@
 		
 		$("#allProductPayment").on("click", ()=> {
 			var arr = [];
+			var quanarr = [];
 			$("input:checkbox[name='cartSno[]']").each(function(){
 				var proNo = $(this).val();
+				var quantity = $(this).parent().parent().next().next().find(".quantitySelect").val();
 				arr.push(proNo);
+				quanarr.push(quantity);
+
 			});
 			if(arr.length !=0){
-				location.href="${path}/product/payment?list="+arr;
+				location.href="${path}/product/payment?list="+arr+"&quantity="+quanarr;
 			}else{
 				alert("장바구니에 작품이 없습니다.");
 			}
@@ -215,16 +233,9 @@
 		var arr = [];
 		var totalPrice = 0;
 		$("input:checkbox[name='cartSno[]']:checked").each(function(){
-			var proNo = $(this).val();
-			arr.push(proNo);
+			totalPrice += Number($(this).parent().parent().next().next().next().next().find(".sumPrice").text());
 		});
-		<c:forEach var="product" items="${list}" varStatus="status">
-			for(var i = 0; i < arr.length; i++){
-				if(${product.proNo} == arr[i]){
-					totalPrice += ${product.proPrice};
-				}
-			}	
-		</c:forEach>
+
 		$(".totalPrice").text(totalPrice);
 	}
 </script>

@@ -39,9 +39,9 @@
         <div class="row my-5">
 
        	<c:forEach var="product" items="${ list }">
-			<div class="col-lg-3 col-md-6">
+			<div class="col-lg-3 col-md-6" onclick="location.href='${path}/product/detail?proNo=${product.proNo}'">
                 <div class="card" style="width: 16rem;">
-                    <img src='${path}/resources/upload/product/painting/${fn:replace(product.proImg,"\\","/")}' width="100%" height="254px">
+                    <img src='${path}/resources/upload/product/painting/${fn:replace(product.proImg,"\\","/")}'  width="100%" height="254px">
                     <div class="card-body">
                         <h5 class="card-title">${product.proName }</h5>
                         <p class="card-text"> ${product.proSize}<br>

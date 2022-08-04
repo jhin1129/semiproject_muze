@@ -1,6 +1,7 @@
 package com.muze.mvc.product.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,9 +10,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.muze.mvc.board.model.service.BoardService;
 import com.muze.mvc.board.model.vo.Product;
+import com.muze.mvc.event.model.vo.Mileage;
+import com.muze.mvc.member.model.vo.Member;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @WebServlet("/product/payment")
 public class PaymentServlet extends HttpServlet {
@@ -31,20 +37,34 @@ public class PaymentServlet extends HttpServlet {
 		} else {
 			String[] proNoStrList = request.getParameterValues("list");
 			List<Integer> proNoList = new ArrayList<Integer>();
+
 			String[] splitProNo = proNoStrList[0].split(",");
 			for(String str : splitProNo) {
 				proNoList.add(Integer.parseInt(str));
 			}
 			list = new BoardService().getProductListByproNoList(proNoList);
+			
+			String[] payQuantityStrList = request.getParameterValues("quantity");
+			List<Integer> payQuantityList = new ArrayList<Integer>();
+			
+			String[] splitPayQuantity = payQuantityStrList[0].split(",");
+			for(String str : splitPayQuantity) {
+				payQuantityList.add(Integer.parseInt(str));
+			}
+			
+			for(int i = 0; i < list.size(); i++) {
+				list.get(i).setPayQuantity(payQuantityList.get(i));
+			}
+			
 		}
 		int totalPrice = new BoardService().getTotalPrice(list);
-		
 		request.setAttribute("list", list);
 		request.setAttribute("totalPrice", totalPrice);
 		request.getRequestDispatcher("/views/product/Payment_.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 	}
 
 }

@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.muze.mvc.member.model.vo.Artist;
-import com.muze.mvc.member.model.vo.Member;
 
 public class ArtistDao {
 	public Artist findArtistByNo(Connection connection, int memberNo) {
@@ -44,7 +43,7 @@ public class ArtistDao {
 		return artist;
 	}
 
-	public static int insertArtist(Connection connection, Artist artist) {
+	public int insertArtist(Connection connection, Artist artist) {
 		int result = 0;
 
 		PreparedStatement pstm = null;

@@ -34,7 +34,8 @@
                     <img src='${path}/resources/upload/product/painting/${fn:replace(product.proImg,"\\","/")}' width="100%" height="254px">
                     <div class="card-body">
                         <h5 class="card-title">${product.proName }</h5>
-                        <p class="card-text"> ${product.proDescription} </p>
+                        <p class="card-text"> ${product.proSize}<br>
+                        ${product.proPrice} </p>
                     </div>
                 </div>
             </div>
