@@ -21,21 +21,21 @@ public class EventService {
 	
 	EventDao eventdao = new EventDao();
 	
-	public int saveEvent(Event event) {
-		int result = 0;
-		Connection connection = getConnection();
-		
-		try {
-			result = eventdao.insertEvent(connection, event);
-			commit(connection);
-		} catch (Exception e) {
-			rollback(connection);
-			throw e;
-		} finally {
-			close(connection);
-		}
-		return result;
-	}
+//	public int saveEvent(Event event) {
+//		int result = 0;
+//		Connection connection = getConnection();
+//		
+//		try {
+//			result = eventdao.insertEvent(connection, event);
+//			commit(connection);
+//		} catch (Exception e) {
+//			rollback(connection);
+//			throw e;
+//		} finally {
+//			close(connection);
+//		}
+//		return result;
+//	}
 
 	public List<Event> getAttendCheck(Member member) {
 		List<Event> list = null;

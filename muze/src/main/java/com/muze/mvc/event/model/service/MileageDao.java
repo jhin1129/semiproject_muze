@@ -14,7 +14,7 @@ public class MileageDao {
 	public int insertAttMileage(Connection connection, int memberNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "INSERT INTO MILEAGE VALUES(SEQ_POINT.NEXTVAL, ?, 100, 'ATT', SYSDATE, 'IN', 0, 100)";
+		String query = "INSERT INTO MILEAGE VALUES(SEQ_POINT.NEXTVAL, ?, 100, '출석체크', SYSDATE, 'IN', 100)";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
@@ -35,7 +35,7 @@ public class MileageDao {
 		Mileage mileage = null;
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
-		String query = "SELECT SUM(POINT_AFTER) FROM MILEAGE WHERE MEMBER_NO='?'";
+		String query = "SELECT SUM(POINT_AFTER) FROM MILEAGE WHERE MEMBER_NO=?";
 		
 		try {
 			pstmt = connection.prepareStatement(query);

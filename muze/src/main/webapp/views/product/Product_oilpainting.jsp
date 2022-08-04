@@ -24,14 +24,6 @@
                         </div>
                 </div>
                 <div class="col-md-6">
-                    <form action="...">
-                        <div class="search">
-                            <input type="text" name="query" value="">
-                            <button type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                            </svg></button>
-                        </div>
-                    </form>
                 </div>
             </div>
            <div class="row my-5">
@@ -49,34 +41,63 @@
 		</c:forEach>
 		</div>
     
-            <div class="row">
+        <div class="row">
             <div class="col-4"></div>
-            <div class="col-4">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item"><a class="page-link" href="${path }/product/oilpainting?page=1&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&lt;&lt;</a></li>
-                    <li class="page-item"><a class="page-link" href="${path }/product/oilpainting?page=${pageInfo.prevPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&lt;</a></li>
-                    
-                    <!--  10개 페이지 목록 -->
-					<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
-						<c:if test="${ status.current == pageInfo.currentPage }">
-		                    <li class="page-item disabled"><a class="page-link" href="#">${ status.current }</a></li>
-						</c:if>
-						<c:if test="${ status.current != pageInfo.currentPage }">
-		                    <li class="page-item"><a class="page-link" href="${path }/product/oilpainting?page=${status.current}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">${ status.current }</a></li>
-					
-						</c:if>
-					</c:forEach>
-                    
-                    <li class="page-item"><a class="page-link" href="${path }/product/oilpainting?page=${pageInfo.nextPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&gt;</a></li>
-                    <li class="page-item"><a class="page-link" href="${path }/product/oilpainting?page=${pageInfo.maxPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&gt;&gt;</a></li>
-                </ul>
-            </div>
+                <div class="col-4">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item"><a class="page-link" href="${path }/product/oilpainting?page=1&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&lt;&lt;</a></li>
+                        <li class="page-item"><a class="page-link" href="${path }/product/oilpainting?page=${pageInfo.prevPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&lt;</a></li>
+                        
+                        <!--  10개 페이지 목록 -->
+                        <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
+                            <c:if test="${ status.current == pageInfo.currentPage }">
+                                <li class="page-item disabled"><a class="page-link" href="#">${ status.current }</a></li>
+                            </c:if>
+                            <c:if test="${ status.current != pageInfo.currentPage }">
+                                <li class="page-item"><a class="page-link" href="${path }/product/oilpainting?page=${status.current}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">${ status.current }</a></li>
+                            </c:if>
+                        </c:forEach>
+                        
+                        <li class="page-item"><a class="page-link" href="${path }/product/oilpainting?page=${pageInfo.nextPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&gt;</a></li>
+                        <li class="page-item"><a class="page-link" href="${path }/product/oilpainting?page=${pageInfo.maxPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&gt;&gt;</a></li>
+                    </ul>
+                </div>
 
             <div class="col-4 text-right">
                 <button class="btn btn-light text-nowrap" onclick="location.href='${ path }/product/writer?type=Owriter'">작품 등록</button>
             </div>
         </div>
+            <div class="search row mb-5">
+                <div class="col-xs-2 col-sm-2">
+                    <select id="searchType" name="searchType" class="form-control">
+                        <option value="pro_name" selected>제목</option>
+                    </select>
+                </div>
+
+                <div class="col-xs-10 col-sm-10">
+                    <div class="input-group">
+                        <input type="text" name="searchinput" id="searchInput" class="form-control">
+                        <span class="input-group-btn">
+                            <button type="submit" id="searchBtn" class="btn btn-light text-nowrap">검색</button>
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
-        
-          <jsp:include page="/views/common/footer.jsp"/>
+    </div>
+    
+    <script>
+
+	$(document).ready(() => {
+
+		$("#searchBtn").on("click", () => {
+			var searchType = $("#searchType option:selected").val();
+			var searchVal = $("#searchInput").val();
+			
+			location.href="${path}/product/oilpainting?type=oilpainting&searchType="+searchType+"&searchVal="+searchVal+"&isSearch=true";
+		});
+	});
+	
+	</script>
+
+<jsp:include page="/views/common/footer.jsp"/>
