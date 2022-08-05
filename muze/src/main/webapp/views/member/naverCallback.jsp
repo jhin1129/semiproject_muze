@@ -40,7 +40,7 @@
 
 						success: function(data) {
 							location.href="${ path }/";
-                        	alert("카카오 로그인 성공");
+                        	alert("네이버 로그인 성공");
 							
 						},
 						 fail: function (error) {
