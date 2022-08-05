@@ -42,10 +42,11 @@ public class ProductDao {
 		return count;
 	}
 
-	public List<Product> finalAll(Connection connection, PageInfo pageInfo, String type) {
+	public List<Product> findAll(Connection connection, PageInfo pageInfo, String type) {
 		List<Product> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+	
 		String query = "SELECT RNUM,"
 				+ " PRO_NO,"
 				+ " PRO_NAME,"
@@ -73,7 +74,6 @@ public class ProductDao {
 				+ " WHERE PRO_TYPE = ? ORDER BY PRO_NO DESC"
 				+ ")"
 				+ " WHERE RNUM BETWEEN ? AND ?";
-		
 		
 		try {
 			
@@ -191,8 +191,6 @@ public class ProductDao {
 				+ " JOIN MEMBER ON (PRODUCT.PRO_ARTIST_NO = MEMBER.MEMBER_NO)"
 				+ " WHERE PRO_ARTIST_NO = ?";
 
-		
-
 		try {
 			pstmt = connection.prepareStatement(query);
 			
@@ -282,10 +280,9 @@ public class ProductDao {
 		case "pro_Artist_No":
 			query = "SELECT COUNT(*) FROM PRODUCT JOIN MEMBER ON(PRODUCT.PRO_ARTIST_NO = MEMBER.MEMBER_NO) WHERE PRO_STATUS='Y' AND PRO_TYPE=? AND MEMBER_ID LIKE '%"+searchVal+"%'";
 			break;
-		default:
+		default: 
 			query = "SELECT COUNT(*) FROM PRODUCT WHERE PRO_STATUS='Y' AND PRO_TYPE=?";			
 		}
-		
 		
 		try {
 			pstmt = connection.prepareStatement(query);
@@ -310,7 +307,7 @@ public class ProductDao {
 		List<Product> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT RNUM"
+		String query = "SELECT RNUM,"
 				+ " PRO_NO, PRO_NAME, PRO_SIZE, PRO_PRICE,"
 				+ " PRO_QUANTITY,"
 				+ " PRO_IMG,"
@@ -329,15 +326,9 @@ public class ProductDao {
 				+ " PRO_ARTIST_NO,"
 				+ " PRO_REG_DATE,"
 				+ " PRO_DESCRIPTION,"
-				+ " PRO_TYPE"
+				+ " PRO_TYPE"            
 				+ " FROM PRODUCT"
-				+ " WHERE PRO_TYPE = ? and "+searchType+" like ? ORDER BY PRO_NO DESC )WHERE RNUM BETWEEN ? AND ?";
-		
-//		String query = " SELECT * FROM (" + 
-//				       " SELECT ROWNUM NUM, N.* " +
-//				       " FROM (SELECT * FROM PRODUCT WHERE "+searchType+" LIKE ? AND PRO_TYPE= ? ORDER BY PRO_REG_DATE DESC) N" +
-//				       ") " +
-//				       "WHERE NUM BETWEEN ? AND ?";
+				+ " WHERE PRO_TYPE = ? AND "+searchType+" LIKE ? ORDER BY PRO_NO DESC ) WHERE RNUM BETWEEN ? AND ?";
 		
 		
 		try {

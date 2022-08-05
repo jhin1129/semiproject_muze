@@ -32,7 +32,7 @@ public class ProductService {
 		List<Product> list = null;
 		Connection connection = getConnection();
 		
-		list = new ProductDao().finalAll(connection, pageInfo, type);
+		list = new ProductDao().findAll(connection, pageInfo, type);
 		
 		close(connection);
 		

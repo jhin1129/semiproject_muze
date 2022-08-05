@@ -28,6 +28,10 @@ public class ProductListServlet extends HttpServlet {
 		String searchVal_ = request.getParameter("searchVal");
 		String isSearch = request.getParameter("isSearch");
 		
+		System.out.println("타입:" + type);
+		System.out.println("서치타입:" +searchType_);
+		System.out.println("서치밸류:" +searchVal_);
+		
 		String searchType = "pro_Name";
 		if(searchType_ != null)
 			searchType = searchType_;
@@ -50,16 +54,16 @@ public class ProductListServlet extends HttpServlet {
     	PageInfo pageInfo = null;
     	List<Product> list = null;
     	
-    	path = "/views/product/product_list.jsp";
-//		if(type.equals("PORTRAIT")) {
-//			path = "/views/product/product_portrait.jsp";
-//		} else if(type.equals("LANDSCAPE")) {
-//			path = "/views/product/product_landscape.jsp";
-//		} else if(type.equals("STILL-LIFE")) {
-//			path = "/views/product/product_still-life.jsp";
-//		} else if(type.equals("ABSTRACT")) {
-//			path = "/views/product/product_abstract.jsp";
-//		}
+//    	path = "/views/product/product_list.jsp";
+		if(type.equals("PORTRAIT")) {
+			path = "/views/product/product_portrait.jsp";
+		} else if(type.equals("LANDSCAPE")) {
+			path = "/views/product/product_landscape.jsp";
+		} else if(type.equals("STILL-LIFE")) {
+			path = "/views/product/product_still-life.jsp";
+		} else if(type.equals("ABSTRACT")) {
+			path = "/views/product/product_abstract.jsp";
+		}
 
     	try {
     		page = Integer.parseInt(request.getParameter("page"));
@@ -68,10 +72,10 @@ public class ProductListServlet extends HttpServlet {
 		}
     
 //    	listCount = new ProductService().getProductCount(type); // 페이지 숫자를 넘버링하기 위한 총 리스트 갯수
-    	pageInfo = new PageInfo(page, 10, listCount, 4); // 페이지 정보 만들기
 //    	list = new ProductService().getProductList(pageInfo, type); // 페이지 별 실제 리스트 개수
     	
     	listCount = new ProductService().getProductCount(type, searchType, searchVal);
+    	pageInfo = new PageInfo(page, 10, listCount, 4); // 페이지 정보 만들기
     	list = new ProductService().getProductList(pageInfo, type, searchType, searchVal);
     	
     	request.setAttribute("pageInfo", pageInfo);
