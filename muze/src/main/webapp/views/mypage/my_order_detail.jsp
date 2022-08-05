@@ -47,7 +47,7 @@
                   <tbody>
                     <tr>
                       <td id="my_td01">${ orderDetail.orderDate } <br>
-                        <a href="${ path }/mypage/orderdetail" id="my_td02">${ orderDetail.orderNo }</a> <br>
+                        <a href="${ path }/mypage/orderdetail?no=${ orderDetail.orderNo }" id="my_td02">${ orderDetail.orderNo }</a> <br>
                           <c:if test="${ orderDetail.orderStatus != '환불' && orderDetail.orderStatus != '구매확정'}">
 		                     <button type="button" class="btn btn-outline-secondary" id="mycbtn">주문취소 </button>
 		                  </c:if>
