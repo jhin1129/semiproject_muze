@@ -180,24 +180,24 @@
                                 <tbody>
                                
                                 <tr>
-                                    <th scope="row"><span class="important">주문하시는 분</span></th>
+                                    <th scope="row" style="height: 35px; width: 100px;"><span class="important">주문하시는 분</span></th>
                                     <td><input type="text" name="orderName" id="orderName" value="" data-pattern="gdEngKor" maxlength="20" placeholder="ex) 홍길동">            
                                 </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row"><span class="important">주소</span></th>
+                                    <th scope="row" style="height: 35px; width: 100px;"><span class="important">주소</span></th>
                                     <td><input type="text" name="orderAddress" id="orderAddress" value="" data-pattern="gdEngKor" maxlength="300" placeholder="ex) 서울 강남구 영동대로 513">            
                                 </td>
                                 </tr>
 
                                 <tr>
-                                    <th scope="row"><span class="important">휴대폰 번호</span></th>
+                                    <th scope="row" style="height: 35px; width: 100px;"><span class="important">휴대폰 번호</span></th>
                                     <td>
                                         <input type="text" id="mobileNum" name="orderCellPhone" value="" maxlength="20" placeholder="ex) 010-0000-0000">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row"><span class="important">이메일</span></th>
+                                    <th scope="row" style="height: 35px; width: 100px;"><span class="important">이메일</span></th>
                                     <td class="member_email">
                                         <input type="text" id="orderEmail" name="orderEmail" value="" placeholder="ex) Email11@naver.com">
                                     </td>
