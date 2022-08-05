@@ -37,8 +37,14 @@ public class WelcomeServlet extends HttpServlet {
     		request.setAttribute("member", member);
 	    	
 	    	// 1st row
-	    	Welcome welcomeRow = null;   	
-	    	welcomeRow = new WelcomeService().getWelcomeRow(memNo);
+	    	Welcome welcomeRow = new WelcomeService().getMileage(memNo);
+	    	Welcome welcomeRow2 = new WelcomeService().getReview(memNo);
+	    	
+	    	System.out.println(welcomeRow);
+	    	System.out.println(welcomeRow2);
+	    	
+	    	request.setAttribute("welcomeRow", welcomeRow);
+	    	request.setAttribute("welcomeRow2", welcomeRow2);
 	    	
 	    	// 2nd row
 			List<MyOrder> status = null;
@@ -48,7 +54,6 @@ public class WelcomeServlet extends HttpServlet {
 			List<MyOrder> list = null;
 			list = new MyOrderService().getOrderRec(memNo);
 	
-			request.setAttribute("welcomeRow", welcomeRow);
 			request.setAttribute("status", status);
 			request.setAttribute("list", list);
 	    	request.getRequestDispatcher("/views/mypage/welcome.jsp").forward(request, response);

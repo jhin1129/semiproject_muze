@@ -37,9 +37,11 @@ public class MyMileageServlet extends HttpServlet {
     		request.setAttribute("member", member);
 	    	
 			// 1st row
-	    	Welcome welcomeRow = null;   	
-	    	welcomeRow = new WelcomeService().getWelcomeRow(memNo);
-			request.setAttribute("welcomeRow", welcomeRow);
+	    	Welcome welcomeRow = new WelcomeService().getMileage(memNo);
+	    	Welcome welcomeRow2 = new WelcomeService().getReview(memNo);
+	    	
+	    	request.setAttribute("welcomeRow", welcomeRow);
+	    	request.setAttribute("welcomeRow2", welcomeRow2);
 			
 			// 검색
 			List<MyMileage> list = null;
