@@ -66,7 +66,7 @@
                                             
                                             <div class="pick_add_cont">
                                                 <span class="pick_add_img">
-                                                    <a href=""><img src="" width="40" alt="${product.proName }" title="${product.proName }" class="middle"></a>
+                                                    <a href=""><img src='${path}/resources/upload/product/painting/${fn:replace(product.proImg,"\\","/")}' width="40" alt="${product.proName }" title="${product.proName }" class="middle"></a>
                                                 </span>
                                                 <div class="pick_add_info">
                                                     <em><a href="">${product.proName }</a></em>

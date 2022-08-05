@@ -31,7 +31,6 @@
 
         <!-- order_tit -->
 
-        <input type="hidden" value="${ list }" name="list">
             
                 <!-- 장바구니 상품리스트 시작 -->
                 <div class="cart_cont_list">
@@ -77,7 +76,7 @@
                                             
                                             <div class="pick_add_cont">
                                                 <span class="pick_add_img">
-                                                    <a href=""><img src="" width="40" alt="${product.proName }" title="[FRAME] At the fair" class="middle"></a>
+                                                    <a href=""><img src='${path}/resources/upload/product/painting/${fn:replace(product.proImg,"\\","/")}' width="40" alt="${product.proName }" title="[FRAME] At the fair" class="middle"></a>
                                                 </span>
                                                 <div class="pick_add_info">
                                                     <em><a href="">${product.proName }</a></em>
