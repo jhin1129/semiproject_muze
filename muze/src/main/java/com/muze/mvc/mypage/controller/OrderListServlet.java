@@ -42,7 +42,6 @@ public class OrderListServlet extends HttpServlet {
 	    	Welcome welcomeRow = null;   	
 	    	welcomeRow = new WelcomeService().getWelcomeRow(memNo);
 			Member member = new Member();
-//			member.setMemberNo(loginMember.getMemberNo());			
 			member.setMemberName(loginMember.getMemberName());
     		
     		request.setAttribute("member", member);
@@ -55,8 +54,8 @@ public class OrderListServlet extends HttpServlet {
 			String dateFrom = request.getParameter("dateFrom");
 			String dateTo = request.getParameter("dateTo");
 			
-			System.out.println(dateFrom);
-			System.out.println(dateTo);
+//			System.out.println(dateFrom);
+//			System.out.println(dateTo);
 			
 			// 검색 타입 가져오기 
 			String type = request.getParameter("type");
@@ -66,9 +65,10 @@ public class OrderListServlet extends HttpServlet {
 				path = "/views/mypage/list_order.jsp";
 			} else if(type.equals("CANCEL")) {
 				path = "/views/mypage/list_cancel.jsp";
-			} else if(type.equals("REFUND")) {
-				path = "/views/mypage/list_refund.jsp";
-			}
+			} 
+//			  else if(type.equals("REFUND")) {
+//				path = "/views/mypage/list_refund.jsp";
+//			} 
 	
 			list = new MyOrderService().orderByDate(dateFrom, dateTo, memNo, type, artNo);
 

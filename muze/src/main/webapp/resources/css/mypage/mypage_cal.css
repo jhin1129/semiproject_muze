@@ -16,8 +16,8 @@
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default,
 .ui-button,
-html .ui-button.ui-state-disabled:hover,
-html .ui-button.ui-state-disabled:active { border: 0px solid #c5c5c1; background-color: transparent; font-weight: light; color: #454545; text-align: center; } 
+/* html .ui-button.ui-state-disabled:hover,
+html .ui-button.ui-state-disabled:active { border: 0px solid #c5c5c1; background-color: transparent; font-weight: light; color: #454545; text-align: center; }  */
 /* 몇 월 몇 일 */
 .ui-datepicker .ui-datepicker-title { margin-bottom: 20px; line-height: 16px; text-align: center; font-size: 14px; padding: 0px; font-weight: bold; } 
 /* 전체 사각형 */

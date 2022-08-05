@@ -11,6 +11,7 @@ import java.util.List;
 import com.muze.mvc.member.model.vo.Artist;
 import com.muze.mvc.mypage.model.dao.ArtOrderDao;
 import com.muze.mvc.mypage.model.vo.ArtOrder;
+import com.muze.mvc.mypage.model.vo.MyOrder;
 
 public class ArtOrderService {
 	
@@ -28,18 +29,20 @@ public class ArtOrderService {
 		return getArtOrder;
 	}
 
-	public int updateStatus(String[] orderNoS, String status) {
-		int result = 0; 
+	public int updateStatus(int orderNo, String status, int buyMemNo, int buyMemMil) {
+		int result1 = 0; 
+		int result2 = 0; 
 		Connection connection = getConnection();
 		
-		int[] orderNo = new int[orderNoS.length];
-		
-		for (int i = 0; i < orderNoS.length; i++) {
-			orderNo[i] = Integer.parseInt(orderNoS[i]);
-			result = new ArtOrderDao().updateStatus(connection, status, orderNo[i]);
+		if(status.equals("환불")) {
+				result1 = new ArtOrderDao().updateStatus(connection, status, orderNo);
+				result2 = new ArtOrderDao().insertMileage(connection, status, buyMemNo, buyMemMil);
+
+		}else {
+				result1 = new ArtOrderDao().updateStatus(connection, status, orderNo);
 		}
-		
-		if(result > 0) {
+			
+		if(result1 + result2 > 0) {
 			commit(connection);
 		} else {
 			rollback(connection);
@@ -47,7 +50,7 @@ public class ArtOrderService {
 		
 		close(connection);
 		
-		return result;
+		return result1;
 	}
 
 }

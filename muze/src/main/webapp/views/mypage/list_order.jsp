@@ -63,11 +63,11 @@
                 </c:if>
                 <c:if test="${ not empty list }">
 	                <form id="myForm01">
- 	                  <span id="mySpan01">주문목록 / 배송내역 총 ${ list.get(list.size()-1).getCount() } 건</span> 
+ 	                  <span id="mySpan01">주문목록 / 배송내역</span> 
 	                </form>
                 </c:if>
                 <!-- 조회 테이블 -->
-                <table class="ordertable">
+                <table class="ordertable" style="margin-bottom:30px;">
                   <thead id="my_thead01">
                     <tr>
                       <th class="my_th" id="my_th01">날짜/주문번호</th>
@@ -88,16 +88,17 @@
                    	<c:if test="${ not empty list }">
                    		<c:forEach var="orderByDate" items="${ list }">
 		                    <tr>
-		                      <td id="my_td01">${ orderByDate.orderDate } <br>
-	   								<a href="${path}/mypage/orderdetail?no=${ orderByDate.orderNo }" id="my_td02">${ orderByDate.orderNo }</a><br>
+		                      <td id="my_td01" style ="padding : 5px;">${ orderByDate.orderDate } <br>
+	   							<a href="${path}/mypage/orderdetail?no=${ orderByDate.orderNo }" id="my_td02">${ orderByDate.orderNo }</a><br>
+		                      </td> 
+		                      <td id="my_td01"><a href="${path}/product/view?proNo=${ orderByDate.proNo }">${ orderByDate.proName }</a></td>
+		                      <td id="my_td01"> <fmt:formatNumber value="${ orderByDate.proPrice }" pattern="#,###"/> p / ${ orderByDate.orderAmount } 개</td>
+		                      <td id="my_td01">${ orderByDate.orderStatus }</td>
+		                      <td id="my_td01">
 		                        <c:if test="${ orderByDate.orderStatus != '환불' && orderByDate.orderStatus != '구매확정'}">
 		                        	<button type="button" class="btn btn-outline-secondary" id="mycbtn">주문취소 </button>
 		                       	</c:if>
-		                      </td> 
-		                      <td id="my_td01">${ orderByDate.proName }</td>
-		                      <td id="my_td01"> <fmt:formatNumber value="${ orderByDate.proPrice }" pattern="#,###"/>원 / ${ orderByDate.orderAmount }개</td>
-		                      <td id="my_td01">${ orderByDate.orderStatus }</td>
-		                      <td id="my_td01"></td>
+		                      </td>
 		                    </tr>
 	                    </c:forEach>
                     </c:if>

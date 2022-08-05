@@ -17,12 +17,14 @@ public class WelcomeDao {
 		Welcome welcomeRow = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT M.MEMBER_NO, M.MEMBER_NAME, MI.POINT_PROCESS, COUNT(*) AS CNT "
+		
+		String query = "SELECT M.MEMBER_NO, M.MEMBER_NAME, MI.POINT_CUR, MI.POINT_NO, COUNT(*) AS CNT "
 						+ "FROM MEMBER M "
 						+ "JOIN MILEAGE MI ON (M.MEMBER_NO = MI.MEMBER_NO) "
 						+ "JOIN BOARD B ON (MI.MEMBER_NO = B.BRD_WRITER_NO) "
-						+ "WHERE M.MEMBER_NO = ? AND BRD_TYPE = 'REVIEW' "
-						+ "GROUP BY M.MEMBER_NO, M.MEMBER_NAME, MI.POINT_PROCESS";
+						+ "WHERE M.MEMBER_NO = ? AND BRD_TYPE = 'REVIEW' AND BRD_STATUS = 'Y' "
+						+ "GROUP BY M.MEMBER_NO, M.MEMBER_NAME, MI.POINT_CUR, MI.POINT_NO "
+						+ "ORDER BY MI.POINT_NO DESC ";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
@@ -37,7 +39,7 @@ public class WelcomeDao {
 						
 						welcomeRow.setMemberNo(rs.getInt("MEMBER_NO"));
 						welcomeRow.setMemberName(rs.getString("MEMBER_NAME"));
-						welcomeRow.setMileageNow(rs.getInt("POINT_PROCESS"));
+						welcomeRow.setMileageNow(rs.getInt("POINT_CUR"));
 						welcomeRow.setBoardCount(rs.getInt("CNT"));
 				}while(rs.next());
 				

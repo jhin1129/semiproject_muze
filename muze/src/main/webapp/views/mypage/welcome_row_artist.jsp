@@ -32,10 +32,10 @@
                   <span id="mySpan01">주문 / 배송 내역</span> 
                   <span id="mySpan02">최근 30일 내 판매하신 내역입니다.</span>
                 <!-- 조회 테이블 -->
-                <table class="ordertable">
+                <table class="ordertable" style="margin-bottom:30px;">
                   <thead id="my_thead01">
                     <tr>
-                      <th class="my_th" id="my_th05">확인</th>
+                      <th class="my_th" id="my_th05">선택</th>
                       <th class="my_th" id="my_th05">날짜/주문번호</th>
                       <th class="my_th" id="my_th02">상품명/옵션</th>
                       <th class="my_th" id="my_th03">상품금액/수량</th>
@@ -54,14 +54,16 @@
                    		<c:forEach var="getOrderRec" items="${ list }"> 
 		                    <tr>
 		                      <td id="my_td01">
-		                      	<input type="checkbox" name="orderNo" value="${ getOrderRec.orderNo }">
+					      		<c:if test="${ getOrderRec.orderStatus != '환불' }">
+		                      		<input type="checkbox" name="orderNo" value="${ getOrderRec.orderNo }">
+								</c:if>
 		                      </td>
 		                      <td id="my_td01"> ${ getOrderRec.orderDate } <br>
 		                        <a href="${ path }/mypage/orderdetail?no=${ getOrderRec.orderNo }" id="my_td02">${ getOrderRec.orderNo }</a> <br>
 		                      </td> 
 			                      <td id="my_td01">${ getOrderRec.proName }</td>
 			                      <td id="my_td01">
-		                     		 <fmt:formatNumber value="${ getOrderRec.proPrice }" pattern="#,###"/>원 / ${ getOrderRec.orderAmount }개</td>
+		                     		 <fmt:formatNumber value="${ getOrderRec.proPrice }" pattern="#,###"/> p / ${ getOrderRec.orderAmount } 개</td>
 			                      <td id="my_td01">${ getOrderRec.orderStatus }</td>
 		                    </tr>
  	                    </c:forEach>

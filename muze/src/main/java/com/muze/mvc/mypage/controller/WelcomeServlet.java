@@ -30,9 +30,7 @@ public class WelcomeServlet extends HttpServlet {
     	Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
 		
     	if (loginMember != null) {
-    		// 로그인 객체의 PK값을 넘기기 위한 객체 생성 
 			Member member = new Member();
-//			member.setMemberNo(loginMember.getMemberNo());			
 			member.setMemberName(loginMember.getMemberName());
     		int memNo = loginMember.getMemberNo();
     		
