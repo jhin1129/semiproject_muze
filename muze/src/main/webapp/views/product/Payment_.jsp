@@ -187,25 +187,16 @@
 					</colgroup>
 					<tbody>
 						<tr>
-							<th scope="row" style="height: 50px; margin-right: 20px;"><span class="important">주문하시는 분</span></th>
-							<td><input type="text" name="orderName" id="orderName"
-								value="" data-pattern="gdEngKor" maxlength="20"></td>
+							<th scope="row" style="width: 150px; height: 35px; margin-right: 20px;"><span class="important">주문하시는 분</span></th>
+							<td><input type="text" name="orderName" id="orderName" value="" data-pattern="gdEngKor" maxlength="20"></td>
 						</tr>
 						<tr>
-							<th scope="row"><span class="important">주소</span></th>
-							<td><input type="text" name="orderAddress" id="orderAddress"
-								value="" data-pattern="gdEngKor" maxlength="300"></td>
-						</tr>
-
-						<tr>
-							<th scope="row"><span class="important">휴대폰 번호</span></th>
-							<td><input type="text" id="mobileNum" name="orderCellPhone"
-								value="" maxlength="20"></td>
+							<th scope="row" style="height: 35px; margin-right: 20px;"><span class="important">휴대폰 번호</span></th>
+							<td><input type="text" id="mobileNum" name="orderCellPhone" value="" maxlength="20"></td>
 						</tr>
 						<tr>
-							<th scope="row"><span class="important">이메일</span></th>
-							<td class="member_email"><input type="text"
-								name="orderEmail" value=""></td>
+							<th scope="row" style="height: 35px; margin-right: 20px;"><span class="important">이메일</span></th>
+							<td class="member_email"><input type="text" name="orderEmail" value=""></td>
 						</tr>
 					</tbody>
 				</table>
@@ -227,20 +218,25 @@
 					</colgroup>
 					<tbody>
 						<tr>
-							<th scope="row"><span class="important">받으실분</span></th>
+							<th scope="row" style="width: 150px; height: 35px; margin-right: 20px;"><span class="important">받으실분</span></th>
 							<td><input type="text" name="receiverName" data-pattern="gdEngKor" maxlength="20"></td>
 						</tr>
 						<tr>
-							<th scope="row"><span class="important">연락처</span></th>
+							<th scope="row" style="height: 35px; margin-right: 20px;"><span class="important">연락처</span></th>
 							<td><input type="text" id="receiverCellPhone" name="receiverCellPhone"></td>
 						</tr>
 						<tr>
-							<th rowspan="1" scope="row"><span class="important">받으실 곳</span></th>
+							<th rowspan="1" scope="row" style="height: 35px; margin-right: 20px;"><span class="important">받으실 곳</span></th>
 							<td class="member_address">
-								<input type="text" id="sample6_postcode" placeholder="우편번호"> 
-								<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-								<input type="text" id="sample6_address" placeholder="주소"><br>
-								<input type="text" id="sample6_detailAddress" placeholder="상세주소">
+								<input type="text" id="sample6_postcode" style="height: 35px;" placeholder="우편번호"> 
+								<input type="button" onclick="sample6_execDaumPostcode()" style="height: 35px; margin-right: 20px;" value="우편번호 찾기">
+							</td>
+						</tr>
+						<tr>
+							<th></th>		
+							<td>
+								<input type="text" id="sample6_address" style="height: 35px;" placeholder="주소"> 
+								<input type="text" id="sample6_detailAddress" style="height: 35px; margin-right: 20px;" placeholder="상세주소">
 							</td>
 						</tr>
 					</tbody>
@@ -265,7 +261,7 @@
 					</colgroup>
 					<tbody>
 						<tr>
-							<th scope="row">상품 합계 금액</th>
+							<th scope="row" style="width: 150px; height: 35px; margin-right: 20px;">상품 합계 금액</th>
 							<td><strong id="totalGoodsPrice" class="order_payment_sum">${totalPrice}</strong>
 							</td>
 						</tr>
@@ -280,12 +276,14 @@
 							<td>
 								<div class="order_money_use">
 									<b><input type="text" name="useMileage"> 원</b>
-									<div class="form_element">
-
-
-										<span class="money_use_sum">(보유 마일리지 : 1,000 원)</span>
-									</div>
-
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th></th>
+							<td>
+								<div class="form_element">
+									<span class="money_use_sum">(보유 마일리지 : 1,000 원)</span>
 								</div>
 							</td>
 						</tr>
