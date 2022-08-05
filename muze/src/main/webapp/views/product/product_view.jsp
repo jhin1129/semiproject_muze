@@ -139,63 +139,51 @@
 		</div>
 		<c:if test="${ not empty productListByArtistNo}">
 			<h3>작가의 다른 작품</h3>
-			<div id="carousel" class="carousel slide row" data-ride="carousel"
-				data-interval="false">
-				<div style="width: 5%;" class="my-5">
-					<button style="width: 5%; height: 60px; margin-top: 200px;"
-						class="carousel-control-prev" type="button"
-						data-target="#carousel" data-slide="prev">
-						<img src="${path }/resources/images/common/prev.png"
-							style="width: 100%; , object-fit: contain;"> <span
-							class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-							class="sr-only">Previous</span>
-					</button>
+				<div id="carousel" class="carousel slide row" data-ride="carousel" data-interval="false">
+					<div style="width:5%;" class="my-5">
+	  					<button style="width:5%; height:60px; margin-top:200px;" class="carousel-control-prev" type="button" data-target="#carousel" data-slide="prev">
+	  						<img src="${path }/resources/images/common/prev.png" style="width:100%;, object-fit:contain;">
+	    					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	    					<span class="sr-only">Previous</span>
+	  					</button>
+					</div>
+					<div style="width:90%" class="carousel-inner">
+						<c:forEach var="product" items="${ productListByArtistNo }" varStatus="status">
+							<c:if test="${status.count % 4 == 1 && !status.first}">
+								<div class="carousel-item">
+						    	<div class="row my-5 w-100 mx-0">
+							</c:if>
+							<c:if test="${status.first}">
+								<div class="carousel-item active">
+								<div class="row my-5 w-100 mx-0">
+							</c:if>
+							<div class="col-lg-3 col-md-6">
+			                    <div class="card" style="width: 14rem;" onclick="location.href='${path}/product/view?proNo=${ product.proNo }'">
+			                        <img src='${path}/resources/upload/product/painting/${fn:replace(product.proImg,"\\","/")}' width="100%" height="222px">
+					                <div class="card-body" style="width:100%; height: 140px;">
+					                    <h5 class="card-title" style="overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">${ product.proName }</h5>
+					                    <p class="card-text">${product.proArtistName }</p>
+					                </div>
+			                    </div>
+			                </div>
+	               			<c:if test="${status.count %4 == 0 && !status.last}">
+			    				</div>
+			    				</div>
+							</c:if>
+							<c:if test="${status.last}">
+			    				</div>
+			    				</div>
+							</c:if>
+						</c:forEach>
+					</div>
+					<div style="width:5%;" class="my-5">
+	  					<button style="width:5%; height:60px; margin-top:200px;" class="carousel-control-next" type="button" data-target="#carousel" data-slide="next">
+	  						<img src="${path }/resources/images/common/next.png" style="width:100%;, object-fit:contain;">
+	    					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+	    					<span class="sr-only">Next</span>
+	  					</button>
+					</div>
 				</div>
-				<div style="width: 90%" class="carousel-inner">
-					<c:forEach var="product" items="${ productListByArtistNo }"
-						varStatus="status">
-						<c:if test="${status.count % 4 == 1 && !status.first}">
-							<div class="carousel-item"></div>
-								<div class="row my-5 w-100 mx-0"></div>
-						</c:if>
-						<c:if test="${status.first}">
-							<div class="carousel-item active"></div>
-								<div class="row my-5 w-100 mx-0"></div>
-						</c:if>
-						<div class="col-lg-3 col-md-6">
-							<div class="card" style="width: 14rem;"
-								onclick="location.href='${path}/product/view?proNo=${ product.proNo }'">
-								<img src='${path}/resources/upload/product/painting/${fn:replace(product.proImg,"\\","/")}' width="100%"
-									height="222px">
-								<div class="card-body" style="width: 100%; height: 140px;">
-									<h5 class="card-title"
-										style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${ product.proName }</h5>
-									<p class="card-text">${product.proArtistName }</p>
-
-								</div>
-							</div>
-						</div>
-						<c:if test="${status.count %4 == 0 && !status.last}">
-		    				</div>
-		    				</div>
-						</c:if>
-						<c:if test="${status.last}">
-		    				</div>
-		    				</div>
-						</c:if>
-					</c:forEach>
-				</div>
-				<div style="width: 5%;" class="my-5">
-					<button style="width: 5%; height: 60px; margin-top: 200px;"
-						class="carousel-control-next" type="button"
-						data-target="#carousel" data-slide="next">
-						<img src="${path }/resources/images/common/next.png"
-							style="width: 100%; , object-fit: contain;"> <span
-							class="carousel-control-next-icon" aria-hidden="true"></span> <span
-							class="sr-only">Next</span>
-					</button>
-				</div>
-			</div>
 		</c:if>
 		<ul class="nav nav-tabs nav-justified">
 			<li class="nav-item"><a class="nav-link active"

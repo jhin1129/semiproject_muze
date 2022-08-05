@@ -33,9 +33,9 @@
 				<div class="row my-5 mx-0" style="width: 100%;">
 					<div class="col-1"></div>
 			</c:if>
-	    	<div class="col-5 px-4" onclick="selectProduct(${product.proNo}, '${product.proName }', '${product.proDescription }', '${product.proArtistName }');">
+	    	<div class="col-5 px-4" onclick="selectProduct(${product.proNo}, '${product.proName }', '${product.proImg }','${product.proArtistName }');">
 	            <div class="card " style="width: 100%;">
-	                <img style="background-color: black;" width="100%" height="188px">
+	                <img src='${path}/resources/upload/product/painting/${fn:replace(product.proImg,"\\","/")}' width="100%" height="188px">
 	                <div class="card-body p-1">
 	                    <h5 class="card-title m-0">${ product.proName }</h5>
 	                </div>
@@ -56,11 +56,11 @@
 	</div>
 	
 	<script>
-			function selectProduct(proNo, proName, proDescription, proArtistName) {
+			function selectProduct(proNo, proName, proImg, proArtistName) {
 				opener.document.getElementById("proNo").value = proNo;
 				opener.document.getElementById("product").value = proName;
 				opener.document.getElementById("proName").innerText = proName;
-				opener.document.getElementById("proDescription").innerText = proDescription;
+				opener.document.getElementById("proImg").src = '${path}/resources/upload/product/painting/' + proImg;
 				opener.document.getElementById("proArtistName").innerText = proArtistName;
 				window.close();
 			}

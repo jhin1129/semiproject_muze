@@ -118,16 +118,15 @@
 	                    <div class="row g-0">
 	                        <!-- 이미지 -->
 	                        <div class="col-md-4" style="min-width: 254px;">
-	                            <img style="background-color: black; width: 254px; height: 254px;" class="rounded-start">
+	                            <img src="${path}/resources/upload/product/painting/${product.proImg}" style="background-color: white; width: 254px; height: 254px;" class="rounded-start">
 	                        </div>
 	                        <!-- 이미지 상세내용 -->
 	                        <div class="col-md-8">
 	                            <div class="card-body">
-	                                <h5 class="card-title">${product.proName }</h5>
-	                                <p class="card-text"><small class="text-muted">${product.proArtistName}</small></p>
-	                                <p style="height:80px;" class="card-text">${product.proDescription }</p>
-	                                <div class="text-right">
-	                                	<a href="${path}/product/detail?proNo=${ product.proNo }" class="btn btn-light">작품 상세보기</a>
+	                                <h3 class="card-title">${product.proName }</h3>
+	                                <h5 class="card-text"><small class="text-muted">${product.proArtistName}</small></h5>
+	                                <div class="text-right" style="margin-top:100px">
+	                                	<a href="${path}/product/view?proNo=${ product.proNo }" class="btn btn-light">작품 상세보기</a>
 	                    			</div>
 	                            </div>
 	                        </div>
