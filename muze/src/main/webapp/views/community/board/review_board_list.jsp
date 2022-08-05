@@ -11,15 +11,15 @@
 <div class="container my-5">
 
     <div>
-        <h2 style="text-align: center;"><a href="${path }/board/list?type=REVIEW">리뷰 게시판</a></h2>
+        <h2 style="text-align: center; "><a style="text-decoration-line: none;" href="${path }/board/list?type=REVIEW">리뷰 게시판</a></h2>
     </div>
 
 	<c:forEach var="board" items="${ list }" varStatus="status">
 		<c:if test="${status.count % 4 == 1}">
 			<div class="row my-5">
 		</c:if>
-		<div class="col-lg-3 col-md-6" onclick="location.href='${ path }/board/view?no=${ board.brdNo }&type=${ type }'">
-            <div class="card" style="width: 16rem;">
+		<div class="col-lg-3 col-md-6">
+            <div class="card" style="cursor:pointer;" style="width: 16rem;" onclick="location.href='${ path }/board/view?no=${ board.brdNo }&type=${ type }'">
 				<div>
                 	<img src="${path}/resources/upload/board/temporary/${board.brdImg }" onerror="this.src='${path}/resources/images/common/No-Image.png'" style="width: 100%; height:254px; object-fit:contain;">
 				</div>

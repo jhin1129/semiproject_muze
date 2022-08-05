@@ -54,4 +54,23 @@ public class MileageService {
 		return result;
 	}
 
+
+	public int insertOrderMileage(int memberNo, int i) {
+		int result = 0;
+		Connection connection = getConnection();
+		result = new MileageDao().insertOrderMileage(connection, memberNo, i);
+	
+		if(result > 0) {
+			commit(connection);
+		} else {
+			rollback(connection);
+		}
+		
+		close(connection);
+		
+		return result;
+		
+	}
+
 }
+

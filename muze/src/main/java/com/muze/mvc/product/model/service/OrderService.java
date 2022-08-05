@@ -7,17 +7,17 @@ import static com.muze.mvc.common.jdbc.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 
-import com.muze.mvc.product.model.dao.WriterDao;
-import com.muze.mvc.product.model.vo.Writer;
+import com.muze.mvc.product.model.dao.OrderDao;
+import com.muze.mvc.product.model.vo.Payment;
 
-public class WriterService {
-
-	public int save(Writer writer) {
+public class OrderService {
+	
+	public int save(Payment pay) {
 		int result = 0;
 		
 		Connection connection = getConnection();
 		
-		result = new WriterDao().insertWriter(connection, writer);
+		result = new OrderDao().insertPayment(connection, pay);
 
 		if(result > 0) {
 			commit(connection);
