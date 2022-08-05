@@ -33,10 +33,12 @@ public class MyOrderDetailServlet extends HttpServlet {
     		int memNo = loginMember.getMemberNo();
 			request.setAttribute("member", member);
 			
-			// 1st row
-	    	Welcome welcomeRow = null;   	
-	    	welcomeRow = new WelcomeService().getWelcomeRow(memNo);
-			request.setAttribute("welcomeRow", welcomeRow);
+	    	// 1st row
+	    	Welcome welcomeRow = new WelcomeService().getMileage(memNo);
+	    	Welcome welcomeRow2 = new WelcomeService().getReview(memNo);
+	    	
+	    	request.setAttribute("welcomeRow", welcomeRow);
+	    	request.setAttribute("welcomeRow2", welcomeRow2);
 			
 			// 상세 (오더 넘버(pk)로 가져옴  
 			MyOrder orderDetail = null;
