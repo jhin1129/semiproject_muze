@@ -79,7 +79,7 @@
 									<div class="mb-2">총 합계금액</div>
 								</td>
 								<td>
-									<div id="totalPrice" class="mb-2"><fmt:formatNumber value="${product.proPrice }" pattern="#,###"/> P</div>
+									<div id="totalPrice" class="mb-2"><fmt:formatNumber value="${product.proPrice}" pattern="#,###"/> P</div>
 								</td>
 							</tr>
 						</table>
@@ -89,13 +89,11 @@
 								test="${loginMember.memberRole == 'MEMBER_ROLE_ARTIST' || loginMember.memberRole == 'MEMBER_ROLE_ADMIN'}">
 								<tr>
 									<td style="width: 50%;">
-										<button type="button" class="py-2 text-center"
-											style="border: 1px solid; width: 100%; height: 100%;">
-											수정
-											</div>
+										<button type="button" class="py-2 text-center" id="btnUpdate"
+											style="border: 1px solid; width: 100%; height: 100%;">수정</button>
 									</td>
 									<td style="width: 50%;">
-										<button class="py-2 text-center"
+										<button class="py-2 text-center" id="btnDelete"
 											style="border: 1px solid; width: 100%; height: 100%;">삭제</button>
 									</td>
 								</tr>
@@ -117,8 +115,7 @@
 											onclick="location.href='${path}/board/list?type=REVIEW&searchType=proNo&searchVal=${product.proNo }&isSearch=true'"
 											class="py-2 text-center"
 											style="border: 1px solid; width: 100%; height: 100%;">
-											리뷰 확인
-											</div>
+											리뷰 확인</button>
 									</td>
 									<td style="width: 50%;">
 										<button id="insertCart" class="py-2 text-center"
@@ -142,64 +139,51 @@
 		</div>
 		<c:if test="${ not empty productListByArtistNo}">
 			<h3>작가의 다른 작품</h3>
-			<div id="carousel" class="carousel slide row" data-ride="carousel"
-				data-interval="false">
-				<div style="width: 5%;" class="my-5">
-					<button style="width: 5%; height: 60px; margin-top: 200px;"
-						class="carousel-control-prev" type="button"
-						data-target="#carousel" data-slide="prev">
-						<img src="${path }/resources/images/common/prev.png"
-							style="width: 100%; , object-fit: contain;"> <span
-							class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-							class="sr-only">Previous</span>
-					</button>
-				</div>
-				<div style="width: 90%" class="carousel-inner">
-					<c:forEach var="product" items="${ productListByArtistNo }"
-						varStatus="status">
-						<c:if test="${status.count % 4 == 1 && !status.first}">
-							<div class="carousel-item">
+				<div id="carousel" class="carousel slide row" data-ride="carousel" data-interval="false">
+					<div style="width:5%;" class="my-5">
+	  					<button style="width:5%; height:60px; margin-top:200px;" class="carousel-control-prev" type="button" data-target="#carousel" data-slide="prev">
+	  						<img src="${path }/resources/images/common/prev.png" style="width:100%;, object-fit:contain;">
+	    					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	    					<span class="sr-only">Previous</span>
+	  					</button>
+					</div>
+					<div style="width:90%" class="carousel-inner">
+						<c:forEach var="product" items="${ productListByArtistNo }" varStatus="status">
+							<c:if test="${status.count % 4 == 1 && !status.first}">
+								<div class="carousel-item">
+						    	<div class="row my-5 w-100 mx-0">
+							</c:if>
+							<c:if test="${status.first}">
+								<div class="carousel-item active">
 								<div class="row my-5 w-100 mx-0">
-						</c:if>
-						<c:if test="${status.first}">
-							<div class="carousel-item active">
-								<div class="row my-5 w-100 mx-0">
-						</c:if>
-						<div class="col-lg-3 col-md-6">
-							<div class="card" style="width: 14rem;"
-								onclick="location.href='${path}/product/view?proNo=${ product.proNo }'">
-								<img style="background-color: black;" width="100%"
-									height="222px">
-								<div class="card-body" style="width: 100%; height: 140px;">
-									<h5 class="card-title"
-										style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${ product.proName }</h5>
-									<p class="card-text">${product.proArtistName }</p>
-									<p class="card-text"
-										style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${product.proDescription }</p>
-								</div>
-							</div>
-						</div>
-						<!-- <c:if test="${status.count %4 == 0 && !status.last}">
+							</c:if>
+							<div class="col-lg-3 col-md-6">
+			                    <div class="card" style="width: 14rem;" onclick="location.href='${path}/product/view?proNo=${ product.proNo }'">
+			                        <img src='${path}/resources/upload/product/painting/${fn:replace(product.proImg,"\\","/")}' width="100%" height="222px">
+					                <div class="card-body" style="width:100%; height: 140px;">
+					                    <h5 class="card-title" style="overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">${ product.proName }</h5>
+					                    <p class="card-text">${product.proArtistName }</p>
+					                </div>
+			                    </div>
+			                </div>
+	               			<c:if test="${status.count %4 == 0 && !status.last}">
 			    				</div>
 			    				</div>
 							</c:if>
 							<c:if test="${status.last}">
 			    				</div>
 			    				</div>
-							</c:if>  -->
-					</c:forEach>
+							</c:if>
+						</c:forEach>
+					</div>
+					<div style="width:5%;" class="my-5">
+	  					<button style="width:5%; height:60px; margin-top:200px;" class="carousel-control-next" type="button" data-target="#carousel" data-slide="next">
+	  						<img src="${path }/resources/images/common/next.png" style="width:100%;, object-fit:contain;">
+	    					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+	    					<span class="sr-only">Next</span>
+	  					</button>
+					</div>
 				</div>
-				<div style="width: 5%;" class="my-5">
-					<button style="width: 5%; height: 60px; margin-top: 200px;"
-						class="carousel-control-next" type="button"
-						data-target="#carousel" data-slide="next">
-						<img src="${path }/resources/images/common/next.png"
-							style="width: 100%; , object-fit: contain;"> <span
-							class="carousel-control-next-icon" aria-hidden="true"></span> <span
-							class="sr-only">Next</span>
-					</button>
-				</div>
-			</div>
 		</c:if>
 		<ul class="nav nav-tabs nav-justified">
 			<li class="nav-item"><a class="nav-link active"
@@ -220,17 +204,17 @@
 						<!-- 이미지 -->
 						<div class="col-6" style="min-width: 254px; width: 100%;">
 							<img
-								style="background-color: black; width: 445px; height: 445px;"
+								src="${path}/resources/upload/artistImg/${artist.artistImg}"
+								style="width: 445px; height: 445px;"
 								class="rounded-start">
 						</div>
 						<div class="col-1"></div>
 						<!-- 이미지 상세내용 -->
 						<div class="col-5">
 							<div class="card-body py-0">
-								<!-- 								<h2>${product.proArtistName }</h2>  -->
+								<h2>${product.proArtistName }</h2>
 								<p>
-									-- 작가 소개 내용 부분 --
-									<!-- 	                                    ${artist.artistIntroduce }  -->
+									${artist.artistIntroduce }
 								</p>
 
 							</div>
@@ -242,14 +226,11 @@
 			<div id="productIntroduce" class="p-5">
 				<h1 class="mt-5" style="text-align: center;">ABOUT PRODUCT</h1>
 
-				<img class="mt-5"
-					style="background-color: black; width: 100%; height: 700px;">
 				<p>${product.proDescription }</p>
 			</div>
 
 			<div id="orderIntroduce" class="p-5">
-				<h1 class="mt-5" style="text-align: center;">ABOUT DELIVERY &
-					SERVICE</h1>
+				<h1 class="mt-5" style="text-align: center;">ABOUT DELIVERY & SERVICE</h1>
 
 				<div class="mt-5">
 					<h3>배송 안내</h3>
@@ -344,5 +325,22 @@
 		
 	});
 	</script>
+	<script>
+$(document).ready(() => {
+	$("#btnDelete").on("click", () => {
+		if(confirm("정말로 게시글을 삭제하시겠습니까?")) {
+			location.replace("${ path }/product/delete?proNo=${ product.proNo }&type=${ product.proType }");
+		}
+	});
+	
+	$("#btnUpdate").on("click", () => {
+			location.replace("${ path }/product/update?proNo=${ product.proNo }");
+	});
+	
+	$("#fileDown").on("click", () => {
+		location.assign("${ path }/support/filedown?oname=${ board.brdOriginalFileName }&rname=${ board.brdRenamedFileName }")
+	});
+});
+</script>
 
 <jsp:include page="/views/common/footer.jsp" />

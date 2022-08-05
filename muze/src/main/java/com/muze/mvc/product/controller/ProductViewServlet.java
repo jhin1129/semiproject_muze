@@ -28,10 +28,11 @@ public class ProductViewServlet extends HttpServlet {
 		
 		List<Product> productList = new ArrayList<Product>();
 		
-//		productList = new ProductService().getProductListByArtistNoNotSelfProduct(product.getProArtistNo(), proNo);
+		productList = new ProductService().getProductListByArtistNoNotSelfProduct(product.getProArtistNo(), proNo);
 		
 		Artist artist = new ProductService().getArtistByProNo(proNo);
 		System.out.println(artist);
+		request.setAttribute("proNo", proNo);
 		request.setAttribute("artist", artist);
 		request.setAttribute("product", product);
 		request.setAttribute("productListByArtistNo", productList);

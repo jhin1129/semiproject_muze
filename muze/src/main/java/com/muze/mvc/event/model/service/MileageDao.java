@@ -14,13 +14,13 @@ public class MileageDao {
 	public int insertAttMileage(Connection connection, int memberNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "INSERT INTO MILEAGE VALUES(SEQ_POINT.NEXTVAL, ?, 100, 'ATT', SYSDATE, 'IN', 0, 100)";
+		String query = "INSERT INTO MILEAGE VALUES(SEQ_POINT.NEXTVAL, ?, 100, 'ATT', SYSDATE, 'IN', ?)";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
 			
 			pstmt.setInt(1, memberNo);
-			
+			pstmt.setInt(2, this.getPointCur(connection, memberNo) + 100);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -29,31 +29,6 @@ public class MileageDao {
 		}
 		
 		return result;
-	}
-	
-	public Mileage currentMileage(Connection connection, int memberNo) {
-		Mileage mileage = null;
-		ResultSet rs = null;
-		PreparedStatement pstmt = null;
-		String query = "SELECT SUM(POINT_AFTER) FROM MILEAGE WHERE MEMBER_NO='?'";
-		
-		try {
-			pstmt = connection.prepareStatement(query);
-			pstmt.setInt(1, memberNo);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-			mileage = new Mileage();
-			
-			mileage.setPointAfter(rs.getInt("POINT_AFTER"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return mileage;
 	}
 
 	public int insertOrderMileage(Connection connection, int memberNo, int i) {
@@ -84,7 +59,7 @@ public class MileageDao {
 		return pointNo;
 	}
 
-	private int getPointCur(Connection connection, int memberNo) {
+	public int getPointCur(Connection connection, int memberNo) {
 		int pointCur = 0;
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;

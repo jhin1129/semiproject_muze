@@ -66,7 +66,7 @@
                                             
                                             <div class="pick_add_cont">
                                                 <span class="pick_add_img">
-                                                    <a href=""><img src="" width="40" alt="${product.proName }" title="${product.proName }" class="middle"></a>
+                                                    <a href=""><img src='${path}/resources/upload/product/painting/${fn:replace(product.proImg,"\\","/")}' width="40" alt="${product.proName }" title="${product.proName }" class="middle"></a>
                                                 </span>
                                                 <div class="pick_add_info">
                                                     <em><a href="">${product.proName }</a></em>
@@ -182,36 +182,65 @@
 		});
 		
 		$("#selectedProductPayment").on("click", () => {
-			var arr = [];
-			var quanarr = [];
+			var result = 1;
 			$("input:checkbox[name='cartSno[]']:checked").each(function(){
-				var proNo = $(this).val();
-				var quantity = $(this).parent().parent().next().next().find(".quantitySelect").val();
-				arr.push(proNo);
-				quanarr.push(quantity);
+				var value = Number($(this).parent().parent().next().next().find(".quantitySelect").val());
+				var min = Number($(this).parent().parent().next().next().find(".quantitySelect").attr("min"));
+				var max = Number($(this).parent().parent().next().next().find(".quantitySelect").attr("max"));
+				
+				if(value < min || value > max){
+					result = 0;
+				}
 			});
-			if(arr.length !=0){
-				location.href="${path}/product/payment?list="+arr+"&quantity="+quanarr;
-			}else{
-				alert("작품을 선택해주세요");
-			}
+			if(result==0){
+				alert("수량을 다시 입력해주세요");
+			} else{
+				var arr = [];
+				var quanarr = [];
+				$("input:checkbox[name='cartSno[]']:checked").each(function(){
+					var proNo = $(this).val();
+					var quantity = $(this).parent().parent().next().next().find(".quantitySelect").val();
+					arr.push(proNo);
+					quanarr.push(quantity);
+				});
+				if(arr.length !=0){
+					location.href="${path}/product/payment?list="+arr+"&quantity="+quanarr;
+				}else{
+					alert("작품을 선택해주세요");
+				}
+			}		
 		});
 		
 		$("#allProductPayment").on("click", ()=> {
-			var arr = [];
-			var quanarr = [];
+			var result = 1;
 			$("input:checkbox[name='cartSno[]']").each(function(){
-				var proNo = $(this).val();
-				var quantity = $(this).parent().parent().next().next().find(".quantitySelect").val();
-				arr.push(proNo);
-				quanarr.push(quantity);
-
+				var value = Number($(this).parent().parent().next().next().find(".quantitySelect").val());
+				var min = Number($(this).parent().parent().next().next().find(".quantitySelect").attr("min"));
+				var max = Number($(this).parent().parent().next().next().find(".quantitySelect").attr("max"));
+				
+				if(value < min || value > max){
+					result = 0;
+				}
 			});
-			if(arr.length !=0){
-				location.href="${path}/product/payment?list="+arr+"&quantity="+quanarr;
+			if(result==0){
+				alert("수량을 다시 입력해주세요.");
 			}else{
-				alert("장바구니에 작품이 없습니다.");
+				var arr = [];
+				var quanarr = [];
+				$("input:checkbox[name='cartSno[]']").each(function(){
+					var proNo = $(this).val();
+					var quantity = $(this).parent().parent().next().next().find(".quantitySelect").val();
+					arr.push(proNo);
+					quanarr.push(quantity);
+	
+				});
+				if(arr.length !=0){
+					location.href="${path}/product/payment?list="+arr+"&quantity="+quanarr;
+				}else{
+					alert("장바구니에 작품이 없습니다.");
+				}
 			}
+			
 		});
 		
 		$(".checkProduct").change(function(){

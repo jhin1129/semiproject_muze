@@ -32,8 +32,10 @@
 	                      onclick="kakaoLogin();">
 	                      <img src="${path}/resources/images/login/kakao.png"  class="img-fluid" alt="카카오 아이디 회원가입"/>
 	                    </a>
+	                    <div id="naverIdLogin" style="display:none;"></div>
 	                    <a
 	                      href="#"
+	                      id="naverLogin"
 	                      class="btn_naver_join js_btn_naver_join"
 	                      data-naver-type="join_method"
 	                      data-naver-url="#">

@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.muze.mvc.board.model.dao.BoardDao;
+import com.muze.mvc.board.model.vo.Board;
 import com.muze.mvc.board.model.vo.Product;
 import com.muze.mvc.common.util.PageInfo;
 import com.muze.mvc.member.model.vo.Artist;
@@ -31,7 +32,7 @@ public class ProductService {
 		List<Product> list = null;
 		Connection connection = getConnection();
 		
-		list = new ProductDao().finalAll(connection, pageInfo, type);
+		list = new ProductDao().findAll(connection, pageInfo, type);
 		
 		close(connection);
 		
@@ -43,8 +44,12 @@ public class ProductService {
 		
 		Connection connection = getConnection();
 		
-		result = new ProductDao().insertProduct(connection, product);
-
+		if(product.getProNo() != 0) {
+			result = new ProductDao().updateProduct(connection, product);
+		} else {
+			result = new ProductDao().insertProduct(connection, product);
+		}
+		
 		if(result > 0) {
 			commit(connection);
 		} else {
@@ -103,16 +108,63 @@ public class ProductService {
 		return totalPrice;
 	}
 	
-	public Product getProductByProNo(int brdProNo) {
+	public Product getProductByProNo(int proNo) {
 		Product product = null;
 		Connection connection = getConnection();
 		
-		product = new BoardDao().findProductByProNo(connection, brdProNo);
+		product = new ProductDao().findProductByProNo(connection, proNo);
 		
 		close(connection);
 		
 		return product;
 	}
+
+	public void reduceProQuantity(String[] proNoSplit, String[] payQuantitySplit) {
+		int result= 0;
+		Connection connection = getConnection();
+		
+		for(int i = 0; i < proNoSplit.length; i++) {
+			result = new ProductDao().reduceProQuantity(connection, Integer.parseInt(proNoSplit[i]) ,Integer.parseInt(payQuantitySplit[i]));
+		}
+		
+		if(result > 0) {
+			commit(connection);
+		} else {
+			rollback(connection);
+		}
+		
+		close(connection);
+	}
+
 	
+	public int getProductCount(PageInfo pageInfo) {
+		return getProductCount("", "pro_Name", "");
+	}
+	
+	public int getProductCount(String type, String searchType, String searchVal) {
+		int count = 0;
+		Connection connection = getConnection();
+		
+		count = new ProductDao().getProductCount(connection, type, searchType, searchVal);
+		
+		close(connection);
+		
+		return count;
+	}
+
+	public List<Product> getProductList(PageInfo pageInfo) {
+		return getProductList(pageInfo, "", "pro_Name", "");
+	}
+	
+	public List<Product> getProductList(PageInfo pageInfo, String type, String searchType, String searchVal) {
+		List<Product> list = null;
+		Connection connection = getConnection();
+		
+		list = new ProductDao().findAll(connection, pageInfo, type, searchType, searchVal);
+		
+		close(connection);
+		
+		return list;
+	}
 
 }

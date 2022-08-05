@@ -27,8 +27,8 @@ public class CartViewServlet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
 		
-		if(loginMember == null) {
-			request.setAttribute("msg", "로그인 해 주세요");
+		if(!loginMember.getMemberRole().equals("MEMBER_ROLE_USER")) {
+			request.setAttribute("msg", "일반 계정으로 로그인 해 주세요");
 			request.setAttribute("location", "/");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}else {
