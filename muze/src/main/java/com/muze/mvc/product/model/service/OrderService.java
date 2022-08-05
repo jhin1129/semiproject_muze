@@ -13,7 +13,6 @@ import com.muze.mvc.product.model.vo.OrderStatus;
 import com.muze.mvc.product.model.vo.Orders;
 
 public class OrderService {
-	
 
 	public int insertOrder(List<Orders> orderList) {
 		int orderNo = 0;
@@ -37,6 +36,7 @@ public class OrderService {
 		Connection connection = getConnection();
 		
 		result = new OrderDao().insertOrderStatus(connection, orderStatusList);
+
 
 		if(result > 0) {
 			commit(connection);

@@ -25,6 +25,10 @@ public class PayCompleteServlet extends HttpServlet {
     public PayCompleteServlet() {
     }
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//리스트 불러오기
+		String[] parameterValues = request.getParameterValues("list");
+		//loginMember에서 memberNo 가져오기
+
 		HttpSession session = request.getSession(false);
         Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
         
@@ -56,7 +60,7 @@ public class PayCompleteServlet extends HttpServlet {
 //			order.setOrderPhone(request.getParameter("orderCellPhone"));
 //			order.setOrderEmail(request.getParameter("orderEmail"));
 				order.setBuyName(request.getParameter("receiverName"));
-				order.setBuyAdress(request.getParameter("receiverAddressSub"));
+				order.setBuyAdress(request.getParameter("address"));
 				order.setBuyPhone(request.getParameter("receiverCellPhone"));
 				order.setPointNo(pointNo);
 				System.out.println(order);

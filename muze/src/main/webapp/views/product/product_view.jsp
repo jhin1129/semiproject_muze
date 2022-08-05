@@ -79,7 +79,7 @@
 									<div class="mb-2">총 합계금액</div>
 								</td>
 								<td>
-									<div id="totalPrice" class="mb-2"><fmt:formatNumber value="${product.proPrice }" pattern="#,###"/> P</div>
+									<div id="totalPrice" class="mb-2"><fmt:formatNumber value="${product.proPrice}" pattern="#,###"/> P</div>
 								</td>
 							</tr>
 						</table>
@@ -89,13 +89,11 @@
 								test="${loginMember.memberRole == 'MEMBER_ROLE_ARTIST' || loginMember.memberRole == 'MEMBER_ROLE_ADMIN'}">
 								<tr>
 									<td style="width: 50%;">
-										<button type="button" class="py-2 text-center"
-											style="border: 1px solid; width: 100%; height: 100%;">
-											수정
-											</div>
+										<button type="button" class="py-2 text-center" id="btnUpdate"
+											style="border: 1px solid; width: 100%; height: 100%;">수정</button>
 									</td>
 									<td style="width: 50%;">
-										<button class="py-2 text-center"
+										<button class="py-2 text-center" id="btnDelete"
 											style="border: 1px solid; width: 100%; height: 100%;">삭제</button>
 									</td>
 								</tr>
@@ -117,8 +115,7 @@
 											onclick="location.href='${path}/board/list?type=REVIEW&searchType=proNo&searchVal=${product.proNo }&isSearch=true'"
 											class="py-2 text-center"
 											style="border: 1px solid; width: 100%; height: 100%;">
-											리뷰 확인
-											</div>
+											리뷰 확인</button>
 									</td>
 									<td style="width: 50%;">
 										<button id="insertCart" class="py-2 text-center"
@@ -158,12 +155,12 @@
 					<c:forEach var="product" items="${ productListByArtistNo }"
 						varStatus="status">
 						<c:if test="${status.count % 4 == 1 && !status.first}">
-							<div class="carousel-item">
-								<div class="row my-5 w-100 mx-0">
+							<div class="carousel-item"></div>
+								<div class="row my-5 w-100 mx-0"></div>
 						</c:if>
 						<c:if test="${status.first}">
-							<div class="carousel-item active">
-								<div class="row my-5 w-100 mx-0">
+							<div class="carousel-item active"></div>
+								<div class="row my-5 w-100 mx-0"></div>
 						</c:if>
 						<div class="col-lg-3 col-md-6">
 							<div class="card" style="width: 14rem;"
@@ -248,8 +245,7 @@
 			</div>
 
 			<div id="orderIntroduce" class="p-5">
-				<h1 class="mt-5" style="text-align: center;">ABOUT DELIVERY &
-					SERVICE</h1>
+				<h1 class="mt-5" style="text-align: center;">ABOUT DELIVERY & SERVICE</h1>
 
 				<div class="mt-5">
 					<h3>배송 안내</h3>
@@ -344,5 +340,22 @@
 		
 	});
 	</script>
+	<script>
+$(document).ready(() => {
+	$("#btnDelete").on("click", () => {
+		if(confirm("정말로 게시글을 삭제하시겠습니까?")) {
+			location.replace("${ path }/product/delete?proNo=${ product.proNo }&type=${ product.proType }");
+		}
+	});
+	
+	$("#btnUpdate").on("click", () => {
+			location.replace("${ path }/product/update?proNo=${ product.proNo }");
+	});
+	
+	$("#fileDown").on("click", () => {
+		location.assign("${ path }/support/filedown?oname=${ board.brdOriginalFileName }&rname=${ board.brdRenamedFileName }")
+	});
+});
+</script>
 
 <jsp:include page="/views/common/footer.jsp" />

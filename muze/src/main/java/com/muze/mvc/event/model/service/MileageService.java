@@ -60,6 +60,7 @@ public class MileageService {
 		
 		return result;
 		
+		
 	}
 	
 	public int getCurrentMileage(int memberNo) {

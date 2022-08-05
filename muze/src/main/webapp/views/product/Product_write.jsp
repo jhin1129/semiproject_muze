@@ -23,18 +23,7 @@
     <div class="container mt-5">
 
         <div>
-        	<c:if test="${ type == 'PORTRAIT'}">
-            	<h2 style="text-align: center;"><a href="${path }/product/write?type=PORTRAIT">인물</a></h2>
-           	</c:if>
-        	<c:if test="${ type == 'LANDSCAPE'}">
-            	<h2 style="text-align: center;"><a href="${path }/product/write?type=LANDSCAPE">풍경</a></h2>
-           	</c:if>
-        	<c:if test="${ type == 'STILL-LIFE'}">
-            	<h2 style="text-align: center;"><a href="${path }/product/write?type=STILL-LIFE">정물</a></h2>
-           	</c:if>
-        	<c:if test="${ type == 'ABSTRACT'}">
-            	<h2 style="text-align: center;"><a href="${path }/product/write?type=ABSTRACT">추상</a></h2>
-           	</c:if>
+        	<h2 style="text-align: center;">작품 등록</h2>
         </div>
         <!-- 후기글 전체 -->
         <div class="mt-5" style="border: 1px solid rgb(238, 233, 233);">
@@ -45,7 +34,7 @@
 	                <table class="table m-0">
 	                    <thead>
 	                    <tr>
-							<th class="table-active">작품 구분</td>
+							<th class="table-active">작품 구분</th>
 							<td style="width: 85%;"><select name="type" id="type" style="width: 150px; color: gray;" required>
 									<option>작품 주제 선택</option>
 									<option value="PORTRAIT">인물</option>
@@ -57,15 +46,15 @@
 	                    </thead>
 	                    <tbody>
 	                    <tr>
-	                    	<th class="table-active">작품명</td>
+	                    	<th class="table-active">작품명</th>
 	                    	<td><input type="text" name="pname" id="pname" style="width: 400px; padding-left: 0.5em;" required></td>
 	                    </tr>
 	                    <tr>
-	                    	<th class="table-active">작품 수량(개)</td>
+	                    	<th class="table-active">작품 수량(개)</th>
 	                    	<td><input type="number" name="pcount" id="pcount" value="0" min="0" max="999" step="1" style="width: 80px; padding-left: 0.5em;" required></td>
 	                    </tr>
 	                    <tr>
-	                    	<th class="table-active">작품 사이즈</td>
+	                    	<th class="table-active">작품 사이즈</th>
 	                    	<td><input type="text" name="psize" style="width: 150px; padding-left: 0.5em;" required> &nbsp &nbsp 예시) '80 x 120cm'와 같이 작성</td>
 <!-- 	                    	<td><label for="width">가로(cm) : &nbsp</label><input type="text" name="psize" id="width" style="width: 80px; padding-left: 0.5em;" required> &nbsp &nbsp
 	                    		<label for="height">세로(cm) : &nbsp</label><input type="text" name="psize" id="height" style="width: 80px; padding-left: 0.5em;" required>
