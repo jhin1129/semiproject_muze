@@ -32,6 +32,7 @@ public class ProductViewServlet extends HttpServlet {
 		
 		Artist artist = new ProductService().getArtistByProNo(proNo);
 		System.out.println(artist);
+		request.setAttribute("proNo", proNo);
 		request.setAttribute("artist", artist);
 		request.setAttribute("product", product);
 		request.setAttribute("productListByArtistNo", productList);
