@@ -165,25 +165,24 @@
 						<div class="col-lg-3 col-md-6">
 							<div class="card" style="width: 14rem;"
 								onclick="location.href='${path}/product/view?proNo=${ product.proNo }'">
-								<img style="background-color: black;" width="100%"
+								<img src='${path}/resources/upload/product/painting/${fn:replace(product.proImg,"\\","/")}' width="100%"
 									height="222px">
 								<div class="card-body" style="width: 100%; height: 140px;">
 									<h5 class="card-title"
 										style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${ product.proName }</h5>
 									<p class="card-text">${product.proArtistName }</p>
-									<p class="card-text"
-										style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${product.proDescription }</p>
+
 								</div>
 							</div>
 						</div>
-						<!-- <c:if test="${status.count %4 == 0 && !status.last}">
-			    				</div>
-			    				</div>
-							</c:if>
-							<c:if test="${status.last}">
-			    				</div>
-			    				</div>
-							</c:if>  -->
+						<c:if test="${status.count %4 == 0 && !status.last}">
+		    				</div>
+		    				</div>
+						</c:if>
+						<c:if test="${status.last}">
+		    				</div>
+		    				</div>
+						</c:if>
 					</c:forEach>
 				</div>
 				<div style="width: 5%;" class="my-5">
@@ -217,17 +216,17 @@
 						<!-- 이미지 -->
 						<div class="col-6" style="min-width: 254px; width: 100%;">
 							<img
-								style="background-color: black; width: 445px; height: 445px;"
+								src="${path}/resources/upload/artistImg/${artist.artistImg}"
+								style="width: 445px; height: 445px;"
 								class="rounded-start">
 						</div>
 						<div class="col-1"></div>
 						<!-- 이미지 상세내용 -->
 						<div class="col-5">
 							<div class="card-body py-0">
-								<!-- 								<h2>${product.proArtistName }</h2>  -->
+								<h2>${product.proArtistName }</h2>
 								<p>
-									-- 작가 소개 내용 부분 --
-									<!-- 	                                    ${artist.artistIntroduce }  -->
+									${artist.artistIntroduce }
 								</p>
 
 							</div>
@@ -239,8 +238,6 @@
 			<div id="productIntroduce" class="p-5">
 				<h1 class="mt-5" style="text-align: center;">ABOUT PRODUCT</h1>
 
-				<img class="mt-5"
-					style="background-color: black; width: 100%; height: 700px;">
 				<p>${product.proDescription }</p>
 			</div>
 
