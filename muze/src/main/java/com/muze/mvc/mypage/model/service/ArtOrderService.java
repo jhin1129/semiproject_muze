@@ -29,20 +29,22 @@ public class ArtOrderService {
 		return getArtOrder;
 	}
 
-	public int updateStatus(int orderNo, String status, int buyMemNo, int buyMemMil) {
+	public int updateStatus(int orderNo, String status, int buyMemNo, int buyMemMil, int orderAmount, int proNo) {
 		int result1 = 0; 
 		int result2 = 0; 
+		int result3 = 0;
 		Connection connection = getConnection();
 		
 		if(status.equals("환불")) {
 				result1 = new ArtOrderDao().updateStatus(connection, status, orderNo);
 				result2 = new ArtOrderDao().insertMileage(connection, status, buyMemNo, buyMemMil);
+				result3 = new ArtOrderDao().updateQuan(connection, orderAmount, proNo);
 
 		}else {
 				result1 = new ArtOrderDao().updateStatus(connection, status, orderNo);
 		}
 			
-		if(result1 + result2 > 0) {
+		if(result1 + result2 + result3 > 0) {
 			commit(connection);
 		} else {
 			rollback(connection);

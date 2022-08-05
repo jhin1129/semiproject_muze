@@ -122,5 +122,49 @@ public class ArtOrderDao {
 		
 		return pointCur;
 	}
+	
+	private int getProQuan(Connection connection, int proNo) {
+		int proQuan = 0;
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		String query = "SELECT PRO_QUANTITY "
+						+ "FROM PRODUCT "
+						+ "WHERE PRO_NO = ? ";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			pstmt.setInt(1, proNo);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				proQuan = rs.getInt("PRO_QUANTITY");
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return proQuan;
+	}
+
+	public int updateQuan(Connection connection, int orderAmount, int proNo) {
+		int result = 0;
+		PreparedStatement pstm = null;
+		String query = "UPDATE PRODUCT SET PRO_QUANTITY = ? WHERE PRO_NO = ? ";
+		
+		try {
+			pstm = connection.prepareStatement(query);
+			pstm.setInt(1, orderAmount + this.getProQuan(connection, proNo)); 
+			pstm.setInt(2, proNo); 
+			
+			result = pstm.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+		}
+		
+		return result;
+	}
 
 }

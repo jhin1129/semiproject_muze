@@ -40,6 +40,8 @@ public class ArtistStatusServlet extends HttpServlet {
     		MyOrder orderDetail = null;
     		int buyMemMil = 0;
     		int buyMemNo = 0;
+    		int orderAmount = 0;
+    		int proNo = 0;
     		
     		// 오더 넘버로 오더 디테일 가죠오기
     		for (int i = 0; i < orderNo.length; i++) {
@@ -47,7 +49,9 @@ public class ArtistStatusServlet extends HttpServlet {
     			// 구매자 넘버와 마일리지 값 가져오기 
     			buyMemMil = orderDetail.getMileagePoint();
     			buyMemNo =  orderDetail.getMemNo();
-    			result = new ArtOrderService().updateStatus(orderNo[i], status, buyMemNo, buyMemMil);
+    			orderAmount = orderDetail.getOrderAmount();
+    			proNo = orderDetail.getProNo();
+    			result = new ArtOrderService().updateStatus(orderNo[i], status, buyMemNo, buyMemMil, orderAmount, proNo);
 			}
     		
     		request.setAttribute("orderDetail", orderDetail);
