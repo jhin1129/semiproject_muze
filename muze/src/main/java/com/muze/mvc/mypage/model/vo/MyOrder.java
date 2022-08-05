@@ -27,6 +27,7 @@ public class MyOrder {
 	private int orderAmount; // 구매수량 ORDERS ORDER_AMOUNT
 	private Date orderDate; // 주문날짜 ORDERS ORDER_DATE
 	private String proName; // 작품명 PRODUCT PRO_NAME
+	private int proNo; // 작품코드 PRODUCT PRO_NO
 	private int proPrice; // 가격 PRODUCT PRO_PRICE
 	private int count; // 카운트 
 	

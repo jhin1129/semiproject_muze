@@ -23,24 +23,26 @@
 		      </div>
 	      <!-- 두번째 카드 -->
 	      <div class="card">
+	       <a href="${path}/mypage/mileage">
 	        <img src="${path}/resources/images/mypage/mileage.png" class="card-img-mid" >
-	        <div class="card-body">
+	         <div class="card-body">
 	          <h5 class="card-title">마일리지</h5>
-	          <p class="card-text"> 
-	            <a href="${path}/mypage/mileage">
-	            	<fmt:formatNumber value="${ welcomeRow.mileageNow }" pattern="#,###"/> p
-	            </a>
-	          </p>
+	           <p class="card-text"> 
+	            <fmt:formatNumber value="${ welcomeRow.mileageNow }" pattern="#,###"/> p
+	           </p>
+	          </a>
 	        </div>
 	      </div>
 	      <!-- 세번째 카드 -->
 	      <div class="card">
+	       <a href="${path}/mypage/community?type=REVIEW">
 	        <img src="${path}/resources/images/mypage/write.png" class="card-img-top" >
-	        <div class="card-body">
+	         <div class="card-body">
 	          <h5 class="card-title">나의 후기</h5>
-	          <p class="card-text">
-	            <a href="${path}/mypage/community?type=REVIEW">${ welcomeRow.boardCount } 개</a>
-	          </p>
+	           <p class="card-text">
+	             ${ welcomeRow.boardCount } 개
+	           </p>
+	          </a>
 	        </div>
 	      </div>
 	    </div>
@@ -58,7 +60,7 @@
 			    <div class="card-group">
 			      <!-- 첫번째 카드 -->
 				      <div class="card" style="padding-top:25px;">
-				        <img src="${path}/resources/images/mypage/paintb.png" class="card-img-top" >
+				        <img src="${path}/resources/images/mypage/artist.png" class="card-img-top" >
 				        <div class="card-body">
 				          <h5 class="card-text">${ artist.busName }의 </h5>
 				          <p class="card-text">
@@ -68,25 +70,25 @@
 				      </div>
 			      <!-- 두번째 카드 -->
 			      <div class="card" style="padding-top:25px;">
+			       <a href="${path}/product/write">
 			        <img src="${path}/resources/images/mypage/uparrow.png" class="card-img-mid" >
-			        <div class="card-body">
+			         <div class="card-body">
 			          <p class="card-text"> 
-			            <a href="${path}/product/write">
-			          		<h5 class="card-title">작품 등록하기</h5>
-			            </a>
+			            <h5 class="card-title">작품 등록하기</h5>
 			          </p>
-			        </div>
+			        </a>
+			       </div>
 			      </div>
 			      <!-- 세번째 카드 -->
 			      <div class="card" style="padding-top:25px;">
+			       <a href="${path}/mypage/community?type=REVIEW_ART">
 			        <img src="${path}/resources/images/mypage/reviewic.png" class="card-img-top" >
-			        <div class="card-body">
+			         <div class="card-body">
 			          <p class="card-text">
-			            <a href="${path}/mypage/community?type=REVIEW_ART">
-			   		       <h5 class="card-title">리뷰 확인하기</h5>
-			            </a>
+			   		    <h5 class="card-title">리뷰 확인하기</h5>
 			          </p>
-			        </div>
+			         </a>
+			       </div>
 			      </div>
 			    </div>
 			    <!-- 카드그룹 끝 -->

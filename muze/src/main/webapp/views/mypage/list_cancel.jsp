@@ -88,10 +88,10 @@
                    	<c:if test="${ not empty list }">
                    		<c:forEach var="cancelByDate" items="${ list }">
 		                    <tr>
-		                      <td id="my_td01">${ cancelByDate.orderDate } <br>
+		                      <td id="my_td01" style ="padding : 5px;">${ cancelByDate.orderDate } <br>
 		                        <a href="${ path }/mypage/orderdetail?no=${ cancelByDate.orderNo }" id="my_td02">${ cancelByDate.orderNo }</a> <br>
 		                      </td> 
-		                      <td id="my_td01">${ cancelByDate.proName }</td>
+		                      <td id="my_td01"><a href="${path}/product/view?proNo=${ cancelByDate.proNo }">${ cancelByDate.proName }</td>
 		                      <td id="my_td01"><fmt:formatNumber value="${ cancelByDate.proPrice }" pattern="#,###"/> p / ${ cancelByDate.orderAmount } 개</td>
 		                      <td id="my_td01">${ cancelByDate.orderStatus }</td>
 		                      <td id="my_td01"></td>
