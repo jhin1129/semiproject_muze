@@ -18,7 +18,7 @@
 <!-- 오른쪽 그리드 -->
 <div class="col-sm-10" style="border: 1px solid lightgray;">
 	<!-- 컨테이너 -->
-	<div class="summary" style="height: 560px;">
+	<div class="summary">
 		<h5>콘텐츠 관리 > 게시글 관리</h5>
 		<form name="contentMgmt" action="${ path }/admin/content/mgmt" method="get">
 			<div class="text-right">
