@@ -118,7 +118,6 @@
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
           <li><a class="dropdown-item" href="${path}/support/list?type=NOTICE">공지사항</a></li>
-          <li><a class="dropdown-item" href="${path}/support/list?type=FAQ">자주하는 질문</a></li>
           <li><a class="dropdown-item" href="${path}/support/write?type=QNA">1:1 문의</a></li>
         </ul>
       </li>

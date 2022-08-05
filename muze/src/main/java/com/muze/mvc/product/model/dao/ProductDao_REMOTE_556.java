@@ -45,11 +45,10 @@ public class ProductDao {
 		return count;
 	}
 
-	public List<Product> findAll(Connection connection, PageInfo pageInfo, String type) {
+	public List<Product> finalAll(Connection connection, PageInfo pageInfo, String type) {
 		List<Product> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-	
 		String query = "SELECT RNUM,"
 				+ " PRO_NO,"
 				+ " PRO_NAME,"
@@ -81,6 +80,7 @@ public class ProductDao {
 				+ " ORDER BY PRO_NO DESC"
 				+ ")"
 				+ " WHERE RNUM BETWEEN ? AND ?";
+		
 		
 		try {
 			
@@ -236,6 +236,8 @@ public class ProductDao {
 				+ " JOIN MEMBER ON (PRODUCT.PRO_ARTIST_NO = MEMBER.MEMBER_NO)"
 				+ " WHERE PRO_ARTIST_NO = ?";
 
+		
+
 		try {
 			pstmt = connection.prepareStatement(query);
 			
@@ -312,32 +314,6 @@ public class ProductDao {
 		return artist;
 	}
 	
-<<<<<<< HEAD
-	public int getProductCount(Connection connection, String type, String searchType, String searchVal) {
-		int count = 0;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String query = null;
-		switch(searchType) {
-		
-		case "pro_Name":
-			query = "SELECT COUNT(*) FROM PRODUCT WHERE PRO_STATUS='Y' AND PRO_TYPE=? AND PRO_NAME LIKE '%"+searchVal+"%'";
-			break;
-		case "pro_Artist_No":
-			query = "SELECT COUNT(*) FROM PRODUCT JOIN MEMBER ON(PRODUCT.PRO_ARTIST_NO = MEMBER.MEMBER_NO) WHERE PRO_STATUS='Y' AND PRO_TYPE=? AND MEMBER_ID LIKE '%"+searchVal+"%'";
-			break;
-		default: 
-			query = "SELECT COUNT(*) FROM PRODUCT WHERE PRO_STATUS='Y' AND PRO_TYPE=?";			
-		}
-		
-		try {
-			pstmt = connection.prepareStatement(query);
-			pstmt.setString(1, type);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				count = rs.getInt(1);
-=======
 	public Product getProductByProNo(int proNo) {
 		Product product = null;
 		Connection connection = getConnection();
@@ -390,7 +366,6 @@ public class ProductDao {
 				product.setProDescription(rs.getString("PRO_DESCRIPTION"));
 				product.setProType(rs.getString("PRO_TYPE"));;
 				
->>>>>>> de673fd1571d9b97258eae7109c42759efed9301
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -399,79 +374,8 @@ public class ProductDao {
 			close(pstmt);
 		}
 		
-<<<<<<< HEAD
-		return count;
-=======
 		return product;
->>>>>>> de673fd1571d9b97258eae7109c42759efed9301
 	}
 
 
-	public List<Product> findAll(Connection connection, PageInfo pageInfo, String type, String searchType, String searchVal) {
-		List<Product> list = new ArrayList<>();
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String query = "SELECT RNUM,"
-				+ " PRO_NO, PRO_NAME, PRO_SIZE, PRO_PRICE,"
-				+ " PRO_QUANTITY,"
-				+ " PRO_IMG,"
-				+ " PRO_ARTIST_NO,"
-				+ " PRO_REG_DATE,"
-				+ " PRO_DESCRIPTION,"
-				+ " PRO_TYPE"
-				+ " FROM ("
-				+ " SELECT ROWNUM AS RNUM,"
-				+ " PRO_NO,"
-				+ " PRO_NAME,"
-				+ " PRO_SIZE,"
-				+ " PRO_PRICE,"
-				+ " PRO_QUANTITY,"
-				+ " PRO_IMG,"
-				+ " PRO_ARTIST_NO,"
-				+ " PRO_REG_DATE,"
-				+ " PRO_DESCRIPTION,"
-				+ " PRO_TYPE"            
-				+ " FROM PRODUCT"
-				+ " WHERE PRO_TYPE = ? AND "+searchType+" LIKE ? ORDER BY PRO_NO DESC ) WHERE RNUM BETWEEN ? AND ?";
-		
-		
-		try {
-			
-			pstmt = connection.prepareStatement(query);
-			pstmt.setString(1, type);
-			pstmt.setString(2, "%"+searchVal+"%");
-			pstmt.setInt(3, pageInfo.getStartList()); 
-			pstmt.setInt(4, pageInfo.getEndList());
-			
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				Product product = new Product();
-				
-				product.setRowNum(rs.getInt("RNUM"));
-				product.setProNo(rs.getInt("PRO_NO"));
-				product.setProName(rs.getString("PRO_NAME"));
-				product.setProSize(rs.getString("PRO_SIZE"));
-				product.setProPrice(rs.getInt("PRO_PRICE"));
-				product.setProQuantity(rs.getInt("PRO_QUANTITY"));
-				product.setProImg(rs.getString("PRO_IMG"));
-				product.setProArtistNo(rs.getInt("PRO_ARTIST_NO"));				
-				product.setProRegDate(rs.getDate("PRO_REG_DATE"));
-				product.setProDescription(rs.getString("PRO_DESCRIPTION"));
-				product.setProType(rs.getString("PRO_TYPE"));
-				list.add(product);
-				
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstmt);
-		}		
-		
-		return list;
-	}
 }
-
-
-
