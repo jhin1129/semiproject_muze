@@ -14,7 +14,7 @@
 				<!-- 이미지 -->
 				<div class="col-6" style="min-width: 254px; width: 100%;">
 					<img src='${path}/resources/upload/product/painting/${fn:replace(product.proImg,"\\","/")}' 
-					style="background-color: black; width: 445px; height: 445px;"
+					style="background-color: white; width: 445px; height: 445px;"
 						class="rounded-start">
 				</div>
 				<div class="col-1"></div>
@@ -283,7 +283,7 @@
 				if(value >= min && value <= max){
 					location.href="${path}/product/payment?proNo=${product.proNo}&payQuantity=" + $("#quantitySelect").val();
 				} else {
-					alert("수량을 다시 입력해주세요");
+					alert("구매 수량을 적절하게 입력해주세요.");
 				}
 			}
 		});
@@ -328,13 +328,21 @@
 	<script>
 $(document).ready(() => {
 	$("#btnDelete").on("click", () => {
-		if(confirm("정말로 게시글을 삭제하시겠습니까?")) {
-			location.replace("${ path }/product/delete?proNo=${ product.proNo }&type=${ product.proType }");
+		if(${loginMember.memberNo == product.proArtistNo}){
+			if(confirm("정말로 게시글을 삭제하시겠습니까?")) {
+				location.replace("${ path }/product/delete?proNo=${ product.proNo }&type=${ product.proType }");
+			}
+		} else{
+			alert("자신이 등록한 상품만 삭제할 수 있습니다.");
 		}
 	});
 	
 	$("#btnUpdate").on("click", () => {
+		if(${loginMember.memberNo == product.proArtistNo}){
 			location.replace("${ path }/product/update?proNo=${ product.proNo }");
+		} else{
+			alert("자신이 등록한 상품만 수정할 수 있습니다.")
+		}
 	});
 	
 	$("#fileDown").on("click", () => {
