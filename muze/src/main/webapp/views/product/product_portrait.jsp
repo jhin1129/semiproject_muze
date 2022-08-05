@@ -65,9 +65,9 @@
 		<div class="col-4">
 			<ul class="pagination justify-content-center">
 				<li class="page-item"><a class="page-link"
-					href="${path }/product/list?page=1&type=PORTRAIT&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&lt;&lt;</a></li>
+					href="${path }/product/list?page=1&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&lt;&lt;</a></li>
 				<li class="page-item"><a class="page-link"
-					href="${path }/product/list?page=${pageInfo.prevPage}&type=PORTRAIT&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&lt;</a></li>
+					href="${path }/product/list?page=${pageInfo.prevPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&lt;</a></li>
 
 				<!--  10개 페이지 목록 -->
 				<c:forEach begin="${ pageInfo.startPage }"
@@ -83,9 +83,9 @@
 				</c:forEach>
 
 				<li class="page-item"><a class="page-link"
-					href="${path }/product/list?page=${pageInfo.nextPage}&type=PORTRAIT&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&gt;</a></li>
+					href="${path }/product/list?page=${pageInfo.nextPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&gt;</a></li>
 				<li class="page-item"><a class="page-link"
-					href="${path }/product/list?page=${pageInfo.maxPage}&type=PORTRAIT&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&gt;&gt;</a></li>
+					href="${path }/product/list?page=${pageInfo.maxPage}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">&gt;&gt;</a></li>
 			</ul>
 		</div>
 	</div>
@@ -94,7 +94,7 @@
     	<div class="col-xs-2 col-sm-2">
         	<select id="searchType" name="searchType" class="form-control">
             	<option value="pro_Name" selected>제목</option>
-                <option value="pro_Artist_No">작성자</option>
+                <option value="pro_Artist_No">아티스트</option>
             </select>
         </div>
 
@@ -119,7 +119,7 @@
 			var searchType = $("#searchType option:selected").val();
 			var searchVal = $("#searchInput").val();
 			
-			location.href="${path}/product/list?type=&searchType="+searchType+"&searchVal="+searchVal+"&isSearch=true";
+			location.href="${path}/product/list?type=PORTRAIT&searchType="+searchType+"&searchVal="+searchVal+"&isSearch=true";
 		});
 	 });
 </script> 

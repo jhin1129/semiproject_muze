@@ -16,26 +16,26 @@ import com.muze.mvc.member.model.vo.Member;
 
 public class EventDao {
 		
-		public int insertEvent(Connection connection, Event event) {
-			int result = 0;
-			PreparedStatement pstmt = null;
-			String query = "INSERT INTO EVENT(MEMBER_NO, EV_ATTEND_DATE) VALUES(?,?)";
-			
-			try {
-				pstmt = connection.prepareStatement(query);
-				
-				pstmt.setInt(1, event.getMemberNo());
-				pstmt.setDate(2, event.getEvAttendDate());				
-				
-				result = pstmt.executeUpdate();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				close(pstmt);
-			}
-			
-			return result;
-		}
+//		public int insertEvent(Connection connection, Event event) {
+//			int result = 0;
+//			PreparedStatement pstmt = null;
+//			String query = "INSERT INTO EVENT(MEMBER_NO, EV_ATTEND_DATE) VALUES(?,?)";
+//			
+//			try {
+//				pstmt = connection.prepareStatement(query);
+//				
+//				pstmt.setInt(1, event.getMemberNo());
+//				pstmt.setDate(2, event.getEvAttendDate());				
+//				
+//				result = pstmt.executeUpdate();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			} finally {
+//				close(pstmt);
+//			}
+//			
+//			return result;
+//		}
 
 		public List<Event> getAttendCheck(Connection connection, Member member) {
 			List<Event> list = new ArrayList<>();

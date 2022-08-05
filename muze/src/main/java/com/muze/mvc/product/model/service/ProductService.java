@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.muze.mvc.board.model.dao.BoardDao;
+import com.muze.mvc.board.model.vo.Board;
 import com.muze.mvc.board.model.vo.Product;
 import com.muze.mvc.common.util.PageInfo;
 import com.muze.mvc.member.model.vo.Artist;
@@ -31,7 +32,7 @@ public class ProductService {
 		List<Product> list = null;
 		Connection connection = getConnection();
 		
-		list = new ProductDao().finalAll(connection, pageInfo, type);
+		list = new ProductDao().findAll(connection, pageInfo, type);
 		
 		close(connection);
 		
@@ -117,6 +118,39 @@ public class ProductService {
 		
 		return product;
 	}
+
+	public int getProductCount() {
+		return getProductCount("", "pro_Name", "");
+	}
 	
+	public int getProductCount(PageInfo pageInfo) {
+		return getProductCount("", "pro_Name", "");
+	}
+	
+	public int getProductCount(String type, String searchType, String searchVal) {
+		int count = 0;
+		Connection connection = getConnection();
+		
+		count = new ProductDao().getProductCount(connection, type, searchType, searchVal);
+		
+		close(connection);
+		
+		return count;
+	}
+
+	public List<Product> getProductList(PageInfo pageInfo) {
+		return getProductList(pageInfo, "", "pro_Name", "");
+	}
+	
+	public List<Product> getProductList(PageInfo pageInfo, String type, String searchType, String searchVal) {
+		List<Product> list = null;
+		Connection connection = getConnection();
+		
+		list = new ProductDao().findAll(connection, pageInfo, type, searchType, searchVal);
+		
+		close(connection);
+		
+		return list;
+	}
 
 }

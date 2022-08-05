@@ -7,7 +7,6 @@ import static com.muze.mvc.common.jdbc.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 
-import com.muze.mvc.event.model.dao.EventDao;
 import com.muze.mvc.event.model.vo.Mileage;
 
 public class MileageService {
@@ -33,12 +32,28 @@ public class MileageService {
 		Connection connection = getConnection();
 		mileage = new MileageDao().currentMileage(connection, memberNo);
 	
-		
-		
 		close(connection);
 		
 		return mileage;
 	}
+	
+	// 회원가입 시 마일리지
+	public int insertJoinMileage(int memberNo) {
+		int result = 0;
+		Connection connection = getConnection();
+		
+		try {
+			result = new MileageDao().insertJoinMileage(connection, memberNo);
+			commit(connection);
+		} catch (Exception e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+		return result;
+	}
+
 
 	public int insertOrderMileage(int memberNo, int i) {
 		int result = 0;
@@ -58,3 +73,4 @@ public class MileageService {
 	}
 
 }
+
