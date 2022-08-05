@@ -13,10 +13,14 @@
 <style type="text/css">
 #pwd_chk1 {
 	font-size:13px;
+	float:left;
+	margin-left:10px;
 }
 
 #pwd_chk2 {
 	font-size:13px;
+	float:left;
+	margin-left:10px;
 }
 </style>
 
