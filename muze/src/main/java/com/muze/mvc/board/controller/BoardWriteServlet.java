@@ -51,7 +51,7 @@ public class BoardWriteServlet extends HttpServlet {
 			Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
 			List<Product> list = null;
 			list = new BoardService().getProductListByOrdersMemberNo(loginMember.getMemberNo());
-			if(list.size() == 0) {
+			if(list.size() == 0 && type.equals("REVIEW")) {
 				request.setAttribute("msg", "구매하신 작품이 없습니다. 작품 구매후 리뷰글을 작성해주세요.");
 				request.setAttribute("location", "/board/list?type="+type);
 				request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
