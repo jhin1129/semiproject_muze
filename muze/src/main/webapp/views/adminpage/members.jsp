@@ -31,7 +31,7 @@
 				<table class="table table-sm">
 					<thead class="text-center">
 						<tr style="height: 10px; color: gray">
-							<th style="width: 10%;">유저번호</th>
+							<th style="width: 10%;">회원번호</th>
 							<th style="width: 12%;">아이디</th>
 							<th style="width: 10%;">이름</th>
 							<th style="width: 12%;">전화번호</th>

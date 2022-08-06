@@ -13,8 +13,8 @@
 <div class="container my-5">
 
 	<div>
-		<h3 style="text-align: left; margin-left: 60px; margin-bottom: 20px;">공지사항</h3>
-	</div>
+		<h2 style="text-align: center; "><a style="text-decoration-line: none;" href="${path }/support/list?type=NOTICE">공지사항</a></h2>
+	</div><br>
 
 	<form action="${ path }/support/write?type=NOTICE" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="brdNo" value=${ board.brdNo }>

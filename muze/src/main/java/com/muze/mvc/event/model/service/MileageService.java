@@ -11,7 +11,7 @@ import com.muze.mvc.event.model.vo.Mileage;
 
 public class MileageService {
 
-	public int insertMileage(int memberNo) {
+	public int insertATTMileage(int memberNo) {
 		int result = 0;
 		Connection connection = getConnection();
 		result = new MileageDao().insertAttMileage(connection, memberNo);
@@ -25,16 +25,6 @@ public class MileageService {
 		close(connection);
 		
 		return result;
-	}
-	
-	public Mileage currentMileage(int memberNo) {
-		Mileage mileage = null;
-		Connection connection = getConnection();
-		mileage = new MileageDao().currentMileage(connection, memberNo);
-	
-		close(connection);
-		
-		return mileage;
 	}
 	
 	// 회원가입 시 마일리지
@@ -70,7 +60,17 @@ public class MileageService {
 		
 		return result;
 		
+		
 	}
-
+	
+	public int getCurrentMileage(int memberNo) {
+		Connection connection = getConnection();
+		int mileage = new MileageDao().getPointCur(connection, memberNo);
+		
+		close(connection);
+		
+		return mileage;
+		
+	}
 }
 

@@ -119,9 +119,23 @@ public class ProductService {
 		return product;
 	}
 
-	public int getProductCount() {
-		return getProductCount("", "pro_Name", "");
+	public void reduceProQuantity(String[] proNoSplit, String[] payQuantitySplit) {
+		int result= 0;
+		Connection connection = getConnection();
+		
+		for(int i = 0; i < proNoSplit.length; i++) {
+			result = new ProductDao().reduceProQuantity(connection, Integer.parseInt(proNoSplit[i]) ,Integer.parseInt(payQuantitySplit[i]));
+		}
+		
+		if(result > 0) {
+			commit(connection);
+		} else {
+			rollback(connection);
+		}
+		
+		close(connection);
 	}
+
 	
 	public int getProductCount(PageInfo pageInfo) {
 		return getProductCount("", "pro_Name", "");

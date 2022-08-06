@@ -14,10 +14,9 @@ public class Welcome {
 	
 	// welcome row
 	private int memberNo;
-	private int mileageNow; // Point_Process
 	private int boardCount; // BRD_TITLE
+	private int pointNo; // MILREAGE POINT_NO
+	private int mileageNow; // MILREAGE POINT_CUR
 	private String memberName;
-	
-	
 	
 }

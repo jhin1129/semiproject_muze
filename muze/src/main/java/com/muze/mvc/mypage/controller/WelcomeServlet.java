@@ -30,17 +30,21 @@ public class WelcomeServlet extends HttpServlet {
     	Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
 		
     	if (loginMember != null) {
-    		// 로그인 객체의 PK값을 넘기기 위한 객체 생성 
 			Member member = new Member();
-//			member.setMemberNo(loginMember.getMemberNo());			
 			member.setMemberName(loginMember.getMemberName());
     		int memNo = loginMember.getMemberNo();
     		
     		request.setAttribute("member", member);
 	    	
 	    	// 1st row
-	    	Welcome welcomeRow = null;   	
-	    	welcomeRow = new WelcomeService().getWelcomeRow(memNo);
+	    	Welcome welcomeRow = new WelcomeService().getMileage(memNo);
+	    	Welcome welcomeRow2 = new WelcomeService().getReview(memNo);
+	    	
+	    	System.out.println(welcomeRow);
+	    	System.out.println(welcomeRow2);
+	    	
+	    	request.setAttribute("welcomeRow", welcomeRow);
+	    	request.setAttribute("welcomeRow2", welcomeRow2);
 	    	
 	    	// 2nd row
 			List<MyOrder> status = null;
@@ -50,7 +54,6 @@ public class WelcomeServlet extends HttpServlet {
 			List<MyOrder> list = null;
 			list = new MyOrderService().getOrderRec(memNo);
 	
-			request.setAttribute("welcomeRow", welcomeRow);
 			request.setAttribute("status", status);
 			request.setAttribute("list", list);
 	    	request.getRequestDispatcher("/views/mypage/welcome.jsp").forward(request, response);

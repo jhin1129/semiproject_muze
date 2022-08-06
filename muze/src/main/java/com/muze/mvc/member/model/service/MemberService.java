@@ -204,6 +204,7 @@ public class MemberService {
 		return member;
 	}
 
+	// 새로운 비밀번호로 업데이트
 	public static int updatePassword(Member member) {
 		Connection conn = getConnection();
 		int result = 0;

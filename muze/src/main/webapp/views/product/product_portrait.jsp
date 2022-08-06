@@ -44,7 +44,7 @@
 		<c:forEach var="product" items="${ list }">
 			<div class="col-lg-3 col-md-6" onclick="location.href='${path}/product/view?proNo=${product.proNo}'">
 				<div class="card" style="width: 16rem;">
-					<img src='${path}/resources/upload/product/painting/${fn:replace(product.proImg,"\\","/")}' width="100%" height="254px">
+					<img src='${path}/resources/upload/product/painting/${fn:replace(product.proImg,"\\","/")}' width="100%" height="254px" style="object-fit:contain;">
 					<div class="card-body">
 						<h5 class="card-title">${product.proName }</h5>
 						<p class="card-text">
@@ -103,7 +103,7 @@
             	<input type="text" name="searchVal" id="searchInput" class="form-control">
             	
                 <span class="input-group-btn">
-                    <button id="searchBtn" "btn btn-light text-nowrap">search</button>
+                    <button id="searchBtn" class="btn btn-light text-nowrap">search</button>
                 </span>
                 
             </div>

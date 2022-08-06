@@ -415,6 +415,26 @@ public class ProductDao {
 
 	}
 
+	public int reduceProQuantity(Connection connection, int proNo, int orderQuantity) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "UPDATE PRODUCT SET PRO_QUANTITY=? WHERE PRO_NO=?";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setInt(1, new BoardDao().findProductByProNo(connection, proNo).getProQuantity() - orderQuantity);
+			pstmt.setInt(2, proNo);		
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 
 	public List<Product> findAll(Connection connection, PageInfo pageInfo, String type, String searchType, String searchVal) {
 		List<Product> list = new ArrayList<>();

@@ -151,14 +151,13 @@
 	                    <div class="row g-0">
 	                        <!-- 이미지 -->
 	                        <div class="col-md-4" style="min-width: 254px;">
-	                            <img style="background-color: black; width: 254px; height: 254px;" class="rounded-start">
+	                            <img id="proImg" style="background-color: white; width: 254px; height: 254px;" class="rounded-start">
 	                        </div>
 	                        <!-- 이미지 상세내용 -->
 	                        <div class="col-md-8">
 	                            <div class="card-body">
-	                                <h5 id="proName" class="card-title"></h5>
-	                                <p id="proArtistName" class="card-text"><small class="text-muted"></small></p>
-	                                <p id="proDescription" class="card-text"></p>
+	                                <h3 id="proName" class="card-title"></h3>
+	                                <h5 id="proArtistName" class="card-text"><small class="text-muted"></small></h5>
 	                            </div>
 	                        </div>
 	                    </div>

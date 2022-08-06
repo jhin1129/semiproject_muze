@@ -103,7 +103,7 @@
             	<input type="text" name="searchVal" id="searchInput" class="form-control">
             	
                 <span class="input-group-btn">
-                    <button id="searchBtn" "btn btn-light text-nowrap">search</button>
+                    <button id="searchBtn" class="btn btn-light text-nowrap">search</button>
                 </span>
                 
             </div>

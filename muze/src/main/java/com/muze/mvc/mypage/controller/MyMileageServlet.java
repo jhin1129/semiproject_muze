@@ -31,16 +31,17 @@ public class MyMileageServlet extends HttpServlet {
     	if (loginMember != null) {
     		// 로그인 객체의 PK값을 넘기기 위한 객체 생성 
 			Member member = new Member();
-//			member.setMemberNo(loginMember.getMemberNo());			
 			member.setMemberName(loginMember.getMemberName());
     		int memNo = loginMember.getMemberNo();
     		
     		request.setAttribute("member", member);
 	    	
 			// 1st row
-	    	Welcome welcomeRow = null;   	
-	    	welcomeRow = new WelcomeService().getWelcomeRow(memNo);
-			request.setAttribute("welcomeRow", welcomeRow);
+	    	Welcome welcomeRow = new WelcomeService().getMileage(memNo);
+	    	Welcome welcomeRow2 = new WelcomeService().getReview(memNo);
+	    	
+	    	request.setAttribute("welcomeRow", welcomeRow);
+	    	request.setAttribute("welcomeRow2", welcomeRow2);
 			
 			// 검색
 			List<MyMileage> list = null;
@@ -51,9 +52,6 @@ public class MyMileageServlet extends HttpServlet {
 			
 			// 처리 결과 
 			list = new MyInfoService().infoMileage(dateFrom, dateTo, memNo);
-			
-			list.forEach(System.out::println);
-			
 			
 			request.setAttribute("list", list);
 	    	request.getRequestDispatcher("/views/mypage/my_mileage.jsp").forward(request, response);
