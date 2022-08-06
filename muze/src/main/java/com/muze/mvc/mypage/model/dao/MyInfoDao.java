@@ -22,7 +22,8 @@ public class MyInfoDao {
 		
 		String query = "SELECT POINT_NO, MEMBER_NO, POINT, POINT_ROUTE, POINT_DATE, POINT_IN_OUT, POINT_CUR "
 						+ "FROM MILEAGE "
-						+ "WHERE POINT_DATE BETWEEN ? AND TO_DATE(TO_CHAR( ? ))+1 AND MEMBER_NO = ?" ;
+						+ "WHERE POINT_DATE BETWEEN ? AND TO_DATE(TO_CHAR( ? ))+1 AND MEMBER_NO = ?"
+						+ "ORDER BY POINT_NO ASC " ;
 		
 		try {
 			pstmt = connection.prepareStatement(query);
