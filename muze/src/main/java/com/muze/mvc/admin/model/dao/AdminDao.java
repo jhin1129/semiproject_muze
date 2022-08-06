@@ -53,7 +53,8 @@ public class AdminDao {
 						+ "POINT, "
 						+ "ENROLL_DATE, "
 						+ "ISMEMBER "
-						+ "FROM MEMBER";
+						+ "FROM MEMBER "
+						+ "ORDER BY MEMBER_NO DESC";
 					
 		try {
 			pstmt = connection.prepareStatement(query);
