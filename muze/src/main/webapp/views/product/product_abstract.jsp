@@ -77,7 +77,7 @@
 					</c:if>
 					<c:if test="${ status.current != pageInfo.currentPage }">
 						<li class="page-item"><a class="page-link"
-							href="${path }/product/list?page=${status.current}&type=PORTRAIT&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">${ status.current }</a></li>
+							href="${path }/product/list?page=${status.current}&type=${type}&isSearch=${isSearch}&searchType=${searchType}&searchVal=${searchVal}">${ status.current }</a></li>
 
 					</c:if>
 				</c:forEach>

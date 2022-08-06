@@ -40,22 +40,17 @@
                     <div class="order_table_type">
                         <table>
                             <colgroup>
-                                
-                                <col>					<!-- 상품명/옵션 -->
-                                <col style="width:5%">  <!-- 수량 -->
+                                <col style="width:72%">					<!-- 상품명/옵션 -->
+                                <col style="width:12%">  <!-- 수량 -->
                                 <col style="width:10%"> <!-- 상품금액 -->
-                                <col style="width:13%"> <!-- 할인/적립 -->
                                 <col style="width:10%"> <!-- 합계금액 -->
-                                <col style="width:10%"> <!-- 배송비 -->
                             </colgroup>
                             <thead>
                                 <tr>
                                     <th>상품/옵션 정보</th>
                                     <th>수량</th>
                                     <th>상품금액</th>
-                                    <th>할인/적립</th>
                                     <th>합계금액</th>
-                                    <th>배송비</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -95,22 +90,13 @@
                                             <strong class="order_sum_txt price">${product.proPrice }</strong>
                                             <p class="add_currency"></p>
                                         </td>
-                                        <td class="td_benefit">
-                                                <ul class="benefit_list">
-                                                </ul>
-                                        </td>
+
                                         <td>
                                             
                                             <strong class="order_sum_txt">${product.payQuantity * product.proPrice}</strong>
                                             <p class="add_currency"></p>
                                         </td>
-                                        <td class="td_delivery" rowspan="1">
-                                            기본 - 금액별배송비<br>
-                                            0원
-        
-                                            <br>
-                                            (택배)
-                                        </td>
+
                                     </tr>
         							</c:forEach>
                                     </tbody>
@@ -135,20 +121,20 @@
                                 <div class="col-md-4 mb-4">
                                     <dl>
                                         <dt>총 <strong id="totalGoodsCnt">${fn:length(list)}</strong> 개의 상품금액 </dt>
-                                        <dd><strong id="totalGoodsPrice">${totalPrice}</strong>원</dd>
+                                        <dd><strong id="totalGoodsPrice">${totalPrice}</strong>P</dd>
                                     </dl>
                                 </div>
                                 <span></span>
                                 <div class="col-md-4 mb-4">
                                     <dl>
                                         <dt>배송비</dt>
-                                        <dd><strong id="totalDeliveryCharge">0</strong>원</dd>
+                                        <dd><strong id="totalDeliveryCharge">0</strong>P</dd>
                                     </dl>
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <dl class="price_total">
                                         <dt>합계</dt>
-                                        <dd><strong id="totalSettlePrice">${totalPrice }</strong>원
+                                        <dd><strong id="totalSettlePrice">${totalPrice }</strong>P
                                         </dd>
                                     </dl>
                                 </div>
@@ -180,24 +166,24 @@
                                 <tbody>
                                
                                 <tr>
-                                    <th scope="row"><span class="important">주문하시는 분</span></th>
+                                    <th scope="row" style="height: 35px; width: 100px;"><span class="important">주문하시는 분</span></th>
                                     <td><input type="text" name="orderName" id="orderName" value="" data-pattern="gdEngKor" maxlength="20" placeholder="ex) 홍길동">            
                                 </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row"><span class="important">주소</span></th>
+                                    <th scope="row" style="height: 35px; width: 100px;"><span class="important">주소</span></th>
                                     <td><input type="text" name="orderAddress" id="orderAddress" value="" data-pattern="gdEngKor" maxlength="300" placeholder="ex) 서울 강남구 영동대로 513">            
                                 </td>
                                 </tr>
 
                                 <tr>
-                                    <th scope="row"><span class="important">휴대폰 번호</span></th>
+                                    <th scope="row" style="height: 35px; width: 100px;"><span class="important">휴대폰 번호</span></th>
                                     <td>
                                         <input type="text" id="mobileNum" name="orderCellPhone" value="" maxlength="20" placeholder="ex) 010-0000-0000">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row"><span class="important">이메일</span></th>
+                                    <th scope="row" style="height: 35px; width: 100px;"><span class="important">이메일</span></th>
                                     <td class="member_email">
                                         <input type="text" id="orderEmail" name="orderEmail" value="" placeholder="ex) Email11@naver.com">
                                     </td>
@@ -275,13 +261,13 @@
                                 <tr>
                                     <th scope="row">상품 합계 금액</th>
                                     <td>
-                                        <strong id="totalGoodsPrice" class="order_payment_sum">${totalPrice}</strong>
+                                        <strong id="totalGoodsPrice" class="order_payment_sum">${totalPrice}P</strong>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">배송비</th>
                                     <td>
-                                        <span id="totalDeliveryCharge">0</span>원
+                                        <span id="totalDeliveryCharge">0</span>P
                                         <span class="multi_shipping_text"></span>
                                     </td>
                                 </tr>
@@ -290,7 +276,7 @@
                                     <th scope="row">보유 마일리지</th>
                                     <td>
                                         <div class="order_money_use">
-                                            <b>${mileage }</b>
+                                            <b>${mileage }P</b>
                                         </div>
                                     </td>
                                 </tr>
@@ -300,7 +286,7 @@
                                         <input type="hidden" name="settlePrice" value="1,490,000">
                                         <input type="hidden" name="overseasSettlePrice" value="0">
                                         <input type="hidden" name="overseasSettleCurrency" value="KRW">
-                                        <strong id="totalSettlePrice" class="order_payment_sum">${totalPrice }</strong>원
+                                        <strong id="totalSettlePrice" class="order_payment_sum">${totalPrice }P</strong>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -369,7 +355,7 @@
                                 <hr>
                                 <dl>
                                     <dt>최종 결제 금액</dt>
-                                    <dd><span><strong id="totalSettlePriceView">${totalPrice}</strong>원</span></dd>
+                                    <dd><span><strong id="totalSettlePriceView">${totalPrice}P</strong></span></dd>
                                 </dl>
                                 <hr>
                             </div>
