@@ -133,7 +133,6 @@
 	                            contentType : false,
 	                            processData : false,
 	                            success : function(data){
-	                            	alert(data.url);
 	                            	$(editor).summernote('editor.insertImage', data.url);
 	                            },
 	                            error : function(e){
