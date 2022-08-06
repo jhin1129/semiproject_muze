@@ -62,7 +62,7 @@
 				      <div class="card" style="padding-top:25px;">
 				        <img src="${path}/resources/images/mypage/artist.png" class="card-img-top" >
 				        <div class="card-body">
-				          <h5 class="card-text">${ artist.busName }의 </h5>
+				          <h5 class="card-text">${ artist.busName } 님의 </h5>
 				          <p class="card-text">
 				            내일을 응원합니다.
 				          </p>

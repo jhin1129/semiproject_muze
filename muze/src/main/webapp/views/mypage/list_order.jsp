@@ -96,7 +96,7 @@
 		                      <td id="my_td01">${ orderByDate.orderStatus }</td>
 		                      <td id="my_td01">
 		                        <c:if test="${ orderByDate.orderStatus != '환불' && orderByDate.orderStatus != '구매확정'}">
-		                        	<button type="button" class="btn btn-outline-secondary" id="mycbtn">주문취소 </button>
+		                        	<button type="button" class="btn btn-outline-secondary" id="mycbtn" onclick="location.href='${path}/mypage/cancel?no=${ orderByDate.orderNo }' " >주문취소 </button>
 		                       	</c:if>
 		                      </td>
 		                    </tr>

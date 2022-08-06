@@ -32,7 +32,8 @@ public class ArtistServlet extends HttpServlet {
 			Artist loginartist = new MemberService().getArtistByNo(loginMember.getMemberNo());
 			Artist artist = new Artist();
 			artist.setArtistNo(loginMember.getMemberNo());
-			artist.setBusName(loginartist.getBusName());
+//			artist.setBusName(loginartist.getBusName());
+			artist.setBusName(loginMember.getMemberName());
 			request.setAttribute("artist", artist);
 			
 	    	// 3rd row 

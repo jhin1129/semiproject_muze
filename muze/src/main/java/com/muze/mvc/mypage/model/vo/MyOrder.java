@@ -44,14 +44,14 @@ public class MyOrder {
 	
 	public int getMileagePoint() {
 
-		this.mileagePoint = (proPrice * orderAmount) + delFee;
+		this.mileagePoint = (proPrice * orderAmount);
 		
 		return mileagePoint;
 	}
 	
 	public int getTotalPrice() {
 		
-		this.totalPrice = (proPrice * orderAmount) + delFee - mileagePoint;
+		this.totalPrice = (proPrice * orderAmount) - mileagePoint;
 		
 		return totalPrice;
 	}
