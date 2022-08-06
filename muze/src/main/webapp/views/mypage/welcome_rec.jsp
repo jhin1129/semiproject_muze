@@ -37,8 +37,7 @@
 		                        <a href="${ path }/mypage/orderdetail?no=${ getOrderRec.orderNo }" id="my_td02">${ getOrderRec.orderNo }</a><br>
 		                      </td> 
 		                      <td id="my_td01"><a href="${path}/product/view?proNo=${ getOrderRec.proNo }">${ getOrderRec.proName }</td>
-		                      <td id="my_td01">
-		                     	 <fmt:formatNumber value="${ getOrderRec.proPrice }" pattern="#,###"/> p / ${ getOrderRec.orderAmount } 개</td>
+		                      <td id="my_td01"><fmt:formatNumber value="${ getOrderRec.proPrice }" pattern="#,###"/> p / ${ getOrderRec.orderAmount } 개</td>
 		                      <td id="my_td01">${ getOrderRec.orderStatus }</td>
 		                      <td id="my_td01">
 		                      	  <c:if test="${ getOrderRec.orderStatus != '환불' && getOrderRec.orderStatus != '구매확정' && getOrderRec.orderStatus != '취소'}">

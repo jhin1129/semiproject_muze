@@ -40,8 +40,8 @@ public class WelcomeServlet extends HttpServlet {
 	    	Welcome welcomeRow = new WelcomeService().getMileage(memNo);
 	    	Welcome welcomeRow2 = new WelcomeService().getReview(memNo);
 	    	
-	    	System.out.println(welcomeRow);
-	    	System.out.println(welcomeRow2);
+//	    	System.out.println(welcomeRow);
+//	    	System.out.println(welcomeRow2);
 	    	
 	    	request.setAttribute("welcomeRow", welcomeRow);
 	    	request.setAttribute("welcomeRow2", welcomeRow2);
@@ -53,6 +53,8 @@ public class WelcomeServlet extends HttpServlet {
 	    	// 3rd row 
 			List<MyOrder> list = null;
 			list = new MyOrderService().getOrderRec(memNo);
+			
+			System.out.println(list);
 	
 			request.setAttribute("status", status);
 			request.setAttribute("list", list);

@@ -40,7 +40,7 @@
                  <thead id="my_thead01">
                     <tr>
                         <th class="my_th" id="br_th01"><center>번호</center></th>
-                        <th class="my_th" id="br_th02"><center>제목</center></th>
+                        <th class="my_th" id="br_th02" style="width: 45%"><center>제목</center></th>
                         <th class="my_th" id="br_th03"><center>답변</center></th>
                         <th class="my_th" id="br_th03"><center>작성자</center></th>
                         <th class="my_th" id="br_th04"><center>날짜</center></th>
