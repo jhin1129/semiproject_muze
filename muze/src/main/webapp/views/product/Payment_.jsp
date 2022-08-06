@@ -175,9 +175,9 @@
                                 </tr>
 
                                 <tr>
-                                    <th scope="row" style="height: 35px; width: 100px;"><span class="important">휴대폰 번호</span></th>
+                                    <th scope="row" style="height: 35px; width: 100px;"><span class="important">연락처</span></th>
                                     <td>
-                                        <input type="text" id="mobileNum" name="orderCellPhone" value="" maxlength="20" placeholder="ex) 010-0000-0000">
+                                        <input type="text" id="mobileNum" name="orderCellPhone" value="" maxlength="20" placeholder="ex) 010-1234-5678">
                                     </td>
                                 </tr>
                                 <tr>
@@ -230,9 +230,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row" style="height: 35px; width: 100px;"><span class="important">휴대폰 번호</span></th>
+                                    <th scope="row" style="height: 35px; width: 100px;"><span class="important">연락처</span></th>
                                     <td>
-                                        <input type="text" id="receiverCellPhone" name="receiverCellPhone" placeholder="ex) 010-0000-0000">
+                                        <input type="text" id="receiverCellPhone" name="receiverCellPhone" placeholder="ex) 010-1234-5678">
                                     </td>
                                 </tr>
                                 </tbody>
@@ -366,7 +366,7 @@
                             <hr>
                             <div class="btn_center_box">
                                 <button class="btn_order_buy order-buy"><em>결제하기</em></button>
-                            </div>
+                            </div><br>
         				</form>
                         </div>
          
