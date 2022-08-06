@@ -58,7 +58,7 @@ margin-right: 100px;
                                     <ul>
                                         <li>
                                             <input type="radio" id="memberFlDefault" name="memberFl" class="ignore" value="MEMBER_ROLE_USER" checked="">
-                                            <label for="memberFlDefault" class="choice_s">개인회원</label>
+                                            <label for="memberFlDefault" class="choice_s">일반회원</label>
                                         </li>
                                         <li>
                                             <input type="radio" id="memberFlartist" name="memberFl" class="ignore" value="MEMBER_ROLE_ARTIST">
@@ -587,10 +587,54 @@ $(document).ready(function () {
 		}
 	});
 });
-
-
-
-
 </script>
+
+<%-- 카카오 스크립트 --%>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
+	<script>
+        Kakao.init('74b3fafd7b1cd90a5f4cd0cd8b97fc90'); // 카카오에서 발급받은 JavaScript 키 (초기화 함수 호출)
+        console.log(Kakao.isInitialized()); // sdk초기화여부판단 (초기화 잘 됐는지 확인하는 함수)
+        //카카오로그인
+        function kakaoLogin() {
+            Kakao.Auth.login({
+              success: function (res) {
+                Kakao.API.request({
+                  url: '/v2/user/me',
+                  success: function (res) {
+                   		var token = Kakao.Auth.getAccessToken();
+                   		Kakao.Auth.setAccessToken(token);			// 토큰 설정
+                	  
+                        var userEmail = res.kakao_account.email; 	// 카카오 email
+                        var userName = res.properties.nickname; 	// 카카오 닉네임(이름)
+                        var kakaoId = res.id						// 비밀번호로 사용할 카카오 아이디
+                       
+                       $.ajax({
+                    	method:"GET",
+                        url:"${ path }/member/kakaoLogin",
+                        data:{ userEmail,
+                        	   userName,
+                        	   kakaoId,
+                        	   token },
+                        	   
+                        success:function(data){
+                        	location.href="${ path }/";
+                        	alert("카카오 로그인 성공");
+                        }
+                    });
+                  },
+    		     
+                  fail: function (error) {
+                	  // 카카오 로그인 실패 시 alert 창
+                	  alert('로그인에 실패하였습니다.');
+                  },
+                })
+              },
+              fail: function (error) {
+            	  location.href="${ path }/member/login";
+              },
+            })
+          }
+        </script>
 
 <jsp:include page="/views/common/footer.jsp"/>
