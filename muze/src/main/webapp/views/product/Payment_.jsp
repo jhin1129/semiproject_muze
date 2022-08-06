@@ -87,14 +87,12 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <strong class="order_sum_txt price">${product.proPrice }</strong>
-                                            <p class="add_currency"></p>
+                                            <strong class="order_sum_txt price">${product.proPrice }</strong>P
                                         </td>
 
                                         <td>
                                             
-                                            <strong class="order_sum_txt">${product.payQuantity * product.proPrice}</strong>
-                                            <p class="add_currency"></p>
+                                            <strong class="order_sum_txt">${product.payQuantity * product.proPrice}</strong>P
                                         </td>
 
                                     </tr>
@@ -208,11 +206,11 @@
                                 </colgroup>
                                 <tbody>
                                 <tr>
-                                    <th scope="row"><span class="important">받으실분</span></th>
+                                    <th scope="row" style="height: 35px; width: 100px;"><span class="important">받으실분</span></th>
                                     <td><input type="text" id="receiverName" name="receiverName" data-pattern="gdEngKor" maxlength="20" placeholder="ex) 홍길동"></td>
                                 </tr>
                                 <tr>
-                                    <th><span class="important">주소</span></th>
+                                    <th style="height: 35px; width: 100px;"><span class="important">주소</span></th>
                                     <td class="member_address">
                                         <div class="address_postcode">
                                             <input type="text" name="zonecode" readonly="readonly" placeholder="우편번호" value="" required>
@@ -232,7 +230,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row"><span class="important">휴대폰 번호</span></th>
+                                    <th scope="row" style="height: 35px; width: 100px;"><span class="important">휴대폰 번호</span></th>
                                     <td>
                                         <input type="text" id="receiverCellPhone" name="receiverCellPhone" placeholder="ex) 010-0000-0000">
                                     </td>
@@ -259,13 +257,13 @@
                                 </colgroup>
                                 <tbody>
                                 <tr>
-                                    <th scope="row">상품 합계 금액</th>
+                                    <th scope="row" style="height: 35px; width: 100px;">상품 합계 금액</th>
                                     <td>
                                         <strong id="totalGoodsPrice" class="order_payment_sum">${totalPrice}P</strong>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">배송비</th>
+                                    <th scope="row" style="height: 35px; width: 100px;">배송비</th>
                                     <td>
                                         <span id="totalDeliveryCharge">0</span>P
                                         <span class="multi_shipping_text"></span>
@@ -273,15 +271,15 @@
                                 </tr>
                                 
                                 <tr>
-                                    <th scope="row">보유 마일리지</th>
+                                    <th scope="row" style="height: 35px; width: 100px;">보유 마일리지</th>
                                     <td>
                                         <div class="order_money_use">
-                                            <b>${mileage }P</b>
+                                            <b><fmt:formatNumber value="${mileage }" pattern="#,###"/>P</b>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">최종 결제 금액</th>
+                                    <th scope="row" style="height: 35px; width: 100px;">최종 결제 금액</th>
                                     <td>
                                         <input type="hidden" name="settlePrice" value="1,490,000">
                                         <input type="hidden" name="overseasSettlePrice" value="0">
