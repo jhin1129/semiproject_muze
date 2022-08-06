@@ -13,7 +13,7 @@
     <div class="container my-5">
 
         <div>
-            <h3 style="text-align: left;">공지사항</h3>
+            <h2 style="text-align: center; "><a style="text-decoration-line: none;" href="${path }/support/list?type=NOTICE">공지사항</a></h2>
         </div>
 
         <div class="mt-5">
