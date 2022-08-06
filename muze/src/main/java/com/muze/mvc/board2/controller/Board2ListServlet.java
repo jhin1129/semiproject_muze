@@ -33,7 +33,7 @@ public class Board2ListServlet extends HttpServlet {
 		} else if(type.equals("FAQ")) {
 			path = "/views/support/faq_brd.jsp";
 		} else if(type.equals("QNA")) {
-			path = "/views/support/qna_brd_list.jsp";
+			path = "/views/mypage/my_qna.jsp";
 		}
 
 		try {

@@ -58,7 +58,7 @@ float:left;
 			<div class="member_sns_login" style="text-align: center">
 				<a href="#"  class="btn_kakao_login" data-kakao-type="login" data-return-url="#" onclick="kakaoLogin();"> <img src="${path}/resources/images/login/kakaoLogin.png" class="img-fluid" alt="카카오 아이디 로그인"></a>
                 <div id="naverIdLogin" style="display:none;"></div>
-                <a href="#" id="naverLogin" class="btn_naver_login js_btn_naver_login" data-naver-url="#"><img src="${path}/resources/images/login/naverLogin.png" class="img-fluid" alt="네이버 아이디 로그인"></a>
+                <a href="#" id="naverLogin" class="btn_naver_login js_btn_naver_login" onclick="naverLogin();" data-naver-url="#"><img src="${path}/resources/images/login/naverLogin.png" class="img-fluid" alt="네이버 아이디 로그인"></a>
             </div>
 			<div class="btn_login_box"  style="text-align: center">
 				<button id="btnJoinMember" class="btn_member_join">회원가입</button>
@@ -173,7 +173,7 @@ float:left;
 				$.post(form.action, $(form).serializeObject()).done(function (data, textStatus, jqXhr) {
 					console.log(data);
 					if (data.result == 0) {
-						location.replace('${ path }/myPage' + data.orderNo);
+						location.replace('${ path }/myPage' + orderDetail.orderNo);
 					} else {
 						$('.js_caution_msg2').empty().html("주문자명과 주문번호가 일치하는 주문이 존재하지 않습니다. 다시 입력해 주세요.<br><span>주문번호와 비밀번호를 잊으신 경우, 고객센터로 문의하여 주시기 바랍니다.</span>");
 					}
@@ -189,11 +189,12 @@ float:left;
 const naverLogin = new naver.LoginWithNaverId(
 		{
 			clientId: "ADu2lc9ebSDr0cdZSCrY",
-			callbackUrl: "http://localhost:8090/muze/naverCallback",
+			callbackUrl: "http://localhost:8090/muze/views/member/naverCallback.jsp",
 			loginButton: {color: "white", type: 3, height: 60, width:500}
 		}
 	);
 naverLogin.init();
+
 
 $(document).on("click", "#naverLogin", function(){
     var naverLogin = document.getElementById("naverIdLogin").firstChild;

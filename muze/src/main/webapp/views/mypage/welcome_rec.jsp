@@ -12,7 +12,7 @@
                   <span id="mySpan02">최근 30일 내 주문하신 내역입니다.</span>
                 </form>
                 <!-- 조회 테이블 -->
-                <table class="ordertable">
+                <table class="ordertable" style="margin-bottom:30px;">
                   <thead id="my_thead01">
                     <tr>
                       <th class="my_th" id="my_th01">날짜/주문번호</th>
@@ -33,17 +33,18 @@
                    	<c:if test="${ not empty list }">
                    		<c:forEach var="getOrderRec" items="${ list }">
 		                    <tr>
-		                      <td id="my_td01">${ getOrderRec.orderDate } <br>
-		                        <a href="${ path }/mypage/orderdetail?no=${ getOrderRec.orderNo }" id="my_td02">${ getOrderRec.orderNo }</a> <br>
+		                      <td id="my_td01" style = "padding: 3px;">${ getOrderRec.orderDate } <br>
+		                        <a href="${ path }/mypage/orderdetail?no=${ getOrderRec.orderNo }" id="my_td02">${ getOrderRec.orderNo }</a><br>
+		                      </td> 
+		                      <td id="my_td01"><a href="${path}/product/view?proNo=${ getOrderRec.proNo }">${ getOrderRec.proName }</td>
+		                      <td id="my_td01">
+		                     	 <fmt:formatNumber value="${ getOrderRec.proPrice }" pattern="#,###"/> p / ${ getOrderRec.orderAmount } 개</td>
+		                      <td id="my_td01">${ getOrderRec.orderStatus }</td>
+		                      <td id="my_td01">
 		                      	  <c:if test="${ getOrderRec.orderStatus != '환불' && getOrderRec.orderStatus != '구매확정' && getOrderRec.orderStatus != '취소'}">
 		                        	<button type="button" class="btn btn-outline-secondary" id="mycbtn" onclick="location.href='${path}/mypage/cancel?no=${ getOrderRec.orderNo }' " >주문취소 </button>
 		                       	  </c:if>
-		                      </td> 
-		                      <td id="my_td01">${ getOrderRec.proName }</td>
-		                      <td id="my_td01">
-		                     	 <fmt:formatNumber value="${ getOrderRec.proPrice }" pattern="#,###"/>원 / ${ getOrderRec.orderAmount }개</td>
-		                      <td id="my_td01">${ getOrderRec.orderStatus }</td>
-		                      <td id="my_td01"></td>
+		                      </td>
 		                    </tr>
 	                    </c:forEach>
                     </c:if>

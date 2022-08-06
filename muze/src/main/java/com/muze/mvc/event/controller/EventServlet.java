@@ -66,7 +66,7 @@ public class EventServlet extends HttpServlet {
 				new EventService().insertEvent(loginMember.getMemberNo());
 				response.setContentType("application/json;charset=UTF-8");
 				new Gson().toJson(isAlreadyEvent, response.getWriter());
-				insertresult = new MileageService().insertMileage(loginMember.getMemberNo());
+				insertresult = new MileageService().insertATTMileage(loginMember.getMemberNo());
 
 			} else {
 				response.setContentType("application/json;charset=UTF-8");

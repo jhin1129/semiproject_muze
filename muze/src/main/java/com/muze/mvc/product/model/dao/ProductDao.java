@@ -312,7 +312,7 @@ public class ProductDao {
 		return artist;
 	}
 	
-<<<<<<< HEAD
+
 	public int getProductCount(Connection connection, String type, String searchType, String searchVal) {
 		int count = 0;
 		PreparedStatement pstmt = null;
@@ -337,7 +337,18 @@ public class ProductDao {
 			
 			if(rs.next()) {
 				count = rs.getInt(1);
-=======
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return count;
+	}
+
+			
 	public Product getProductByProNo(int proNo) {
 		Product product = null;
 		Connection connection = getConnection();
@@ -390,7 +401,7 @@ public class ProductDao {
 				product.setProDescription(rs.getString("PRO_DESCRIPTION"));
 				product.setProType(rs.getString("PRO_TYPE"));;
 				
->>>>>>> de673fd1571d9b97258eae7109c42759efed9301
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -399,11 +410,29 @@ public class ProductDao {
 			close(pstmt);
 		}
 		
-<<<<<<< HEAD
-		return count;
-=======
+
 		return product;
->>>>>>> de673fd1571d9b97258eae7109c42759efed9301
+
+	}
+
+	public int reduceProQuantity(Connection connection, int proNo, int orderQuantity) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "UPDATE PRODUCT SET PRO_QUANTITY=? WHERE PRO_NO=?";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setInt(1, new BoardDao().findProductByProNo(connection, proNo).getProQuantity() - orderQuantity);
+			pstmt.setInt(2, proNo);		
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 

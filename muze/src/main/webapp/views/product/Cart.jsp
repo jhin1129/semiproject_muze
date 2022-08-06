@@ -47,8 +47,9 @@
                                             <label for="allCheck1" class="check_s on"></label>
                                         </div>
                                     </th>
-                                    <th style="width:70%">상품/옵션 정보</th>
-                                    <th style="width:10%">수량</th>
+                                    <th style="width:60%">상품/옵션 정보</th>
+                                    <th style="width:10%">남은수량</th>
+                                    <th style="width:10%">구매수량</th>
                                     <th style="width:10%">상품금액</th>
                                     <th style="width:10%">합계금액</th>
                                 </tr>
@@ -66,7 +67,7 @@
                                             
                                             <div class="pick_add_cont">
                                                 <span class="pick_add_img">
-                                                    <a href=""><img src="" width="40" alt="${product.proName }" title="${product.proName }" class="middle"></a>
+                                                    <a href=""><img src='${path}/resources/upload/product/painting/${fn:replace(product.proImg,"\\","/")}' width="40" alt="${product.proName }" title="${product.proName }" class="middle"></a>
                                                 </span>
                                                 <div class="pick_add_info">
                                                     <em><a href="">${product.proName }</a></em>
@@ -78,17 +79,20 @@
                                             <!-- //pick_add_cont -->
                                             <!-- //pick_add_list -->
                                         </td>
+                                        <td>
+                                        	<strong class="proQuantity">${product.proQuantity}</strong>
+                                        </td>
                                         <td class="td_order_amount">
                                             <div class="order_goods_num">
                                                 <input style="width:60px;" class="quantitySelect" type="number" min="1" max="${product.proQuantity}" value="1">
                                             </div>
                                         </td>
                                         <td>
-                                            <strong class="proPrice">${product.proPrice }</strong>원
+                                            <strong class="proPrice">${product.proPrice }</strong>P
                                             <p class="add_currency"></p>
                                         </td>
                                         <td>
-                                            <strong class="sumPrice">${product.proPrice }</strong>원
+                                            <strong class="sumPrice">${product.proPrice }</strong>P
                                             <p class="add_currency"></p>
                                         </td>
                                     </tr>
@@ -115,20 +119,20 @@
                                 <div class="col-md-4 mb-4">
                                     <dl>
                                         <dt>총 <strong id="totalGoodsCnt">${fn:length(list)}</strong> 개의 상품금액 </dt>
-                                        <dd><strong id="totalGoodsPrice" class="totalPrice">0</strong>원</dd>
+                                        <dd><strong id="totalGoodsPrice" class="totalPrice">0</strong>P</dd>
                                     </dl>
                                 </div>
                                 <span></span>
                                 <div class="col-md-4 mb-4">
                                     <dl>
                                         <dt>배송비</dt>
-                                        <dd><strong id="totalDeliveryCharge">0</strong>원</dd>
+                                        <dd><strong id="totalDeliveryCharge">0</strong>P</dd>
                                     </dl>
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <dl class="price_total">
                                         <dt>합계</dt>
-                                        <dd><strong id="totalSettlePrice" class="totalPrice">0</strong>원
+                                        <dd><strong id="totalSettlePrice" class="totalPrice">0</strong>P
                                         </dd>
                                     </dl>
                                 </div>
@@ -182,36 +186,65 @@
 		});
 		
 		$("#selectedProductPayment").on("click", () => {
-			var arr = [];
-			var quanarr = [];
+			var result = 1;
 			$("input:checkbox[name='cartSno[]']:checked").each(function(){
-				var proNo = $(this).val();
-				var quantity = $(this).parent().parent().next().next().find(".quantitySelect").val();
-				arr.push(proNo);
-				quanarr.push(quantity);
+				var value = Number($(this).parent().parent().next().next().next().find(".quantitySelect").val());
+				var min = Number($(this).parent().parent().next().next().next().find(".quantitySelect").attr("min"));
+				var max = Number($(this).parent().parent().next().next().next().find(".quantitySelect").attr("max"));
+				
+				if(value < min || value > max){
+					result = 0;
+				}
 			});
-			if(arr.length !=0){
-				location.href="${path}/product/payment?list="+arr+"&quantity="+quanarr;
-			}else{
-				alert("작품을 선택해주세요");
-			}
+			if(result==0){
+				alert("구매수량을 적절하게 입력해주세요");
+			} else{
+				var arr = [];
+				var quanarr = [];
+				$("input:checkbox[name='cartSno[]']:checked").each(function(){
+					var proNo = $(this).val();
+					var quantity = $(this).parent().parent().next().next().next().find(".quantitySelect").val();
+					arr.push(proNo);
+					quanarr.push(quantity);
+				});
+				if(arr.length !=0){
+					location.href="${path}/product/payment?list="+arr+"&quantity="+quanarr;
+				}else{
+					alert("작품을 선택해주세요");
+				}
+			}		
 		});
 		
 		$("#allProductPayment").on("click", ()=> {
-			var arr = [];
-			var quanarr = [];
+			var result = 1;
 			$("input:checkbox[name='cartSno[]']").each(function(){
-				var proNo = $(this).val();
-				var quantity = $(this).parent().parent().next().next().find(".quantitySelect").val();
-				arr.push(proNo);
-				quanarr.push(quantity);
-
+				var value = Number($(this).parent().parent().next().next().next().find(".quantitySelect").val());
+				var min = Number($(this).parent().parent().next().next().next().find(".quantitySelect").attr("min"));
+				var max = Number($(this).parent().parent().next().next().next().find(".quantitySelect").attr("max"));
+				
+				if(value < min || value > max){
+					result = 0;
+				}
 			});
-			if(arr.length !=0){
-				location.href="${path}/product/payment?list="+arr+"&quantity="+quanarr;
+			if(result==0){
+				alert("수량을 다시 입력해주세요.");
 			}else{
-				alert("장바구니에 작품이 없습니다.");
+				var arr = [];
+				var quanarr = [];
+				$("input:checkbox[name='cartSno[]']").each(function(){
+					var proNo = $(this).val();
+					var quantity = $(this).parent().parent().next().next().next().find(".quantitySelect").val();
+					arr.push(proNo);
+					quanarr.push(quantity);
+	
+				});
+				if(arr.length !=0){
+					location.href="${path}/product/payment?list="+arr+"&quantity="+quanarr;
+				}else{
+					alert("장바구니에 작품이 없습니다.");
+				}
 			}
+			
 		});
 		
 		$(".checkProduct").change(function(){
@@ -233,7 +266,7 @@
 		var arr = [];
 		var totalPrice = 0;
 		$("input:checkbox[name='cartSno[]']:checked").each(function(){
-			totalPrice += Number($(this).parent().parent().next().next().next().next().find(".sumPrice").text());
+			totalPrice += Number($(this).parent().parent().next().next().next().next().next().find(".sumPrice").text());
 		});
 
 		$(".totalPrice").text(totalPrice);

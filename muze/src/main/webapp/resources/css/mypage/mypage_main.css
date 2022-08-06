@@ -115,6 +115,7 @@
 
 #my_td01{
 	border-bottom: 1px solid lightgray;
+	padding : 10px;
     height: 10px;
     text-align: center;
     font-size: 0.8em;

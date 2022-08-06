@@ -163,9 +163,9 @@ float:left;
 	   			return false;
 	   		}
        		
-	   	//이름 유효성 여부표시가 나와있으면 return
+	   	//이메일 유효성 여부표시가 나와있으면 return
 	   		if($("#email_chk").css("visibility") != "hidden"){
-	   			alert("이름을 제대로 입력 해주세요");
+	   			alert("이메일을 제대로 입력 해주세요");
 	   			$("#userEmail").focus();
 	   			return false;
 	   		}

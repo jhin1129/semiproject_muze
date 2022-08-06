@@ -12,8 +12,8 @@
 	   <hr>
 	     <p id="myListMain"> 판매 정보 </p> 
 	       <li id="mylist"><a id="sublist" href="${ path }/mypage/list?type=ORDER">- 주문 / 배송 조회</a></li>
-	       <li id="mylist"><a id="sublist" href="${ path }/mypage/list?type=CANCEL">- 취소 / 반품 내역</a></li>
-	       <li id="mylist"><a id="sublist" href="${ path }/mypage/list?type=REFUND">- 환불 / 입금 내역</a></li><br>
+	       <li id="mylist"><a id="sublist" href="${ path }/mypage/list?type=CANCEL">- 취소 / 환불 내역</a></li><br>
+<%-- 	       <li id="mylist"><a id="sublist" href="${ path }/mypage/list?type=REFUND">- 환불 / 입금 내역</a></li><br> --%>
 	     <p id="myListMain"> 아티스트 정보 </p> 
 	       <li id="mylist"><a id="sublist" href="${ path }/mypage/checkinfo?type=UPDATE">- 회원 정보 변경 </a></li>
 	       <li id="mylist"><a id="sublist" href="${ path }/mypage/checkinfo?type=DELETE">- 회원 탈퇴 </a></li><br>
@@ -28,10 +28,10 @@
 	   <hr>
 	     <p id="myListMain"> 구매 정보 </p> 
 	       <li id="mylist"><a id="sublist" href="${ path }/mypage/list?type=ORDER">- 주문 / 배송 조회</a></li>
-	       <li id="mylist"><a id="sublist" href="${ path }/mypage/list?type=CANCEL">- 취소 / 반품 내역</a></li>
-	       <li id="mylist"><a id="sublist" href="${ path }/mypage/list?type=REFUND">- 환불 / 입금 내역</a></li><br>
+	       <li id="mylist"><a id="sublist" href="${ path }/mypage/list?type=CANCEL">- 취소 / 환불 내역</a></li><br>
+<%-- 	       <li id="mylist"><a id="sublist" href="${ path }/mypage/list?type=REFUND">- 환불 / 입금 내역</a></li><br> --%>
 	     <p id="myListMain"> 회원 정보 </p> 
-	       <li id="mylist"><a id="sublist" href="${ path }/mypage/mileage">- 회원 혜택</a></li>
+	       <li id="mylist"><a id="sublist" href="${ path }/mypage/mileage">- 마일리지</a></li>
 	       <li id="mylist"><a id="sublist" href="${ path }/mypage/checkinfo?type=UPDATE">- 회원 정보 변경 </a></li>
 	       <li id="mylist"><a id="sublist" href="${ path }/mypage/checkinfo?type=DELETE">- 회원 탈퇴 </a></li><br>
 	     <p id="myListMain"> 문의 내역 </p> 
@@ -39,5 +39,6 @@
 	     <p id="myListMain"> 내가 쓴 글</p> 
 	       <li id="mylist"><a id="sublist" href="${ path }/mypage/community?type=REVIEW">- 구매 후기</a></li>
 	       <li id="mylist"><a id="sublist" href="${ path }/mypage/community?type=FREE">- 나의 게시글</a></li><br>
-	 </c:if>
+<!-- 	       <iframe src="https://service.dongledongle.com/muze" frameborder="0" width="100%" height="400"></iframe> -->	 
+	</c:if>
 	 </div>
